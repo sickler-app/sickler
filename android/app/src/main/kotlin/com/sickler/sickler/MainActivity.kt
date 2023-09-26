@@ -1,4 +1,4 @@
-package com.sickler.sickler.sickler
+package com.sickler.sickler
 
 import io.flutter.embedding.android.FlutterActivity
 
