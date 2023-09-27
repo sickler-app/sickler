@@ -1,48 +1,50 @@
 import 'package:flutter/material.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-
 ///-------Paddings--------///
 const double kDefaultPadding = 16.0;
 const double kDefaultPaddingLarge = 24.0;
 
 ///------Input Decorations-------///
 class SicklerInputDecoration {
-  static InputDecoration inputDecoration = InputDecoration(
-      errorStyle:
-          SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.red50),
-      errorBorder: OutlineInputBorder(
-        gapPadding: 4,
-        borderSide: const BorderSide(color: SicklerColours.red50, width: 1),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      border: OutlineInputBorder(
-        gapPadding: 0,
-        borderSide: const BorderSide(width: 1, color: SicklerColours.purple40),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      enabledBorder: OutlineInputBorder(
-        gapPadding: 0,
-        borderSide: const BorderSide(width: 0, color: SicklerColours.purple40),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      disabledBorder: OutlineInputBorder(
-        gapPadding: 0,
-        borderSide: const BorderSide(width: 0, color: SicklerColours.neutral95),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      focusedBorder: OutlineInputBorder(
-        gapPadding: 0,
-        borderSide: const BorderSide(width: 1, color: SicklerColours.purple40),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      filled: true,
-      isDense: true,
-      fillColor: SicklerColours.purple95,
-      hintStyle: SicklerTextStyles.bodyMedium
-          .copyWith(color: SicklerColours.neutral50),
-      labelStyle:
-          SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.black));
+  static InputDecoration inputDecoration(BuildContext context) {
+    return InputDecoration(
+        errorStyle: SicklerTextStyles.bodyMedium
+            .copyWith(color: Theme.of(context).colorScheme.error),
+        errorBorder: OutlineInputBorder(
+          gapPadding: 4,
+          borderSide:
+              BorderSide(color: Theme.of(context).colorScheme.error, width: 1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        border: OutlineInputBorder(
+          gapPadding: 0,
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        enabledBorder: OutlineInputBorder(
+          gapPadding: 0,
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        disabledBorder: OutlineInputBorder(
+          gapPadding: 0,
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          gapPadding: 0,
+          borderSide:
+              const BorderSide(width: 1, color: SicklerColours.purple60),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        filled: true,
+        isDense: true,
+        fillColor: Theme.of(context).cardColor,
+        hintStyle: SicklerTextStyles.bodyMedium
+            .copyWith(color: SicklerColours.neutral50),
+        labelStyle:
+            SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.black));
+  }
 }
 
 ///------Colours-------///
@@ -60,7 +62,7 @@ class SicklerColours {
   static const Color purple60 = Color(0xFF987BFF);
   static const Color purple70 = Color(0xFFB29DFF);
   static const Color purple80 = Color(0xFFCCBDFF);
-  static const Color purple90 = Color(0xFFCCBDFF);
+  static const Color purple90 = Color(0xFFE7DEFF);
   static const Color purple95 = Color(0xFFF5EEFF);
   static const Color purple99 = Color(0xFFFFFBFF);
 
@@ -137,102 +139,123 @@ class SicklerColours {
 ///------Text Styles-------///
 class SicklerTextStyles {
   ///---Display---//
-  static TextStyle displayLargeBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle displayLargeBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 57,
+    height: 1,
   );
 
-  static TextStyle displayLarge = GoogleFonts.plusJakartaSans(
+  static TextStyle displayLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 57,
+    height: 1,
   );
 
-  static TextStyle displayMediumBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle displayMediumBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 45,
+    height: 1,
   );
 
-  static TextStyle displayMedium = GoogleFonts.plusJakartaSans(
+  static TextStyle displayMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 45,
+    height: 1,
   );
-  static TextStyle displaySmallBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle displaySmallBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 36,
+    height: 1,
   );
 
-  static TextStyle displaySmall = GoogleFonts.plusJakartaSans(
+  static TextStyle displaySmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 36,
+    height: 1,
   );
 
   ///---Headline---///
-  static TextStyle headlineLarge = GoogleFonts.plusJakartaSans(
+  static TextStyle headlineLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 32,
+    height: 1,
   );
-  static TextStyle headlineMedium = GoogleFonts.plusJakartaSans(
+  static TextStyle headlineMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 28,
+    height: 1,
   );
-  static TextStyle headlineSmall = GoogleFonts.plusJakartaSans(
+  static TextStyle headlineSmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 24,
+    height: 1,
   );
 
   ///---Title---///
-  static TextStyle titleLargeBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle titleLargeBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 22,
+    height: 1,
   );
-  static TextStyle titleLarge = GoogleFonts.plusJakartaSans(
+  static TextStyle titleLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 22,
+    height: 1,
   );
 
-  static TextStyle titleMediumBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle titleMediumBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 16,
+    height: 1,
   );
-  static TextStyle titleMedium = GoogleFonts.plusJakartaSans(
+  static TextStyle titleMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 16,
+    height: 1,
   );
 
-  static TextStyle titleSmallBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle titleSmallBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 14,
+    height: 1,
   );
-  static TextStyle titleSmall = GoogleFonts.plusJakartaSans(
+  static TextStyle titleSmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 14,
+    height: 1,
   );
 
   ///---Body---///
-  static TextStyle bodyLargeBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle bodyLargeBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 16,
+    height: 1,
   );
-  static TextStyle bodyLarge = GoogleFonts.plusJakartaSans(
+  static TextStyle bodyLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 16,
+    height: 1,
   );
 
-  static TextStyle bodyMediumBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle bodyMediumBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 14,
+    height: 1,
   );
-  static TextStyle bodyMedium = GoogleFonts.plusJakartaSans(
+  static TextStyle bodyMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 14,
+    height: 1,
   );
 
-  static TextStyle bodySmallBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle bodySmallBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 12,
+    height: 1,
   );
-  static TextStyle bodySmall = GoogleFonts.plusJakartaSans(
+  static TextStyle bodySmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 12,
+    height: 1,
   );
 }

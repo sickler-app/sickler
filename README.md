@@ -31,7 +31,7 @@ Below are some general rules and guidelines as we develop this app. This is to e
 - If you can, please endeavour to write tests for your code. Basic unit tests that pass are enough for the time being. No need to get too complicated
 
 
-- Please follow the linting guidelines, and rules as well.  
+- Please follow the linting guidelines, and rules as well. Just run `dart fix --apply` to fix all linting issues 😉  
 
 All of this is in an effort to always have good working code in our `main` branch and to keep a clean and simple commit history. Feel free to play around with your own fork of the repository, and have as many commits as you need. Commits would be squash-merged when PRs are created into a single meaningful commit.
 
