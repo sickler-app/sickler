@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
-import 'package:sickler/screens/onboarding/onboarding_base_screen.dart';
+import 'package:sickler/screens/auth/auth_success.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: SicklerThemeData.lightTheme,
       darkTheme: SicklerThemeData.darkTheme,
       themeMode: ThemeMode.system,
-      home: const OnboardingBaseScreen(),
+      home: const AuthSuccessScreen(),
     );
   }
 }

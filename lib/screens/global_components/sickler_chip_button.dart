@@ -12,6 +12,7 @@ class SicklerChipButton extends StatelessWidget {
     this.backgroundColor,
     this.iconPath,
     this.showIcon = false,
+    this.overrideIconColor = true,
     this.buttonType = SicklerButtonType.primary,
   }) : super(key: key);
   final VoidCallback onPressed;
@@ -21,6 +22,7 @@ class SicklerChipButton extends StatelessWidget {
   final String? iconPath;
   final Color? color;
   final Color? backgroundColor;
+  final bool? overrideIconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -99,10 +101,12 @@ class SicklerChipButton extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   iconPath ?? "",
-                  colorFilter: ColorFilter.mode(
-                    labelColor,
-                    BlendMode.srcIn, // the blend mode
-                  ),
+                  colorFilter: overrideIconColor!
+                      ? ColorFilter.mode(
+                          labelColor,
+                          BlendMode.srcIn, // the blend mode
+                        )
+                      : null,
                 ),
                 const SizedBox(width: 4),
               ],

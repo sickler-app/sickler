@@ -12,6 +12,7 @@ class SicklerButton extends StatelessWidget {
     this.backgroundColor,
     this.iconPath,
     this.showIcon = false,
+    this.overrideIconColor = true,
     this.buttonType = SicklerButtonType.primary,
   }) : super(key: key);
   final VoidCallback onPressed;
@@ -21,6 +22,7 @@ class SicklerButton extends StatelessWidget {
   final String? iconPath;
   final Color? color;
   final Color? backgroundColor;
+  final bool? overrideIconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,6 @@ class SicklerButton extends StatelessWidget {
 
     final theme = Theme.of(context);
     ButtonStyle style = ElevatedButton.styleFrom(
-      fixedSize: const Size.fromHeight(36),
       backgroundColor: backgroundColor ?? theme.colorScheme.primary,
       foregroundColor: color ?? Colors.white,
     );
@@ -39,7 +40,6 @@ class SicklerButton extends StatelessWidget {
     switch (buttonType) {
       case SicklerButtonType.primary:
         style = ElevatedButton.styleFrom(
-          fixedSize: const Size.fromHeight(36),
           alignment: Alignment.center,
           backgroundColor: backgroundColor ?? theme.colorScheme.primary,
           foregroundColor: color ?? Colors.white,
@@ -49,7 +49,6 @@ class SicklerButton extends StatelessWidget {
 
       case SicklerButtonType.secondary:
         style = ElevatedButton.styleFrom(
-          fixedSize: const Size.fromHeight(36),
           backgroundColor:
               backgroundColor ?? theme.colorScheme.primaryContainer,
           foregroundColor: color ?? theme.colorScheme.onPrimaryContainer,
@@ -59,7 +58,6 @@ class SicklerButton extends StatelessWidget {
 
       case SicklerButtonType.outline:
         style = ElevatedButton.styleFrom(
-            fixedSize: const Size.fromHeight(36),
             backgroundColor: Colors.transparent,
             foregroundColor: color ?? theme.colorScheme.primary,
             side: BorderSide(
@@ -71,7 +69,6 @@ class SicklerButton extends StatelessWidget {
         break;
       case SicklerButtonType.text:
         style = ElevatedButton.styleFrom(
-            fixedSize: const Size.fromHeight(36),
             backgroundColor: Colors.transparent,
             foregroundColor: color ?? theme.colorScheme.primary);
         labelColor = color ?? theme.colorScheme.primary;
@@ -79,7 +76,6 @@ class SicklerButton extends StatelessWidget {
 
       default:
         style = ElevatedButton.styleFrom(
-          fixedSize: const Size.fromHeight(36),
           backgroundColor: backgroundColor ?? theme.colorScheme.primary,
           foregroundColor: color ?? Colors.white,
         );
@@ -100,10 +96,12 @@ class SicklerButton extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     iconPath ?? "",
-                    colorFilter: ColorFilter.mode(
-                      labelColor,
-                      BlendMode.srcIn, // the blend mode
-                    ),
+                    colorFilter: overrideIconColor!
+                        ? ColorFilter.mode(
+                            labelColor,
+                            BlendMode.srcIn, // the blend mode
+                          )
+                        : null,
                   ),
                   const SizedBox(width: 12),
                 ],

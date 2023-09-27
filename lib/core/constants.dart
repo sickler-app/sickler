@@ -6,41 +6,45 @@ const double kDefaultPaddingLarge = 24.0;
 
 ///------Input Decorations-------///
 class SicklerInputDecoration {
-  static InputDecoration inputDecoration = InputDecoration(
-      errorStyle:
-          SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.red50),
-      errorBorder: OutlineInputBorder(
-        gapPadding: 4,
-        borderSide: const BorderSide(color: SicklerColours.red50, width: 1),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      border: OutlineInputBorder(
-        gapPadding: 0,
-        borderSide: const BorderSide(width: 1, color: SicklerColours.purple40),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      enabledBorder: OutlineInputBorder(
-        gapPadding: 0,
-        borderSide: const BorderSide(width: 0, color: SicklerColours.purple40),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      disabledBorder: OutlineInputBorder(
-        gapPadding: 0,
-        borderSide: const BorderSide(width: 0, color: SicklerColours.neutral95),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      focusedBorder: OutlineInputBorder(
-        gapPadding: 0,
-        borderSide: const BorderSide(width: 1, color: SicklerColours.purple40),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      filled: true,
-      isDense: true,
-      fillColor: SicklerColours.purple95,
-      hintStyle: SicklerTextStyles.bodyMedium
-          .copyWith(color: SicklerColours.neutral50),
-      labelStyle:
-          SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.black));
+  static InputDecoration inputDecoration(BuildContext context) {
+    return InputDecoration(
+        errorStyle: SicklerTextStyles.bodyMedium
+            .copyWith(color: Theme.of(context).colorScheme.error),
+        errorBorder: OutlineInputBorder(
+          gapPadding: 4,
+          borderSide:
+              BorderSide(color: Theme.of(context).colorScheme.error, width: 1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        border: OutlineInputBorder(
+          gapPadding: 0,
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        enabledBorder: OutlineInputBorder(
+          gapPadding: 0,
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        disabledBorder: OutlineInputBorder(
+          gapPadding: 0,
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          gapPadding: 0,
+          borderSide:
+              const BorderSide(width: 1, color: SicklerColours.purple60),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        filled: true,
+        isDense: true,
+        fillColor: Theme.of(context).cardColor,
+        hintStyle: SicklerTextStyles.bodyMedium
+            .copyWith(color: SicklerColours.neutral50),
+        labelStyle:
+            SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.black));
+  }
 }
 
 ///------Colours-------///
