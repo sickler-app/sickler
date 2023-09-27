@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-
 ///-------Paddings--------///
 const double kDefaultPadding = 16.0;
 const double kDefaultPaddingLarge = 24.0;
@@ -137,101 +135,101 @@ class SicklerColours {
 ///------Text Styles-------///
 class SicklerTextStyles {
   ///---Display---//
-  static TextStyle displayLargeBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle displayLargeBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 57,
   );
 
-  static TextStyle displayLarge = GoogleFonts.plusJakartaSans(
+  static TextStyle displayLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 57,
   );
 
-  static TextStyle displayMediumBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle displayMediumBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 45,
   );
 
-  static TextStyle displayMedium = GoogleFonts.plusJakartaSans(
+  static TextStyle displayMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 45,
   );
-  static TextStyle displaySmallBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle displaySmallBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 36,
   );
 
-  static TextStyle displaySmall = GoogleFonts.plusJakartaSans(
+  static TextStyle displaySmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 36,
   );
 
   ///---Headline---///
-  static TextStyle headlineLarge = GoogleFonts.plusJakartaSans(
+  static TextStyle headlineLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 32,
   );
-  static TextStyle headlineMedium = GoogleFonts.plusJakartaSans(
+  static TextStyle headlineMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 28,
   );
-  static TextStyle headlineSmall = GoogleFonts.plusJakartaSans(
+  static TextStyle headlineSmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 24,
   );
 
   ///---Title---///
-  static TextStyle titleLargeBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle titleLargeBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 22,
   );
-  static TextStyle titleLarge = GoogleFonts.plusJakartaSans(
+  static TextStyle titleLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 22,
   );
 
-  static TextStyle titleMediumBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle titleMediumBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 16,
   );
-  static TextStyle titleMedium = GoogleFonts.plusJakartaSans(
+  static TextStyle titleMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 16,
   );
 
-  static TextStyle titleSmallBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle titleSmallBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 14,
   );
-  static TextStyle titleSmall = GoogleFonts.plusJakartaSans(
+  static TextStyle titleSmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 14,
   );
 
   ///---Body---///
-  static TextStyle bodyLargeBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle bodyLargeBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 16,
   );
-  static TextStyle bodyLarge = GoogleFonts.plusJakartaSans(
+  static TextStyle bodyLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 16,
   );
 
-  static TextStyle bodyMediumBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle bodyMediumBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 14,
   );
-  static TextStyle bodyMedium = GoogleFonts.plusJakartaSans(
+  static TextStyle bodyMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 14,
   );
 
-  static TextStyle bodySmallBold = GoogleFonts.plusJakartaSans(
-    fontWeight: FontWeight.bold,
+  static TextStyle bodySmallBold = const TextStyle(
+    fontWeight: FontWeight.w800,
     fontSize: 12,
   );
-  static TextStyle bodySmall = GoogleFonts.plusJakartaSans(
+  static TextStyle bodySmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 12,
   );

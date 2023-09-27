@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
-
 import 'screens/home_screen/home_screen.dart';
 
 void main() {
