@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
-import 'package:sickler/screens/auth/auth_success.dart';
+import 'package:sickler/screens/meds/add_meds_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: SicklerThemeData.lightTheme,
       darkTheme: SicklerThemeData.darkTheme,
       themeMode: ThemeMode.system,
-      home: const AuthSuccessScreen(),
+      home: const AddMedsScreen(),
     );
   }
 }

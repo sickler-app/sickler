@@ -42,9 +42,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  const SicklerAppBar(pageTitle: "Register", showAction: false),
+                  const SicklerAppBar(pageTitle: "Register"),
                   Text("Email", style: theme.textTheme.bodyMedium),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
                   TextFormField(
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -60,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 24),
                   Text("Password", style: theme.textTheme.bodyMedium),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
                   TextFormField(
                     controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,
@@ -79,7 +79,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ? "assets/svg/eye.svg"
                                 : "assets/svg/eye-off.svg",
                             colorFilter: ColorFilter.mode(
-                                theme.iconTheme.color!, BlendMode.srcIn),
+                                theme.brightness == Brightness.light
+                                    ? theme.colorScheme.primary
+                                    : theme.iconTheme.color!,
+                                BlendMode.srcIn),
                           )),
                     ),
                     validator: (value) {
@@ -94,7 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 24),
                   Text("Confirm Password", style: theme.textTheme.bodyMedium),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
                   TextFormField(
                     controller: confirmPasswordController,
                     keyboardType: TextInputType.visiblePassword,
@@ -113,7 +116,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ? "assets/svg/eye.svg"
                                 : "assets/svg/eye-off.svg",
                             colorFilter: ColorFilter.mode(
-                                theme.iconTheme.color!, BlendMode.srcIn),
+                                theme.brightness == Brightness.light
+                                    ? theme.colorScheme.primary
+                                    : theme.iconTheme.color!,
+                                BlendMode.srcIn),
                           )),
                     ),
                     validator: (value) {

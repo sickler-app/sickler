@@ -3,22 +3,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class SicklerAppBar extends StatelessWidget {
   final String pageTitle;
-  final bool? showAction;
-  final String? actionIconLink;
+  final List<Widget>? actions;
 
-  const SicklerAppBar(
-      {super.key,
-      required this.pageTitle,
-      this.showAction = false,
-      this.actionIconLink});
+  const SicklerAppBar({
+    super.key,
+    required this.pageTitle,
+    this.actions,
+  });
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    if (showAction == true && actionIconLink == null) {
-      throw ErrorHint(
-          "Did you forget to provide an icon link for the action? Please provide a path for the action icon");
-    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -27,7 +22,6 @@ class SicklerAppBar extends StatelessWidget {
         Row(
           children: [
             IconButton(
-              alignment: Alignment.centerLeft,
               padding: EdgeInsets.zero,
               onPressed: () {},
               icon: SvgPicture.asset(
@@ -37,22 +31,21 @@ class SicklerAppBar extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            Visibility(
-              visible: showAction!,
-              child: IconButton(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.zero,
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  "assets/svg/chevron-back.svg",
-                  colorFilter:
-                      ColorFilter.mode(theme.iconTheme.color!, BlendMode.srcIn),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Visibility(
+                visible: actions != null ? true : false,
+                child: Row(
+                  children: actions!,
                 ),
               ),
-            ),
+            )
           ],
         ),
-        Text(pageTitle, style: theme.textTheme.displaySmall),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Text(pageTitle, style: theme.textTheme.displaySmall),
+        ),
         const SizedBox(height: 48),
       ],
     );

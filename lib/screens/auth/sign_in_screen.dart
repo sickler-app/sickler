@@ -39,9 +39,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  const SicklerAppBar(pageTitle: "Sign In", showAction: false),
+                  const SicklerAppBar(pageTitle: "Sign In"),
                   Text("Email", style: theme.textTheme.bodyMedium),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
                   TextFormField(
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -57,7 +57,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   const SizedBox(height: 24),
                   Text("Password", style: theme.textTheme.bodyMedium),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
                   TextFormField(
                     controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,

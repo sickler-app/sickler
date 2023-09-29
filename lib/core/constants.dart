@@ -62,7 +62,7 @@ class SicklerColours {
   static const Color purple60 = Color(0xFF987BFF);
   static const Color purple70 = Color(0xFFB29DFF);
   static const Color purple80 = Color(0xFFCCBDFF);
-  static const Color purple90 = Color(0xFFCCBDFF);
+  static const Color purple90 = Color(0xFFE7DEFF);
   static const Color purple95 = Color(0xFFF5EEFF);
   static const Color purple99 = Color(0xFFFFFBFF);
 

@@ -55,7 +55,6 @@ class _OnboardingBaseScreenState extends State<OnboardingBaseScreen> {
                 });
               },
               itemBuilder: (BuildContext context, int index) {
-                print(index);
                 return OnboardingTemplateScreen(
                   text: onboardingInfo[index]["text"]!,
                   illustration: onboardingInfo[index]["image"]!,
