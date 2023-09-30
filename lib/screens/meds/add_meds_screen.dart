@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sickler/screens/meds/components/meds_type_item.dart';
 
 import '../../core/core.dart';
 import '../global_components/global_components.dart';
@@ -85,14 +86,69 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                   const SizedBox(height: 24),
                   const Text("What type of medication are you taking?"),
                   const SizedBox(height: 12),
-
-                  ///Todo: add medication type widgets
+                  GridView(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: .7,
+                      crossAxisCount: 4,
+                      mainAxisSpacing: 0,
+                    ),
+                    children: [
+                      MedsTypeItem(
+                        colorScheme: SelectorColors.green,
+                        onPressed: () {},
+                        label: "Capsules",
+                        iconPath: "assets/svg/medication.svg",
+                      ),
+                      MedsTypeItem(
+                        colorScheme: SelectorColors.orange,
+                        onPressed: () {},
+                        label: "Tablets",
+                        iconPath: "assets/svg/tablet.svg",
+                      ),
+                      MedsTypeItem(
+                        colorScheme: SelectorColors.blue,
+                        onPressed: () {},
+                        label: "Droplets",
+                        iconPath: "assets/svg/droplet.svg",
+                      ),
+                      MedsTypeItem(
+                        colorScheme: SelectorColors.red,
+                        onPressed: () {},
+                        label: "Injections",
+                        iconPath: "assets/svg/syringe.svg",
+                      ),
+                      MedsTypeItem(
+                        colorScheme: SelectorColors.purple,
+                        onPressed: () {},
+                        label: "liquids",
+                        iconPath: "assets/svg/bottle.svg",
+                      ),
+                      MedsTypeItem(
+                        colorScheme: SelectorColors.green,
+                        onPressed: () {},
+                        label: "inhaler",
+                        iconPath: "assets/svg/medication.svg",
+                      ),
+                      MedsTypeItem(
+                        colorScheme: SelectorColors.red,
+                        onPressed: () {},
+                        label: "Creams & Gels",
+                        iconPath: "assets/svg/stream.svg",
+                      ),
+                      MedsTypeItem(
+                        colorScheme: SelectorColors.purple,
+                        onPressed: () {},
+                        label: "Custom",
+                        iconPath: "assets/svg/plus.svg",
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 24),
-                  const Text("How oftern do you take your medication in a day?"),
+                  const Text("How often do you take your medication in a day?"),
                   const SizedBox(height: 12),
-
-                  ///Todo: add medication type widgets
-
                   Wrap(
                     direction: Axis.horizontal,
                     spacing: 12,
@@ -162,7 +218,6 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                     ],
                   ),
                   const SizedBox(height: 24),
-
                   const Text("How long have you been taking this medication?"),
                   const SizedBox(height: 12),
                   Wrap(

@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 import '../../core/core.dart';
+import 'components/sickler_radio.dart';
 
 class BasicInfoScreen extends StatefulWidget {
   const BasicInfoScreen({super.key});
@@ -16,6 +18,17 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
   final TextEditingController addressController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool radioValue = false;
+  Gender selectedRadioValue = Gender.male;
+  final List<String> listData = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+  ];
+
   @override
   void dispose() {
     super.dispose();
@@ -27,76 +40,194 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final Size size = MediaQuery.sizeOf(context);
 
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
-          height: MediaQuery.sizeOf(context).height,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  const SicklerAppBar(pageTitle: "Tell us more\nabout you"),
-                  Text("Full Names", style: theme.textTheme.bodyMedium),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                    controller: nameController,
-                    keyboardType: TextInputType.name,
-                    decoration: SicklerInputDecoration.inputDecoration(context)
-                        .copyWith(hintText: "Email"),
-                  ),
-                  const SizedBox(height: 24),
-                  Text("Password", style: theme.textTheme.bodyMedium),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                    controller: ageController,
-                    keyboardType: TextInputType.number,
-                    decoration: SicklerInputDecoration.inputDecoration(context)
-                        .copyWith(
-                      hintText: "Age",
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Text("Address", style: theme.textTheme.bodyMedium),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                    controller: addressController,
-                    keyboardType: TextInputType.streetAddress,
-                    decoration: SicklerInputDecoration.inputDecoration(context)
-                        .copyWith(
-                      hintText: "Address",
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Text("Sex", style: theme.textTheme.bodyMedium),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                    keyboardType: TextInputType.streetAddress,
-                    decoration: SicklerInputDecoration.inputDecoration(context)
-                        .copyWith(
-                      hintText: "Sex",
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  const Spacer(),
+          height: size.height,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SicklerAppBar(pageTitle: "Tell us more\nabout you"),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Full Names", style: theme.textTheme.bodyMedium),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          controller: nameController,
+                          keyboardType: TextInputType.name,
+                          decoration:
+                              SicklerInputDecoration.inputDecoration(context)
+                                  .copyWith(hintText: "Email"),
+                        ),
+                        const SizedBox(height: 24),
+                        Text("Age", style: theme.textTheme.bodyMedium),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          controller: ageController,
+                          keyboardType: TextInputType.number,
+                          decoration:
+                              SicklerInputDecoration.inputDecoration(context)
+                                  .copyWith(
+                            hintText: "Age",
+                          ),
+                          onTap: () async {
+                            //Todo: Trigger Bottom Sheet
+                            int age = await showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (context) => Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SizedBox(
+                                          height: 200,
+                                          width: double.infinity,
+                                          child:
+                                              ListWheelScrollView.useDelegate(
+                                                  itemExtent: 48,
+                                                  childDelegate:
+                                                      ListWheelChildBuilderDelegate(
+                                                          builder: (BuildContext
+                                                                  context,
+                                                              int index) {
+                                                    return Text(
+                                                        listData[index]);
+                                                  })),
+                                        ),
+                                        Text("Bottom Sheet"),
+                                        SizedBox(
+                                          height: 64,
+                                        )
+                                      ],
+                                    ));
 
-                  ///Buttons
-                  SicklerButton(
-                      onPressed: () {
-                        //Todo: Perform sign in action
-                      },
-                      label: "Continue"),
+                            setState(() {
+                              ageController.text = age.toString();
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 24),
+                        Text("Address", style: theme.textTheme.bodyMedium),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          controller: addressController,
+                          keyboardType: TextInputType.streetAddress,
+                          decoration:
+                              SicklerInputDecoration.inputDecoration(context)
+                                  .copyWith(
+                            hintText: "Address",
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Text("Sex", style: theme.textTheme.bodyMedium),
+                        const SizedBox(height: 8),
 
-                  const SizedBox(height: 64)
-                ],
-              ),
+                        SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: SicklerRadio<Gender>(
+                                label: "Female",
+                                value: Gender.female,
+                                groupValue: selectedRadioValue,
+                                onChanged: (Gender? value) {
+                                  setState(() {
+                                    selectedRadioValue = value!;
+                                  });
+                                },
+                              ),
+                            ),
+                            SizedBox(width: 16),
+                            Expanded(
+                              child: SicklerRadio<Gender>(
+                                label: "Male",
+                                value: Gender.male,
+                                groupValue: selectedRadioValue,
+                                onChanged: (Gender? value) {
+                                  setState(() {
+                                    selectedRadioValue = value!;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 32),
+                        Spacer(),
+
+                        ///Buttons
+                        SicklerButton(
+                            onPressed: () {
+                              //Todo: Perform sign in action
+                            },
+                            label: "Continue"),
+
+                        const SizedBox(height: 64),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CupertinoPickerTestScreen extends StatelessWidget {
+  CupertinoPickerTestScreen({super.key});
+
+  List<String> listData = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          SicklerAppBar(pageTitle: "Cupertino Picker\nTest Screen"),
+
+          CupertinoTimerPicker(
+              minuteInterval: 30,
+              mode: CupertinoTimerPickerMode.hm,
+              itemExtent: 48,
+              onTimerDurationChanged: (Duration duration) {}),
+          // CupertinoPicker.builder(
+          //   // backgroundColor: Colors.red,
+          //   // offAxisFraction: .5,
+          //   childCount: listData.length,
+          //   itemExtent: 48,
+          //   onSelectedItemChanged: (value) {
+          //     print("centre value changed");
+          //     print(value);
+          //   },
+          //   itemBuilder: (BuildContext context, int index) {
+          //     return Center(child: Text(listData[index]));
+          //   },
+          //
+          //   // selectionOverlay: Container(
+          //   //   decoration: BoxDecoration(
+          //   //       color: Colors.transparent,
+          //   //       border: Border.symmetric(
+          //   //           horizontal: BorderSide(width: 1, color: Colors.black))),
+          //   // ),
+          // ),
+        ],
       ),
     );
   }

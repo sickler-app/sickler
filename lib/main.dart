@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
-import 'package:sickler/screens/meds/add_meds_screen.dart';
+import 'package:sickler/screens/auth/register_screen.dart';
+import 'package:sickler/screens/auth/sign_in_screen.dart';
+import 'package:sickler/screens/user_info/basic_info_screen.dart';
+import 'package:sickler/screens/user_info/medical_info_screen.dart';
+import 'package:sickler/screens/user_info/personal_info_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: SicklerThemeData.lightTheme,
       darkTheme: SicklerThemeData.darkTheme,
       themeMode: ThemeMode.system,
-      home: const AddMedsScreen(),
+      home: CupertinoPickerTestScreen(),
     );
   }
 }

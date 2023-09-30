@@ -5,3 +5,7 @@ enum AuthState { initial, authenticated, unauthenticated }
 enum SicklerButtonType { primary, secondary, outline, text }
 
 enum SicklerChipType { filter, info }
+
+enum SelectorColors { purple, blue, green, red, orange }
+
+enum Gender { male, female }
