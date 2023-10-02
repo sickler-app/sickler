@@ -9,3 +9,11 @@ enum SicklerChipType { filter, info }
 enum SelectorColors { purple, blue, green, red, orange }
 
 enum Gender { male, female }
+
+enum SicklerListWheelScrollViewPickerMode {
+  integer,
+  duration,
+  time,
+  decimal,
+  text
+}

@@ -193,6 +193,10 @@ class CupertinoPickerTestScreen extends StatelessWidget {
     "4",
     "5",
     "6",
+    "6",
+    "6",
+    "6",
+    "6",
   ];
 
   @override
@@ -201,32 +205,31 @@ class CupertinoPickerTestScreen extends StatelessWidget {
       body: Column(
         children: [
           SicklerAppBar(pageTitle: "Cupertino Picker\nTest Screen"),
-
           CupertinoTimerPicker(
               minuteInterval: 30,
               mode: CupertinoTimerPickerMode.hm,
               itemExtent: 48,
               onTimerDurationChanged: (Duration duration) {}),
-          // CupertinoPicker.builder(
-          //   // backgroundColor: Colors.red,
-          //   // offAxisFraction: .5,
-          //   childCount: listData.length,
-          //   itemExtent: 48,
-          //   onSelectedItemChanged: (value) {
-          //     print("centre value changed");
-          //     print(value);
-          //   },
-          //   itemBuilder: (BuildContext context, int index) {
-          //     return Center(child: Text(listData[index]));
-          //   },
-          //
-          //   // selectionOverlay: Container(
-          //   //   decoration: BoxDecoration(
-          //   //       color: Colors.transparent,
-          //   //       border: Border.symmetric(
-          //   //           horizontal: BorderSide(width: 1, color: Colors.black))),
-          //   // ),
-          // ),
+          SicklerListWheelScrollViewPicker(
+            // primaryInitialValue: 0,
+            // primaryFinalValue: 50,
+            // secondaryInitialValue: 0,
+            // secondaryFinalValue: 10,
+            // secondaryValueInterval: 1,
+            itemExtent: 50,
+            onSelectedItemIndexChanged: (index) {},
+            mode: SicklerListWheelScrollViewPickerMode.text,
+            textDataValuesList: [
+              "Text 1",
+              "Text 2",
+              "Text 3",
+              "Text 4",
+              "Text 5",
+            ],
+
+            scrollViewToLabelPadding: 16,
+            //  primaryUnitLabels: ["Kg", "Hours", "short", "extra long"],
+          )
         ],
       ),
     );
