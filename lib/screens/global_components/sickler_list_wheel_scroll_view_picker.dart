@@ -74,7 +74,17 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
   /// [magnification] Documentation Can be found in the [ListWheelScrollView] widget
   /// [itemExtent] Documentation Can be found in the [ListWheelScrollView] widget
   ///
-  /// [onSelectedItemIndexChanged] A Void Callback which is run when the selected item index is changed, ie. when a user selects a new item
+  /// [onSelectedItemChanged] A Void Callback which is run when the selected
+  /// item index is changed, ie. when a user selects a new item.
+  /// Depending on the different modes, the [selectedValue] has different types.
+  /// For the [SicklerListWheelScrollViewPickerMode.text] the [selectedValue] is a [String]
+  /// For the [SicklerListWheelScrollViewPickerMode.integer] the [selectedValue] is an [int]
+  /// For the [SicklerListWheelScrollViewPickerMode.decimal] the [selectedValue] is a [double]
+  /// For the [SicklerListWheelScrollViewPickerMode.duration] the [selectedValue] is a [Duration]
+  /// For the [SicklerListWheelScrollViewPickerMode.time] the [selectedValue] is a [TimeOfDay]
+  ///
+  /// [scrollViewToLabelPadding] Determines the spacing between the Scrollable area,
+  /// and the label, and has a default value of 8 px
 
   final double height;
   final double itemExtent;
@@ -94,9 +104,9 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
   final List<String>? secondaryUnitLabels;
   final double scrollViewToLabelPadding;
 
-  final void Function(int index) onSelectedItemIndexChanged;
+  final void Function(dynamic selectedValue) onSelectedItemChanged;
 
-  SicklerListWheelScrollViewPicker({
+  const SicklerListWheelScrollViewPicker({
     super.key,
     this.height = 200,
     required this.itemExtent,
@@ -104,22 +114,24 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
     this.useMagnifier = false,
     this.magnification = 1.1,
     this.mode = SicklerListWheelScrollViewPickerMode.integer,
-    required this.onSelectedItemIndexChanged,
+    required this.onSelectedItemChanged,
     this.textDataValuesList,
     this.selectedItemUnderlayDecoration,
-    this.primaryValueInterval = 1,
-    this.secondaryValueInterval = 1,
-    this.primaryInitialValue = 0,
-    this.primaryFinalValue = 10,
-    this.secondaryInitialValue = 0,
-    this.secondaryFinalValue = 10,
+    this.primaryValueInterval,
+    this.secondaryValueInterval,
+    this.primaryInitialValue,
+    this.primaryFinalValue,
+    this.secondaryInitialValue,
+    this.secondaryFinalValue,
     this.primaryUnitLabels,
     this.secondaryUnitLabels,
     this.scrollViewToLabelPadding = 8,
-  })  : assert(
-            primaryFinalValue! >= primaryInitialValue! + primaryValueInterval!),
-        assert(secondaryFinalValue! >=
-            secondaryInitialValue! + secondaryValueInterval!);
+  });
+
+  // : assert(
+  //       primaryFinalValue >= primaryInitialValue! + primaryValueInterval!),
+  //   assert(secondaryFinalValue! >=
+  //       secondaryInitialValue! + secondaryValueInterval!);
 
   // assert((mode == SicklerListWheelScrollViewPickerMode.duration) &&
   // (secondaryValueInterval! > 0 && 60 % secondaryValueInterval == 0)),
@@ -142,8 +154,15 @@ class _SicklerListWheelScrollViewPickerState
 
     int currentValue = initialValue;
 
+    data.add(currentValue);
+
     for (int i = initialValue; i < finalValue; i += interval) {
       currentValue += interval;
+      if ((widget.mode == SicklerListWheelScrollViewPickerMode.duration ||
+              widget.mode == SicklerListWheelScrollViewPickerMode.time) &&
+          currentValue > 59) {
+        break;
+      }
 
       data.add(currentValue);
     }
@@ -154,25 +173,131 @@ class _SicklerListWheelScrollViewPickerState
   List<int> _primaryGeneratedList = [];
   List<int> _secondaryGeneratedList = [];
 
+  ///objects to hold the selected value based on mode
+
+  String selectedText = "";
+  int selectedPrimaryValue = 0;
+  int selectedSecondaryValue = 0;
+
   @override
   void initState() {
     super.initState();
-    _primaryGeneratedList = generateDataList(
-      initialValue: widget.primaryInitialValue!,
-      finalValue: widget.primaryFinalValue!,
-      interval: widget.primaryValueInterval!,
-    );
+    switch (widget.mode) {
+      case SicklerListWheelScrollViewPickerMode.time:
+        _primaryGeneratedList = generateDataList(
+          initialValue: 0,
+          finalValue: 12,
+          interval: widget.primaryValueInterval ?? 1,
+        );
+        _secondaryGeneratedList = generateDataList(
+          initialValue: 0,
+          finalValue: 59,
+          interval: widget.secondaryValueInterval ?? 1,
+        );
+        break;
 
-    _secondaryGeneratedList = generateDataList(
-      initialValue: widget.secondaryInitialValue!,
-      finalValue: widget.secondaryFinalValue!,
-      interval: widget.secondaryValueInterval!,
-    );
+      case SicklerListWheelScrollViewPickerMode.duration:
+        _primaryGeneratedList = generateDataList(
+          initialValue: 0,
+          finalValue: 24,
+          interval: widget.primaryValueInterval ?? 1,
+        );
+        _secondaryGeneratedList = generateDataList(
+          initialValue: 0,
+          finalValue: 59,
+          interval: widget.secondaryValueInterval ?? 1,
+        );
+        break;
+
+      case SicklerListWheelScrollViewPickerMode.decimal:
+        _primaryGeneratedList = generateDataList(
+          initialValue: widget.primaryInitialValue ?? 0,
+          finalValue: widget.primaryFinalValue ?? 10,
+          interval: widget.primaryValueInterval ?? 1,
+        );
+
+        _secondaryGeneratedList = generateDataList(
+          initialValue: widget.secondaryInitialValue ?? 0,
+          finalValue: widget.secondaryFinalValue ?? 9,
+          interval: widget.secondaryValueInterval ?? 1,
+        );
+        break;
+
+      default:
+        _primaryGeneratedList = generateDataList(
+          initialValue: widget.primaryInitialValue ?? 0,
+          finalValue: widget.primaryFinalValue ?? 10,
+          interval: widget.primaryValueInterval ?? 1,
+        );
+
+        _secondaryGeneratedList = generateDataList(
+          initialValue: widget.secondaryInitialValue ?? 0,
+          finalValue: widget.secondaryFinalValue ?? 10,
+          interval: widget.secondaryValueInterval ?? 1,
+        );
+    }
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  ///Handle on selectedItemChanged
+  void _handleOnSelectedItemChanged<T>(
+      {required int index, required List<T> values, bool? isSecondaryValue}) {
+    ///Run a switch case for the different modes
+    ///and return thr appropriate object to pass into onselectedItemchanged
+
+    switch (widget.mode) {
+      case SicklerListWheelScrollViewPickerMode.integer:
+        selectedPrimaryValue = values[index] as int;
+        widget.onSelectedItemChanged.call(selectedPrimaryValue);
+        break;
+
+      case SicklerListWheelScrollViewPickerMode.decimal:
+        if (isSecondaryValue != null && isSecondaryValue) {
+          selectedSecondaryValue = values[index] as int;
+        } else {
+          selectedPrimaryValue = values[index] as int;
+        }
+
+        double? selectedDecimal =
+            double.tryParse("$selectedPrimaryValue.$selectedSecondaryValue");
+
+        widget.onSelectedItemChanged.call(selectedDecimal);
+        break;
+      case SicklerListWheelScrollViewPickerMode.duration:
+        if (isSecondaryValue != null && isSecondaryValue) {
+          selectedSecondaryValue = values[index] as int;
+        } else {
+          selectedPrimaryValue = values[index] as int;
+        }
+        Duration selectedDuration = Duration(
+            hours: selectedPrimaryValue, minutes: selectedSecondaryValue);
+
+        widget.onSelectedItemChanged.call(selectedDuration);
+        break;
+      case SicklerListWheelScrollViewPickerMode.time:
+        if (isSecondaryValue == null) {
+        } else if (isSecondaryValue) {
+          selectedSecondaryValue = values[index] as int;
+        } else {
+          selectedPrimaryValue = values[index] as int;
+        }
+
+        TimeOfDay selectedTimeOfDay = TimeOfDay(
+            hour: selectedText == "PM"
+                ? selectedPrimaryValue + 12
+                : selectedPrimaryValue,
+            minute: selectedSecondaryValue);
+
+        widget.onSelectedItemChanged.call(selectedTimeOfDay);
+        break;
+      case SicklerListWheelScrollViewPickerMode.text:
+        widget.onSelectedItemChanged.call(selectedText);
+        break;
+    }
   }
 
   ///Build Picker Widgets (Primary, Secondary, and Label)
@@ -183,6 +308,7 @@ class _SicklerListWheelScrollViewPickerState
     required List<int> values,
     bool? alignValuesToRight,
     double? alignmentPadding,
+    bool? isSecondaryPicker,
   }) {
     final Size maxValueSize = _getLargestLabelSize(values);
     double padding = alignmentPadding ?? 0;
@@ -218,7 +344,10 @@ class _SicklerListWheelScrollViewPickerState
       offAxisFraction: offAxisFraction ?? 0,
       useMagnifier: widget.useMagnifier,
       magnification: widget.magnification,
-      onSelectedItemChanged: widget.onSelectedItemIndexChanged,
+      onSelectedItemChanged: (int? index) {
+        _handleOnSelectedItemChanged(
+            index: index!, values: values, isSecondaryValue: isSecondaryPicker);
+      },
     );
   }
 
@@ -256,13 +385,20 @@ class _SicklerListWheelScrollViewPickerState
             offAxisFraction: 0,
             useMagnifier: widget.useMagnifier,
             magnification: widget.magnification,
-            onSelectedItemChanged: widget.onSelectedItemIndexChanged,
-          );
+            onSelectedItemChanged: (int index) {
+              selectedText = labelList[index];
+              _handleOnSelectedItemChanged(
+                  index: index, values: labelList, isSecondaryValue: null);
+            });
   }
 
   Widget pickerMode() {
     switch (widget.mode) {
       case SicklerListWheelScrollViewPickerMode.integer:
+        if (widget.textDataValuesList != null) {
+          throw ErrorHint(
+              "For a Integer Mode, the textDataValuesList must be null");
+        }
         return LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             final double parentWidth = constraints.maxWidth;
@@ -275,6 +411,7 @@ class _SicklerListWheelScrollViewPickerState
                 ///Primary Picker
                 _buildPicker(
                     values: _primaryGeneratedList,
+                    isSecondaryPicker: false,
 
                     ///Aligns the values to the optical centre if the picker Labels
                     ///are visible, and aligns to the actual centre if no labels are visible
@@ -305,22 +442,23 @@ class _SicklerListWheelScrollViewPickerState
                         child: _buildPickerLabels(
                             labelList: widget.primaryUnitLabels!),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ],
             );
           },
         );
 
       case SicklerListWheelScrollViewPickerMode.duration:
-        // if (widget.primaryUnitLabels != null ||
-        //     widget.secondaryUnitLabels != null ||
-        //     widget.primaryInitialValue != null ||
-        //     widget.primaryFinalValue != null ||
-        //     widget.secondaryInitialValue != null ||
-        //     widget.secondaryFinalValue != null) {
-        //   throw ErrorHint(
-        //       "For a Duration Mode, the primaryUnitLabels,secondaryUnitLabels, primaryInitialValue, primaryFinalValue, secondaryInitialValue, secondaryFinalValue, must all be null, consider removing any values.");
-        // }
+        if (widget.textDataValuesList != null ||
+            widget.primaryUnitLabels != null ||
+            widget.secondaryUnitLabels != null ||
+            widget.primaryInitialValue != null ||
+            widget.primaryFinalValue != null ||
+            widget.secondaryInitialValue != null ||
+            widget.secondaryFinalValue != null) {
+          throw ErrorHint(
+              "For a Duration Mode, the textDataValuesList, primaryUnitLabels,secondaryUnitLabels, primaryInitialValue, primaryFinalValue, secondaryInitialValue, secondaryFinalValue, must all be null, consider removing any values.");
+        }
 
         return Row(
           mainAxisSize: MainAxisSize.min,
@@ -334,16 +472,11 @@ class _SicklerListWheelScrollViewPickerState
                       _getLargestLabelSize(_primaryGeneratedList);
                   final Size hourSize = _getLargestLabelSize(["hours"]);
 
-                  print(hourSize.width);
-                  print(parentWidth);
-
-                  print((hourSize.width + widget.scrollViewToLabelPadding * 2) /
-                      parentWidth);
-
                   return Stack(
                     children: [
                       ///Primary Picker
                       _buildPicker(
+                          isSecondaryPicker: false,
                           values: _primaryGeneratedList,
                           alignmentPadding: parentWidth -
                               (hourSize.width +
@@ -377,13 +510,13 @@ class _SicklerListWheelScrollViewPickerState
             Expanded(
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
-                  final double parentWidth = constraints.maxWidth;
                   final Size primaryScrollViewMaxSize =
                       _getLargestLabelSize(_primaryGeneratedList);
                   return Stack(
                     children: [
                       ///Primary Picker
                       _buildPicker(
+                          isSecondaryPicker: true,
                           alignValuesToRight: true,
                           values: _secondaryGeneratedList,
                           alignment: Alignment.centerLeft,
@@ -407,6 +540,17 @@ class _SicklerListWheelScrollViewPickerState
         );
 
       case SicklerListWheelScrollViewPickerMode.time:
+        if (widget.textDataValuesList != null ||
+            widget.primaryUnitLabels != null ||
+            widget.secondaryUnitLabels != null ||
+            widget.primaryInitialValue != null ||
+            widget.primaryFinalValue != null ||
+            widget.secondaryInitialValue != null ||
+            widget.secondaryFinalValue != null) {
+          throw ErrorHint(
+              "For a Time Mode, the textDataValuesList, primaryUnitLabels,secondaryUnitLabels, primaryInitialValue, primaryFinalValue, secondaryInitialValue, secondaryFinalValue, primaryValueInterval, and secondaryValueInterval must all be null, consider removing any values.");
+        }
+
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -423,6 +567,7 @@ class _SicklerListWheelScrollViewPickerState
                     children: [
                       ///Primary Picker
                       _buildPicker(
+                          isSecondaryPicker: false,
                           values: _primaryGeneratedList,
                           alignmentPadding: parentWidth -
                               (decimalPointSize.width +
@@ -454,19 +599,19 @@ class _SicklerListWheelScrollViewPickerState
             Expanded(
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
-                  final double parentWidth = constraints.maxWidth;
                   final Size primaryScrollViewMaxSize =
                       _getLargestLabelSize(_primaryGeneratedList);
                   return Stack(
                     children: [
                       ///Primary Picker
                       _buildPicker(
+                          isSecondaryPicker: true,
                           alignValuesToRight: true,
                           values: _secondaryGeneratedList,
                           alignment: Alignment.centerLeft,
                           offAxisFraction: 0.5),
 
-                      ///Primary Picker Unit Label,
+                      ///Time Picker Label
                       Padding(
                         //Pad half the screen + half the width of the middle item +
                         // then a spacing between the two, which can be user defined
@@ -484,10 +629,19 @@ class _SicklerListWheelScrollViewPickerState
         );
 
       case SicklerListWheelScrollViewPickerMode.decimal:
+        if (widget.textDataValuesList != null) {
+          throw ErrorHint(
+              "For a Decimal Mode,  the textDataValuesList must be null");
+        }
+        if (widget.primaryUnitLabels != null) {
+          throw ErrorHint(
+              "For a Decimal mode, the primaryUnitLabels must be null");
+        }
+
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ///Layout Builder for Hour section
+            ///Layout Builder for Primary Number section
             Expanded(
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
@@ -500,6 +654,7 @@ class _SicklerListWheelScrollViewPickerState
                     children: [
                       ///Primary Picker
                       _buildPicker(
+                          isSecondaryPicker: false,
                           values: _primaryGeneratedList,
                           alignmentPadding: parentWidth -
                               (decimalPointSize.width +
@@ -531,13 +686,13 @@ class _SicklerListWheelScrollViewPickerState
             Expanded(
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
-                  final double parentWidth = constraints.maxWidth;
                   final Size primaryScrollViewMaxSize =
                       _getLargestLabelSize(_primaryGeneratedList);
                   return Stack(
                     children: [
                       ///Primary Picker
                       _buildPicker(
+                          isSecondaryPicker: true,
                           alignValuesToRight: true,
                           values: _secondaryGeneratedList,
                           alignment: Alignment.centerLeft,
@@ -551,7 +706,7 @@ class _SicklerListWheelScrollViewPickerState
                             left: primaryScrollViewMaxSize.width +
                                 widget.scrollViewToLabelPadding),
                         child: _buildPickerLabels(
-                          labelList: [widget.primaryUnitLabels?.first ?? ""],
+                          labelList: [widget.secondaryUnitLabels?.first ?? ""],
                         ),
                       ),
                     ],
@@ -580,7 +735,6 @@ class _SicklerListWheelScrollViewPickerState
         //       "For a Text Mode, the primaryUnitLabels,secondaryUnitLabels, primaryInitialValue, primaryFinalValue, secondaryInitialValue, secondaryFinalValue, primaryValueInterval, and secondaryValueInterval must all be null, consider removing any values.");
         // }
 
-        ///Todo: Fix the picker in the case where the values are text, use generics
         return _buildPickerLabels(
             labelList: widget.textDataValuesList!, alignment: Alignment.center);
     }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
@@ -54,7 +53,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                 const SicklerAppBar(pageTitle: "Tell us more\nabout you"),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -80,32 +79,28 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                           ),
                           onTap: () async {
                             //Todo: Trigger Bottom Sheet
-                            int age = await showModalBottomSheet(
+                            int? age = await showModalBottomSheet(
                                 context: context,
                                 isScrollControlled: true,
-                                builder: (context) => Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SizedBox(
-                                          height: 200,
-                                          width: double.infinity,
-                                          child:
-                                              ListWheelScrollView.useDelegate(
-                                                  itemExtent: 48,
-                                                  childDelegate:
-                                                      ListWheelChildBuilderDelegate(
-                                                          builder: (BuildContext
-                                                                  context,
-                                                              int index) {
-                                                    return Text(
-                                                        listData[index]);
-                                                  })),
+                                builder: (context) => SicklerBottomSheet(
+                                      title: "Age",
+                                      onPressed: () {},
+                                      child: SicklerListWheelScrollViewPicker(
+                                        selectedItemUnderlayDecoration:
+                                            BoxDecoration(
+                                          border: Border.symmetric(
+                                            horizontal: BorderSide(
+                                                width: 1,
+                                                color:
+                                                    theme.colorScheme.primary),
+                                          ),
                                         ),
-                                        Text("Bottom Sheet"),
-                                        SizedBox(
-                                          height: 64,
-                                        )
-                                      ],
+                                        itemExtent: 48,
+                                        onSelectedItemChanged:
+                                            (selectedValue) {},
+                                        primaryInitialValue: 0,
+                                        primaryFinalValue: 100,
+                                      ),
                                     ));
 
                             setState(() {
@@ -129,7 +124,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                         Text("Sex", style: theme.textTheme.bodyMedium),
                         const SizedBox(height: 8),
 
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Row(
                           children: [
                             Expanded(
@@ -144,7 +139,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                                 },
                               ),
                             ),
-                            SizedBox(width: 16),
+                            const SizedBox(width: 16),
                             Expanded(
                               child: SicklerRadio<Gender>(
                                 label: "Male",
@@ -159,8 +154,8 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 32),
-                        Spacer(),
+                        const SizedBox(height: 32),
+                        const Spacer(),
 
                         ///Buttons
                         SicklerButton(
@@ -178,59 +173,6 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class CupertinoPickerTestScreen extends StatelessWidget {
-  CupertinoPickerTestScreen({super.key});
-
-  List<String> listData = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "6",
-    "6",
-    "6",
-    "6",
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          SicklerAppBar(pageTitle: "Cupertino Picker\nTest Screen"),
-          CupertinoTimerPicker(
-              minuteInterval: 30,
-              mode: CupertinoTimerPickerMode.hm,
-              itemExtent: 48,
-              onTimerDurationChanged: (Duration duration) {}),
-          SicklerListWheelScrollViewPicker(
-            // primaryInitialValue: 0,
-            // primaryFinalValue: 50,
-            // secondaryInitialValue: 0,
-            // secondaryFinalValue: 10,
-            // secondaryValueInterval: 1,
-            itemExtent: 50,
-            onSelectedItemIndexChanged: (index) {},
-            mode: SicklerListWheelScrollViewPickerMode.text,
-            textDataValuesList: [
-              "Text 1",
-              "Text 2",
-              "Text 3",
-              "Text 4",
-              "Text 5",
-            ],
-
-            scrollViewToLabelPadding: 16,
-            //  primaryUnitLabels: ["Kg", "Hours", "short", "extra long"],
-          )
-        ],
       ),
     );
   }

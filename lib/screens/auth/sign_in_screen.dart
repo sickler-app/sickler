@@ -35,7 +35,7 @@ class _SignInScreenState extends State<SignInScreen> {
             key: _formKey,
             child: Column(
               children: [
-                SicklerAppBar(pageTitle: "Sign In"),
+                const SicklerAppBar(pageTitle: "Sign In"),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),

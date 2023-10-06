@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/core.dart';
 
-class MedsTypeItem extends StatelessWidget {
-  MedsTypeItem(
+class MedsTypeItem extends StatefulWidget {
+  const MedsTypeItem(
       {super.key,
       this.colorScheme = SelectorColors.purple,
       required this.onPressed,
@@ -16,13 +15,18 @@ class MedsTypeItem extends StatelessWidget {
   final String iconPath;
   final VoidCallback onPressed;
 
+  @override
+  State<MedsTypeItem> createState() => _MedsTypeItemState();
+}
+
+class _MedsTypeItemState extends State<MedsTypeItem> {
   Color backgroundColor = SicklerColours.purple95;
   Color color = SicklerColours.purple40;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    switch (colorScheme) {
+    switch (widget.colorScheme) {
       case SelectorColors.purple:
         backgroundColor = theme.brightness == Brightness.light
             ? SicklerColours.purple95
@@ -71,7 +75,7 @@ class MedsTypeItem extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         InkWell(
-          onTap: onPressed,
+          onTap: widget.onPressed,
           splashColor: color.withOpacity(.2),
           splashFactory: InkSparkle.splashFactory,
           borderRadius: BorderRadius.circular(72),
@@ -84,7 +88,7 @@ class MedsTypeItem extends StatelessWidget {
             ),
             child: Center(
               child: SvgPicture.asset(
-                iconPath,
+                widget.iconPath,
                 colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
               ),
             ),
@@ -92,7 +96,7 @@ class MedsTypeItem extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          label,
+          widget.label,
           textAlign: TextAlign.center,
           style: theme.textTheme.bodySmall!.copyWith(
               color: theme.brightness == Brightness.light
