@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
-import 'package:sickler/screens/user_info/basic_info_screen.dart';
+import 'package:sickler/screens/water/suggested_daily_goal_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: SicklerThemeData.lightTheme,
       darkTheme: SicklerThemeData.darkTheme,
       themeMode: ThemeMode.system,
-      home: const BasicInfoScreen(),
+      home: const SuggestedDailyGoalScreen(),
     );
   }
 }

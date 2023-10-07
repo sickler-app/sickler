@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-class SuggestedDailyGoalScreen extends StatelessWidget {
+class SuggestedDailyGoalScreen extends StatefulWidget {
   const SuggestedDailyGoalScreen({super.key});
 
+  @override
+  State<SuggestedDailyGoalScreen> createState() =>
+      _SuggestedDailyGoalScreenState();
+}
+
+int dailyGoal = 2000;
+
+class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -34,7 +42,7 @@ class SuggestedDailyGoalScreen extends StatelessWidget {
                 style: theme.textTheme.bodyMedium),
           ),
           const SizedBox(height: 64),
-          Text("2,000 ml",
+          Text("$dailyGoal ml",
               style: theme.textTheme.displaySmall!
                   .copyWith(fontWeight: FontWeight.w800)),
           const SizedBox(height: 24),
@@ -51,7 +59,30 @@ class SuggestedDailyGoalScreen extends StatelessWidget {
             child: Column(
               children: [
                 SicklerButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      context: context,
+                      builder: (context) => SicklerBottomSheet(
+                        title: "Select Volume",
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: SicklerListWheelScrollViewPicker(
+                          primaryInitialValue: 1000,
+                          primaryFinalValue: 5000,
+                          primaryValueInterval: 100,
+                          primaryUnitLabels: const ["ml"],
+                          onSelectedItemChanged: (selectedValue) {
+                            /// Todo: change daily goal to selected volume
+
+                            setState(() {
+                              dailyGoal = selectedValue;
+                            });
+                          },
+                        ),
+                      ),
+                    );
+                  },
                   label: "Change Goal",
                   showIcon: true,
                   iconPath: "assets/svg/edit.svg",

@@ -6,10 +6,12 @@ class SicklerBottomSheet extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
   final Widget child;
+  final String buttonLabel;
   const SicklerBottomSheet(
       {super.key,
       required this.title,
       required this.onPressed,
+      this.buttonLabel = "Continue",
       required this.child});
 
   @override
@@ -29,7 +31,7 @@ class SicklerBottomSheet extends StatelessWidget {
               height: 6,
               width: 42,
               decoration: BoxDecoration(
-                  color: theme.colorScheme.primaryContainer,
+                  color: theme.cardColor,
                   borderRadius: BorderRadius.circular(8)),
             ),
             const SizedBox(height: 12),
@@ -41,7 +43,7 @@ class SicklerBottomSheet extends StatelessWidget {
             ),
             child,
             const SizedBox(height: 32),
-            SicklerButton(onPressed: onPressed, label: 'Continue'),
+            SicklerButton(onPressed: onPressed, label: buttonLabel),
             const SizedBox(
               height: 64,
             )

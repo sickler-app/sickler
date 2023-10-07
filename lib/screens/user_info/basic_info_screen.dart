@@ -70,6 +70,8 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                         Text("Age", style: theme.textTheme.bodyMedium),
                         const SizedBox(height: 8),
                         TextFormField(
+                          readOnly: true,
+                          showCursor: true,
                           controller: ageController,
                           keyboardType: TextInputType.number,
                           decoration:
@@ -79,33 +81,26 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                           ),
                           onTap: () async {
                             //Todo: Trigger Bottom Sheet
-                            int? age = await showModalBottomSheet(
+                            await showModalBottomSheet(
                                 context: context,
                                 isScrollControlled: true,
                                 builder: (context) => SicklerBottomSheet(
                                       title: "Age",
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
                                       child: SicklerListWheelScrollViewPicker(
-                                        selectedItemUnderlayDecoration:
-                                            BoxDecoration(
-                                          border: Border.symmetric(
-                                            horizontal: BorderSide(
-                                                width: 1,
-                                                color:
-                                                    theme.colorScheme.primary),
-                                          ),
-                                        ),
                                         itemExtent: 48,
-                                        onSelectedItemChanged:
-                                            (selectedValue) {},
+                                        onSelectedItemChanged: (selectedValue) {
+                                          setState(() {
+                                            ageController.text =
+                                                selectedValue.toString();
+                                          });
+                                        },
                                         primaryInitialValue: 0,
                                         primaryFinalValue: 100,
                                       ),
                                     ));
-
-                            setState(() {
-                              ageController.text = age.toString();
-                            });
                           },
                         ),
                         const SizedBox(height: 24),

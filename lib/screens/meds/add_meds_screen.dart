@@ -90,7 +90,8 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       childAspectRatio: .7,
                       crossAxisCount: 4,
                       mainAxisSpacing: 0,
@@ -204,7 +205,26 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ),
                         child: IconButton(
                           padding: EdgeInsets.zero,
-                          onPressed: () {},
+                          onPressed: () async {
+                            await showModalBottomSheet(
+                                context: context,
+                                builder: (context) => SicklerBottomSheet(
+                                      title: "Select Time",
+                                      onPressed: () {
+                                        ///Todo: Add to the list of times
+                                      },
+                                      child: SicklerListWheelScrollViewPicker(
+                                        scrollViewToLabelPadding: 12,
+                                        mode:
+                                            SicklerListWheelScrollViewPickerMode
+                                                .time,
+                                        itemExtent: 48,
+                                        onSelectedItemChanged: (selectedValue) {
+                                          ///Todo: set selected time to a time var,
+                                        },
+                                      ),
+                                    ));
+                          },
                           icon: SvgPicture.asset(
                             "assets/svg/plus.svg",
                             colorFilter: ColorFilter.mode(

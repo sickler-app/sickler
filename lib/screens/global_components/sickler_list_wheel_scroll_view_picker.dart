@@ -1,91 +1,90 @@
 import 'package:flutter/material.dart';
-
 import '../../core/core.dart';
 
+/// Constructs an versatile and customisable ListWheelScrollView Picker.
+///
+/// [mode] is one of the modes listed in [SicklerListWheelScrollViewPickerMode] and
+/// defaults to [SicklerListWheelScrollViewPickerMode.integer].
+/// Several picker mode exists, which include;
+///
+/// [SicklerListWheelScrollViewPickerMode.integer] for a simple single
+/// column picker with integers can be useful for selecting discrete values like ages
+/// [SicklerListWheelScrollViewPickerMode.decimal] for a simple decimal picker
+/// with two columns, useful for selecting continuous values like weights
+/// [SicklerListWheelScrollViewPickerMode.duration] for selecting a duration,
+/// this mode requires no parameters and all nullable parameters must be kept null;
+/// [SicklerListWheelScrollViewPickerMode.time] for selecting a time.
+/// this mode requires no parameters and all nullable parameters must be kept null;
+/// [SicklerListWheelScrollViewPickerMode.text] for selecting string values.
+/// This mode requires [textDataValuesList] (which is a list of text
+/// values to choose from), and must not be null. All other nullable parameters
+/// must be kept null;
+
+/// [height] is height of the picker in logical pixels, and defaults to 200px.
+/// It also determines how many of the Picker's available options are visible
+/// both above and below the selected value
+///
+/// [textDataValuesList] A list of text stings for the user to choose from.
+/// It is required only when [mode] is set to [SicklerListWheelScrollViewPickerMode.text]
+///
+/// [selectedItemUnderlayDecoration] A Decoration to be provided to
+/// the [Container] underlying the selected Item to indicate
+/// it is the selected item.
+/// It Defaults to a Decoration matching the Sickler Design,
+/// but can be customisable to any Decoration.
+///
+/// [primaryInitialValue] The initial Value of the Primary (First) scroll column.
+/// It Defaults to 0 and can be a positive or negative integer
+/// [primaryFinalValue] The Final Value of the Primary (First) scroll column.
+/// It Defaults to 10 and must not be less than the [primaryInitialValue]+[primaryValueInterval]
+/// [primaryValueInterval] The granularity of the Primary (First) scroll colum picker.
+/// It Defaults to 1, and must be a positive integer.
+/// [primaryUnitLabels] The labels for the Primary scroll column.
+/// A List of strings, which is itself, a [ListWheelScrollView].
+/// For Instance, can be used to pick between [AM] and [PM] in
+/// the [SicklerListWheelScrollViewPickerMode.time] mode.
+/// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
+/// A Text representing the [hour] is used instead.
+///
+/// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
+/// the [primaryInitialValue] and [primaryFinalValue] corresponds the [hours] of the picker.
+///
+///
+/// [secondaryInitialValue] The initial Value of the Secondary (Second) scroll column.
+/// It Defaults to 0 and can be a positive or negative integer
+/// [secondaryFinalValue] The Final Value of the Secondary (Second) scroll column.
+/// It Defaults to 10 and must not be less than the [secondaryInitialValue]+[secondaryValueInterval]
+/// [secondaryValueInterval] The granularity of the Secondary (Second) scroll colum picker.
+/// It Defaults to 1, and must be a positive integer.
+/// [secondaryUnitLabels] The labels for the Secondary scroll column.
+/// A List of strings, which is itself, a [ListWheelScrollView].
+/// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
+/// a Text representing the [minutes] is used instead.
+/// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
+/// the [secondaryInitialValue] and [secondaryFinalValue]
+/// corresponds the the [minutes] of the picker.
+///
+/// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
+/// the [secondaryValueInterval] must be a positive integer factor of 60
+///
+/// [diameterRatio] Documentation Can be found in the [ListWheelScrollView] widget
+/// [useMagnifier] Documentation Can be found in the [ListWheelScrollView] widget
+/// [magnification] Documentation Can be found in the [ListWheelScrollView] widget
+/// [itemExtent] Documentation Can be found in the [ListWheelScrollView] widget
+///
+/// [onSelectedItemChanged] A Void Callback which is run when the selected
+/// item index is changed, ie. when a user selects a new item.
+/// Depending on the different modes, the [selectedValue] has different types.
+/// For the [SicklerListWheelScrollViewPickerMode.text] the [selectedValue] is a [String]
+/// For the [SicklerListWheelScrollViewPickerMode.integer] the [selectedValue] is an [int]
+/// For the [SicklerListWheelScrollViewPickerMode.decimal] the [selectedValue] is a [double]
+/// For the [SicklerListWheelScrollViewPickerMode.duration] the [selectedValue] is a [Duration]
+/// For the [SicklerListWheelScrollViewPickerMode.time] the [selectedValue] is a [TimeOfDay]
+///
+/// [scrollViewToLabelPadding] Determines the spacing between the Scrollable area,
+/// and the label, and has a default value of 8 px
+
 class SicklerListWheelScrollViewPicker extends StatefulWidget {
-  /// Constructs an versatile and customisable ListWheelScrollView Picker.
-  ///
-  /// [mode] is one of the modes listed in [SicklerListWheelScrollViewPickerMode] and
-  /// defaults to [SicklerListWheelScrollViewPickerMode.integer].
-  /// Several picker mode exists, which include;
-  ///
-  /// [SicklerListWheelScrollViewPickerMode.integer] for a simple single
-  /// column picker with integers can be useful for selecting discrete values like ages
-  /// [SicklerListWheelScrollViewPickerMode.decimal] for a simple decimal picker
-  /// with two columns, useful for selecting continuous values like weights
-  /// [SicklerListWheelScrollViewPickerMode.duration] for selecting a duration,
-  /// this mode requires no parameters and all nullable parameters must be kept null;
-  /// [SicklerListWheelScrollViewPickerMode.time] for selecting a time.
-  /// this mode requires no parameters and all nullable parameters must be kept null;
-  /// [SicklerListWheelScrollViewPickerMode.text] for selecting string values.
-  /// This mode requires [textDataValuesList] (which is a list of text
-  /// values to choose from), and must not be null. All other nullable parameters
-  /// must be kept null;
-
-  /// [height] is height of the picker in logical pixels, and defaults to 200px.
-  /// It also determines how many of the Picker's available options are visible
-  /// both above and below the selected value
-  ///
-  /// [textDataValuesList] A list of text stings for the user to choose from.
-  /// It is required only when [mode] is set to [SicklerListWheelScrollViewPickerMode.text]
-  ///
-  /// [selectedItemUnderlayDecoration] A Decoration to be provided to
-  /// the [Container] underlying the selected Item to indicate
-  /// it is the selected item.
-  /// It Defaults to a Decoration matching the Sickler Design,
-  /// but can be customisable to any Decoration.
-  ///
-  /// [primaryInitialValue] The initial Value of the Primary (First) scroll column.
-  /// It Defaults to 0 and can be a positive or negative integer
-  /// [primaryFinalValue] The Final Value of the Primary (First) scroll column.
-  /// It Defaults to 10 and must not be less than the [primaryInitialValue]+[primaryValueInterval]
-  /// [primaryValueInterval] The granularity of the Primary (First) scroll colum picker.
-  /// It Defaults to 1, and must be a positive integer.
-  /// [primaryUnitLabels] The labels for the Primary scroll column.
-  /// A List of strings, which is itself, a [ListWheelScrollView].
-  /// For Instance, can be used to pick between [AM] and [PM] in
-  /// the [SicklerListWheelScrollViewPickerMode.time] mode.
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
-  /// A Text representing the [hour] is used instead.
-  ///
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
-  /// the [primaryInitialValue] and [primaryFinalValue] corresponds the [hours] of the picker.
-  ///
-  ///
-  /// [secondaryInitialValue] The initial Value of the Secondary (Second) scroll column.
-  /// It Defaults to 0 and can be a positive or negative integer
-  /// [secondaryFinalValue] The Final Value of the Secondary (Second) scroll column.
-  /// It Defaults to 10 and must not be less than the [secondaryInitialValue]+[secondaryValueInterval]
-  /// [secondaryValueInterval] The granularity of the Secondary (Second) scroll colum picker.
-  /// It Defaults to 1, and must be a positive integer.
-  /// [secondaryUnitLabels] The labels for the Secondary scroll column.
-  /// A List of strings, which is itself, a [ListWheelScrollView].
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
-  /// a Text representing the [minutes] is used instead.
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
-  /// the [secondaryInitialValue] and [secondaryFinalValue]
-  /// corresponds the the [minutes] of the picker.
-  ///
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
-  /// the [secondaryValueInterval] must be a positive integer factor of 60
-  ///
-  /// [diameterRatio] Documentation Can be found in the [ListWheelScrollView] widget
-  /// [useMagnifier] Documentation Can be found in the [ListWheelScrollView] widget
-  /// [magnification] Documentation Can be found in the [ListWheelScrollView] widget
-  /// [itemExtent] Documentation Can be found in the [ListWheelScrollView] widget
-  ///
-  /// [onSelectedItemChanged] A Void Callback which is run when the selected
-  /// item index is changed, ie. when a user selects a new item.
-  /// Depending on the different modes, the [selectedValue] has different types.
-  /// For the [SicklerListWheelScrollViewPickerMode.text] the [selectedValue] is a [String]
-  /// For the [SicklerListWheelScrollViewPickerMode.integer] the [selectedValue] is an [int]
-  /// For the [SicklerListWheelScrollViewPickerMode.decimal] the [selectedValue] is a [double]
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] the [selectedValue] is a [Duration]
-  /// For the [SicklerListWheelScrollViewPickerMode.time] the [selectedValue] is a [TimeOfDay]
-  ///
-  /// [scrollViewToLabelPadding] Determines the spacing between the Scrollable area,
-  /// and the label, and has a default value of 8 px
-
   final double height;
   final double itemExtent;
   final double diameterRatio;
@@ -109,7 +108,7 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
   const SicklerListWheelScrollViewPicker({
     super.key,
     this.height = 200,
-    required this.itemExtent,
+    this.itemExtent = 48,
     this.diameterRatio = 2,
     this.useMagnifier = false,
     this.magnification = 1.1,
@@ -723,18 +722,6 @@ class _SicklerListWheelScrollViewPickerState
               "For a Text Mode,  the textDataValuesList must not be null, Consider providing all the text values to choose from in a list");
         }
 
-        // else if (widget.primaryUnitLabels != null ||
-        //     widget.secondaryUnitLabels != null ||
-        //     widget.primaryInitialValue != null ||
-        //     widget.primaryFinalValue != null ||
-        //     widget.secondaryInitialValue != null ||
-        //     widget.secondaryFinalValue != null ||
-        //     widget.primaryValueInterval != null ||
-        //     widget.secondaryValueInterval != null) {
-        //   throw ErrorHint(
-        //       "For a Text Mode, the primaryUnitLabels,secondaryUnitLabels, primaryInitialValue, primaryFinalValue, secondaryInitialValue, secondaryFinalValue, primaryValueInterval, and secondaryValueInterval must all be null, consider removing any values.");
-        // }
-
         return _buildPickerLabels(
             labelList: widget.textDataValuesList!, alignment: Alignment.center);
     }
@@ -776,10 +763,13 @@ class _SicklerListWheelScrollViewPickerState
             width: double.infinity,
             decoration: widget.selectedItemUnderlayDecoration ??
                 BoxDecoration(
-                    color: theme.cardColor,
-                    borderRadius: BorderRadius.circular(16),
-                    border:
-                        Border.all(width: 1, color: theme.colorScheme.primary)),
+                  border: Border.symmetric(
+                    horizontal: BorderSide(
+                      width: 1,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                ),
           ),
           pickerMode(),
         ],

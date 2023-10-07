@@ -15,6 +15,8 @@ class MedsTypeItem extends StatefulWidget {
   final String iconPath;
   final VoidCallback onPressed;
 
+  ///Todo: create an onSelected Callback
+
   @override
   State<MedsTypeItem> createState() => _MedsTypeItemState();
 }

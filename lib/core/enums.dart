@@ -17,3 +17,5 @@ enum SicklerListWheelScrollViewPickerMode {
   decimal,
   text
 }
+
+///Todo: create an enum for medication types
