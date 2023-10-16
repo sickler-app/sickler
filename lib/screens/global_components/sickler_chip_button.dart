@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/core.dart';
 
-class SicklerChipButton extends StatelessWidget {
+class SicklerChipButton extends StatefulWidget {
   const SicklerChipButton({
     Key? key,
     required this.onPressed,
@@ -25,84 +25,89 @@ class SicklerChipButton extends StatelessWidget {
   final bool? overrideIconColor;
 
   @override
+  State<SicklerChipButton> createState() => _SicklerChipButtonState();
+}
+
+class _SicklerChipButtonState extends State<SicklerChipButton> {
+  @override
   Widget build(BuildContext context) {
-    if (showIcon == true && iconPath == null) {
-      throw UnimplementedError(
+    if (widget.showIcon == true && widget.iconPath == null) {
+      throw ErrorHint(
           "You've not provided an icon path to show, consider providing a path");
     }
 
     final theme = Theme.of(context);
     ButtonStyle style = ElevatedButton.styleFrom(
       fixedSize: const Size.fromHeight(36),
-      backgroundColor: backgroundColor ?? theme.colorScheme.primary,
-      foregroundColor: color ?? Colors.white,
+      backgroundColor: widget.backgroundColor ?? theme.colorScheme.primary,
+      foregroundColor: widget.color ?? Colors.white,
     );
     Color labelColor = SicklerColours.purple40;
-    switch (buttonType) {
+    switch (widget.buttonType) {
       case SicklerButtonType.primary:
         style = ElevatedButton.styleFrom(
           fixedSize: const Size.fromHeight(36),
           alignment: Alignment.center,
-          backgroundColor: backgroundColor ?? theme.colorScheme.primary,
-          foregroundColor: color ?? Colors.white,
+          backgroundColor: widget.backgroundColor ?? theme.colorScheme.primary,
+          foregroundColor: widget.color ?? Colors.white,
         );
-        labelColor = color ?? theme.colorScheme.onPrimary;
+        labelColor = widget.color ?? theme.colorScheme.onPrimary;
         break;
 
       case SicklerButtonType.secondary:
         style = ElevatedButton.styleFrom(
           fixedSize: const Size.fromHeight(36),
           backgroundColor: theme.brightness == Brightness.light
-              ? backgroundColor ?? theme.colorScheme.primaryContainer
+              ? widget.backgroundColor ?? theme.colorScheme.primaryContainer
               : SicklerColours.neutral20,
-          foregroundColor: color ?? theme.colorScheme.onPrimaryContainer,
+          foregroundColor: widget.color ?? theme.colorScheme.onPrimaryContainer,
         );
-        labelColor = color ?? theme.colorScheme.onPrimaryContainer;
+        labelColor = widget.color ?? theme.colorScheme.onPrimaryContainer;
         break;
 
       case SicklerButtonType.outline:
         style = ElevatedButton.styleFrom(
             fixedSize: const Size.fromHeight(36),
             backgroundColor: Colors.transparent,
-            foregroundColor: color ?? theme.colorScheme.primary,
+            foregroundColor: widget.color ?? theme.colorScheme.primary,
             side: BorderSide(
               width: 1,
-              color: backgroundColor ?? theme.colorScheme.primary,
+              color: widget.backgroundColor ?? theme.colorScheme.primary,
             ));
 
-        labelColor = color ?? theme.colorScheme.primary;
+        labelColor = widget.color ?? theme.colorScheme.primary;
         break;
       case SicklerButtonType.text:
         style = ElevatedButton.styleFrom(
             fixedSize: const Size.fromHeight(36),
             backgroundColor: Colors.transparent,
-            foregroundColor: color ?? theme.colorScheme.primary);
-        labelColor = color ?? theme.colorScheme.primary;
+            foregroundColor: widget.color ?? theme.colorScheme.primary);
+        labelColor = widget.color ?? theme.colorScheme.primary;
         break;
 
       default:
         style = ElevatedButton.styleFrom(
           fixedSize: const Size.fromHeight(36),
-          backgroundColor: backgroundColor ?? theme.colorScheme.primary,
-          foregroundColor: color ?? Colors.white,
+          backgroundColor: widget.backgroundColor ?? theme.colorScheme.primary,
+          foregroundColor: widget.color ?? Colors.white,
         );
-        labelColor = color ?? theme.colorScheme.primary;
+        labelColor = widget.color ?? theme.colorScheme.primary;
         break;
     }
 
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: widget.onPressed,
       style: style,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Visibility(
-            visible: showIcon,
+            visible: widget.showIcon,
             child: Row(
               children: [
                 SvgPicture.asset(
-                  iconPath ?? "",
-                  colorFilter: overrideIconColor!
+                  widget.iconPath ?? "",
+                  colorFilter: widget.overrideIconColor!
                       ? ColorFilter.mode(
                           labelColor,
                           BlendMode.srcIn, // the blend mode
@@ -113,7 +118,7 @@ class SicklerChipButton extends StatelessWidget {
               ],
             ),
           ),
-          Text(label,
+          Text(widget.label,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!

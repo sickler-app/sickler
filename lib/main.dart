@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
-import 'package:sickler/screens/water/suggested_daily_goal_screen.dart';
+import 'package:sickler/screens/meds/meds_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,7 +9,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: SicklerThemeData.lightTheme,
       darkTheme: SicklerThemeData.darkTheme,
       themeMode: ThemeMode.system,
-      home: const SuggestedDailyGoalScreen(),
+      home: const MedsScreen(),
     );
   }
 }

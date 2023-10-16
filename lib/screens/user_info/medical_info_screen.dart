@@ -55,19 +55,19 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                     runSpacing: 4,
                     children: [
                       SicklerChip(
-                        labelText: "Daily",
+                        label: "Daily",
                         onSelected: (value) {},
                       ),
                       SicklerChip(
-                        labelText: "Weekly",
+                        label: "Weekly",
                         onSelected: (value) {},
                       ),
                       SicklerChip(
-                        labelText: "Monthly",
+                        label: "Monthly",
                         onSelected: (value) {},
                       ),
                       SicklerChip(
-                        labelText: "Custom",
+                        label: "Custom",
                         onSelected: (value) {},
                       ),
                     ],
@@ -115,15 +115,15 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                     children: [
                       SicklerChip(
                         chipType: SicklerChipType.info,
-                        labelText: "Peanuts",
+                        label: "Peanuts",
                       ),
                       SicklerChip(
                         chipType: SicklerChipType.info,
-                        labelText: "Bees",
+                        label: "Bees",
                       ),
                       SicklerChip(
                         chipType: SicklerChipType.info,
-                        labelText: "Dogs",
+                        label: "Dogs",
                       ),
                     ],
                   ),
@@ -162,11 +162,11 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                     children: [
                       SicklerChip(
                         chipType: SicklerChipType.info,
-                        labelText: "Aneamia",
+                        label: "Aneamia",
                       ),
                       SicklerChip(
                         chipType: SicklerChipType.info,
-                        labelText: "Cold",
+                        label: "Cold",
                       ),
                     ],
                   ),

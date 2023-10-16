@@ -158,22 +158,22 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                       SicklerChip(
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
-                        labelText: "Once",
+                        label: "Once",
                       ),
                       SicklerChip(
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
-                        labelText: "Twice",
+                        label: "Twice",
                       ),
                       SicklerChip(
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
-                        labelText: "3 Times",
+                        label: "3 Times",
                       ),
                       SicklerChip(
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
-                        labelText: "Custom",
+                        label: "Custom",
                       ),
                     ],
                   ),
@@ -189,11 +189,11 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                     children: [
                       const SicklerChip(
                         chipType: SicklerChipType.info,
-                        labelText: "8:00 AM",
+                        label: "8:00 AM",
                       ),
                       const SicklerChip(
                         chipType: SicklerChipType.info,
-                        labelText: "3:00 PM",
+                        label: "3:00 PM",
                       ),
                       Container(
                         height: 42,
@@ -248,27 +248,27 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                       SicklerChip(
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
-                        labelText: "1 Week",
+                        label: "1 Week",
                       ),
                       SicklerChip(
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
-                        labelText: "2 Weeks",
+                        label: "2 Weeks",
                       ),
                       SicklerChip(
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
-                        labelText: "A month",
+                        label: "A month",
                       ),
                       SicklerChip(
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
-                        labelText: "6 months",
+                        label: "6 months",
                       ),
                       SicklerChip(
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
-                        labelText: "Custom",
+                        label: "Custom",
                       ),
                     ],
                   ),

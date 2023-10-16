@@ -27,7 +27,7 @@ class SicklerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (showIcon == true && iconPath == null) {
-      throw UnimplementedError(
+      throw ErrorHint(
           "You've not provided an icon path to show, consider providing a path");
     }
 
