@@ -9,7 +9,6 @@ class SicklerThemeData {
     primaryColorLight: SicklerColours.purple50,
     primaryColorDark: SicklerColours.purple30,
     scaffoldBackgroundColor: SicklerColours.white,
-    brightness: Brightness.light,
     iconTheme: const IconThemeData(color: SicklerColours.black),
     primaryIconTheme: const IconThemeData(color: SicklerColours.black),
     cardTheme: CardTheme(
@@ -113,17 +112,19 @@ class SicklerThemeData {
       primaryContainer: SicklerColours.purple90,
       onPrimaryContainer: SicklerColours.purple10,
       error: SicklerColours.red50,
+      onError: SicklerColours.white,
+      errorContainer: SicklerColours.red90,
+      onErrorContainer: SicklerColours.red10,
     ),
   );
 
   ///--------Dark Theme-------///
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
-    primaryColor: SicklerColours.purple80,
+    primaryColor: SicklerColours.purple70,
     primaryColorLight: SicklerColours.purple90,
     primaryColorDark: SicklerColours.purple70,
     scaffoldBackgroundColor: SicklerColours.black,
-    brightness: Brightness.dark,
     iconTheme: const IconThemeData(color: SicklerColours.white),
     primaryIconTheme: const IconThemeData(color: SicklerColours.white),
     switchTheme: SwitchThemeData(
@@ -227,11 +228,11 @@ class SicklerThemeData {
       seedColor: SicklerColours.purpleSeed,
       primary: SicklerColours.purple70,
       onPrimary: SicklerColours.purple10,
-      primaryContainer: SicklerColours.purple10.withOpacity(.8),
+      primaryContainer: SicklerColours.purple10,
       onPrimaryContainer: SicklerColours.purple95,
       error: SicklerColours.red60,
       onError: SicklerColours.white,
-      errorContainer: SicklerColours.red30,
+      errorContainer: SicklerColours.red10,
       onErrorContainer: SicklerColours.red90,
     ),
   );

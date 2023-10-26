@@ -49,7 +49,30 @@ class MedsScreen extends StatelessWidget {
                   SicklerButton(
                     showIcon: true,
                     iconPath: "assets/svg/plus.svg",
-                    onPressed: () {},
+                    onPressed: () {
+                      showAdaptiveDialog(
+                        context: context,
+                        builder: (context) => SicklerAlertDialog(
+                          title: "Delete Log?",
+                          message: "Are you sure you want to delete this log?",
+                          actions: [
+                            SicklerChipButton(
+                                showIcon: true,
+                                iconPath: "assets/svg/cross.svg",
+                                buttonType: SicklerButtonType.primary,
+                                onPressed: () {},
+                                label: "Cancel"),
+                            SicklerChipButton(
+                                showIcon: true,
+                                iconPath: "assets/svg/delete.svg",
+                                color: theme.colorScheme.error,
+                                buttonType: SicklerButtonType.outline,
+                                onPressed: () {},
+                                label: "Delete")
+                          ],
+                        ),
+                      );
+                    },
                     label: "Add Medication",
                     buttonType: SicklerButtonType.secondary,
                   ),
@@ -72,7 +95,14 @@ class MedsScreen extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  const MedsHistoryItem(),
+                  HistoryNextPreviousButton(
+                      onNextPressed: () {},
+                      onPreviousPressed: () {},
+                      label: "Today"),
+                  const SizedBox(height: 12),
+                  const MedsHistoryItem(
+                    mode: MedsHistoryMode.weekly,
+                  ),
                   const MedsHistoryItem(),
                   const MedsHistoryItem(),
                   const SizedBox(

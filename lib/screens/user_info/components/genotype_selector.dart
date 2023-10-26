@@ -5,77 +5,61 @@ import '../../../core/core.dart';
 class GenotypeSelector extends StatefulWidget {
   const GenotypeSelector({
     super.key,
-    this.colorScheme = SelectorColors.purple,
     required this.onPressed,
-    required this.label,
+    this.label,
+    required this.genotype,
     this.isSelected = false,
+    this.color,
+    this.backgroundColor,
   });
-  final SelectorColors colorScheme;
-  final String label;
+
+  final String? label;
+  final Color? color;
+  final Color? backgroundColor;
   final VoidCallback onPressed;
   final bool isSelected;
+  final Genotype genotype;
 
   @override
   State<GenotypeSelector> createState() => _GenotypeSelectorState();
 }
 
 class _GenotypeSelectorState extends State<GenotypeSelector> {
-  Color backgroundColor = SicklerColours.purple95;
+  Color _backgroundColor = SicklerColours.purple95;
 
-  Color color = SicklerColours.purple40;
+  Color _color = SicklerColours.purple40;
+  String _label = "AA";
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final Size size = MediaQuery.sizeOf(context);
-    switch (widget.colorScheme) {
-      case SelectorColors.purple:
-        backgroundColor = theme.brightness == Brightness.light
-            ? SicklerColours.purple95
-            : SicklerColours.purple20;
-        color = theme.brightness == Brightness.light
-            ? theme.colorScheme.primary
-            : SicklerColours.purple80;
-        break;
-      case SelectorColors.blue:
-        backgroundColor = theme.brightness == Brightness.light
-            ? SicklerColours.blue95
-            : SicklerColours.blue20;
-        color = theme.brightness == Brightness.light
-            ? SicklerColours.blue60
-            : SicklerColours.blue80;
-        break;
+    bool isDarkMode = theme.brightness == Brightness.dark;
 
-      case SelectorColors.green:
-        backgroundColor = theme.brightness == Brightness.light
-            ? SicklerColours.green95
-            : SicklerColours.green20;
-        color = theme.brightness == Brightness.light
-            ? SicklerColours.green60
-            : SicklerColours.green80;
+    switch (widget.genotype) {
+      case Genotype.aa:
+        _backgroundColor =
+            !isDarkMode ? SicklerColours.green95 : SicklerColours.green20;
+        _color = !isDarkMode ? SicklerColours.green60 : SicklerColours.green80;
+        _label = "AA";
         break;
-
-      case SelectorColors.red:
-        backgroundColor = theme.brightness == Brightness.light
-            ? SicklerColours.red95
-            : SicklerColours.red10;
-        color = theme.brightness == Brightness.light
-            ? SicklerColours.red50
-            : SicklerColours.red80;
+      case Genotype.as:
+        _backgroundColor =
+            !isDarkMode ? SicklerColours.blue95 : SicklerColours.blue20;
+        _color = !isDarkMode ? SicklerColours.blue60 : SicklerColours.blue80;
+        _label = "AS";
         break;
-
-      case SelectorColors.orange:
-        backgroundColor = theme.brightness == Brightness.light
-            ? SicklerColours.orange95
-            : SicklerColours.orange20;
-        color = theme.brightness == Brightness.light
-            ? SicklerColours.orange60
-            : SicklerColours.orange80;
+      case Genotype.ss:
+        _backgroundColor =
+            !isDarkMode ? SicklerColours.red95 : SicklerColours.red10;
+        _color = !isDarkMode ? SicklerColours.red50 : SicklerColours.red80;
+        _label = "SS";
+        break;
     }
 
     return InkWell(
       onTap: widget.onPressed,
-      splashColor: color.withOpacity(.2),
+      splashColor: widget.color?.withOpacity(.2) ?? _color.withOpacity(.2),
       splashFactory: InkSparkle.splashFactory,
       borderRadius: BorderRadius.circular(72),
       child: AnimatedContainer(
@@ -85,16 +69,18 @@ class _GenotypeSelectorState extends State<GenotypeSelector> {
         width: widget.isSelected ? (size.width - ((72 * 2) + (16 * 4))) : 72,
         child: Ink(
           decoration: BoxDecoration(
-              border:
-                  widget.isSelected ? Border.all(color: color, width: 1) : null,
-              color: backgroundColor,
+              border: widget.isSelected
+                  ? Border.all(color: widget.color ?? _color, width: 1)
+                  : null,
+              color: widget.backgroundColor ?? _backgroundColor,
               borderRadius: BorderRadius.circular(72)),
           child: Center(
             child: Text(
-              widget.label,
+              widget.label ?? _label,
               style: widget.isSelected
-                  ? theme.textTheme.bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w800, color: color)
+                  ? theme.textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: widget.color ?? _color)
                   : theme.textTheme.bodyLarge,
             ),
           ),

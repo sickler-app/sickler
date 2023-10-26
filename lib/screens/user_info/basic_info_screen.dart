@@ -17,7 +17,6 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
   final TextEditingController addressController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  bool radioValue = false;
   Gender selectedRadioValue = Gender.male;
   final List<String> listData = [
     "1",

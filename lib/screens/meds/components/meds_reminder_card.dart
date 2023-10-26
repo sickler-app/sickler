@@ -44,7 +44,11 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
           : const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: widget.isCurrent ? theme.cardColor : SicklerColours.neutral95,
+        color: widget.isCurrent
+            ? theme.cardColor
+            : theme.brightness == Brightness.dark
+                ? theme.cardColor
+                : SicklerColours.neutral95,
       ),
       child: widget.isCurrent
           ? Column(
@@ -66,13 +70,13 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                       SvgPicture.asset(
                         "assets/svg/tablet.svg",
                         colorFilter: ColorFilter.mode(
-                            theme.primaryColor, BlendMode.srcIn),
+                            theme.colorScheme.primary, BlendMode.srcIn),
                       ),
                       const SizedBox(width: 8),
                       Text(
                         "Tablet",
                         style: theme.textTheme.bodyMedium!
-                            .copyWith(color: theme.primaryColor),
+                            .copyWith(color: theme.colorScheme.primary),
                       ),
                       const SizedBox(width: 8),
                     ],
@@ -147,8 +151,8 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                   child: Center(
                     child: SvgPicture.asset(
                       "assets/svg/medication.svg",
-                      colorFilter:
-                          ColorFilter.mode(theme.primaryColor, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                          theme.colorScheme.primary, BlendMode.srcIn),
                     ),
                   ),
                 ),

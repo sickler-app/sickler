@@ -20,13 +20,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _isGenotypeKnown = false;
-  Map<int, bool> isGenotypeSelected = {};
-
-  List<Map<String, dynamic>> genotypeData = [
-    {"genotype": "AA", "colorScheme": SelectorColors.green},
-    {"genotype": "AS", "colorScheme": SelectorColors.blue},
-    {"genotype": "SS", "colorScheme": SelectorColors.red},
-  ];
+  Map<int, bool> isGenotypeSelected = {0: true};
+  List<Genotype> genotypeData = Genotype.values;
 
   @override
   void dispose() {
@@ -132,22 +127,21 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              // isGenotypeSelected[index] = false;
+                              isGenotypeSelected.putIfAbsent(
+                                  index, () => false);
+
                               return GenotypeSelector(
                                 onPressed: () {
-                                  setState(() {
-                                    HapticFeedback.mediumImpact();
-                                    Feedback.forTap(context);
-                                    isGenotypeSelected
-                                        .updateAll((key, value) => false);
-                                    isGenotypeSelected[index] =
-                                        !isGenotypeSelected[index]!;
-                                  });
+                                  HapticFeedback.mediumImpact();
+                                  Feedback.forTap(context);
+                                  isGenotypeSelected
+                                      .updateAll((key, value) => false);
+                                  isGenotypeSelected.update(index,
+                                      (value) => !isGenotypeSelected[index]!);
+                                  setState(() {});
                                 },
                                 isSelected: isGenotypeSelected[index]!,
-                                label: genotypeData[index]["genotype"],
-                                colorScheme: genotypeData[index]["colorScheme"]
-                                    as SelectorColors,
+                                genotype: genotypeData[index],
                               );
                             },
                             separatorBuilder:

@@ -37,6 +37,7 @@ class _SicklerChipButtonState extends State<SicklerChipButton> {
     }
 
     final theme = Theme.of(context);
+    bool isDarkMode = theme.brightness == Brightness.dark;
     ButtonStyle style = ElevatedButton.styleFrom(
       fixedSize: const Size.fromHeight(36),
       backgroundColor: widget.backgroundColor ?? theme.colorScheme.primary,
@@ -57,7 +58,7 @@ class _SicklerChipButtonState extends State<SicklerChipButton> {
       case SicklerButtonType.secondary:
         style = ElevatedButton.styleFrom(
           fixedSize: const Size.fromHeight(36),
-          backgroundColor: theme.brightness == Brightness.light
+          backgroundColor: !isDarkMode
               ? widget.backgroundColor ?? theme.colorScheme.primaryContainer
               : SicklerColours.neutral20,
           foregroundColor: widget.color ?? theme.colorScheme.onPrimaryContainer,
@@ -72,7 +73,7 @@ class _SicklerChipButtonState extends State<SicklerChipButton> {
             foregroundColor: widget.color ?? theme.colorScheme.primary,
             side: BorderSide(
               width: 1,
-              color: widget.backgroundColor ?? theme.colorScheme.primary,
+              color: widget.color ?? theme.colorScheme.primary,
             ));
 
         labelColor = widget.color ?? theme.colorScheme.primary;

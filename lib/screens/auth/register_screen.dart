@@ -29,6 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    bool isDarkMode = theme.brightness == Brightness.dark;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -84,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ? "assets/svg/eye.svg"
                                       : "assets/svg/eye-off.svg",
                                   colorFilter: ColorFilter.mode(
-                                      theme.brightness == Brightness.light
+                                      !isDarkMode
                                           ? theme.colorScheme.primary
                                           : theme.iconTheme.color!,
                                       BlendMode.srcIn),
@@ -123,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ? "assets/svg/eye.svg"
                                       : "assets/svg/eye-off.svg",
                                   colorFilter: ColorFilter.mode(
-                                      theme.brightness == Brightness.light
+                                      !isDarkMode
                                           ? theme.colorScheme.primary
                                           : theme.iconTheme.color!,
                                       BlendMode.srcIn),

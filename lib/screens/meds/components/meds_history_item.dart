@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sickler/screens/meds/components/components.dart';
 
 import '../../../core/core.dart';
 import '../../global_components/global_components.dart';
 
 class MedsHistoryItem extends StatelessWidget {
-  const MedsHistoryItem({super.key});
+  const MedsHistoryItem({super.key, this.mode = MedsHistoryMode.daily});
+  final MedsHistoryMode mode;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +17,7 @@ class MedsHistoryItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(color: theme.colorScheme.primaryContainer))),
+          border: Border(bottom: BorderSide(color: theme.cardColor))),
       child: Row(
         ///The Compressed Mode
         children: [
@@ -28,8 +30,8 @@ class MedsHistoryItem extends StatelessWidget {
             child: Center(
               child: SvgPicture.asset(
                 "assets/svg/medication.svg",
-                colorFilter:
-                    ColorFilter.mode(theme.primaryColor, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(
+                    theme.colorScheme.primary, BlendMode.srcIn),
               ),
             ),
           ),
@@ -67,8 +69,11 @@ class MedsHistoryItem extends StatelessWidget {
               ],
             ),
           ),
-          const Spacer(),
-          const SicklerChip(chipType: SicklerChipType.info, label: "Taken")
+          mode == MedsHistoryMode.daily ? const Spacer() : SizedBox(),
+          mode == MedsHistoryMode.daily
+              ? const SicklerChip(
+                  chipType: SicklerChipType.info, label: "Taken")
+              : SizedBox(),
         ],
       ),
     );

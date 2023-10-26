@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sickler/screens/meds/meds_details_screen.dart';
 
 import '../../../core/core.dart';
 import '../../global_components/global_components.dart';
@@ -10,11 +11,12 @@ class MyMedsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    bool isDarkMode = theme.brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: SicklerColours.neutral95),
+          color: isDarkMode ? theme.cardColor : SicklerColours.neutral95),
       child: Row(
         ///The Compressed Mode
         children: [
@@ -33,8 +35,8 @@ class MyMedsCard extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/svg/tablet.svg",
-                      colorFilter:
-                          ColorFilter.mode(theme.primaryColor, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                          theme.colorScheme.primary, BlendMode.srcIn),
                     ),
                     const SizedBox(width: 8),
                     Text(
@@ -49,14 +51,14 @@ class MyMedsCard extends StatelessWidget {
           ),
           const Spacer(),
           CircleAvatar(
-            backgroundColor: SicklerColours.red90,
+            backgroundColor: theme.colorScheme.errorContainer,
             child: IconButton(
-              color: SicklerColours.red50,
+              color: theme.colorScheme.error,
               onPressed: () {},
               icon: SvgPicture.asset(
                 "assets/svg/delete.svg",
-                colorFilter: const ColorFilter.mode(
-                    SicklerColours.red50, BlendMode.srcIn),
+                colorFilter:
+                    ColorFilter.mode(theme.colorScheme.error, BlendMode.srcIn),
               ),
             ),
           ),
@@ -64,7 +66,13 @@ class MyMedsCard extends StatelessWidget {
           SicklerChipButton(
               iconPath: "assets/svg/check.svg",
               buttonType: SicklerButtonType.primary,
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (context) => const MedsDetailsScreen(),
+                );
+              },
               label: "View")
         ],
       ),

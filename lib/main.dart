@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
+import 'package:sickler/screens/meds/meds_schedule_screen.dart';
 import 'package:sickler/screens/meds/meds_screen.dart';
 
 void main() {
@@ -12,12 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sickler',
-      debugShowCheckedModeBanner: false,
-      theme: SicklerThemeData.lightTheme,
-      darkTheme: SicklerThemeData.darkTheme,
-      themeMode: ThemeMode.system,
-      home: const MedsScreen(),
-    );
+        title: 'Sickler',
+        debugShowCheckedModeBanner: false,
+        theme: SicklerThemeData.lightTheme,
+        darkTheme: SicklerThemeData.darkTheme,
+        themeMode: ThemeMode.system,
+        home: const MedsScreen());
   }
 }

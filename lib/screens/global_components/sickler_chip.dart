@@ -29,8 +29,9 @@ class _SicklerChipState extends State<SicklerChip> {
           "onSelected must not be null on a Filter Chip type, please consider adding the onSelected parameter");
     }
     final ThemeData theme = Theme.of(context);
+    bool isDarkMode = theme.brightness == Brightness.dark;
     Color selectedLabelColor = SicklerColours.purple20;
-    Color unselectedLabelColor = theme.brightness == Brightness.light
+    Color unselectedLabelColor = !isDarkMode
         ? SicklerColours.neutral30
         : SicklerColours.white;
     return widget.chipType == SicklerChipType.filter
@@ -53,10 +54,12 @@ class _SicklerChipState extends State<SicklerChip> {
               setState(() {
                 labelSelected = value;
               });
+
+              widget.onSelected!.call(value);
             })
         : Chip(
             //side: BorderSide(width: 1, color: theme.colorScheme.primary),
-            backgroundColor: theme.brightness == Brightness.light
+            backgroundColor: !isDarkMode
                 ? SicklerColours.purple90
                 : theme.colorScheme.primary,
             label: Text(

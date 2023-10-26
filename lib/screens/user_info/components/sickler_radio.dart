@@ -7,22 +7,32 @@ class SicklerRadio<T> extends StatelessWidget {
   final T value;
   final T groupValue;
   final void Function(T? value) onChanged;
+  final Color? unselectedBackgroundColor;
+  final Color? selectedBackgroundColor;
+  final Color? fillColor;
+  final bool? showBorder;
 
   const SicklerRadio(
       {super.key,
       required this.label,
       required this.value,
       required this.groupValue,
-      required this.onChanged});
+      required this.onChanged,
+      this.unselectedBackgroundColor,
+      this.selectedBackgroundColor,
+      this.showBorder = true,
+      this.fillColor});
 
   @override
   Widget build(BuildContext context) {
     bool isSelected = value == groupValue ? true : false;
     final ThemeData theme = Theme.of(context);
     return RadioListTile<T>(
+      dense: true,
       selected: isSelected,
-      tileColor: theme.cardColor,
-      selectedTileColor: theme.colorScheme.primaryContainer,
+      tileColor: unselectedBackgroundColor ?? theme.cardColor,
+      selectedTileColor:
+          selectedBackgroundColor ?? theme.colorScheme.primaryContainer,
       overlayColor:
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
@@ -35,15 +45,17 @@ class SicklerRadio<T> extends StatelessWidget {
       title: Text(label, style: theme.textTheme.bodyMedium),
       fillColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.selected)) {
-          return theme.primaryColor;
+          return fillColor ?? theme.colorScheme.primary;
         } else if (states.contains(MaterialState.disabled)) {
           return SicklerColours.neutral50;
         }
         return null;
       }),
       shape: RoundedRectangleBorder(
-          side: isSelected
-              ? BorderSide(width: 1, color: theme.colorScheme.primary)
+          side: showBorder!
+              ? isSelected
+                  ? BorderSide(width: 1, color: theme.colorScheme.primary)
+                  : BorderSide.none
               : BorderSide.none,
           borderRadius: BorderRadius.circular(12)),
       value: value,

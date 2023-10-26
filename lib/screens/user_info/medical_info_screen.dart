@@ -16,6 +16,7 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    bool isDarkMode = theme.brightness == Brightness.dark;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -99,7 +100,7 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                         icon: SvgPicture.asset(
                           "assets/svg/check.svg",
                           colorFilter: ColorFilter.mode(
-                              theme.brightness == Brightness.light
+                              !isDarkMode
                                   ? theme.colorScheme.primary
                                   : theme.iconTheme.color!,
                               BlendMode.srcIn),
@@ -146,7 +147,7 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                         icon: SvgPicture.asset(
                           "assets/svg/check.svg",
                           colorFilter: ColorFilter.mode(
-                              theme.brightness == Brightness.light
+                              !isDarkMode
                                   ? theme.colorScheme.primary
                                   : theme.iconTheme.color!,
                               BlendMode.srcIn),
