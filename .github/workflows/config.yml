@@ -1,0 +1,81 @@
+name: Analyze, Tests, and Builds for Sickler
+on:
+  pull_request:
+    branches: ["main", "development"]
+
+jobs:
+
+# Run the Analyzer
+  analyze:
+      name: Analyze Project
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v3
+        - uses: subosito/flutter-action@v2.12.0
+          with:
+            flutter-version: '3.13.5'
+            channel: 'stable'
+
+        - run: flutter pub get
+        - run: flutter analyze
+
+
+# Build the Android application and provide build artifacts
+  build-android:
+    name: Build Android Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2.12.0
+        with:
+          channel: 'stable'
+
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - run: flutter --version
+      - run: flutter pub get
+
+      # Build application
+      - run: flutter build apk
+
+      # Make build artifacts available
+      - name: Make Artifacts available
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: build/app/outputs/flutter-apk
+
+# Build the iOS application and provide build artifacts
+  build-ios:
+    name: Build iOS Application
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2.12.0
+        with:
+          channel: 'stable'
+          architecture: x64
+      - run: flutter pub get
+      - run: flutter build ios --release --no-codesign
+
+
+# Run tests on the project
+  test:
+    name: Run Basic Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2.12.0
+        with:
+          channel: 'stable'
+
+      - run: flutter pub get
+      - run: flutter test
+
+

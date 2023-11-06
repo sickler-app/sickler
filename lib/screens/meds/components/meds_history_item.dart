@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sickler/screens/meds/components/components.dart';
 
 import '../../../core/core.dart';
 import '../../global_components/global_components.dart';
@@ -69,11 +67,11 @@ class MedsHistoryItem extends StatelessWidget {
               ],
             ),
           ),
-          mode == MedsHistoryMode.daily ? const Spacer() : SizedBox(),
+          mode == MedsHistoryMode.daily ? const Spacer() : const SizedBox(),
           mode == MedsHistoryMode.daily
               ? const SicklerChip(
                   chipType: SicklerChipType.info, label: "Taken")
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
     );
