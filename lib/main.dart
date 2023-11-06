@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
-import 'package:sickler/screens/meds/meds_schedule_screen.dart';
+
 import 'package:sickler/screens/meds/meds_screen.dart';
 
 void main() {
