@@ -24,6 +24,8 @@ dependencies:
   firebase_core: ^2.16.0
   google_sign_in: ^6.1.5
   fpdart: ^1.1.0
+  percent_indicator: ^4.2.3
+  fl_chart: ^0.64.0
 
 dev_dependencies:
   flutter_test:
