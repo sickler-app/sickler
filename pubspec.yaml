@@ -24,6 +24,7 @@ dependencies:
   firebase_core: ^2.16.0
   google_sign_in: ^6.1.5
   fpdart: ^1.1.0
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_test:

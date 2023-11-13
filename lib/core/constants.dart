@@ -90,8 +90,8 @@ class SicklerColours {
   static const Color green60 = Color(0xFF00A661);
   static const Color green70 = Color(0xFF00C473);
   static const Color green80 = Color(0xFF1CE288);
-  static const Color green90 = Color(0xFF59FFA4);
-  static const Color green95 = Color(0xFFC2FFD2);
+  static const Color green90 = Color(0xFF90FFC2);
+  static const Color green95 = Color(0xFFD0FFDD);
   static const Color green99 = Color(0xFFF5FFF4);
 
   ///-----------Red---------///

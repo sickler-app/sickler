@@ -22,20 +22,22 @@ class HistoryNextPreviousButton extends StatelessWidget {
     bool isDarkMode = theme.brightness == Brightness.dark;
     return Row(
       children: [
-        CircleAvatar(
-          backgroundColor:
-              !isDarkMode ? SicklerColours.purple90 : theme.colorScheme.primary,
-          child: IconButton(
-              onPressed: onPreviousPressed,
-              icon: SvgPicture.asset(
-                "assets/svg/chevron-left.svg",
-                colorFilter: ColorFilter.mode(
-                    !isDarkMode
-                        ? theme.iconTheme.color!
-                        : SicklerColours.purple10,
-                    BlendMode.srcIn),
-              )),
-        ),
+        IconButton.filled(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(isDarkMode
+                  ? theme.colorScheme.primary
+                  : SicklerColours.purple90),
+              elevation: MaterialStateProperty.all(0),
+            ),
+            onPressed: onPreviousPressed,
+            icon: SvgPicture.asset(
+              "assets/svg/chevron-left.svg",
+              colorFilter: ColorFilter.mode(
+                  !isDarkMode
+                      ? theme.iconTheme.color!
+                      : SicklerColours.purple10,
+                  BlendMode.srcIn),
+            )),
         const Spacer(),
         Container(
           decoration: BoxDecoration(

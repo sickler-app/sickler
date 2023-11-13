@@ -5,6 +5,7 @@ import '../../core/core.dart';
 
 class SicklerChipButton extends StatefulWidget {
   const SicklerChipButton({
+    ///Todo: refactor this widget to remove showIcon paramater and use only iconPath
     Key? key,
     required this.onPressed,
     required this.label,
