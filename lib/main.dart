@@ -3,6 +3,7 @@ import 'package:sickler/core/theme.dart';
 import 'package:sickler/screens/meds/meds_schedule_screen.dart';
 import 'package:sickler/screens/meds/meds_screen.dart';
 import 'package:sickler/screens/water/suggested_daily_goal_screen.dart';
+import 'package:sickler/screens/water/water_screen_empty.dart';
 
 import 'screens/home_screen/home_screen.dart';
 import 'screens/water/set_edit_daily_goal.dart';
@@ -23,6 +24,6 @@ class MyApp extends StatelessWidget {
         theme: SicklerThemeData.lightTheme,
         darkTheme: SicklerThemeData.darkTheme,
         themeMode: ThemeMode.system,
-        home: const WaterScreen());
+        home: const EditDailyGoalScreen());
   }
 }

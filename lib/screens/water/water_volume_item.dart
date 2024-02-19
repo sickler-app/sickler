@@ -114,11 +114,6 @@ class _WaterVolumeItemState extends State<WaterVolumeItem>
         _iconPath = "assets/svg/plus.svg";
         _label = "600ml";
         break;
-     
-
-     
-
- 
     }
 
     return Column(

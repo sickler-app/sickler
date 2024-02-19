@@ -4,7 +4,6 @@ import 'package:sickler/screens/global_components/global_components.dart';
 import '../../core/core.dart';
 import '../user_info/components/sickler_radio.dart';
 
-
 class EditDailyGoalScreen extends StatefulWidget {
   const EditDailyGoalScreen({super.key});
 
@@ -18,16 +17,12 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
   final TextEditingController timeintervalController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
   bool _isReminderKnown = false;
   Map<int, bool> isReminderSelected = {0: true};
   Gender selectedRadioValue = Gender.male;
   final List<String> listData = [
-    
     "hour",
     "hours",
-   
-  
   ];
 
   @override
@@ -69,7 +64,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                                   .copyWith(hintText: "1000ml"),
                         ),
                         const SizedBox(height: 24),
-                            Row(
+                        Row(
                           children: [
                             Text("Enable reminders for this goal",
                                 style: theme.textTheme.bodyMedium),
@@ -85,14 +80,15 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                           ],
                         ),
                         const SizedBox(height: 24),
-                        Text("Notification Interval", style: theme.textTheme.bodyMedium),
+                        Text("Notification Interval",
+                            style: theme.textTheme.bodyMedium),
                         const SizedBox(height: 8),
                         TextFormField(
                           readOnly: true,
                           controller: timeintervalController,
                           keyboardType: TextInputType.streetAddress,
-                          onTap: () async{
-                               await showModalBottomSheet(
+                          onTap: () async {
+                            await showModalBottomSheet(
                                 context: context,
                                 isScrollControlled: true,
                                 builder: (context) => SicklerBottomSheet(
@@ -109,7 +105,6 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                                           });
                                         },
                                         primaryUnitLabels: listData,
-                                        
                                         primaryInitialValue: 0,
                                         primaryFinalValue: 100,
                                       ),
@@ -122,24 +117,24 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                           ),
                         ),
                         const SizedBox(height: 24),
-                        Text("We will send you reminder every ${timeintervalController.text} hour to help you achieve this goal", style: theme.textTheme.bodyMedium),
+                        Text(
+                            "We will send you reminder every ${timeintervalController.text} hour to help you achieve this goal",
+                            style: theme.textTheme.bodyMedium),
                         const SizedBox(height: 32),
-                        Text("Happy drinking", style: theme.textTheme.bodyMedium),
-                      
+                        Text("Happy drinking",
+                            style: theme.textTheme.bodyMedium),
 
                         const SizedBox(height: 16),
-                        
+
                         const SizedBox(height: 32),
                         const Spacer(),
 
                         ///Buttons
                         SicklerButton(
-                            onPressed: ()async {
-                              
+                            onPressed: () async {
                               //Todo: Perform sign in action
-                            
                             },
-                            label: "Continue"),
+                            label: "Save Goal"),
 
                         const SizedBox(height: 64),
                       ],
