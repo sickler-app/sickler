@@ -23,7 +23,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
     return AnimatedContainer(
       duration: 300.ms,
       curve: Curves.easeInOut,
-      padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 12),
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: isDarkMode
@@ -39,7 +39,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
                 style: theme.textTheme.bodyLarge!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
                 onPressed: () {
                   setState(() {
@@ -54,27 +54,27 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
               ),
             ],
           ),
-          Gap(8),
+          const Gap(8),
           Row(
             children: [
               Text(
                 "Extreme pain - 7",
                 style: theme.textTheme.bodyMedium,
               ),
-              Spacer(),
+              const Spacer(),
               Text(
                 "12:07 pm",
                 style: theme.textTheme.bodyMedium,
               ),
             ],
           ),
-          Gap(16),
+          const Gap(16),
           Visibility(
             child: Column(
               children: [
-                Text(
+                const Text(
                     "Description, if any, for example, pain felt, on lowe back and chest"),
-                Gap(16),
+                const Gap(16),
                 Row(
                   children: [
                     IconButton.filled(
@@ -90,7 +90,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
                             theme.colorScheme.error, BlendMode.srcIn),
                       ),
                     ),
-                    Gap(8),
+                    const Gap(8),
                     SicklerChipButton(
                       onPressed: () {},
                       label: "Edit",

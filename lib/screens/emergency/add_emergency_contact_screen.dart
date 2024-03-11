@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sickler/core/constants.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/meds/components/components.dart';
 
@@ -35,7 +34,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
       body: Form(
         child: Column(
           children: [
-            SicklerAppBar(
+            const SicklerAppBar(
               pageTitle: "Add Emergency\nContacts",
             ),
             Stack(
@@ -51,13 +50,13 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                     color: theme.colorScheme.primary,
                     onPressed: () {},
                     icon: SvgPicture.asset("assets/svg/edit.svg",
-                        colorFilter: ColorFilter.mode(
+                        colorFilter: const ColorFilter.mode(
                             SicklerColours.white, BlendMode.srcIn)),
                   ),
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 48,
             ),
             Row(
@@ -68,7 +67,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                   colorFilter: ColorFilter.mode(
                       theme.colorScheme.primary, BlendMode.srcIn),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 Text(
@@ -77,7 +76,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             TextFormField(
@@ -85,7 +84,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
               decoration: SicklerInputDecoration.inputDecoration(context)
                   .copyWith(hintText: "Name"),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Row(
@@ -96,7 +95,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                   colorFilter: ColorFilter.mode(
                       theme.colorScheme.primary, BlendMode.srcIn),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 Text(
@@ -120,10 +119,10 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
-            Wrap(
+            const Wrap(
               children: [
                 SicklerChip(
                   label: "6 77 77 77 77",
@@ -133,7 +132,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                     label: "6 77 77 77 77", chipType: SicklerChipType.info),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Row(
@@ -144,7 +143,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                   colorFilter: ColorFilter.mode(
                       theme.colorScheme.primary, BlendMode.srcIn),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 Text(

@@ -96,7 +96,7 @@ class _SicklerCalendarWeekSelectorItemState
                             ? FontWeight.w800
                             : FontWeight.normal),
                   ),
-                  Gap(8),
+                  const Gap(8),
                   Container(
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,

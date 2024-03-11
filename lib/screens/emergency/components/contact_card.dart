@@ -67,7 +67,7 @@ class ContactCard extends StatelessWidget {
                                       label: "Cancel",
                                       buttonType: SicklerButtonType.text,
                                     ),
-                                    Gap(8),
+                                    const Gap(8),
                                     SicklerChipButton(
                                       onPressed: () {
                                         ///Todo:Delete contact

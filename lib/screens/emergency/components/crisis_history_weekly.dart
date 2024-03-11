@@ -17,7 +17,7 @@ class CrisisHistoryWeekly extends StatelessWidget {
           style:
               theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
         ),
-        Gap(16),
+        const Gap(16),
         RichText(
           text: TextSpan(
             children: [
@@ -34,21 +34,21 @@ class CrisisHistoryWeekly extends StatelessWidget {
             ],
           ),
         ),
-        Gap(32),
+        const Gap(32),
         SicklerCalendarWeekSelector(selectedDay: (selectedDay) {}),
-        Gap(24),
+        const Gap(24),
         SicklerDateSwitcher(
             onNextPressed: () {},
             onPreviousPressed: () {},
             label: "Wednesday 03, Nov"),
-        Gap(24),
-        CrisisLogCard(),
-        Gap(8),
-        CrisisLogCard(),
-        Gap(8),
-        CrisisLogCard(),
-        Gap(8),
-        CrisisLogCard(),
+        const Gap(24),
+        const CrisisLogCard(),
+        const Gap(8),
+        const CrisisLogCard(),
+        const Gap(8),
+        const CrisisLogCard(),
+        const Gap(8),
+        const CrisisLogCard(),
       ],
     );
   }
