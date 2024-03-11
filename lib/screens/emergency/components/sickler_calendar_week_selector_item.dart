@@ -4,8 +4,8 @@ import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
 
-class WeekDayItem extends StatefulWidget {
-  const WeekDayItem({
+class SicklerCalendarWeekSelectorItem extends StatefulWidget {
+  const SicklerCalendarWeekSelectorItem({
     super.key,
     this.color,
     this.backgroundColor,
@@ -28,10 +28,12 @@ class WeekDayItem extends StatefulWidget {
   final bool isEmphasized;
 
   @override
-  State<WeekDayItem> createState() => _WeekDayItemState();
+  State<SicklerCalendarWeekSelectorItem> createState() =>
+      _SicklerCalendarWeekSelectorItemState();
 }
 
-class _WeekDayItemState extends State<WeekDayItem>
+class _SicklerCalendarWeekSelectorItemState
+    extends State<SicklerCalendarWeekSelectorItem>
     with TickerProviderStateMixin {
   final Color _color = SicklerColours.purple40;
   late final AnimationController animationController;
@@ -42,14 +44,12 @@ class _WeekDayItemState extends State<WeekDayItem>
     animationController = AnimationController(vsync: this, duration: 200.ms);
     _radiusAnimation = Tween<double>(begin: 22, end: 12).animate(
         CurvedAnimation(parent: animationController, curve: Curves.easeInOut));
-
     super.initState();
   }
 
   @override
   void dispose() {
     animationController.dispose();
-
     super.dispose();
   }
 
@@ -90,7 +90,7 @@ class _WeekDayItemState extends State<WeekDayItem>
                     widget.label,
                     style: theme.textTheme.bodyMedium!.copyWith(
                         color: widget.isSelected
-                            ? theme.colorScheme.primary
+                            ? theme.scaffoldBackgroundColor
                             : SicklerColours.neutral50,
                         fontWeight: widget.isSelected
                             ? FontWeight.w800

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
+import 'package:sickler/screens/global_components/global_components.dart';
 
 import '../../../core/core.dart';
 
@@ -54,7 +56,30 @@ class ContactCard extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => SicklerAlertDialog(
+                                  title: "Delete Contact",
+                                  actions: [
+                                    SicklerChipButton(
+                                      onPressed: () {},
+                                      label: "Cancel",
+                                      buttonType: SicklerButtonType.text,
+                                    ),
+                                    Gap(8),
+                                    SicklerChipButton(
+                                      onPressed: () {
+                                        ///Todo:Delete contact
+                                      },
+                                      label: "Delete",
+                                      backgroundColor: theme.colorScheme.error,
+                                      color: SicklerColours.white,
+                                      iconPath: "assets/svg/delete.svg",
+                                    ),
+                                  ],
+                                ));
+                      },
                       icon: SvgPicture.asset(
                         "assets/svg/delete.svg",
                         colorFilter: ColorFilter.mode(

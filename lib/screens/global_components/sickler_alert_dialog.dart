@@ -19,8 +19,8 @@ class SicklerAlertDialog extends StatelessWidget {
     return AlertDialog.adaptive(
       actionsPadding: const EdgeInsets.only(
         bottom: 16,
-        left: 24,
-        right: 24,
+        left: 16,
+        right: 16,
         top: 0,
       ),
       surfaceTintColor: theme.scaffoldBackgroundColor,

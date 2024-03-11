@@ -47,7 +47,7 @@ class _MedsTypeItemState extends State<MedsTypeItem>
         CurvedAnimation(parent: animationController, curve: Curves.easeInOut));
 
     super.initState();
-  }
+  }r
 
   @override
   void dispose() {

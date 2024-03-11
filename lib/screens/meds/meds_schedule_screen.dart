@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
-import 'package:sickler/screens/meds/components/day_of_week_selector.dart';
+import 'package:sickler/screens/meds/components/sickler_calendar_day_selector.dart';
 import 'package:sickler/screens/user_info/components/sickler_radio.dart';
 
 import '../../core/core.dart';
@@ -89,7 +89,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                         ],
                       ),
                       const SizedBox(height: 24),
-                      DayOfWeekSelector(selectedDays: (selectedDay) {
+                      SicklerCalendarDaySelector(selectedDays: (selectedDay) {
                         ///Todo:Add the selected day to state;
                       }),
                       const SizedBox(height: 24),

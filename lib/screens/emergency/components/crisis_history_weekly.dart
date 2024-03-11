@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:sickler/screens/global_components/global_components.dart';
 
 import 'components.dart';
 
@@ -12,33 +13,42 @@ class CrisisHistoryWeekly extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Monthly",
+          "Weekly",
           style:
               theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
         ),
-        Gap(24),
+        Gap(16),
         RichText(
           text: TextSpan(
             children: [
               TextSpan(
-                text: "13",
+                text: "3",
                 style: theme.textTheme.headlineMedium!
                     .copyWith(fontWeight: FontWeight.w800),
               ),
               TextSpan(
-                text: "Crises events this month",
+                text: "Crises events this week ",
                 style: theme.textTheme.headlineMedium!
                     .copyWith(fontWeight: FontWeight.w800),
               ),
             ],
           ),
         ),
+        Gap(32),
+        SicklerCalendarWeekSelector(selectedDay: (selectedDay) {}),
         Gap(24),
-
-        ///Todo: put the next previous widget here
+        SicklerDateSwitcher(
+            onNextPressed: () {},
+            onPreviousPressed: () {},
+            label: "Wednesday 03, Nov"),
         Gap(24),
-
-        ///Todo: Put Calendar Widget here
+        CrisisLogCard(),
+        Gap(8),
+        CrisisLogCard(),
+        Gap(8),
+        CrisisLogCard(),
+        Gap(8),
+        CrisisLogCard(),
       ],
     );
   }

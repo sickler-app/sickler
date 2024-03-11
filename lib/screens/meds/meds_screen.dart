@@ -95,7 +95,7 @@ class MedsScreen extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  HistoryNextPreviousButton(
+                  SicklerDateSwitcher(
                       onNextPressed: () {},
                       onPreviousPressed: () {},
                       label: "Today"),

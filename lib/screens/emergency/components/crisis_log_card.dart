@@ -41,7 +41,11 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
               ),
               Spacer(),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    isExpanded = !isExpanded;
+                  });
+                },
                 icon: SvgPicture.asset(
                   "assets/svg/chevron-down.svg",
                   colorFilter:

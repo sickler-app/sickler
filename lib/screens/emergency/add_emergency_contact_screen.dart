@@ -6,14 +6,15 @@ import 'package:sickler/screens/meds/components/components.dart';
 
 import '../global_components/global_components.dart';
 
-class AddEmergencyContact extends StatefulWidget {
-  const AddEmergencyContact({super.key});
+class AddEmergencyContactScreen extends StatefulWidget {
+  const AddEmergencyContactScreen({super.key});
 
   @override
-  State<AddEmergencyContact> createState() => _AddEmergencyContactState();
+  State<AddEmergencyContactScreen> createState() =>
+      _AddEmergencyContactScreenState();
 }
 
-class _AddEmergencyContactState extends State<AddEmergencyContact> {
+class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController phoneController = TextEditingController();

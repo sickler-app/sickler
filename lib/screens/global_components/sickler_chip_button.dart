@@ -5,13 +5,14 @@ import '../../core/core.dart';
 
 class SicklerChipButton extends StatefulWidget {
   const SicklerChipButton({
-    ///Todo: refactor this widget to remove showIcon paramater and use only iconPath
     Key? key,
     required this.onPressed,
     required this.label,
     this.color,
     this.backgroundColor,
     this.iconPath,
+    @Deprecated(
+        "Should not use `showIcon`, just use an iconPath if you want to show an Icon")
     this.showIcon = false,
     this.overrideIconColor = true,
     this.buttonType = SicklerButtonType.primary,
@@ -32,11 +33,6 @@ class SicklerChipButton extends StatefulWidget {
 class _SicklerChipButtonState extends State<SicklerChipButton> {
   @override
   Widget build(BuildContext context) {
-    if (widget.showIcon == true && widget.iconPath == null) {
-      throw ErrorHint(
-          "You've not provided an icon path to show, consider providing a path");
-    }
-
     final theme = Theme.of(context);
     bool isDarkMode = theme.brightness == Brightness.dark;
     ButtonStyle style = ElevatedButton.styleFrom(
@@ -104,7 +100,7 @@ class _SicklerChipButtonState extends State<SicklerChipButton> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Visibility(
-            visible: widget.showIcon,
+            visible: widget.iconPath != null,
             child: Row(
               children: [
                 SvgPicture.asset(
@@ -120,11 +116,13 @@ class _SicklerChipButtonState extends State<SicklerChipButton> {
               ],
             ),
           ),
-          Text(widget.label,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: labelColor)),
+          Text(
+            widget.label,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: labelColor),
+          ),
         ],
       ),
     );
