@@ -11,6 +11,8 @@ class SicklerButton extends StatelessWidget {
     this.color,
     this.backgroundColor,
     this.iconPath,
+    @Deprecated(
+        "Should not use `showIcon`, just use an iconPath if you want to show an Icon")
     this.showIcon = false,
     this.overrideIconColor = true,
     this.buttonType = SicklerButtonType.primary,
@@ -18,6 +20,8 @@ class SicklerButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String label;
   final SicklerButtonType buttonType;
+  @Deprecated(
+      "Should not use `showIcon`, just use and iconPath if you want to show an Icon")
   final bool showIcon;
   final String? iconPath;
   final Color? color;
@@ -26,11 +30,6 @@ class SicklerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (showIcon == true && iconPath == null) {
-      throw ErrorHint(
-          "You've not provided an icon path to show, consider providing a path");
-    }
-
     final theme = Theme.of(context);
     ButtonStyle style = ElevatedButton.styleFrom(
       backgroundColor: backgroundColor ?? theme.colorScheme.primary,
@@ -91,7 +90,7 @@ class SicklerButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Visibility(
-              visible: showIcon,
+              visible: iconPath != null,
               child: Row(
                 children: [
                   SvgPicture.asset(

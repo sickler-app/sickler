@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
+import 'package:sickler/screens/emergency/emergency_screen.dart';
 
-import 'package:sickler/screens/meds/meds_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +18,6 @@ class MyApp extends StatelessWidget {
         theme: SicklerThemeData.lightTheme,
         darkTheme: SicklerThemeData.darkTheme,
         themeMode: ThemeMode.system,
-        home: const MedsScreen());
+        home: const EmergencyScreen());
   }
 }

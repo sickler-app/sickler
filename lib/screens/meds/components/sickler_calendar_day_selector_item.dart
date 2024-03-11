@@ -3,8 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../core/core.dart';
 
-class DayOfWeekItem extends StatefulWidget {
-  const DayOfWeekItem({
+class SicklerCalendarDaySelectorItem extends StatefulWidget {
+  const SicklerCalendarDaySelectorItem({
     super.key,
     this.color,
     this.backgroundColor,
@@ -19,10 +19,10 @@ class DayOfWeekItem extends StatefulWidget {
   final Color? color;
 
   @override
-  State<DayOfWeekItem> createState() => _DayOfWeekItemState();
+  State<SicklerCalendarDaySelectorItem> createState() => _SicklerCalendarDaySelectorItemState();
 }
 
-class _DayOfWeekItemState extends State<DayOfWeekItem>
+class _SicklerCalendarDaySelectorItemState extends State<SicklerCalendarDaySelectorItem>
     with TickerProviderStateMixin {
   final Color _color = SicklerColours.purple40;
 
