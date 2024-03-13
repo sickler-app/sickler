@@ -88,12 +88,12 @@ class ContactCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                Gap( 12),
                 CircleAvatar(
                   radius: 40,
                   child: Image.asset("assets/images/memoji.png"),
                 ),
-                const SizedBox(height: 24),
+                Gap( 24),
                 Text(
                   "Nuikweh",
                   style: theme.textTheme.bodyMedium!.copyWith(
@@ -101,7 +101,7 @@ class ContactCard extends StatelessWidget {
                   ),
                 ),
                 Text("Lewis", style: theme.textTheme.bodyMedium),
-                const SizedBox(height: 12),
+                Gap( 12),
                 Text(
                   "6 77 77 77 77",
                   style: theme.textTheme.bodyMedium!

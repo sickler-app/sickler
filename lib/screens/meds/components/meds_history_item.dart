@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
 import '../../global_components/global_components.dart';
@@ -51,7 +52,7 @@ class MedsHistoryItem extends StatelessWidget {
                         end: 0)
                     .fadeIn(
                         delay: 200.ms, curve: Curves.easeOut, duration: 500.ms),
-                const SizedBox(height: 8),
+                Gap( 8),
                 Text(
                   "8:00 pm",
                   style: theme.textTheme.bodyMedium,

@@ -5,7 +5,7 @@ import '../../core/core.dart';
 
 class SicklerButton extends StatelessWidget {
   const SicklerButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.label,
     this.color,
@@ -16,7 +16,7 @@ class SicklerButton extends StatelessWidget {
     this.showIcon = false,
     this.overrideIconColor = true,
     this.buttonType = SicklerButtonType.primary,
-  }) : super(key: key);
+  });
   final VoidCallback onPressed;
   final String label;
   final SicklerButtonType buttonType;

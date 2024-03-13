@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 class SicklerAppBar extends StatelessWidget {
   final String pageTitle;
@@ -19,7 +20,7 @@ class SicklerAppBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(height: 64),
+       Gap(48),
         Row(
           children: [
             IconButton(
@@ -50,7 +51,7 @@ class SicklerAppBar extends StatelessWidget {
             child: Text(pageTitle, style: theme.textTheme.displaySmall),
           ),
         ),
-        const SizedBox(height: 48),
+        Gap( 48),
       ],
     );
   }

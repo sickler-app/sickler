@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
@@ -39,7 +40,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
             style: theme.textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 32),
+          Gap( 32),
           const Align(
             alignment: Alignment.centerLeft,
             child: AlertDetailsText(
@@ -47,7 +48,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
               label: "Your Location",
             ),
           ),
-          const SizedBox(height: 8),
+          Gap( 8),
           const Align(
             alignment: Alignment.centerLeft,
             child: AlertDetailsText(
@@ -55,7 +56,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
               label: "Details about your crises",
             ),
           ),
-          const SizedBox(height: 32),
+          Gap( 32),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -77,7 +78,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          Gap( 24),
         ],
       ),
     );

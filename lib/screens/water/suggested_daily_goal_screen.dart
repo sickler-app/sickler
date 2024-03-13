@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
@@ -33,7 +34,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
             "Your daily goal",
             style: theme.textTheme.displaySmall,
           ),
-          const SizedBox(height: 24),
+          Gap( 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -41,11 +42,11 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium),
           ),
-          const SizedBox(height: 64),
+          Gap( 64),
           Text("$dailyGoal ml",
               style: theme.textTheme.displaySmall!
                   .copyWith(fontWeight: FontWeight.w800)),
-          const SizedBox(height: 24),
+          Gap( 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -88,7 +89,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
                   iconPath: "assets/svg/edit.svg",
                   buttonType: SicklerButtonType.outline,
                 ),
-                const SizedBox(height: 16),
+                Gap( 16),
                 SicklerButton(
                   onPressed: () {},
                   label: "Accept Goal & Continue",
@@ -96,7 +97,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 64)
+          Gap( 64)
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
 import '../../global_components/global_components.dart';
@@ -82,7 +83,7 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                     ],
                   ),
                 ),
-                const SizedBox(height: 8),
+                Gap( 8),
                 RepaintBoundary(
                   child: Text(
                     "Hydroxyl Urea",

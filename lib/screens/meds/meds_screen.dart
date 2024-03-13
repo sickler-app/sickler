@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/meds/components/components.dart';
@@ -24,24 +25,24 @@ class MedsScreen extends StatelessWidget {
                     "Upcoming",
                     style: theme.textTheme.headlineSmall,
                   ),
-                  const SizedBox(height: 16),
+                  Gap( 16),
                   const MedsScreenReminderCard(
                     isCurrent: true,
                   ),
-                  const SizedBox(height: 12),
+                  Gap( 12),
                   const MedsScreenReminderCard(
                     isCurrent: false,
                   ),
-                  const SizedBox(height: 48),
+                  Gap( 48),
                   Text(
                     "My Medications",
                     style: theme.textTheme.headlineSmall,
                   ),
-                  const SizedBox(height: 16),
+                  Gap( 16),
                   const MyMedsCard(),
-                  const SizedBox(height: 12),
+                  Gap( 12),
                   const MyMedsCard(),
-                  const SizedBox(height: 12),
+                  Gap( 12),
                   const MyMedsCard(),
                   const SizedBox(
                     height: 32,
@@ -99,7 +100,7 @@ class MedsScreen extends StatelessWidget {
                       onNextPressed: () {},
                       onPreviousPressed: () {},
                       label: "Today"),
-                  const SizedBox(height: 12),
+                  Gap( 12),
                   const MedsHistoryItem(
                     mode: MedsHistoryMode.weekly,
                   ),

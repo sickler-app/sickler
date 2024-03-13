@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';
+import 'package:sickler/screens/home/home_screen.dart';
 
 
 void main() {

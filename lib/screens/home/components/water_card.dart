@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import '../../global_components/global_components.dart';
 import '../../../core/core.dart';
 
@@ -32,7 +33,7 @@ class WaterCard extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 4),
+          Gap( 4),
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -57,12 +58,12 @@ class WaterCard extends StatelessWidget {
                                 color: SicklerColours.neutral50),
                           ),
                         ])),
-                    const SizedBox(height: 4),
+                    Gap( 4),
                     Text(
                       "Only 2 hours left to finish your daily goal",
                       style: theme.textTheme.bodyMedium,
                     ),
-                    const SizedBox(height: 4),
+                    Gap( 4),
                     Align(
                       alignment: Alignment.centerRight,
                       child: SicklerChipButton(

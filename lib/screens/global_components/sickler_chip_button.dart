@@ -40,7 +40,7 @@ class _SicklerChipButtonState extends State<SicklerChipButton> {
       backgroundColor: widget.backgroundColor ?? theme.colorScheme.primary,
       foregroundColor: widget.color ?? Colors.white,
     );
-    Color labelColor = SicklerColours.purple40;
+    Color labelColor = SicklerColours.purpleSeed;
     switch (widget.buttonType) {
       case SicklerButtonType.primary:
         style = ElevatedButton.styleFrom(
@@ -94,6 +94,7 @@ class _SicklerChipButtonState extends State<SicklerChipButton> {
     }
 
     return ElevatedButton(
+
       onPressed: widget.onPressed,
       style: style,
       child: Row(

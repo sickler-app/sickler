@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
@@ -13,7 +14,7 @@ class SelectContactsDialog extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 32),
+          Gap( 32),
           Container(
             width: 80,
             height: 80,
@@ -21,7 +22,7 @@ class SelectContactsDialog extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          const SizedBox(height: 32),
+          Gap( 32),
           SicklerButton(
             onPressed: () {},
             label: "Send to all contacts",
@@ -31,7 +32,7 @@ class SelectContactsDialog extends StatelessWidget {
             showIcon: true,
             iconPath: "assets/svg/cross.svg",
           ),
-          const SizedBox(height: 12),
+          Gap( 12),
           SicklerButton(
             onPressed: () {},
             label: "Select Contacts",

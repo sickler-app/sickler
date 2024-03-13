@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/screens/meds/meds_details_screen.dart';
 
 import '../../../core/core.dart';
@@ -30,7 +31,7 @@ class MyMedsCard extends StatelessWidget {
                   style: theme.textTheme.bodyLarge!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 8),
+                Gap( 8),
                 Row(
                   children: [
                     SvgPicture.asset(

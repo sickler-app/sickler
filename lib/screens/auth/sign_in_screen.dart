@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
@@ -44,7 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text("Email", style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        Gap( 8),
                         TextFormField(
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -59,9 +60,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             }
                           },
                         ),
-                        const SizedBox(height: 24),
+                        Gap( 24),
                         Text("Password", style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        Gap( 8),
                         TextFormField(
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
@@ -94,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             }
                           },
                         ),
-                        const SizedBox(height: 32),
+                        Gap( 32),
                         const Spacer(),
 
                         ///Buttons
@@ -105,7 +106,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               }
                             },
                             label: "Sign In"),
-                        const SizedBox(height: 16),
+                        Gap( 16),
                         Row(
                           children: [
                             Expanded(
@@ -135,7 +136,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        Gap( 12),
                         Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -153,7 +154,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               },
                               label: "Create an Account",
                             )),
-                        const SizedBox(height: 64)
+                        Gap( 64)
                       ],
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 import '../../core/core.dart';
 import '../global_components/global_components.dart';
@@ -55,12 +56,12 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: 16),
+                    Gap( 16),
                     Text(
                       "Name",
                       style: theme.textTheme.bodyMedium,
                     ),
-                    const SizedBox(height: 12),
+                    Gap( 12),
                     TextFormField(
                       controller: nameController,
                       decoration:
@@ -76,12 +77,12 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         }
                       },
                     ),
-                    const SizedBox(height: 16),
+                    Gap( 16),
                     Text(
                       "Description",
                       style: theme.textTheme.bodyMedium,
                     ),
-                    const SizedBox(height: 12),
+                    Gap( 12),
                     TextFormField(
                       maxLines: 3,
                       controller: descriptionController,
@@ -91,16 +92,16 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         hintText: "Description",
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    Gap( 24),
                     const Text("What type of medication are you taking?"),
-                    const SizedBox(height: 12),
+                    Gap( 12),
                     MedicationTypeSelector(selectedMedication:
                         (MedicationType selectedMedicationType) {
                       ///Todo: Add selected Medication to state
                     }),
-                    const SizedBox(height: 24),
+                    Gap( 24),
                     const Text("What's the dose of your medication "),
-                    const SizedBox(height: 12),
+                    Gap( 12),
                     Wrap(
                       direction: Axis.horizontal,
                       spacing: 12,
@@ -154,10 +155,10 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 24),
+                    Gap( 24),
                     const Text(
                         "How often do you take your medication in a day?"),
-                    const SizedBox(height: 12),
+                    Gap( 12),
                     Wrap(
                       direction: Axis.horizontal,
                       spacing: 12,
@@ -185,7 +186,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 24),
+                    Gap( 24),
                     Text(
                       "What time(s) do you take your medication?",
                       style: theme.textTheme.bodyMedium,
@@ -246,10 +247,10 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         )
                       ],
                     ),
-                    const SizedBox(height: 24),
+                    Gap( 24),
                     // const Text(
                     //     "How long have you been taking this medication?"),
-                    // const SizedBox(height: 12),
+                    // Gap( 12),
                     // Wrap(
                     //   direction: Axis.horizontal,
                     //   spacing: 12,
@@ -298,7 +299,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                             })
                       ],
                     ),
-                    const SizedBox(height: 12),
+                    Gap( 12),
                     Visibility(
                       visible: !isTakingMedsPermanently,
                       child: Row(
@@ -319,7 +320,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 32),
+                    Gap( 32),
                     SicklerButton(
                         onPressed: () {},
                         label: widget.isEditing
@@ -329,7 +330,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         iconPath: "assets/svg/check.svg"),
                     Visibility(
                         visible: !widget.isEditing,
-                        child: const SizedBox(height: 16)),
+                        child: Gap( 16)),
                     Visibility(
                       visible: !widget.isEditing,
                       child: SicklerButton(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
@@ -19,7 +20,7 @@ class MedsDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 24),
+            Gap( 24),
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -41,12 +42,12 @@ class MedsDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            Gap( 24),
             Text(
               "Lorem ipsum dolor sit amet consectetur. Ut ipsum et viverra adipiscing velit viverra sit venenatis facilisis. Vel laoreet pellentesque amet amet orci viverra eget.",
               style: theme.textTheme.bodyMedium!.copyWith(height: 1.5),
             ),
-            const SizedBox(height: 24),
+            Gap( 24),
             Wrap(
               runSpacing: 12,
               children: [
@@ -63,22 +64,22 @@ class MedsDetailsScreen extends StatelessWidget {
                     chipType: SicklerChipType.info, label: "3:00 PM"),
               ],
             ),
-            const SizedBox(height: 24),
+            Gap( 24),
             Text(
               "Medication History",
               style: theme.textTheme.bodyLarge!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 12),
+            Gap( 12),
             const SicklerCalendar(),
-            const SizedBox(height: 24),
+            Gap( 24),
             SicklerButton(
               onPressed: () {},
               label: "Edit Medication",
               showIcon: true,
               iconPath: "assets/svg/edit.svg",
             ),
-            const SizedBox(height: 64),
+            Gap( 64),
           ],
         ),
       ),

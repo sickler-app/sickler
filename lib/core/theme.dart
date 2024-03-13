@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'core.dart';
 
 class SicklerThemeData {
+
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
-    primaryColor: SicklerColours.purple40,
+    primaryColor: SicklerColours.purpleSeed,
     primaryColorLight: SicklerColours.purple50,
     primaryColorDark: SicklerColours.purple30,
     scaffoldBackgroundColor: SicklerColours.white,
@@ -58,6 +59,7 @@ class SicklerThemeData {
     cardColor: SicklerColours.purple95,
     elevatedButtonTheme: const ElevatedButtonThemeData(
       style: ButtonStyle(
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         fixedSize: MaterialStatePropertyAll<Size>(Size.fromHeight(52)),
         padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
             EdgeInsets.symmetric(horizontal: 16)),
@@ -195,7 +197,9 @@ class SicklerThemeData {
     ),
     cardColor: SicklerColours.neutral20,
     elevatedButtonTheme: const ElevatedButtonThemeData(
+
       style: ButtonStyle(
+  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         fixedSize: MaterialStatePropertyAll<Size>(Size.fromHeight(52)),
         padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
             EdgeInsets.symmetric(horizontal: 16)),
@@ -212,7 +216,7 @@ class SicklerThemeData {
     sliderTheme: const SliderThemeData(
         activeTickMarkColor: SicklerColours.purple40,
         inactiveTrackColor: SicklerColours.neutral90,
-        trackHeight: 4,
+        trackHeight: 2,
         trackShape: RoundedRectSliderTrackShape(),
         thumbShape: RoundSliderThumbShape(
           elevation: 0,
