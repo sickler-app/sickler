@@ -56,7 +56,7 @@ class EmergencyLocationSharingCard extends StatelessWidget {
                 ],
               ),
               Spacer(),
-              SicklerChipButton(
+               SicklerButton( isChipButton:true,
                 onPressed: () {},
                 label: 'Stop Sharing',
                 iconPath: "assets/svg/location-off.svg",

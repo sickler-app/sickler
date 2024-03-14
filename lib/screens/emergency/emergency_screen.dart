@@ -18,46 +18,58 @@ class EmergencyScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SicklerAppBar(pageTitle: "Emergency"),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const EmergencyLocationSharingCard(),
-                Gap(16),
-                  const FeelingCheckupCard(),
-                  Gap(32),
-                  Row(
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        "My Contacts",
-                        style: theme.textTheme.headlineSmall,
+                      const EmergencyLocationSharingCard(),
+                      Gap(24),
+                      const FeelingCheckupCard(),
+                      Gap(32),
+                      Row(
+                        children: [
+                          Text(
+                            "My Contacts",
+                            style: theme.textTheme.headlineSmall,
+                          ),
+                          const Spacer(),
+                           SicklerButton( isChipButton:true,
+                            onPressed: () {},
+                            label: "Add Contact",
+                            buttonType: SicklerButtonType.text,
+                            iconPath: "assets/svg/emergency.svg",
+                            color: Colors.white,
+                          )
+                        ],
                       ),
-                      const Spacer(),
-                      SicklerChipButton(
-                        onPressed: () {},
-                        label: "Add Contact",
-                        buttonType: SicklerButtonType.text,
-                      )
                     ],
                   ),
-                  Gap( 16),
-                  // Expanded(
-                  //   child: ListView(
-                  //     scrollDirection: Axis.horizontal,
-                  //     children: const [
-                  //       ContactCard(
-                  //         showAddContactButton: true,
-                  //       ),
-                  //       SizedBox(width: 12),
-                  //       ContactCard(),
-                  //       SizedBox(width: 12),
-                  //       ContactCard(),
-                  //     ],
-                  //   ),
-                  // )
-                ],
-              ),
+                ),
+                Gap(16),
+                SizedBox(
+                  height: 240,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    children: const [
+                      Gap(16),
+                      ContactCard(
+                        showAddContactButton: true,
+                      ),
+                      Gap(12),
+                      ContactCard(),
+                      Gap(12),
+                      ContactCard(),
+                      Gap(16),
+                    ],
+                  ),
+                ),
+                Gap(64),
+              ],
             )
           ],
         ),

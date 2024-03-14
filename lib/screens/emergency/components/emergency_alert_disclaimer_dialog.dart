@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -18,17 +19,16 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
           label: "Cancel",
           buttonType: SicklerButtonType.outline,
           color: theme.colorScheme.error,
-          showIcon: true,
+          icon: FluentIcons.dismiss_square_24_regular,
           iconPath: "assets/svg/cross.svg",
         ),
-        const SizedBox(width: 16),
+        const Gap( 16),
         SicklerButton(
           onPressed: () {},
           label: "Continue",
           buttonType: SicklerButtonType.primary,
           color: SicklerColours.white,
           backgroundColor: theme.colorScheme.error,
-          showIcon: true,
           iconPath: "assets/svg/emergency.svg",
         )
       ],
@@ -110,7 +110,7 @@ class AlertDetailsText extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 16),
+        const Gap( 16),
         Text(
           label,
           style: theme.textTheme.bodyMedium,
