@@ -81,7 +81,8 @@ class SicklerButton extends StatelessWidget {
         style = ElevatedButton.styleFrom(
             fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
             backgroundColor: Colors.transparent,
-            foregroundColor: color ?? theme.colorScheme.primary);
+            foregroundColor: color ?? theme.colorScheme.primary,
+        );
         labelColor = color ?? theme.colorScheme.primary;
         break;
 

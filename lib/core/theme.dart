@@ -59,6 +59,7 @@ class SicklerThemeData {
     cardColor: SicklerColours.purple95,
     elevatedButtonTheme: const ElevatedButtonThemeData(
       style: ButtonStyle(
+        splashFactory: InkSparkle.splashFactory,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         fixedSize: MaterialStatePropertyAll<Size>(Size.fromHeight(52)),
         padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
@@ -203,6 +204,7 @@ class SicklerThemeData {
     elevatedButtonTheme: const ElevatedButtonThemeData(
 
       style: ButtonStyle(
+        splashFactory: InkSparkle.splashFactory,
   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         fixedSize: MaterialStatePropertyAll<Size>(Size.fromHeight(52)),
         padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(

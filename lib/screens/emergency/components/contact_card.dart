@@ -66,38 +66,20 @@ class ContactCard extends StatelessWidget {
                                 label: "Cancel",
                                 buttonType: SicklerButtonType.text,
                               ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Center(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Icon(
-                                        FluentIcons.delete_16_regular,
-                                        color: theme.colorScheme.error,
-                                      ),
-                                      Gap(4),
-                                      Text(
-                                        "Delete",
-                                        style: theme.textTheme.bodyMedium!
-                                            .copyWith(
-                                                color: theme.colorScheme.error),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                              SicklerButton(
+                                isChipButton:true,
+                                onPressed: () {
+                                  ///Todo:Delete contact
+                                },
+                                label: "Delete",
+                                icon: FluentIcons.delete_16_regular,
+                                color: theme.colorScheme.error,
+                                buttonType: SicklerButtonType.text,
+
                               ),
 
-                              //  SicklerButton( isChipButton:true,
-                              //   onPressed: () {
-                              //     ///Todo:Delete contact
-                              //   },
-                              //   label: "Delete",
-                              //   backgroundColor: theme.colorScheme.error,
-                              //   color: SicklerColours.white,
-                              //   iconPath: "assets/svg/delete.svg",
-                              // ),
+
+
                             ],
                           ),
                         );
