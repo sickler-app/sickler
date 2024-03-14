@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -73,13 +74,13 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                         colorFilter: ColorFilter.mode(
                             theme.colorScheme.primary, BlendMode.srcIn),
                       ),
-                      const SizedBox(width: 8),
+                      const Gap( 8),
                       Text(
                         "Tablet",
                         style: theme.textTheme.bodyMedium!
                             .copyWith(color: theme.colorScheme.primary),
                       ),
-                      const SizedBox(width: 8),
+                      const Gap( 8),
                     ],
                   ),
                 ),
@@ -125,13 +126,13 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    SicklerChipButton(
+                     SicklerButton( isChipButton:true,
                         buttonType: SicklerButtonType.outline,
                         onPressed: () {},
                         label: "View"),
-                    const SizedBox(width: 8),
-                    SicklerChipButton(
-                        showIcon: true,
+                    const Gap( 8),
+                     SicklerButton( isChipButton:true,
+                        icon: FluentIcons.check_20_regular,
                         iconPath: "assets/svg/check.svg",
                         buttonType: SicklerButtonType.primary,
                         onPressed: () {},
@@ -157,7 +158,7 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                     ),
                   ),
                 ),
-                const SizedBox(width: 16),
+                const Gap( 16),
                 RepaintBoundary(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -196,9 +197,10 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                   ),
                 ),
                 const Spacer(),
-                SicklerChipButton(
-                    showIcon: true,
+                 SicklerButton( isChipButton:true,
+
                     iconPath: "assets/svg/check.svg",
+                    icon: FluentIcons.check_20_regular,
                     buttonType: SicklerButtonType.outline,
                     onPressed: () {},
                     label: "Taken")

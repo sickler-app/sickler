@@ -34,7 +34,7 @@ class MedsHistoryItem extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 16),
+          const Gap( 16),
           RepaintBoundary(
             child: Column(
               mainAxisSize: MainAxisSize.min,

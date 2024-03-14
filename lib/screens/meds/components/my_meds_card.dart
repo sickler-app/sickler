@@ -39,7 +39,7 @@ class MyMedsCard extends StatelessWidget {
                       colorFilter: ColorFilter.mode(
                           theme.colorScheme.primary, BlendMode.srcIn),
                     ),
-                    const SizedBox(width: 8),
+                    const Gap( 8),
                     Text(
                       "Tablet",
                       style: theme.textTheme.bodyMedium!
@@ -63,8 +63,8 @@ class MyMedsCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 8),
-          SicklerChipButton(
+          const Gap( 8),
+           SicklerButton( isChipButton:true,
               iconPath: "assets/svg/check.svg",
               buttonType: SicklerButtonType.primary,
               onPressed: () {

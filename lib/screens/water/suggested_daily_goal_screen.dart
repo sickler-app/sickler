@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
@@ -24,7 +25,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
             showTitle: false,
             pageTitle: "Your daily goal",
             actions: [
-              SicklerChipButton(
+               SicklerButton( isChipButton:true,
                   onPressed: () {},
                   label: "Skip",
                   buttonType: SicklerButtonType.text),
@@ -85,8 +86,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
                     );
                   },
                   label: "Change Goal",
-                  showIcon: true,
-                  iconPath: "assets/svg/edit.svg",
+                  icon: FluentIcons.edit_24_regular,
                   buttonType: SicklerButtonType.outline,
                 ),
                 Gap( 16),

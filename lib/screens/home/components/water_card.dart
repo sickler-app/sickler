@@ -40,7 +40,7 @@ class WaterCard extends StatelessWidget {
               const CircleAvatar(
                 radius: 48,
               ),
-              const SizedBox(width: 16),
+              const Gap( 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +66,7 @@ class WaterCard extends StatelessWidget {
                     Gap( 4),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: SicklerChipButton(
+                      child:  SicklerButton( isChipButton:true,
                         onPressed: () {},
                         label: "Drink",
                         backgroundColor: SicklerColours.blue60,

@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -75,16 +76,17 @@ class _FeelingCardState extends State<FeelingCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SicklerChipButton(
+               SicklerButton( isChipButton:true,
                   onPressed: () {},
                   label: "Cancel",
                   buttonType: SicklerButtonType.outline),
-              const SizedBox(width: 16),
-              SicklerChipButton(
+              const Gap( 16),
+               SicklerButton( isChipButton:true,
                   onPressed: () {},
                   label: "Save",
                   iconPath: "assets/svg/check.svg",
-                  showIcon: true,
+                  icon: FluentIcons.check_20_regular,
+
                   buttonType: SicklerButtonType.primary),
             ],
           ),

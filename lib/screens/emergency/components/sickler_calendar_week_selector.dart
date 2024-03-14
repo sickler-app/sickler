@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/screens/emergency/components/sickler_calendar_week_selector_item.dart';
 
 class SicklerCalendarWeekSelector extends StatefulWidget {
@@ -69,8 +70,8 @@ class _SicklerCalendarWeekSelectorState
               ),
             );
           },
-          separatorBuilder: (contex, index) {
-            return SizedBox(width: seperatorSpacing);
+          separatorBuilder: (context, index) {
+            return Gap( seperatorSpacing);
           },
           itemCount: days.length),
     );

@@ -67,7 +67,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                                             context)
                                         .copyWith(hintText: "1")),
                           ),
-                          const SizedBox(width: 16),
+                          const Gap( 16),
                           Expanded(
                             child: TextFormField(
                               controller: repeatIntervalController,

@@ -134,7 +134,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                                 },
                               ),
                             ),
-                            const SizedBox(width: 16),
+                            const Gap( 16),
                             Expanded(
                               child: SicklerRadio<Gender>(
                                 label: "Male",

@@ -26,7 +26,7 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
             SicklerAppBar(
               pageTitle: "Medical\nInfo",
               actions: [
-                SicklerChipButton(
+                 SicklerButton( isChipButton:true,
                   onPressed: () {
                     //Todo: Skip Page
                   },

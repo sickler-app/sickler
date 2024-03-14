@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -41,7 +42,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                 pageTitle:
                     widget.isEditing ? "Edit\nMedication" : "Add\nMedication",
                 actions: [
-                  SicklerChipButton(
+                   SicklerButton( isChipButton:true,
                     onPressed: () {
                       //Todo: Skip Page
                     },
@@ -309,10 +310,11 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                                   style: theme.textTheme.bodyMedium)
                               : const SizedBox(),
                           widget.isEditing ? const Spacer() : const SizedBox(),
-                          SicklerChipButton(
+                           SicklerButton( isChipButton:true,
                               buttonType: SicklerButtonType.secondary,
-                              showIcon: true,
+
                               onPressed: () {},
+                              icon:    FluentIcons.calendar_20_regular,
                               label: widget.isEditing
                                   ? "12/05/2023"
                                   : "Select End Date",
@@ -326,8 +328,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         label: widget.isEditing
                             ? "Save Medication"
                             : "Add Medication",
-                        showIcon: true,
-                        iconPath: "assets/svg/check.svg"),
+                        icon: FluentIcons.check_24_regular),
                     Visibility(
                         visible: !widget.isEditing,
                         child: Gap( 16)),

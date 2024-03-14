@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -19,7 +20,7 @@ class FeelingCheckupCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text("How are you\n feeling today?"),
+               Text("How are you\nfeeling today?", style:  theme.textTheme.headlineSmall,),
               const Spacer(),
               RichText(
                   text: TextSpan(children: [
@@ -32,19 +33,25 @@ class FeelingCheckupCard extends StatelessWidget {
             ],
           ),
           Gap( 24),
+          Row(
+            children: [
+              Text("No Pain", style: theme.textTheme.bodySmall,), Spacer(),
+              Text("Extreme Pain", style: theme.textTheme.bodySmall,)
+            ],
+          ),
           Slider(value: .7, onChanged: (value) {}),
           Gap( 24),
           TextFormField(
-            maxLines: 3,
+            maxLines: 4,
             decoration: SicklerInputDecoration.inputDecoration(context)
                 .copyWith(hintText: "Description"),
           ),
-          Gap( 24),
+          Gap(16),
           SicklerButton(
             onPressed: () {},
+
             label: "Trigger SOS Alert",
-            showIcon: true,
-            iconPath: "assets/svg.emergency.svg",
+           iconPath: "assets/svg/emergency.svg",
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -34,7 +35,7 @@ class MedsDetailsScreen extends StatelessWidget {
                   colorFilter: ColorFilter.mode(
                       theme.colorScheme.primary, BlendMode.srcIn),
                 ),
-                const SizedBox(width: 8),
+                const Gap( 8),
                 Text(
                   "Tablets",
                   style: theme.textTheme.bodyMedium!
@@ -76,7 +77,7 @@ class MedsDetailsScreen extends StatelessWidget {
             SicklerButton(
               onPressed: () {},
               label: "Edit Medication",
-              showIcon: true,
+              icon: FluentIcons.edit_24_regular,
               iconPath: "assets/svg/edit.svg",
             ),
             Gap( 64),

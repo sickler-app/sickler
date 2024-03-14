@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -48,8 +49,9 @@ class MedsScreen extends StatelessWidget {
                     height: 32,
                   ),
                   SicklerButton(
-                    showIcon: true,
+
                     iconPath: "assets/svg/plus.svg",
+                    icon: FluentIcons.add_24_regular,
                     onPressed: () {
                       showAdaptiveDialog(
                         context: context,
@@ -57,14 +59,15 @@ class MedsScreen extends StatelessWidget {
                           title: "Delete Log?",
                           message: "Are you sure you want to delete this log?",
                           actions: [
-                            SicklerChipButton(
-                                showIcon: true,
+                             SicklerButton( isChipButton:true,
+
+                                icon: FluentIcons.dismiss_20_regular,
                                 iconPath: "assets/svg/cross.svg",
                                 buttonType: SicklerButtonType.primary,
                                 onPressed: () {},
                                 label: "Cancel"),
-                            SicklerChipButton(
-                                showIcon: true,
+                             SicklerButton( isChipButton:true,
+                                icon: FluentIcons.delete_20_regular,
                                 iconPath: "assets/svg/delete.svg",
                                 color: theme.colorScheme.error,
                                 buttonType: SicklerButtonType.outline,

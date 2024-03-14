@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
@@ -29,8 +30,8 @@ class SelectContactsDialog extends StatelessWidget {
             buttonType: SicklerButtonType.primary,
             color: SicklerColours.white,
             backgroundColor: theme.colorScheme.error,
-            showIcon: true,
-            iconPath: "assets/svg/cross.svg",
+            icon: FluentIcons.dismiss_24_regular,
+
           ),
           Gap( 12),
           SicklerButton(
@@ -38,8 +39,8 @@ class SelectContactsDialog extends StatelessWidget {
             label: "Select Contacts",
             buttonType: SicklerButtonType.outline,
             color: theme.colorScheme.error,
-            showIcon: true,
-            iconPath: "assets/svg/cross.svg",
+            icon: FluentIcons.dismiss_24_regular,
+
           ),
         ],
       ),

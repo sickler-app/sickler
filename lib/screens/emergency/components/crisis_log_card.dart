@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -91,11 +92,10 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
                       ),
                     ),
                     const Gap(8),
-                    SicklerChipButton(
+                     SicklerButton( isChipButton:true,
                       onPressed: () {},
                       label: "Edit",
-                      showIcon: true,
-                      iconPath: "assets/svg/edit.svg",
+                      icon: FluentIcons.edit_24_regular
                     ),
                   ],
                 )

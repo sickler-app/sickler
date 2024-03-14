@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 import '../../core/core.dart';
 
@@ -11,34 +12,42 @@ class SicklerButton extends StatelessWidget {
     this.color,
     this.backgroundColor,
     this.iconPath,
-    @Deprecated(
-        "Should not use `showIcon`, just use an iconPath if you want to show an Icon")
-    this.showIcon = false,
-    this.overrideIconColor = true,
+    this.icon,
+    this.overrideIconColor = false,
     this.buttonType = SicklerButtonType.primary,
+    this.isChipButton = false,
   });
   final VoidCallback onPressed;
   final String label;
   final SicklerButtonType buttonType;
-  @Deprecated(
-      "Should not use `showIcon`, just use and iconPath if you want to show an Icon")
-  final bool showIcon;
+  final IconData? icon;
   final String? iconPath;
   final Color? color;
   final Color? backgroundColor;
   final bool? overrideIconColor;
+  final bool? isChipButton;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    if (icon != null && iconPath != null) {
+      throw ErrorHint(
+          "Cannot set both an icon and an iconPath property simultaneously, consider removing one");
+    }
+    if (overrideIconColor == true && color == null) {
+      throw ErrorHint(
+          "Must provide a color property if overrideIconColor is set to true");
+    }
+
     ButtonStyle style = ElevatedButton.styleFrom(
       backgroundColor: backgroundColor ?? theme.colorScheme.primary,
       foregroundColor: color ?? Colors.white,
     );
-    Color labelColor = SicklerColours.purple40;
+    Color labelColor = theme.colorScheme.primary;
     switch (buttonType) {
       case SicklerButtonType.primary:
         style = ElevatedButton.styleFrom(
+          fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
           alignment: Alignment.center,
           backgroundColor: backgroundColor ?? theme.colorScheme.primary,
           foregroundColor: color ?? Colors.white,
@@ -48,6 +57,7 @@ class SicklerButton extends StatelessWidget {
 
       case SicklerButtonType.secondary:
         style = ElevatedButton.styleFrom(
+          fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
           backgroundColor:
               backgroundColor ?? theme.colorScheme.primaryContainer,
           foregroundColor: color ?? theme.colorScheme.onPrimaryContainer,
@@ -57,6 +67,7 @@ class SicklerButton extends StatelessWidget {
 
       case SicklerButtonType.outline:
         style = ElevatedButton.styleFrom(
+            fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
             backgroundColor: Colors.transparent,
             foregroundColor: color ?? theme.colorScheme.primary,
             side: BorderSide(
@@ -68,6 +79,7 @@ class SicklerButton extends StatelessWidget {
         break;
       case SicklerButtonType.text:
         style = ElevatedButton.styleFrom(
+            fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
             backgroundColor: Colors.transparent,
             foregroundColor: color ?? theme.colorScheme.primary);
         labelColor = color ?? theme.colorScheme.primary;
@@ -75,6 +87,7 @@ class SicklerButton extends StatelessWidget {
 
       default:
         style = ElevatedButton.styleFrom(
+          fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
           backgroundColor: backgroundColor ?? theme.colorScheme.primary,
           foregroundColor: color ?? Colors.white,
         );
@@ -90,19 +103,15 @@ class SicklerButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Visibility(
-              visible: iconPath != null,
+              visible: icon != null || iconPath != null,
               child: Row(
                 children: [
-                  SvgPicture.asset(
-                    iconPath ?? "",
-                    colorFilter: overrideIconColor!
-                        ? ColorFilter.mode(
-                            labelColor,
-                            BlendMode.srcIn, // the blend mode
-                          )
-                        : null,
-                  ),
-                  const SizedBox(width: 12),
+                  icon != null
+                      ? Icon(icon)
+                      : SvgPicture.asset(iconPath ?? "",
+                          colorFilter:
+                              ColorFilter.mode(labelColor, BlendMode.srcIn)),
+                  Gap(8)
                 ],
               ),
             ),

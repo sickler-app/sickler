@@ -163,14 +163,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: theme.iconTheme.color,
                                   overrideIconColor: false,
                                   buttonType: SicklerButtonType.outline,
-                                  showIcon: true,
                                   iconPath: "assets/svg/google.svg",
                                   onPressed: () {
                                     //Todo: Perform Google Sign In Action
                                   },
                                   label: "Continue"),
                             ),
-                            const SizedBox(width: 16),
+                            const Gap( 16),
                             Expanded(
                               child: SicklerButton(
                                   color: theme.iconTheme.color,
@@ -179,7 +178,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   onPressed: () {
                                     //Todo: Perform Apple Sign In Option
                                   },
-                                  showIcon: true,
+
                                   iconPath: "assets/svg/apple.svg",
                                   label: "Continue"),
                             ),
@@ -196,7 +195,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         Align(
                             alignment: Alignment.center,
-                            child: SicklerChipButton(
+                            child:  SicklerButton( isChipButton:true,
                               buttonType: SicklerButtonType.text,
                               onPressed: () {
                                 //  Todo: Navigate to Create Account Screen

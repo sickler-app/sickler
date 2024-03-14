@@ -46,7 +46,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                 SicklerAppBar(
                   pageTitle: "Personal\nInfo",
                   actions: [
-                    SicklerChipButton(
+                     SicklerButton( isChipButton:true,
                       onPressed: () {
                         //Todo: Skip Page
                       },
@@ -69,7 +69,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               colorFilter: ColorFilter.mode(
                                   theme.colorScheme.primary, BlendMode.srcIn),
                             ),
-                            const SizedBox(width: 4),
+                            const Gap( 4),
                             Text("Your Height",
                                 style: theme.textTheme.bodyMedium),
                           ],
@@ -90,7 +90,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               colorFilter: ColorFilter.mode(
                                   theme.colorScheme.primary, BlendMode.srcIn),
                             ),
-                            const SizedBox(width: 4),
+                            const Gap( 4),
                             Text("Your Weight",
                                 style: theme.textTheme.bodyMedium),
                           ],
@@ -113,7 +113,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               colorFilter: ColorFilter.mode(
                                   theme.colorScheme.primary, BlendMode.srcIn),
                             ),
-                            const SizedBox(width: 4),
+                            const Gap( 4),
                             Text("Your Genotype",
                                 style: theme.textTheme.bodyMedium),
                           ],
@@ -147,7 +147,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             },
                             separatorBuilder:
                                 (BuildContext context, int index) {
-                              return const SizedBox(width: 16);
+                              return const Gap( 16);
                             },
                           ),
                         ),
