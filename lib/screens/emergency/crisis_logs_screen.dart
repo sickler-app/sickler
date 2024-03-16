@@ -7,7 +7,7 @@ class CrisisLogsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+   // final ThemeData theme = Theme.of(context);
     return const Scaffold(
       body: SingleChildScrollView(
         child: Column(

@@ -19,7 +19,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController phoneController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+ // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
