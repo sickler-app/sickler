@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/core/constants.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 import 'components.dart';
@@ -44,7 +41,7 @@ class CrisisHistoryWeekly extends StatelessWidget {
             onPreviousPressed: () {},
             label: "Wednesday 03, Nov"),
         const Gap(24),
-        Row(
+        const Row(
           children: [
             // SizedBox(
             //   width: 20,
@@ -79,13 +76,13 @@ class CrisisHistoryWeekly extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  const CrisisLogCard(),
-                  const Gap(8),
-                  const CrisisLogCard(),
-                  const Gap(8),
-                  const CrisisLogCard(),
-                  const Gap(8),
-                  const CrisisLogCard(),
+                  CrisisLogCard(),
+                  Gap(8),
+                  CrisisLogCard(),
+                  Gap(8),
+                  CrisisLogCard(),
+                  Gap(8),
+                  CrisisLogCard(),
                 ],
               ),
             ),

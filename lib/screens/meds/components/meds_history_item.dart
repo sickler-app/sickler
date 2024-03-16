@@ -52,7 +52,7 @@ class MedsHistoryItem extends StatelessWidget {
                         end: 0)
                     .fadeIn(
                         delay: 200.ms, curve: Curves.easeOut, duration: 500.ms),
-                Gap( 8),
+                const Gap( 8),
                 Text(
                   "8:00 pm",
                   style: theme.textTheme.bodyMedium,

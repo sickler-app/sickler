@@ -15,7 +15,7 @@ class SelectContactsDialog extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Gap( 32),
+          const Gap( 32),
           Container(
             width: 80,
             height: 80,
@@ -23,7 +23,7 @@ class SelectContactsDialog extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          Gap( 32),
+          const Gap( 32),
           SicklerButton(
             onPressed: () {},
             label: "Send to all contacts",
@@ -33,7 +33,7 @@ class SelectContactsDialog extends StatelessWidget {
             icon: FluentIcons.dismiss_24_regular,
 
           ),
-          Gap( 12),
+          const Gap( 12),
           SicklerButton(
             onPressed: () {},
             label: "Select Contacts",

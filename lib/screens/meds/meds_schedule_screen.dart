@@ -89,13 +89,13 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                           const Spacer(),
                         ],
                       ),
-                      Gap( 24),
+                      const Gap( 24),
                       SicklerCalendarDaySelector(selectedDays: (selectedDay) {
                         ///Todo:Add the selected day to state;
                       }),
-                      Gap( 24),
+                      const Gap( 24),
                       const Text("Ends on"),
-                      Gap( 24),
+                      const Gap( 24),
                       SicklerRadio<MedsScheduleEndingState>(
                         showBorder: false,
                         unselectedBackgroundColor: Colors.transparent,
@@ -109,7 +109,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                           });
                         },
                       ),
-                      Gap( 12),
+                      const Gap( 12),
                       Row(
                         children: [
                           Expanded(
@@ -147,7 +147,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                           const Spacer(),
                         ],
                       ),
-                      Gap( 12),
+                      const Gap( 12),
                       Row(
                         children: [
                           Expanded(
@@ -195,7 +195,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                             ///Todo: save data, add to state and pop
                           },
                           label: "Continue"),
-                      Gap( 64),
+                      const Gap( 64),
                     ],
                   ),
                 ),

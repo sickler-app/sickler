@@ -35,7 +35,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
             "Your daily goal",
             style: theme.textTheme.displaySmall,
           ),
-          Gap( 24),
+          const Gap( 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -43,11 +43,11 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium),
           ),
-          Gap( 64),
+          const Gap( 64),
           Text("$dailyGoal ml",
               style: theme.textTheme.displaySmall!
                   .copyWith(fontWeight: FontWeight.w800)),
-          Gap( 24),
+          const Gap( 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -89,7 +89,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
                   icon: FluentIcons.edit_24_regular,
                   buttonType: SicklerButtonType.outline,
                 ),
-                Gap( 16),
+                const Gap( 16),
                 SicklerButton(
                   onPressed: () {},
                   label: "Accept Goal & Continue",
@@ -97,7 +97,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
               ],
             ),
           ),
-          Gap( 64)
+          const Gap( 64)
         ],
       ),
     );

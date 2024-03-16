@@ -21,7 +21,7 @@ class OnboardingTemplateScreen extends StatelessWidget {
               text,
               style: theme.textTheme.displaySmall,
             ),
-            Gap( 96 + 64),
+            const Gap( 96 + 64),
           ],
         ),
       ),

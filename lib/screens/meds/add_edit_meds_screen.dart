@@ -57,12 +57,12 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Gap( 16),
+                    const Gap( 16),
                     Text(
                       "Name",
                       style: theme.textTheme.bodyMedium,
                     ),
-                    Gap( 12),
+                    const Gap( 12),
                     TextFormField(
                       controller: nameController,
                       decoration:
@@ -78,12 +78,12 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         }
                       },
                     ),
-                    Gap( 16),
+                    const Gap( 16),
                     Text(
                       "Description",
                       style: theme.textTheme.bodyMedium,
                     ),
-                    Gap( 12),
+                    const Gap( 12),
                     TextFormField(
                       maxLines: 3,
                       controller: descriptionController,
@@ -93,16 +93,16 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         hintText: "Description",
                       ),
                     ),
-                    Gap( 24),
+                    const Gap( 24),
                     const Text("What type of medication are you taking?"),
-                    Gap( 12),
+                    const Gap( 12),
                     MedicationTypeSelector(selectedMedication:
                         (MedicationType selectedMedicationType) {
                       ///Todo: Add selected Medication to state
                     }),
-                    Gap( 24),
+                    const Gap( 24),
                     const Text("What's the dose of your medication "),
-                    Gap( 12),
+                    const Gap( 12),
                     Wrap(
                       direction: Axis.horizontal,
                       spacing: 12,
@@ -156,10 +156,10 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ),
                       ],
                     ),
-                    Gap( 24),
+                    const Gap( 24),
                     const Text(
                         "How often do you take your medication in a day?"),
-                    Gap( 12),
+                    const Gap( 12),
                     Wrap(
                       direction: Axis.horizontal,
                       spacing: 12,
@@ -187,7 +187,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ),
                       ],
                     ),
-                    Gap( 24),
+                    const Gap( 24),
                     Text(
                       "What time(s) do you take your medication?",
                       style: theme.textTheme.bodyMedium,
@@ -248,7 +248,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         )
                       ],
                     ),
-                    Gap( 24),
+                    const Gap( 24),
                     // const Text(
                     //     "How long have you been taking this medication?"),
                     // Gap( 12),
@@ -300,7 +300,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                             })
                       ],
                     ),
-                    Gap( 12),
+                    const Gap( 12),
                     Visibility(
                       visible: !isTakingMedsPermanently,
                       child: Row(
@@ -322,7 +322,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ],
                       ),
                     ),
-                    Gap( 32),
+                    const Gap( 32),
                     SicklerButton(
                         onPressed: () {},
                         label: widget.isEditing
@@ -331,7 +331,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         icon: FluentIcons.check_24_regular),
                     Visibility(
                         visible: !widget.isEditing,
-                        child: Gap( 16)),
+                        child: const Gap( 16)),
                     Visibility(
                       visible: !widget.isEditing,
                       child: SicklerButton(

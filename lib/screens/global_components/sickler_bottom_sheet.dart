@@ -27,7 +27,7 @@ class SicklerBottomSheet extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Gap( 12),
+            const Gap( 12),
             Container(
               height: 6,
               width: 42,
@@ -35,7 +35,7 @@ class SicklerBottomSheet extends StatelessWidget {
                   color: theme.cardColor,
                   borderRadius: BorderRadius.circular(8)),
             ),
-            Gap( 12),
+            const Gap( 12),
             Text(title,
                 style: theme.textTheme.titleMedium!
                     .copyWith(fontWeight: FontWeight.w800)),
@@ -43,7 +43,7 @@ class SicklerBottomSheet extends StatelessWidget {
               height: 16,
             ),
             child,
-            Gap( 32),
+            const Gap( 32),
             SicklerButton(onPressed: onPressed, label: buttonLabel),
             const SizedBox(
               height: 64,

@@ -1,13 +1,9 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
-import '../../global_components/global_components.dart';
 
 class CrisisLogCard extends StatefulWidget {
   const CrisisLogCard({super.key});
@@ -58,7 +54,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
                       isExpanded = !isExpanded;
                     });
                   },
-                  icon: Icon(FluentIcons.chevron_down_24_regular)),
+                  icon: const Icon(FluentIcons.chevron_down_24_regular)),
             ],
           ),
 
@@ -94,13 +90,13 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
                 const Gap(8),
                 Row(
                   children: [
-                    Spacer(),
+                    const Spacer(),
                     IconButton.filled(
                         style: IconButton.styleFrom(
                             elevation: 0,
                             backgroundColor: theme.colorScheme.error),
                         onPressed: () {},
-                        icon: Icon(FluentIcons.delete_20_regular, color: Colors.white,)),
+                        icon: const Icon(FluentIcons.delete_20_regular, color: Colors.white,)),
                    // const Gap(4),
                     IconButton.filled(
                         style: IconButton.styleFrom(
@@ -108,7 +104,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
                             elevation: 0,
                             backgroundColor: theme.colorScheme.primary),
                         onPressed: () {},
-                        icon: Icon(FluentIcons.edit_20_regular, color: Colors.white)),
+                        icon: const Icon(FluentIcons.edit_20_regular, color: Colors.white)),
                   ],
                 )
               ],

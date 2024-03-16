@@ -27,9 +27,9 @@ class EmergencyScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const EmergencyLocationSharingCard(),
-                      Gap(24),
+                      const Gap(24),
                       const FeelingCheckupCard(),
-                      Gap(32),
+                      const Gap(32),
                       Row(
                         children: [
                           Text(
@@ -49,7 +49,7 @@ class EmergencyScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Gap(16),
+                const Gap(16),
                 SizedBox(
                   height: 240,
                   child: ListView(
@@ -68,7 +68,7 @@ class EmergencyScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Gap(64),
+                const Gap(64),
               ],
             )
           ],

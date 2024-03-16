@@ -40,7 +40,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
             style: theme.textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
-          Gap( 32),
+          const Gap( 32),
           const Align(
             alignment: Alignment.centerLeft,
             child: AlertDetailsText(
@@ -48,7 +48,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
               label: "Your Location",
             ),
           ),
-          Gap( 8),
+          const Gap( 8),
           const Align(
             alignment: Alignment.centerLeft,
             child: AlertDetailsText(
@@ -56,7 +56,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
               label: "Details about your crises",
             ),
           ),
-          Gap( 32),
+          const Gap( 32),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -78,7 +78,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
               ],
             ),
           ),
-          Gap( 24),
+          const Gap( 24),
         ],
       ),
     );

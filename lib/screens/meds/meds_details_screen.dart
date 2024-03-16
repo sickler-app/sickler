@@ -21,7 +21,7 @@ class MedsDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Gap( 24),
+            const Gap( 24),
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -43,12 +43,12 @@ class MedsDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Gap( 24),
+            const Gap( 24),
             Text(
               "Lorem ipsum dolor sit amet consectetur. Ut ipsum et viverra adipiscing velit viverra sit venenatis facilisis. Vel laoreet pellentesque amet amet orci viverra eget.",
               style: theme.textTheme.bodyMedium!.copyWith(height: 1.5),
             ),
-            Gap( 24),
+            const Gap( 24),
             Wrap(
               runSpacing: 12,
               children: [
@@ -65,22 +65,22 @@ class MedsDetailsScreen extends StatelessWidget {
                     chipType: SicklerChipType.info, label: "3:00 PM"),
               ],
             ),
-            Gap( 24),
+            const Gap( 24),
             Text(
               "Medication History",
               style: theme.textTheme.bodyLarge!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
-            Gap( 12),
+            const Gap( 12),
             const SicklerCalendar(),
-            Gap( 24),
+            const Gap( 24),
             SicklerButton(
               onPressed: () {},
               label: "Edit Medication",
               icon: FluentIcons.edit_24_regular,
               iconPath: "assets/svg/edit.svg",
             ),
-            Gap( 64),
+            const Gap( 64),
           ],
         ),
       ),

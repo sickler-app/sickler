@@ -112,7 +112,7 @@ class SicklerButton extends StatelessWidget {
                       : SvgPicture.asset(iconPath ?? "",
                           colorFilter:
                               ColorFilter.mode(labelColor, BlendMode.srcIn)),
-                  Gap(8)
+                  const Gap(8)
                 ],
               ),
             ),

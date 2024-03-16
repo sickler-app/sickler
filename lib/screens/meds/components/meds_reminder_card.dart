@@ -84,7 +84,7 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                     ],
                   ),
                 ),
-                Gap( 8),
+                const Gap( 8),
                 RepaintBoundary(
                   child: Text(
                     "Hydroxyl Urea",

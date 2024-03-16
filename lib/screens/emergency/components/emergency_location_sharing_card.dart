@@ -34,7 +34,7 @@ class EmergencyLocationSharingCard extends StatelessWidget {
               )
             ],
           ),
-          Gap(24),
+          const Gap(24),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -55,7 +55,7 @@ class EmergencyLocationSharingCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
                SicklerButton( isChipButton:true,
                 onPressed: () {},
                 label: 'Stop Sharing',

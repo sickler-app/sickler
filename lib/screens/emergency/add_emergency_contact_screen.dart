@@ -42,7 +42,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
               ),
               Stack(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 64,
                     backgroundImage: AssetImage("assets/images/memoji.png"),
                   ),
@@ -52,14 +52,14 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                     child: IconButton.filled(
                         color: theme.colorScheme.primary,
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           FluentIcons.edit_24_regular,
                           color: Colors.white,
                         )),
                   )
                 ],
               ),
-              Gap(
+              const Gap(
                 48,
               ),
               Padding(
@@ -81,7 +81,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                         )
                       ],
                     ),
-                    Gap(
+                    const Gap(
                       12,
                     ),
                     TextFormField(
@@ -89,7 +89,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                       decoration: SicklerInputDecoration.inputDecoration(context)
                           .copyWith(hintText: "Name"),
                     ),
-                    Gap(
+                    const Gap(
                       24,
                     ),
                     Row(
@@ -106,7 +106,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                         )
                       ],
                     ),
-                    Gap(8),
+                    const Gap(8),
                     TextFormField(
                       controller: phoneController,
                       decoration: SicklerInputDecoration.inputDecoration(context)
@@ -120,7 +120,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                             ),),
                       ),
                     ),
-                    Gap(12),
+                    const Gap(12),
                     const Wrap(
                       alignment: WrapAlignment.start,
                       spacing: 16,
@@ -134,7 +134,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                             chipType: SicklerChipType.info),
                       ],
                     ),
-                    Gap(24),
+                    const Gap(24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -152,7 +152,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
         
                       ],
                     ),
-                    Gap(8),
+                    const Gap(8),
                     Row(
                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -174,7 +174,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                   ],
                 ),
               ),
-              Gap(64),
+              const Gap(64),
             ],
           ),
         ),

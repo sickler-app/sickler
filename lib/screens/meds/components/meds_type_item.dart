@@ -189,7 +189,7 @@ class _MedsTypeItemState extends State<MedsTypeItem>
             );
           },
         ),
-        Gap( 8),
+        const Gap( 8),
         Text(
           widget.label ?? _label,
           textAlign: TextAlign.center,

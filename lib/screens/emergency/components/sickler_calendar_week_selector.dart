@@ -51,7 +51,7 @@ class _SicklerCalendarWeekSelectorState
     return SizedBox(
       height: 80,
       child: ListView.separated(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             isDaySelected.putIfAbsent(index, () => false);
@@ -71,7 +71,7 @@ class _SicklerCalendarWeekSelectorState
             );
           },
           separatorBuilder: (context, index) {
-            return Gap(8);
+            return const Gap(8);
           },
           itemCount: days.length),
     );

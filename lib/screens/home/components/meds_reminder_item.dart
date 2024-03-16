@@ -25,7 +25,7 @@ class MedsReminderItem extends StatelessWidget {
             style: theme.textTheme.bodyMedium!
                 .copyWith(fontWeight: FontWeight.bold),
           ),
-          Gap( 8),
+          const Gap( 8),
           Align(
             alignment: Alignment.centerRight,
             child: Text(

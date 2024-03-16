@@ -45,7 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text("Email", style: theme.textTheme.bodyMedium),
-                        Gap( 8),
+                        const Gap( 8),
                         TextFormField(
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -60,9 +60,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             }
                           },
                         ),
-                        Gap( 24),
+                        const Gap( 24),
                         Text("Password", style: theme.textTheme.bodyMedium),
-                        Gap( 8),
+                        const Gap( 8),
                         TextFormField(
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
@@ -95,7 +95,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             }
                           },
                         ),
-                        Gap( 32),
+                        const Gap( 32),
                         const Spacer(),
 
                         ///Buttons
@@ -106,7 +106,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               }
                             },
                             label: "Sign In"),
-                        Gap( 16),
+                        const Gap( 16),
                         Row(
                           children: [
                             Expanded(
@@ -135,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ],
                         ),
-                        Gap( 12),
+                        const Gap( 12),
                         Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -153,7 +153,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               },
                               label: "Create an Account",
                             )),
-                        Gap( 64)
+                        const Gap( 64)
                       ],
                     ),
                   ),

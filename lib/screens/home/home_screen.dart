@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              Gap( 64 + 16),
+              const Gap( 64 + 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 48,
               ),
               const FeelingCard(),
-              Gap( 16),
+              const Gap( 16),
               const WaterCard(),
               const SizedBox(
                 height: 32,
@@ -72,10 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: theme.textTheme.headlineSmall,
                 ),
               ),
-              Gap( 16),
-              MedsReminderCard(),
-              Gap(16),
-              EmergencySharingCard(),
+              const Gap( 16),
+              const MedsReminderCard(),
+              const Gap(16),
+              const EmergencySharingCard(),
               const SizedBox(
                 height: 64,
               )

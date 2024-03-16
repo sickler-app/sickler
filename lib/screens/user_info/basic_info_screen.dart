@@ -58,7 +58,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Full Names", style: theme.textTheme.bodyMedium),
-                        Gap( 8),
+                        const Gap( 8),
                         TextFormField(
                           controller: nameController,
                           keyboardType: TextInputType.name,
@@ -66,9 +66,9 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                               SicklerInputDecoration.inputDecoration(context)
                                   .copyWith(hintText: "Email"),
                         ),
-                        Gap( 24),
+                        const Gap( 24),
                         Text("Age", style: theme.textTheme.bodyMedium),
-                        Gap( 8),
+                        const Gap( 8),
                         TextFormField(
                           readOnly: true,
                           showCursor: true,
@@ -103,9 +103,9 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                                     ));
                           },
                         ),
-                        Gap( 24),
+                        const Gap( 24),
                         Text("Address", style: theme.textTheme.bodyMedium),
-                        Gap( 8),
+                        const Gap( 8),
                         TextFormField(
                           controller: addressController,
                           keyboardType: TextInputType.streetAddress,
@@ -115,11 +115,11 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                             hintText: "Address",
                           ),
                         ),
-                        Gap( 24),
+                        const Gap( 24),
                         Text("Sex", style: theme.textTheme.bodyMedium),
-                        Gap( 8),
+                        const Gap( 8),
 
-                        Gap( 16),
+                        const Gap( 16),
                         Row(
                           children: [
                             Expanded(
@@ -149,7 +149,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                             ),
                           ],
                         ),
-                        Gap( 32),
+                        const Gap( 32),
                         const Spacer(),
 
                         ///Buttons
@@ -159,7 +159,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                             },
                             label: "Continue"),
 
-                        Gap( 64),
+                        const Gap( 64),
                       ],
                     ),
                   ),

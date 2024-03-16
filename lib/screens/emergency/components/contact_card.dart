@@ -27,7 +27,7 @@ class ContactCard extends StatelessWidget {
           ? Center(
               child: IconButton.filled(
                   style: IconButton.styleFrom(
-                    fixedSize: Size.square(100),
+                    fixedSize: const Size.square(100),
                     elevation: 0,
                     foregroundColor: theme.cardColor,
                     backgroundColor: theme.cardColor,
@@ -50,7 +50,7 @@ class ContactCard extends StatelessWidget {
                     const Spacer(),
                     IconButton(
                         onPressed: () {},
-                        icon: Icon(FluentIcons.edit_16_regular)),
+                        icon: const Icon(FluentIcons.edit_16_regular)),
                     IconButton(
                       onPressed: () {
                         showDialog(
@@ -91,16 +91,16 @@ class ContactCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
-                Center(
+                const Spacer(),
+                const Center(
                   child: CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage("assets/images/memoji.png"),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text("Nuikweh Lewis", style: theme.textTheme.bodyMedium),
-                Gap(2),
+                const Gap(2),
                 Text(
                   "6 77 77 77 77",
                   style: theme.textTheme.bodyMedium!

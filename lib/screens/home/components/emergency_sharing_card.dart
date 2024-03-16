@@ -58,7 +58,7 @@ class EmergencySharingCard extends StatelessWidget {
             textAlign: TextAlign.center,
             style: theme.textTheme.bodyMedium,
           ),
-          Gap( 16),
+          const Gap( 16),
         ],
       ),
     );

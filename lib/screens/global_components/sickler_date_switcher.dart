@@ -1,7 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/core.dart';
 
@@ -30,7 +29,7 @@ class SicklerDateSwitcher extends StatelessWidget {
             elevation: 0,
           ),
           onPressed: onPreviousPressed,
-          icon:  Icon(FluentIcons.chevron_left_24_regular, color: SicklerColours.purple20,)
+          icon:  const Icon(FluentIcons.chevron_left_24_regular, color: SicklerColours.purple20,)
 
           ),
         const Spacer(),
@@ -65,7 +64,7 @@ class SicklerDateSwitcher extends StatelessWidget {
                 : theme.colorScheme.primaryContainer,
           ),
           onPressed: onNextPressed,
-          icon: Icon(FluentIcons.chevron_right_24_regular, color:SicklerColours.purple20,)
+          icon: const Icon(FluentIcons.chevron_right_24_regular, color:SicklerColours.purple20,)
 
         )
       ],

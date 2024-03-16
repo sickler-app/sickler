@@ -48,7 +48,7 @@ class _FeelingCardState extends State<FeelingCard> {
               ),
             ],
           ),
-          Gap( 24),
+          const Gap( 24),
           Row(children: [
             Text(
               "No Pain",
@@ -60,7 +60,7 @@ class _FeelingCardState extends State<FeelingCard> {
               style: theme.textTheme.bodySmall,
             )
           ]),
-          Gap( 12),
+          const Gap( 12),
           Slider(
               activeColor: theme.colorScheme.primary,
               inactiveColor: SicklerColours.neutral90,
@@ -72,7 +72,7 @@ class _FeelingCardState extends State<FeelingCard> {
                   sliderValue = value;
                 });
               }),
-          Gap( 16),
+          const Gap( 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

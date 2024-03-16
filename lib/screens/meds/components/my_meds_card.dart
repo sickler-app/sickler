@@ -31,7 +31,7 @@ class MyMedsCard extends StatelessWidget {
                   style: theme.textTheme.bodyLarge!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
-                Gap( 8),
+                const Gap( 8),
                 Row(
                   children: [
                     SvgPicture.asset(

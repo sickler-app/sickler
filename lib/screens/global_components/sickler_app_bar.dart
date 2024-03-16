@@ -20,7 +20,7 @@ class SicklerAppBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-       Gap(48),
+       const Gap(48),
         Row(
           children: [
             IconButton(
@@ -51,7 +51,7 @@ class SicklerAppBar extends StatelessWidget {
             child: Text(pageTitle, style: theme.textTheme.displaySmall),
           ),
         ),
-        Gap( 48),
+        const Gap( 48),
       ],
     );
   }

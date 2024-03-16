@@ -33,7 +33,7 @@ class WaterCard extends StatelessWidget {
               )
             ],
           ),
-          Gap( 4),
+          const Gap( 4),
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -58,12 +58,12 @@ class WaterCard extends StatelessWidget {
                                 color: SicklerColours.neutral50),
                           ),
                         ])),
-                    Gap( 4),
+                    const Gap( 4),
                     Text(
                       "Only 2 hours left to finish your daily goal",
                       style: theme.textTheme.bodyMedium,
                     ),
-                    Gap( 4),
+                    const Gap( 4),
                     Align(
                       alignment: Alignment.centerRight,
                       child:  SicklerButton( isChipButton:true,

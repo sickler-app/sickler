@@ -1,4 +1,3 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -32,21 +31,21 @@ class FeelingCheckupCard extends StatelessWidget {
               ]))
             ],
           ),
-          Gap( 24),
+          const Gap( 24),
           Row(
             children: [
-              Text("No Pain", style: theme.textTheme.bodySmall,), Spacer(),
+              Text("No Pain", style: theme.textTheme.bodySmall,), const Spacer(),
               Text("Extreme Pain", style: theme.textTheme.bodySmall,)
             ],
           ),
           Slider(value: .7, onChanged: (value) {}),
-          Gap( 24),
+          const Gap( 24),
           TextFormField(
             maxLines: 4,
             decoration: SicklerInputDecoration.inputDecoration(context)
                 .copyWith(hintText: "Description"),
           ),
-          Gap(16),
+          const Gap(16),
           SicklerButton(
             onPressed: () {},
 
