@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,17 +26,13 @@ class SicklerDateSwitcher extends StatelessWidget {
           style: IconButton.styleFrom(
             backgroundColor: isDarkMode
                 ? theme.colorScheme.primary
-                : SicklerColours.purple90,
+                : theme.colorScheme.primaryContainer,
             elevation: 0,
           ),
           onPressed: onPreviousPressed,
-          icon: SvgPicture.asset(
-            "assets/svg/chevron-left.svg",
-            colorFilter: ColorFilter.mode(
-                isDarkMode ? SicklerColours.purple10 : theme.iconTheme.color!,
-                BlendMode.srcIn),
+          icon:  Icon(FluentIcons.chevron_left_24_regular, color: SicklerColours.purple20,)
+
           ),
-        ),
         const Spacer(),
         AnimatedContainer(
           duration: 300.ms,
@@ -44,7 +41,7 @@ class SicklerDateSwitcher extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             color: isDarkMode
                 ? theme.colorScheme.primary
-                : SicklerColours.purple90,
+                : theme.colorScheme.primaryContainer,
           ),
           child: Center(
             child: Padding(
@@ -52,9 +49,9 @@ class SicklerDateSwitcher extends StatelessWidget {
               child: Text(
                 label,
                 style: theme.textTheme.bodyMedium!.copyWith(
-                  color: isDarkMode
-                      ? SicklerColours.purple10
-                      : theme.iconTheme.color!,
+                  color:
+                SicklerColours.purple20,
+
                 ),
               ),
             ),
@@ -65,15 +62,11 @@ class SicklerDateSwitcher extends StatelessWidget {
           style: IconButton.styleFrom(
             backgroundColor: isDarkMode
                 ? theme.colorScheme.primary
-                : SicklerColours.purple90,
+                : theme.colorScheme.primaryContainer,
           ),
           onPressed: onNextPressed,
-          icon: SvgPicture.asset(
-            "assets/svg/chevron-right.svg",
-            colorFilter: ColorFilter.mode(
-                isDarkMode ? SicklerColours.purple10 : theme.iconTheme.color!,
-                BlendMode.srcIn),
-          ),
+          icon: Icon(FluentIcons.chevron_right_24_regular, color:SicklerColours.purple20,)
+
         )
       ],
     );

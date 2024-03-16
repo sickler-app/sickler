@@ -65,6 +65,6 @@ flutter:
         - asset: assets/fonts/PlusJakartaSans-Regular.ttf
         - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
         - asset: assets/fonts/PlusJakartaSans-SemiBoldItalic.ttf
-    - family: My Icons
-      fonts:
-        - asset: assets/fonts/my_icons_font.otf
+#    - family: My Icons
+#      fonts:
+#        - asset: assets/fonts/my_icons_font.otf

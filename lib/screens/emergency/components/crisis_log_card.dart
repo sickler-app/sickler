@@ -1,5 +1,7 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -22,45 +24,58 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
     final ThemeData theme = Theme.of(context);
     bool isDarkMode = theme.brightness == Brightness.dark;
     return AnimatedContainer(
-      duration: 300.ms,
+      height: isExpanded ? 202 : 106,
+      duration: 250.ms,
       curve: Curves.easeInOut,
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 12),
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 4, bottom: 8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(24),
+        border: isDarkMode
+            ? null
+            : Border.all(
+                color: (isExpanded
+                    ? Colors.transparent
+                    : theme.colorScheme.primaryContainer),
+                width: 1),
         color: isDarkMode
             ? theme.cardColor
-            : (isExpanded ? SicklerColours.purple95 : theme.cardColor),
+            : (isExpanded ? theme.cardColor: Colors.transparent),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
               Text(
                 "Crises Event",
-                style: theme.textTheme.bodyLarge!
+                style: theme.textTheme.bodyMedium!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               const Spacer(),
               IconButton(
-                onPressed: () {
-                  setState(() {
-                    isExpanded = !isExpanded;
-                  });
-                },
-                icon: SvgPicture.asset(
-                  "assets/svg/chevron-down.svg",
-                  colorFilter:
-                      ColorFilter.mode(theme.iconTheme.color!, BlendMode.srcIn),
-                ),
-              ),
+                  onPressed: () {
+                    setState(() {
+                      isExpanded = !isExpanded;
+                    });
+                  },
+                  icon: Icon(FluentIcons.chevron_down_24_regular)),
             ],
           ),
-          const Gap(8),
+
           Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
-                "Extreme pain - 7",
-                style: theme.textTheme.bodyMedium,
+                "7",
+                style: theme.textTheme.titleLarge!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.primary),
+              ),
+              Text(
+                " - Extreme pain",
+                style: theme.textTheme.bodySmall!
+                    .copyWith(color: SicklerColours.neutral50),
               ),
               const Spacer(),
               Text(
@@ -71,32 +86,29 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
           ),
           const Gap(16),
           Visibility(
+            visible: isExpanded,
             child: Column(
               children: [
                 const Text(
                     "Description, if any, for example, pain felt, on lowe back and chest"),
-                const Gap(16),
+                const Gap(8),
                 Row(
                   children: [
+                    Spacer(),
                     IconButton.filled(
-                      style: IconButton.styleFrom(
-                          elevation: 0,
-                          backgroundColor: isDarkMode
-                              ? SicklerColours.red20
-                              : SicklerColours.red95),
-                      onPressed: () {},
-                      icon: SvgPicture.asset(
-                        "assets/svg/delete.svg",
-                        colorFilter: ColorFilter.mode(
-                            theme.colorScheme.error, BlendMode.srcIn),
-                      ),
-                    ),
-                    const Gap(8),
-                     SicklerButton( isChipButton:true,
-                      onPressed: () {},
-                      label: "Edit",
-                      icon: FluentIcons.edit_24_regular
-                    ),
+                        style: IconButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: theme.colorScheme.error),
+                        onPressed: () {},
+                        icon: Icon(FluentIcons.delete_20_regular, color: Colors.white,)),
+                   // const Gap(4),
+                    IconButton.filled(
+                        style: IconButton.styleFrom(
+                          splashFactory: InkSparkle.splashFactory,
+                            elevation: 0,
+                            backgroundColor: theme.colorScheme.primary),
+                        onPressed: () {},
+                        icon: Icon(FluentIcons.edit_20_regular, color: Colors.white)),
                   ],
                 )
               ],

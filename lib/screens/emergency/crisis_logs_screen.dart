@@ -8,12 +8,15 @@ class CrisisLogsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             SicklerAppBar(pageTitle: "Crises History"),
-            CrisisHistoryWeekly(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: CrisisHistoryWeekly(),
+            ),
           ],
         ),
       ),

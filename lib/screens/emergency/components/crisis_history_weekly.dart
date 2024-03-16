@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
+import 'package:sickler/core/constants.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 import 'components.dart';
@@ -11,6 +14,7 @@ class CrisisHistoryWeekly extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "Weekly",
@@ -27,10 +31,8 @@ class CrisisHistoryWeekly extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.w800),
               ),
               TextSpan(
-                text: "Crises events this week ",
-                style: theme.textTheme.headlineMedium!
-                    .copyWith(fontWeight: FontWeight.w800),
-              ),
+                  text: " Crises events this week ",
+                  style: theme.textTheme.bodyMedium),
             ],
           ),
         ),
@@ -42,13 +44,53 @@ class CrisisHistoryWeekly extends StatelessWidget {
             onPreviousPressed: () {},
             label: "Wednesday 03, Nov"),
         const Gap(24),
-        const CrisisLogCard(),
-        const Gap(8),
-        const CrisisLogCard(),
-        const Gap(8),
-        const CrisisLogCard(),
-        const Gap(8),
-        const CrisisLogCard(),
+        Row(
+          children: [
+            // SizedBox(
+            //   width: 20,
+            //   height: 500,
+            //   child: ListView.separated(
+            //     padding: EdgeInsets.zero,
+            //       physics: NeverScrollableScrollPhysics(),
+            //       shrinkWrap: true,
+            //       itemBuilder: (context, index) {
+            //         return Container(
+            //           margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            //           height: 100,
+            //           width: 6,
+            //           decoration:
+            //               BoxDecoration(
+            //                   borderRadius: BorderRadius.circular(6),
+            //                   color: SicklerColours.neutral95),
+            //         );
+            //       },
+            //       separatorBuilder: (context, index) {
+            //         return Container(
+            //           width: 12,
+            //           height: 12,
+            //           decoration: BoxDecoration(
+            //               color: SicklerColours.neutral90,
+            //               shape: BoxShape.circle),
+            //         );
+            //       },
+            //       itemCount: 5),
+            // ),
+            // Gap(8),
+            Expanded(
+              child: Column(
+                children: [
+                  const CrisisLogCard(),
+                  const Gap(8),
+                  const CrisisLogCard(),
+                  const Gap(8),
+                  const CrisisLogCard(),
+                  const Gap(8),
+                  const CrisisLogCard(),
+                ],
+              ),
+            ),
+          ],
+        )
       ],
     );
   }
