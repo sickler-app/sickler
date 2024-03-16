@@ -1,7 +1,9 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/meds/components/components.dart';
+import 'package:sickler/screens/meds/components/meds_type_item.dart';
 
 import '../global_components/global_components.dart';
 
@@ -31,145 +33,150 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
-      body: Form(
-        child: Column(
-          children: [
-            const SicklerAppBar(
-              pageTitle: "Add Emergency\nContacts",
-            ),
-            Stack(
-              children: [
-                CircleAvatar(
-                  radius: 56,
-                  child: Image.asset("assets/image/memoji.png"),
-                ),
-                Positioned(
-                  left: 0,
-                  bottom: 0,
-                  child: IconButton.filled(
-                    color: theme.colorScheme.primary,
-                    onPressed: () {},
-                    icon: SvgPicture.asset("assets/svg/edit.svg",
-                        colorFilter: const ColorFilter.mode(
-                            SicklerColours.white, BlendMode.srcIn)),
+      body: SingleChildScrollView(
+        child: Form(
+          child: Column(
+            children: [
+              const SicklerAppBar(
+                pageTitle: "Add Emergency\nContacts",
+              ),
+              Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 64,
+                    backgroundImage: AssetImage("assets/images/memoji.png"),
                   ),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 48,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SvgPicture.asset(
-                  "assets/svg/person.svg",
-                  colorFilter: ColorFilter.mode(
-                      theme.colorScheme.primary, BlendMode.srcIn),
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                Text(
-                  "Name",
-                  style: theme.textTheme.bodyMedium,
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            TextFormField(
-              controller: nameController,
-              decoration: SicklerInputDecoration.inputDecoration(context)
-                  .copyWith(hintText: "Name"),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SvgPicture.asset(
-                  "assets/svg/phone.svg",
-                  colorFilter: ColorFilter.mode(
-                      theme.colorScheme.primary, BlendMode.srcIn),
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                Text(
-                  "Phone",
-                  style: theme.textTheme.bodyMedium,
-                )
-              ],
-            ),
-            TextFormField(
-              controller: phoneController,
-              decoration:
-                  SicklerInputDecoration.inputDecoration(context).copyWith(
-                hintText: "Phone Number",
-                suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    "assets/svg/plus.svg",
-                    colorFilter: ColorFilter.mode(
-                        theme.iconTheme.color!, BlendMode.srcIn),
-                  ),
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: IconButton.filled(
+                        color: theme.colorScheme.primary,
+                        onPressed: () {},
+                        icon: Icon(
+                          FluentIcons.edit_24_regular,
+                          color: Colors.white,
+                        )),
+                  )
+                ],
+              ),
+              Gap(
+                48,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(FluentIcons.person_24_regular,
+                            color: theme.colorScheme.primary),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          "Name",
+                          style: theme.textTheme.bodyMedium,
+                        )
+                      ],
+                    ),
+                    Gap(
+                      12,
+                    ),
+                    TextFormField(
+                      controller: nameController,
+                      decoration: SicklerInputDecoration.inputDecoration(context)
+                          .copyWith(hintText: "Name"),
+                    ),
+                    Gap(
+                      24,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(FluentIcons.call_24_regular,
+                            color: theme.colorScheme.primary),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          "Phone",
+                          style: theme.textTheme.bodyMedium,
+                        )
+                      ],
+                    ),
+                    Gap(8),
+                    TextFormField(
+                      controller: phoneController,
+                      decoration: SicklerInputDecoration.inputDecoration(context)
+                          .copyWith(
+                        hintText: "Phone Number",
+                        suffixIcon: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              FluentIcons.add_24_regular,
+                              color: theme.colorScheme.primary,
+                            ),),
+                      ),
+                    ),
+                    Gap(12),
+                    const Wrap(
+                      alignment: WrapAlignment.start,
+                      spacing: 16,
+                      children: [
+                        SicklerChip(
+                          label: "6 77 77 77 77",
+                          chipType: SicklerChipType.info,
+                        ),
+                        SicklerChip(
+                            label: "6 77 77 77 77",
+                            chipType: SicklerChipType.info),
+                      ],
+                    ),
+                    Gap(24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          FluentIcons.people_24_regular,
+                          color: theme.colorScheme.primary,
+                        ),
+                        const Gap(
+                          4,
+                        ),
+                        Text(
+                          "Relation",
+                          style: theme.textTheme.bodyMedium,
+                        ),
+        
+                      ],
+                    ),
+                    Gap(8),
+                    Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ///Todo: Replace with the actual relations
+                        MedsTypeItem(
+                            medicationType: MedicationType.droplets,
+                            onPressed: () {}),
+                        MedsTypeItem(
+                            medicationType: MedicationType.droplets,
+                            onPressed: () {}),
+                        MedsTypeItem(
+                            medicationType: MedicationType.droplets,
+                            onPressed: () {}),
+                        MedsTypeItem(
+                            medicationType: MedicationType.droplets,
+                            onPressed: () {}),
+                      ],
+                    )
+                  ],
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            const Wrap(
-              children: [
-                SicklerChip(
-                  label: "6 77 77 77 77",
-                  chipType: SicklerChipType.info,
-                ),
-                SicklerChip(
-                    label: "6 77 77 77 77", chipType: SicklerChipType.info),
-              ],
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SvgPicture.asset(
-                  "assets/svg/relationship.svg",
-                  colorFilter: ColorFilter.mode(
-                      theme.colorScheme.primary, BlendMode.srcIn),
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                Text(
-                  "Relation",
-                  style: theme.textTheme.bodyMedium,
-                ),
-                Row(
-                  children: [
-                    ///Todo: Replace with the actual relations
-                    MedsTypeItem(
-                        medicationType: MedicationType.droplets,
-                        onPressed: () {}),
-                    MedsTypeItem(
-                        medicationType: MedicationType.droplets,
-                        onPressed: () {}),
-                    MedsTypeItem(
-                        medicationType: MedicationType.droplets,
-                        onPressed: () {}),
-                    MedsTypeItem(
-                        medicationType: MedicationType.droplets,
-                        onPressed: () {}),
-                  ],
-                )
-              ],
-            ),
-          ],
+              Gap(64),
+            ],
+          ),
         ),
       ),
     );
