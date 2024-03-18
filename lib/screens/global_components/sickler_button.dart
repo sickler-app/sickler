@@ -79,9 +79,9 @@ class SicklerButton extends StatelessWidget {
         break;
       case SicklerButtonType.text:
         style = ElevatedButton.styleFrom(
-            fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
-            backgroundColor: Colors.transparent,
-            foregroundColor: color ?? theme.colorScheme.primary,
+          fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
+          backgroundColor: Colors.transparent,
+          foregroundColor: color ?? theme.colorScheme.primary,
         );
         labelColor = color ?? theme.colorScheme.primary;
         break;
@@ -97,33 +97,33 @@ class SicklerButton extends StatelessWidget {
     }
 
     return ElevatedButton(
-      onPressed: onPressed,
-      style: style,
-      child: Center(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Visibility(
-              visible: icon != null || iconPath != null,
+            onPressed: onPressed,
+            style: style,
+            child: Center(
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  icon != null
-                      ? Icon(icon)
-                      : SvgPicture.asset(iconPath ?? "",
-                          colorFilter:
-                              ColorFilter.mode(labelColor, BlendMode.srcIn)),
-                  const Gap(8)
+                  Visibility(
+                    visible: icon != null || iconPath != null,
+                    child: Row(
+                      children: [
+                        icon != null
+                            ? Icon(icon)
+                            : SvgPicture.asset(iconPath ?? "",
+                                colorFilter: ColorFilter.mode(
+                                    labelColor, BlendMode.srcIn)),
+                        const Gap(8)
+                      ],
+                    ),
+                  ),
+                  Text(label,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: labelColor)),
                 ],
               ),
             ),
-            Text(label,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(color: labelColor)),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -60,26 +62,29 @@ class ContactCard extends StatelessWidget {
                             message:
                                 "Are you sure you want to delete this emergency contact?",
                             actions: [
-                               SicklerButton(
-                                 isChipButton:true,
+                              SicklerButton(
+                                isChipButton: true,
                                 onPressed: () {},
                                 label: "Cancel",
                                 buttonType: SicklerButtonType.text,
                               ),
                               SicklerButton(
-                                isChipButton:true,
+                                isChipButton: true,
                                 onPressed: () {
                                   ///Todo:Delete contact
                                 },
                                 label: "Delete",
                                 icon: FluentIcons.delete_16_regular,
-                                color: theme.colorScheme.error,
-                                buttonType: SicklerButtonType.text,
-
+                                color: Platform.isIOS
+                                    ? theme.colorScheme.error
+                                    : Colors.white,
+                                backgroundColor: Platform.isIOS
+                                    ? null
+                                    : theme.colorScheme.error,
+                                buttonType: Platform.isIOS
+                                    ? SicklerButtonType.text
+                                    : SicklerButtonType.primary,
                               ),
-
-
-
                             ],
                           ),
                         );

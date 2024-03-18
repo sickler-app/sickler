@@ -27,7 +27,8 @@ class SicklerAlertDialog extends StatelessWidget {
       backgroundColor: theme.scaffoldBackgroundColor,
       actionsAlignment: MainAxisAlignment.center,
       actions: actions,
-      shape: const ContinuousRectangleBorder(),
+      actionsOverflowButtonSpacing: 8,
+      scrollable: false,
       title: Text(title,
           textAlign: TextAlign.center,
           style: theme.textTheme.titleMedium!

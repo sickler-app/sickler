@@ -83,9 +83,11 @@ class CrisisHistoryWeekly extends StatelessWidget {
                   CrisisLogCard(),
                   Gap(8),
                   CrisisLogCard(),
+                Gap(64),
                 ],
               ),
             ),
+
           ],
         )
       ],
