@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:sickler/screens/emergency/components/emergency_alert_disclaimer_dialog.dart';
 
 import '../../../core/core.dart';
 import '../../global_components/global_components.dart';
@@ -45,9 +46,16 @@ class FeelingCheckupCard extends StatelessWidget {
             decoration: SicklerInputDecoration.inputDecoration(context)
                 .copyWith(hintText: "Description"),
           ),
-          const Gap(16),
+
+    const Gap( 16),
           SicklerButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => const EmergencyAlertDisclaimerDialog()
+              );
+
+            },
 
             label: "Trigger SOS Alert",
            iconPath: "assets/svg/emergency.svg",

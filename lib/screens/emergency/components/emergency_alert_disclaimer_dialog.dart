@@ -1,6 +1,5 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
@@ -11,6 +10,9 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool isDarkMode = theme.colorScheme.brightness == Brightness.dark;
+
+    ///TODO: Wrap with BackButton Listener
     return SicklerAlertDialog(
       title: "Emergency Alert",
       actions: [
@@ -19,44 +21,43 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
           label: "Cancel",
           buttonType: SicklerButtonType.outline,
           color: theme.colorScheme.error,
-          icon: FluentIcons.dismiss_square_24_regular,
-          iconPath: "assets/svg/cross.svg",
+          icon: FluentIcons.dismiss_24_regular,
         ),
-        const Gap( 16),
+        // const Gap( 16),
         SicklerButton(
           onPressed: () {},
           label: "Continue",
           buttonType: SicklerButtonType.primary,
           color: SicklerColours.white,
           backgroundColor: theme.colorScheme.error,
-          iconPath: "assets/svg/emergency.svg",
+       //   iconPath: "assets/svg/emergency.svg",
         )
       ],
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             "Emergency Alert would share the following information with your emergency contacts",
             style: theme.textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
-          const Gap( 32),
+          const Gap(32),
           const Align(
             alignment: Alignment.centerLeft,
             child: AlertDetailsText(
-              iconPath: "assets/svg/location.svg",
+              iconData: FluentIcons.location_24_regular,
               label: "Your Location",
             ),
           ),
-          const Gap( 8),
+          const Gap(8),
           const Align(
             alignment: Alignment.centerLeft,
             child: AlertDetailsText(
-              iconPath: "assets/svg/details.svg",
+              iconData: FluentIcons.apps_list_detail_24_regular,
               label: "Details about your crises",
             ),
           ),
-          const Gap( 32),
+          const Gap(32),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -69,7 +70,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
                 TextSpan(
                   text: " 6 hours, ",
                   style: theme.textTheme.bodySmall!
-                      .copyWith(color: theme.colorScheme.error),
+                      .copyWith(color: isDarkMode ? SicklerColours.red70 : theme.colorScheme.error),
                 ),
                 TextSpan(
                   text: "or until you stop sharing.",
@@ -78,7 +79,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
               ],
             ),
           ),
-          const Gap( 24),
+          const Gap(16),
         ],
       ),
     );
@@ -86,10 +87,10 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
 }
 
 class AlertDetailsText extends StatelessWidget {
-  final String iconPath;
+  final IconData iconData;
   final String label;
   const AlertDetailsText(
-      {super.key, required this.iconPath, required this.label});
+      {super.key, required this.label, required this.iconData});
 
   @override
   Widget build(BuildContext context) {
@@ -98,19 +99,17 @@ class AlertDetailsText extends StatelessWidget {
     return Row(
       children: [
         Container(
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isDarkMode ? SicklerColours.red20 : SicklerColours.red95,
+            color: isDarkMode ? theme.colorScheme.errorContainer : SicklerColours.red95,
           ),
-          child: Center(
-            child: SvgPicture.asset(
-              iconPath,
-              colorFilter:
-                  ColorFilter.mode(theme.colorScheme.error, BlendMode.srcIn),
-            ),
+          child: Icon(
+            iconData,
+            color: theme.colorScheme.error,
           ),
         ),
-        const Gap( 16),
+        const Gap(16),
         Text(
           label,
           style: theme.textTheme.bodyMedium,

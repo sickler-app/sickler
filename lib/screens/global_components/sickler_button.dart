@@ -46,36 +46,39 @@ class SicklerButton extends StatelessWidget {
     Color labelColor = theme.colorScheme.primary;
     switch (buttonType) {
       case SicklerButtonType.primary:
+        labelColor = color ?? theme.colorScheme.onPrimary;
+
         style = ElevatedButton.styleFrom(
           fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
           alignment: Alignment.center,
           backgroundColor: backgroundColor ?? theme.colorScheme.primary,
           foregroundColor: color ?? Colors.white,
         );
-        labelColor = color ?? theme.colorScheme.onPrimary;
         break;
 
       case SicklerButtonType.secondary:
+        labelColor = color ?? theme.colorScheme.onPrimaryContainer;
+
         style = ElevatedButton.styleFrom(
           fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
           backgroundColor:
               backgroundColor ?? theme.colorScheme.primaryContainer,
-          foregroundColor: color ?? theme.colorScheme.onPrimaryContainer,
+          foregroundColor: labelColor,
         );
-        labelColor = color ?? theme.colorScheme.onPrimaryContainer;
         break;
 
       case SicklerButtonType.outline:
+        labelColor = color ?? theme.colorScheme.primary;
+
         style = ElevatedButton.styleFrom(
             fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
             backgroundColor: Colors.transparent,
             foregroundColor: color ?? theme.colorScheme.primary,
             side: BorderSide(
               width: 1,
-              color: backgroundColor ?? theme.colorScheme.primary,
-            ));
+              color: labelColor,
+            ),);
 
-        labelColor = color ?? theme.colorScheme.primary;
         break;
       case SicklerButtonType.text:
         style = ElevatedButton.styleFrom(
