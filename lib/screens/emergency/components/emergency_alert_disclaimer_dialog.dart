@@ -15,24 +15,6 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
     ///TODO: Wrap with BackButton Listener
     return SicklerAlertDialog(
       title: "Emergency Alert",
-      actions: [
-        SicklerButton(
-          onPressed: () {},
-          label: "Cancel",
-          buttonType: SicklerButtonType.outline,
-          color: theme.colorScheme.error,
-          icon: FluentIcons.dismiss_24_regular,
-        ),
-        // const Gap( 16),
-        SicklerButton(
-          onPressed: () {},
-          label: "Continue",
-          buttonType: SicklerButtonType.primary,
-          color: SicklerColours.white,
-          backgroundColor: theme.colorScheme.error,
-       //   iconPath: "assets/svg/emergency.svg",
-        )
-      ],
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -65,21 +47,50 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
                 TextSpan(
                   text:
                       "Status updates and location would be shared with emergency contacts for",
-                  style: theme.textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall!.copyWith(color: SicklerColours.neutral50),
                 ),
                 TextSpan(
                   text: " 6 hours, ",
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(color: isDarkMode ? SicklerColours.red70 : theme.colorScheme.error),
+                  style: theme.textTheme.bodySmall!.copyWith(
+                      color: isDarkMode
+                          ? SicklerColours.red70
+                          : theme.colorScheme.error),
                 ),
                 TextSpan(
                   text: "or until you stop sharing.",
-                  style: theme.textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall!.copyWith(color: SicklerColours.neutral50),
                 ),
               ],
             ),
           ),
           const Gap(16),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: SicklerButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  label: "Cancel",
+                  buttonType: SicklerButtonType.outline,
+                  color: theme.colorScheme.error,
+                  icon: FluentIcons.dismiss_24_regular,
+                ),
+              ),
+              const Gap( 8),
+              Expanded(
+                child: SicklerButton(
+                  onPressed: () {},
+                  label: "Continue",
+                  buttonType: SicklerButtonType.primary,
+                  color: SicklerColours.white,
+                  backgroundColor: theme.colorScheme.error,
+                  //   iconPath: "assets/svg/emergency.svg",
+                ),
+              )
+            ],
+          )
         ],
       ),
     );
@@ -102,7 +113,9 @@ class AlertDetailsText extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isDarkMode ? theme.colorScheme.errorContainer : SicklerColours.red95,
+            color: isDarkMode
+                ? theme.colorScheme.errorContainer
+                : SicklerColours.red95,
           ),
           child: Icon(
             iconData,

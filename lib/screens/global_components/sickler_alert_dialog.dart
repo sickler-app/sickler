@@ -16,18 +16,10 @@ class SicklerAlertDialog extends StatelessWidget {
           "Cannot have both 'child' and `message` parameters simultaneously, consider removing one");
     }
     final ThemeData theme = Theme.of(context);
-    return AlertDialog.adaptive(
-      actionsPadding: const EdgeInsets.only(
-        bottom: 16,
-        left: 16,
-        right: 16,
-        top: 0,
-      ),
+    return AlertDialog(
+      contentPadding: const EdgeInsets.all(16),
       surfaceTintColor: Colors.transparent,
       backgroundColor: theme.scaffoldBackgroundColor,
-      actionsAlignment: MainAxisAlignment.center,
-      actions: actions,
-      actionsOverflowButtonSpacing: 8,
       scrollable: false,
       title: Text(title,
           textAlign: TextAlign.center,
