@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/emergency/components/emergency_alert_disclaimer_dialog.dart';
+import 'package:sickler/screens/emergency/components/dialogs/emergency_alert_no_contact_dialog.dart';
 
 import '../../../core/core.dart';
 import '../../global_components/global_components.dart';
@@ -52,7 +52,7 @@ class FeelingCheckupCard extends StatelessWidget {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => const EmergencyAlertDisclaimerDialog()
+                builder: (context) => const EmergencyAlertNoContactDialog(),
               );
 
             },

@@ -1,11 +1,10 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-class SelectContactsDialog extends StatelessWidget {
-  const SelectContactsDialog({super.key});
+class EmergencySelectContactsDialog extends StatelessWidget {
+  const EmergencySelectContactsDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,33 +13,32 @@ class SelectContactsDialog extends StatelessWidget {
       title: "Select Contacts",
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          const Gap( 32),
+
           Container(
-            width: 80,
-            height: 80,
-            decoration: const BoxDecoration(
+            width: 140,
+            height: 140,
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
+              color: theme.colorScheme.errorContainer,
             ),
           ),
-          const Gap( 32),
+          const Gap(16),
           SicklerButton(
             onPressed: () {},
             label: "Send to all contacts",
             buttonType: SicklerButtonType.primary,
             color: SicklerColours.white,
             backgroundColor: theme.colorScheme.error,
-            icon: FluentIcons.dismiss_24_regular,
-
+            iconPath: "assets/svg/emergency.svg",
           ),
-          const Gap( 12),
+          const Gap(12),
           SicklerButton(
             onPressed: () {},
             label: "Select Contacts",
             buttonType: SicklerButtonType.outline,
             color: theme.colorScheme.error,
-            icon: FluentIcons.dismiss_24_regular,
-
           ),
         ],
       ),
