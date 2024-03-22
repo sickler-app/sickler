@@ -25,13 +25,16 @@ dependencies:
   google_sign_in: ^6.1.5
   fpdart: ^1.1.0
   gap: ^3.0.1
+  fluentui_system_icons: ^1.1.231
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   build_runner: ^2.4.6
+  icon_font_generator: ^4.0.0
 
 
 # The following section is specific to Flutter packages.
@@ -41,7 +44,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  # - assets/fonts/
+   - assets/fonts/
    - assets/images/
    - assets/svg/
 
@@ -62,3 +65,6 @@ flutter:
         - asset: assets/fonts/PlusJakartaSans-Regular.ttf
         - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
         - asset: assets/fonts/PlusJakartaSans-SemiBoldItalic.ttf
+#    - family: My Icons
+#      fonts:
+#        - asset: assets/fonts/my_icons_font.otf

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/screens/emergency/components/sickler_calendar_week_selector_item.dart';
+import 'dart:math';
 
 class SicklerCalendarWeekSelector extends StatefulWidget {
   const SicklerCalendarWeekSelector({
@@ -38,39 +40,38 @@ class _SicklerCalendarWeekSelectorState
   String? selectedDay;
 
   Map<int, bool> isDaySelected = {};
+  List<bool> isEmphasized = [true, false];
 
   @override
   Widget build(BuildContext context) {
-    //Gets the seperator spacing by calculating the the width of the device and
+    //Gets the separator spacing by calculating the the width of the device and
     //subtracting the combined widths of the daySelectorItems+padding,
-    //then dividing the remaining space by 6 (6 spaces inbetween 7 objects)
-    double seperatorSpacing =
-        (MediaQuery.sizeOf(context).width - 32 - (44 * 7)) / 6;
+    //then dividing the remaining space by 6 (6 spaces between 7 objects)
+
     return SizedBox(
-      height: 44,
+      height: 80,
       child: ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             isDaySelected.putIfAbsent(index, () => false);
-            return Center(
-              child: SicklerCalendarWeekSelectorItem(
-                label: days[index].substring(0, 2),
-                onPressed: () {
-                  HapticFeedback.mediumImpact();
-                  Feedback.forTap(context);
-                  isDaySelected.update(
-                      index, (value) => !isDaySelected[index]!);
-                  selectedDay = days[index];
-                  setState(() {});
-                  widget.selectedDay.call(selectedDay);
-                },
-                isSelected: isDaySelected[index]!,
-                date: dates[index],
-              ),
+            return SicklerCalendarWeekSelectorItem(
+              label: days[index].substring(0, 2),
+              onPressed: () {
+                HapticFeedback.mediumImpact();
+                Feedback.forTap(context);
+                isDaySelected.update(index, (value) => !isDaySelected[index]!);
+                selectedDay = days[index];
+                setState(() {});
+                widget.selectedDay.call(selectedDay);
+              },
+              isSelected: isDaySelected[index]!,
+              isEmphasized: isEmphasized[Random().nextInt(2)],
+              date: dates[index],
             );
           },
-          separatorBuilder: (contex, index) {
-            return SizedBox(width: seperatorSpacing);
+          separatorBuilder: (context, index) {
+            return const Gap(8);
           },
           itemCount: days.length),
     );

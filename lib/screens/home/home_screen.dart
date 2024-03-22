@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../../core/core.dart';
 import 'components/components.dart';
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              const SizedBox(height: 64 + 16),
+              const Gap( 64 + 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -59,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 48,
               ),
               const FeelingCard(),
-              const SizedBox(height: 16),
+              const Gap( 16),
               const WaterCard(),
               const SizedBox(
                 height: 32,
@@ -71,14 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: theme.textTheme.headlineSmall,
                 ),
               ),
-              const SizedBox(height: 16),
-              const Row(
-                children: [
-                  Expanded(child: MedsReminderCard()),
-                  SizedBox(width: 16),
-                  Expanded(child: EmergencySharingCard())
-                ],
-              ),
+              const Gap( 16),
+              const MedsReminderCard(),
+              const Gap(16),
+              const EmergencySharingCard(),
               const SizedBox(
                 height: 64,
               )

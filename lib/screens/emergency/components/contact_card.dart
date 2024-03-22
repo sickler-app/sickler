@@ -1,5 +1,7 @@
+import 'dart:io';
+
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
@@ -14,98 +16,100 @@ class ContactCard extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     bool isDarkMode = theme.brightness == Brightness.dark;
     return Container(
-      width: 144,
-      padding: const EdgeInsets.only(top: 8, right: 8, left: 12, bottom: 12),
+      width: 180,
+      height: 220,
+      padding: const EdgeInsets.only(top: 0, right: 0, left: 12, bottom: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: isDarkMode ? theme.cardColor : SicklerColours.neutral95,
+        border: Border.all(
+          color: isDarkMode ? theme.cardColor : SicklerColours.neutral90,
+        ),
       ),
       child: showAddContactButton
           ? Center(
               child: IconButton.filled(
-                iconSize: 80,
-                style: IconButton.styleFrom(
-                  elevation: 0,
-                  foregroundColor: theme.cardColor,
-                ),
-                splashRadius: 40,
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  "assets/svg/plus.svg",
-                  colorFilter: ColorFilter.mode(
-                      theme.colorScheme.primary, BlendMode.srcIn),
-                ),
-              ),
+                  style: IconButton.styleFrom(
+                    fixedSize: const Size.square(100),
+                    elevation: 0,
+                    foregroundColor: theme.cardColor,
+                    backgroundColor: theme.cardColor,
+                  ),
+                  splashRadius: 40,
+                  onPressed: () {},
+                  icon: Icon(
+                    FluentIcons.add_16_regular,
+                    color: theme.colorScheme.primary,
+                  )),
             )
           : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Text(
-                      "Brother",
-                      style: theme.textTheme.bodyMedium!
-                          .copyWith(color: theme.colorScheme.primary),
-                    ),
+                    Text("Brother", style: theme.textTheme.bodyMedium),
                     const Spacer(),
                     IconButton(
-                      onPressed: () {},
-                      icon: SvgPicture.asset(
-                        "assets/svg/edit.svg",
-                        colorFilter: ColorFilter.mode(
-                            theme.colorScheme.primary, BlendMode.srcIn),
-                      ),
-                    ),
+                        onPressed: () {},
+                        icon: const Icon(FluentIcons.edit_16_regular)),
                     IconButton(
                       onPressed: () {
                         showDialog(
-                            context: context,
-                            builder: (context) => SicklerAlertDialog(
-                                  title: "Delete Contact",
-                                  actions: [
-                                    SicklerChipButton(
-                                      onPressed: () {},
-                                      label: "Cancel",
-                                      buttonType: SicklerButtonType.text,
-                                    ),
-                                    Gap(8),
-                                    SicklerChipButton(
-                                      onPressed: () {
-                                        ///Todo:Delete contact
-                                      },
-                                      label: "Delete",
-                                      backgroundColor: theme.colorScheme.error,
-                                      color: SicklerColours.white,
-                                      iconPath: "assets/svg/delete.svg",
-                                    ),
-                                  ],
-                                ));
+                          context: context,
+                          builder: (context) => SicklerAlertDialog(
+                            title: "Delete Contact",
+                            message:
+                                "Are you sure you want to delete this emergency contact?",
+                            actions: [
+                              SicklerButton(
+                                isChipButton: true,
+                                onPressed: () {},
+                                label: "Cancel",
+                                buttonType: SicklerButtonType.text,
+                              ),
+                              SicklerButton(
+                                isChipButton: true,
+                                onPressed: () {
+                                  ///Todo:Delete contact
+                                },
+                                label: "Delete",
+                                icon: FluentIcons.delete_16_regular,
+                                color: Platform.isIOS
+                                    ? theme.colorScheme.error
+                                    : Colors.white,
+                                backgroundColor: Platform.isIOS
+                                    ? null
+                                    : theme.colorScheme.error,
+                                buttonType: Platform.isIOS
+                                    ? SicklerButtonType.text
+                                    : SicklerButtonType.primary,
+                              ),
+                            ],
+                          ),
+                        );
                       },
-                      icon: SvgPicture.asset(
-                        "assets/svg/delete.svg",
-                        colorFilter: ColorFilter.mode(
-                            theme.colorScheme.error, BlendMode.srcIn),
+                      icon: Icon(
+                        FluentIcons.delete_16_regular,
+                        color: theme.colorScheme.error,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
-                CircleAvatar(
-                  radius: 40,
-                  child: Image.asset("assets/images/memoji.png"),
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  "Nuikweh",
-                  style: theme.textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.bold,
+                const Spacer(),
+                const Center(
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage("assets/images/memoji.png"),
                   ),
                 ),
-                Text("Lewis", style: theme.textTheme.bodyMedium),
-                const SizedBox(height: 12),
+                const Spacer(),
+                Text("Nuikweh Lewis", style: theme.textTheme.bodyMedium),
+                const Gap(2),
                 Text(
                   "6 77 77 77 77",
                   style: theme.textTheme.bodyMedium!
-                      .copyWith(color: theme.colorScheme.primary),
+                      .copyWith(fontWeight: FontWeight.w800),
                 ),
               ],
             ),

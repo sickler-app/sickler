@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/screens/meds/meds_details_screen.dart';
 
 import '../../../core/core.dart';
@@ -30,7 +31,7 @@ class MyMedsCard extends StatelessWidget {
                   style: theme.textTheme.bodyLarge!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 8),
+                const Gap( 8),
                 Row(
                   children: [
                     SvgPicture.asset(
@@ -38,7 +39,7 @@ class MyMedsCard extends StatelessWidget {
                       colorFilter: ColorFilter.mode(
                           theme.colorScheme.primary, BlendMode.srcIn),
                     ),
-                    const SizedBox(width: 8),
+                    const Gap( 8),
                     Text(
                       "Tablet",
                       style: theme.textTheme.bodyMedium!
@@ -62,8 +63,8 @@ class MyMedsCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 8),
-          SicklerChipButton(
+          const Gap( 8),
+           SicklerButton( isChipButton:true,
               iconPath: "assets/svg/check.svg",
               buttonType: SicklerButtonType.primary,
               onPressed: () {

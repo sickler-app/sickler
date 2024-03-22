@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:sickler/screens/emergency/components/dialogs/emergency_alert_no_contact_dialog.dart';
 
 import '../../../core/core.dart';
 import '../../global_components/global_components.dart';
@@ -12,13 +14,13 @@ class FeelingCheckupCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: theme.cardColor,
+      //  color: theme.cardColor,
       ),
       child: Column(
         children: [
           Row(
             children: [
-              const Text("How are you\n feeling today?"),
+               Text("How are you\nfeeling today?", style:  theme.textTheme.headlineSmall,),
               const Spacer(),
               RichText(
                   text: TextSpan(children: [
@@ -30,40 +32,34 @@ class FeelingCheckupCard extends StatelessWidget {
               ]))
             ],
           ),
-          const SizedBox(height: 24),
+          const Gap( 24),
+          Row(
+            children: [
+              Text("No Pain", style: theme.textTheme.bodySmall,), const Spacer(),
+              Text("Extreme Pain", style: theme.textTheme.bodySmall,)
+            ],
+          ),
           Slider(value: .7, onChanged: (value) {}),
-          const SizedBox(height: 24),
+          const Gap( 24),
           TextFormField(
-            maxLines: 3,
+            maxLines: 4,
             decoration: SicklerInputDecoration.inputDecoration(context)
                 .copyWith(hintText: "Description"),
           ),
-          const SizedBox(height: 24),
+
+    const Gap( 16),
           SicklerButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => const EmergencyAlertNoContactDialog(),
+              );
+
+            },
+
             label: "Trigger SOS Alert",
-            showIcon: true,
-            iconPath: "assets/svg.emergency.svg",
+           iconPath: "assets/svg/emergency.svg",
           ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SicklerChipButton(
-                onPressed: () {},
-                label: "Cancel",
-                buttonType: SicklerButtonType.primary,
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              SicklerChipButton(
-                onPressed: () {},
-                label: "Cancel",
-                buttonType: SicklerButtonType.outline,
-              ),
-            ],
-          )
         ],
       ),
     );

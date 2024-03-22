@@ -1,5 +1,7 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/meds/components/components.dart';
@@ -24,31 +26,32 @@ class MedsScreen extends StatelessWidget {
                     "Upcoming",
                     style: theme.textTheme.headlineSmall,
                   ),
-                  const SizedBox(height: 16),
+                  const Gap( 16),
                   const MedsScreenReminderCard(
                     isCurrent: true,
                   ),
-                  const SizedBox(height: 12),
+                  const Gap( 12),
                   const MedsScreenReminderCard(
                     isCurrent: false,
                   ),
-                  const SizedBox(height: 48),
+                  const Gap( 48),
                   Text(
                     "My Medications",
                     style: theme.textTheme.headlineSmall,
                   ),
-                  const SizedBox(height: 16),
+                  const Gap( 16),
                   const MyMedsCard(),
-                  const SizedBox(height: 12),
+                  const Gap( 12),
                   const MyMedsCard(),
-                  const SizedBox(height: 12),
+                  const Gap( 12),
                   const MyMedsCard(),
                   const SizedBox(
                     height: 32,
                   ),
                   SicklerButton(
-                    showIcon: true,
+
                     iconPath: "assets/svg/plus.svg",
+                    icon: FluentIcons.add_24_regular,
                     onPressed: () {
                       showAdaptiveDialog(
                         context: context,
@@ -56,14 +59,15 @@ class MedsScreen extends StatelessWidget {
                           title: "Delete Log?",
                           message: "Are you sure you want to delete this log?",
                           actions: [
-                            SicklerChipButton(
-                                showIcon: true,
+                             SicklerButton( isChipButton:true,
+
+                                icon: FluentIcons.dismiss_20_regular,
                                 iconPath: "assets/svg/cross.svg",
                                 buttonType: SicklerButtonType.primary,
                                 onPressed: () {},
                                 label: "Cancel"),
-                            SicklerChipButton(
-                                showIcon: true,
+                             SicklerButton( isChipButton:true,
+                                icon: FluentIcons.delete_20_regular,
                                 iconPath: "assets/svg/delete.svg",
                                 color: theme.colorScheme.error,
                                 buttonType: SicklerButtonType.outline,
@@ -99,7 +103,7 @@ class MedsScreen extends StatelessWidget {
                       onNextPressed: () {},
                       onPreviousPressed: () {},
                       label: "Today"),
-                  const SizedBox(height: 12),
+                  const Gap( 12),
                   const MedsHistoryItem(
                     mode: MedsHistoryMode.weekly,
                   ),

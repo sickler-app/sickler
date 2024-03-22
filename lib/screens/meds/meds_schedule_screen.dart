@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/meds/components/sickler_calendar_day_selector.dart';
 import 'package:sickler/screens/user_info/components/sickler_radio.dart';
@@ -66,7 +67,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                                             context)
                                         .copyWith(hintText: "1")),
                           ),
-                          const SizedBox(width: 16),
+                          const Gap( 16),
                           Expanded(
                             child: TextFormField(
                               controller: repeatIntervalController,
@@ -88,13 +89,13 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                           const Spacer(),
                         ],
                       ),
-                      const SizedBox(height: 24),
+                      const Gap( 24),
                       SicklerCalendarDaySelector(selectedDays: (selectedDay) {
                         ///Todo:Add the selected day to state;
                       }),
-                      const SizedBox(height: 24),
+                      const Gap( 24),
                       const Text("Ends on"),
-                      const SizedBox(height: 24),
+                      const Gap( 24),
                       SicklerRadio<MedsScheduleEndingState>(
                         showBorder: false,
                         unselectedBackgroundColor: Colors.transparent,
@@ -108,7 +109,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                           });
                         },
                       ),
-                      const SizedBox(height: 12),
+                      const Gap( 12),
                       Row(
                         children: [
                           Expanded(
@@ -146,7 +147,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                           const Spacer(),
                         ],
                       ),
-                      const SizedBox(height: 12),
+                      const Gap( 12),
                       Row(
                         children: [
                           Expanded(
@@ -194,7 +195,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                             ///Todo: save data, add to state and pop
                           },
                           label: "Continue"),
-                      const SizedBox(height: 64),
+                      const Gap( 64),
                     ],
                   ),
                 ),

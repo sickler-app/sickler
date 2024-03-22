@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/emergency/components/components.dart';
 
@@ -17,49 +18,58 @@ class EmergencyScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SicklerAppBar(pageTitle: "Emergency"),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: [
-                    const EmergencyLocationSharingCard(),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    const FeelingCheckupCard(),
-                    const SizedBox(height: 32),
-                    Row(
-                      children: [
-                        Text(
-                          "My Contacts",
-                          style: theme.textTheme.headlineSmall,
-                        ),
-                        const Spacer(),
-                        SicklerChipButton(
-                          onPressed: () {},
-                          label: "Add Contact",
-                          buttonType: SicklerButtonType.text,
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Expanded(
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: const [
-                          ContactCard(
-                            showAddContactButton: true,
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const EmergencyLocationSharingCard(),
+                      const Gap(24),
+                      const FeelingCheckupCard(),
+                      const Gap(32),
+                      Row(
+                        children: [
+                          Text(
+                            "My Contacts",
+                            style: theme.textTheme.headlineSmall,
                           ),
-                          SizedBox(width: 12),
-                          ContactCard(),
-                          SizedBox(width: 12),
-                          ContactCard(),
+                          const Spacer(),
+                           SicklerButton( isChipButton:true,
+                            onPressed: () {},
+                            label: "Add Contact",
+                            buttonType: SicklerButtonType.text,
+                            iconPath: "assets/svg/emergency.svg",
+                            color: Colors.white,
+                          )
                         ],
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+                const Gap(16),
+                SizedBox(
+                  height: 240,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    children: const [
+                      Gap(16),
+                      ContactCard(
+                        showAddContactButton: true,
+                      ),
+                      Gap(12),
+                      ContactCard(),
+                      Gap(12),
+                      ContactCard(),
+                      Gap(16),
+                    ],
+                  ),
+                ),
+                const Gap(64),
+              ],
             )
           ],
         ),

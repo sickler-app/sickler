@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
 
@@ -47,7 +48,7 @@ class _MedsTypeItemState extends State<MedsTypeItem>
         CurvedAnimation(parent: animationController, curve: Curves.easeInOut));
 
     super.initState();
-  }r
+  }
 
   @override
   void dispose() {
@@ -188,7 +189,7 @@ class _MedsTypeItemState extends State<MedsTypeItem>
             );
           },
         ),
-        const SizedBox(height: 8),
+        const Gap( 8),
         Text(
           widget.label ?? _label,
           textAlign: TextAlign.center,

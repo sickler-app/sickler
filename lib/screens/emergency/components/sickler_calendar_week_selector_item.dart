@@ -57,6 +57,11 @@ class _SicklerCalendarWeekSelectorItemState
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     bool isDarkMode = theme.brightness == Brightness.dark;
+    final Size size = MediaQuery.sizeOf(context);
+    //Assume a separator spacing of 8,
+    double itemSpacing = 8;
+    double itemWidth =
+        (size.width - 32 - (itemSpacing * 6)) / 7; // Item width is 44.71
     return AnimatedBuilder(
       animation: _radiusAnimation,
       builder: (context, child) {
@@ -72,7 +77,7 @@ class _SicklerCalendarWeekSelectorItemState
           splashFactory: InkSparkle.splashFactory,
           borderRadius: BorderRadius.circular(_radiusAnimation.value),
           child: Ink(
-            height: 44,
+            width: itemWidth,
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(_radiusAnimation.value),
@@ -80,40 +85,45 @@ class _SicklerCalendarWeekSelectorItemState
                   ? theme.colorScheme.primary
                   : theme.cardColor,
               border: widget.isEmphasized
-                  ? null
-                  : Border.all(color: theme.colorScheme.primary),
+                  ? Border.all(color: theme.colorScheme.primary)
+                  : null,
             ),
-            child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(4),
               child: Column(
                 children: [
+                  const Gap(4),
                   Text(
                     widget.label,
                     style: theme.textTheme.bodyMedium!.copyWith(
                         color: widget.isSelected
                             ? theme.scaffoldBackgroundColor
                             : SicklerColours.neutral50,
-                        fontWeight: widget.isSelected
-                            ? FontWeight.w800
-                            : FontWeight.normal),
+                    ),
                   ),
-                  Gap(8),
-                  Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: widget.isSelected
-                            ? theme.scaffoldBackgroundColor
-                            : Colors.transparent),
-                    child: Text(
-                      widget.date,
-                      style: theme.textTheme.bodyMedium!.copyWith(
-                          color: widget.isSelected || widget.isEmphasized
-                              ? theme.colorScheme.primary
-                              : (isDarkMode
-                                  ? SicklerColours.white
-                                  : SicklerColours.neutral50),
-                          fontWeight: widget.isSelected
-                              ? FontWeight.w800
-                              : FontWeight.normal),
+                  const Gap(8),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: widget.isSelected
+                              ? theme.scaffoldBackgroundColor
+                              : Colors.transparent),
+                      child: Center(
+                        child: Text(
+                          widget.date,
+                        //  "27",
+                          style: theme.textTheme.bodyMedium!.copyWith(
+                              color: widget.isSelected || widget.isEmphasized
+                                  ? theme.colorScheme.primary
+                                  : (isDarkMode
+                                      ? SicklerColours.white
+                                      : SicklerColours.neutral50),
+                              fontWeight: widget.isSelected
+                                  ? FontWeight.w800
+                                  : FontWeight.normal),
+                        ),
+                      ),
                     ),
                   )
                 ],

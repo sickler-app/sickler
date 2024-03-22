@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 import '../../core/core.dart';
@@ -45,7 +46,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                 SicklerAppBar(
                   pageTitle: "Personal\nInfo",
                   actions: [
-                    SicklerChipButton(
+                     SicklerButton( isChipButton:true,
                       onPressed: () {
                         //Todo: Skip Page
                       },
@@ -68,12 +69,12 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               colorFilter: ColorFilter.mode(
                                   theme.colorScheme.primary, BlendMode.srcIn),
                             ),
-                            const SizedBox(width: 4),
+                            const Gap( 4),
                             Text("Your Height",
                                 style: theme.textTheme.bodyMedium),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        const Gap( 8),
                         TextFormField(
                           controller: heightController,
                           keyboardType: TextInputType.number,
@@ -81,7 +82,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               SicklerInputDecoration.inputDecoration(context)
                                   .copyWith(hintText: "Height"),
                         ),
-                        const SizedBox(height: 24),
+                        const Gap( 24),
                         Row(
                           children: [
                             SvgPicture.asset(
@@ -89,12 +90,12 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               colorFilter: ColorFilter.mode(
                                   theme.colorScheme.primary, BlendMode.srcIn),
                             ),
-                            const SizedBox(width: 4),
+                            const Gap( 4),
                             Text("Your Weight",
                                 style: theme.textTheme.bodyMedium),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        const Gap( 8),
                         TextFormField(
                           controller: weightController,
                           keyboardType: TextInputType.number,
@@ -104,7 +105,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             hintText: "Weight",
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const Gap( 24),
                         Row(
                           children: [
                             SvgPicture.asset(
@@ -112,12 +113,12 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               colorFilter: ColorFilter.mode(
                                   theme.colorScheme.primary, BlendMode.srcIn),
                             ),
-                            const SizedBox(width: 4),
+                            const Gap( 4),
                             Text("Your Genotype",
                                 style: theme.textTheme.bodyMedium),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        const Gap( 8),
 
                         SizedBox(
                           height: 72,
@@ -146,7 +147,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             },
                             separatorBuilder:
                                 (BuildContext context, int index) {
-                              return const SizedBox(width: 16);
+                              return const Gap( 16);
                             },
                           ),
                         ),
@@ -167,7 +168,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                           ],
                         ),
 
-                        const SizedBox(height: 32),
+                        const Gap( 32),
                         const Spacer(),
 
                         ///Buttons
@@ -177,7 +178,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             },
                             label: "Continue"),
 
-                        const SizedBox(height: 64)
+                        const Gap( 64)
                       ],
                     ),
                   ),

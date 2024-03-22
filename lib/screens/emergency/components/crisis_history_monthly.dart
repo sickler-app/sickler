@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-import 'components.dart';
 
 class CrisisHistoryMonthly extends StatelessWidget {
   const CrisisHistoryMonthly({super.key});
@@ -11,13 +10,15 @@ class CrisisHistoryMonthly extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           "Monthly",
           style:
               theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
         ),
-        Gap(16),
+
         RichText(
           text: TextSpan(
             children: [
@@ -27,20 +28,19 @@ class CrisisHistoryMonthly extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.w800),
               ),
               TextSpan(
-                text: "Crises events this month",
-                style: theme.textTheme.headlineMedium!
-                    .copyWith(fontWeight: FontWeight.w800),
+                text: " Crises events this month",
+                style: theme.textTheme.bodyMedium,
               ),
             ],
           ),
         ),
-        Gap(32),
+        const Gap(24),
         SicklerDateSwitcher(
             onNextPressed: () {},
             onPreviousPressed: () {},
             label: "November, 2023"),
 
-        Gap(32),
+        const Gap(24),
 
         CalendarDatePicker(
           initialDate: DateTime(9),
@@ -49,7 +49,7 @@ class CrisisHistoryMonthly extends StatelessWidget {
           onDateChanged: (DateTime date) {},
         ),
 
-        ///Todo: Put Calendar Widget here
+        ///Todo: Rebuild Calendar Widget here
       ],
     );
   }

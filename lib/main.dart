@@ -18,6 +18,10 @@ class MyApp extends StatelessWidget {
         theme: SicklerThemeData.lightTheme,
         darkTheme: SicklerThemeData.darkTheme,
         themeMode: ThemeMode.system,
+        themeAnimationStyle: AnimationStyle(
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 300),
+        ),
         home: const EmergencyScreen());
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 import '../../core/core.dart';
@@ -57,7 +58,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Full Names", style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        const Gap( 8),
                         TextFormField(
                           controller: nameController,
                           keyboardType: TextInputType.name,
@@ -65,9 +66,9 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                               SicklerInputDecoration.inputDecoration(context)
                                   .copyWith(hintText: "Email"),
                         ),
-                        const SizedBox(height: 24),
+                        const Gap( 24),
                         Text("Age", style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        const Gap( 8),
                         TextFormField(
                           readOnly: true,
                           showCursor: true,
@@ -102,9 +103,9 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                                     ));
                           },
                         ),
-                        const SizedBox(height: 24),
+                        const Gap( 24),
                         Text("Address", style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        const Gap( 8),
                         TextFormField(
                           controller: addressController,
                           keyboardType: TextInputType.streetAddress,
@@ -114,11 +115,11 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                             hintText: "Address",
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const Gap( 24),
                         Text("Sex", style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        const Gap( 8),
 
-                        const SizedBox(height: 16),
+                        const Gap( 16),
                         Row(
                           children: [
                             Expanded(
@@ -133,7 +134,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                                 },
                               ),
                             ),
-                            const SizedBox(width: 16),
+                            const Gap( 16),
                             Expanded(
                               child: SicklerRadio<Gender>(
                                 label: "Male",
@@ -148,7 +149,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 32),
+                        const Gap( 32),
                         const Spacer(),
 
                         ///Buttons
@@ -158,7 +159,7 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
                             },
                             label: "Continue"),
 
-                        const SizedBox(height: 64),
+                        const Gap( 64),
                       ],
                     ),
                   ),
