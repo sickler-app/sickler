@@ -8,11 +8,15 @@ class SicklerChip extends StatefulWidget {
     this.onSelected,
     required this.label,
     this.chipType = SicklerChipType.filter,
+    this.color,
+    this.backgroundColor,
   });
 
   final Function(bool)? onSelected;
   final SicklerChipType chipType;
   final String label;
+  final Color? color;
+  final Color? backgroundColor;
 
   @override
   State<SicklerChip> createState() => _SicklerChipState();
@@ -31,9 +35,8 @@ class _SicklerChipState extends State<SicklerChip> {
     final ThemeData theme = Theme.of(context);
     bool isDarkMode = theme.brightness == Brightness.dark;
     Color selectedLabelColor = SicklerColours.purple20;
-    Color unselectedLabelColor = !isDarkMode
-        ? SicklerColours.neutral30
-        : SicklerColours.white;
+    Color unselectedLabelColor =
+        !isDarkMode ? SicklerColours.neutral30 : SicklerColours.white;
     return widget.chipType == SicklerChipType.filter
         ? FilterChip(
             side: labelSelected
@@ -60,12 +63,12 @@ class _SicklerChipState extends State<SicklerChip> {
         : Chip(
             //side: BorderSide(width: 1, color: theme.colorScheme.primary),
             backgroundColor: !isDarkMode
-                ? SicklerColours.purple90
-                : theme.colorScheme.primary,
+                ? widget.backgroundColor ?? SicklerColours.purple90
+                : widget.backgroundColor ?? theme.colorScheme.primary,
             label: Text(
               widget.label,
               style: theme.textTheme.bodyMedium!
-                  .copyWith(color: SicklerColours.purple10),
+                  .copyWith(color: widget.color ?? SicklerColours.purple10),
             ),
           );
   }
