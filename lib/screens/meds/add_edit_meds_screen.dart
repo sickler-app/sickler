@@ -1,5 +1,7 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 import '../../core/core.dart';
 import '../global_components/global_components.dart';
@@ -40,7 +42,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                 pageTitle:
                     widget.isEditing ? "Edit\nMedication" : "Add\nMedication",
                 actions: [
-                  SicklerChipButton(
+                   SicklerButton( isChipButton:true,
                     onPressed: () {
                       //Todo: Skip Page
                     },
@@ -55,12 +57,12 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: 16),
+                    const Gap( 16),
                     Text(
                       "Name",
                       style: theme.textTheme.bodyMedium,
                     ),
-                    const SizedBox(height: 12),
+                    const Gap( 12),
                     TextFormField(
                       controller: nameController,
                       decoration:
@@ -76,12 +78,12 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         }
                       },
                     ),
-                    const SizedBox(height: 16),
+                    const Gap( 16),
                     Text(
                       "Description",
                       style: theme.textTheme.bodyMedium,
                     ),
-                    const SizedBox(height: 12),
+                    const Gap( 12),
                     TextFormField(
                       maxLines: 3,
                       controller: descriptionController,
@@ -91,16 +93,16 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         hintText: "Description",
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const Gap( 24),
                     const Text("What type of medication are you taking?"),
-                    const SizedBox(height: 12),
+                    const Gap( 12),
                     MedicationTypeSelector(selectedMedication:
                         (MedicationType selectedMedicationType) {
                       ///Todo: Add selected Medication to state
                     }),
-                    const SizedBox(height: 24),
+                    const Gap( 24),
                     const Text("What's the dose of your medication "),
-                    const SizedBox(height: 12),
+                    const Gap( 12),
                     Wrap(
                       direction: Axis.horizontal,
                       spacing: 12,
@@ -154,10 +156,10 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 24),
+                    const Gap( 24),
                     const Text(
                         "How often do you take your medication in a day?"),
-                    const SizedBox(height: 12),
+                    const Gap( 12),
                     Wrap(
                       direction: Axis.horizontal,
                       spacing: 12,
@@ -185,7 +187,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 24),
+                    const Gap( 24),
                     Text(
                       "What time(s) do you take your medication?",
                       style: theme.textTheme.bodyMedium,
@@ -246,10 +248,10 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         )
                       ],
                     ),
-                    const SizedBox(height: 24),
+                    const Gap( 24),
                     // const Text(
                     //     "How long have you been taking this medication?"),
-                    // const SizedBox(height: 12),
+                    // Gap( 12),
                     // Wrap(
                     //   direction: Axis.horizontal,
                     //   spacing: 12,
@@ -298,7 +300,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                             })
                       ],
                     ),
-                    const SizedBox(height: 12),
+                    const Gap( 12),
                     Visibility(
                       visible: !isTakingMedsPermanently,
                       child: Row(
@@ -308,10 +310,11 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                                   style: theme.textTheme.bodyMedium)
                               : const SizedBox(),
                           widget.isEditing ? const Spacer() : const SizedBox(),
-                          SicklerChipButton(
+                           SicklerButton( isChipButton:true,
                               buttonType: SicklerButtonType.secondary,
-                              showIcon: true,
+
                               onPressed: () {},
+                              icon:    FluentIcons.calendar_20_regular,
                               label: widget.isEditing
                                   ? "12/05/2023"
                                   : "Select End Date",
@@ -319,17 +322,16 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 32),
+                    const Gap( 32),
                     SicklerButton(
                         onPressed: () {},
                         label: widget.isEditing
                             ? "Save Medication"
                             : "Add Medication",
-                        showIcon: true,
-                        iconPath: "assets/svg/check.svg"),
+                        icon: FluentIcons.check_24_regular),
                     Visibility(
                         visible: !widget.isEditing,
-                        child: const SizedBox(height: 16)),
+                        child: const Gap( 16)),
                     Visibility(
                       visible: !widget.isEditing,
                       child: SicklerButton(

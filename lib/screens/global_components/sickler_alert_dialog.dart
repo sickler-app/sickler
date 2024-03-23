@@ -3,28 +3,27 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 class SicklerAlertDialog extends StatelessWidget {
   const SicklerAlertDialog(
-      {super.key, this.actions, required this.title, this.message});
+      {super.key, this.actions, required this.title, this.message, this.child});
   final List<Widget>? actions;
   final String title;
   final String? message;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
+    if (child != null && message != null) {
+      throw ErrorHint(
+          "Cannot have both 'child' and `message` parameters simultaneously, consider removing one");
+    }
     final ThemeData theme = Theme.of(context);
-    return AlertDialog.adaptive(
-      actionsPadding: const EdgeInsets.only(
-        bottom: 16,
-        left: 24,
-        right: 24,
-        top: 0,
-      ),
-      surfaceTintColor: theme.scaffoldBackgroundColor,
+    return AlertDialog(
+      contentPadding: const EdgeInsets.all(16),
+      surfaceTintColor: Colors.transparent,
       backgroundColor: theme.scaffoldBackgroundColor,
-      actionsAlignment: MainAxisAlignment.center,
-      actions: actions,
+      scrollable: false,
       title: Text(title,
           textAlign: TextAlign.center,
-          style: theme.textTheme.titleLarge!
+          style: theme.textTheme.titleMedium!
               .copyWith(fontWeight: FontWeight.bold)),
       content: message != null
           ? Text(
@@ -32,7 +31,7 @@ class SicklerAlertDialog extends StatelessWidget {
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium!.copyWith(height: 1.5),
             )
-          : null,
+          : child,
     )
         .animate()
         .slideY(

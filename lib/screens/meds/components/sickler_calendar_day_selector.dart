@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sickler/screens/meds/components/day_of_week_item.dart';
+import 'package:gap/gap.dart';
+import 'package:sickler/screens/meds/components/sickler_calendar_day_selector_item.dart';
 
-class DayOfWeekSelector extends StatefulWidget {
-  const DayOfWeekSelector({super.key, required this.selectedDays});
+class SicklerCalendarDaySelector extends StatefulWidget {
+  const SicklerCalendarDaySelector({super.key, required this.selectedDays});
   final void Function(List<String> selectedDays) selectedDays;
 
   @override
-  State<DayOfWeekSelector> createState() => _DayOfWeekSelectorState();
+  State<SicklerCalendarDaySelector> createState() =>
+      _SicklerCalendarDaySelectorState();
 }
 
-class _DayOfWeekSelectorState extends State<DayOfWeekSelector> {
+class _SicklerCalendarDaySelectorState
+    extends State<SicklerCalendarDaySelector> {
   final List<String> days = [
     "Monday",
     "Tuesday",
@@ -39,7 +42,7 @@ class _DayOfWeekSelectorState extends State<DayOfWeekSelector> {
           itemBuilder: (context, index) {
             isDaySelected.putIfAbsent(index, () => false);
             return Center(
-              child: DayOfWeekItem(
+              child: SicklerCalendarDaySelectorItem(
                 label: days[index].substring(0, 1).toUpperCase(),
                 onPressed: () {
                   HapticFeedback.mediumImpact();
@@ -61,8 +64,8 @@ class _DayOfWeekSelectorState extends State<DayOfWeekSelector> {
               ),
             );
           },
-          separatorBuilder: (contex, index) {
-            return SizedBox(width: seperatorSpacing);
+          separatorBuilder: (context, index) {
+            return Gap( seperatorSpacing);
           },
           itemCount: days.length),
     );

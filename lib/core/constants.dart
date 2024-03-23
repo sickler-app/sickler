@@ -90,8 +90,8 @@ class SicklerColours {
   static const Color green60 = Color(0xFF00A661);
   static const Color green70 = Color(0xFF00C473);
   static const Color green80 = Color(0xFF1CE288);
-  static const Color green90 = Color(0xFF59FFA4);
-  static const Color green95 = Color(0xFFC2FFD2);
+  static const Color green90 = Color(0xFF90FFC2);
+  static const Color green95 = Color(0xFFD0FFDD);
   static const Color green99 = Color(0xFFF5FFF4);
 
   ///-----------Red---------///
@@ -178,84 +178,84 @@ class SicklerTextStyles {
   static TextStyle headlineLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 32,
-    height: 1,
+  //  height: 1,
   );
   static TextStyle headlineMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 28,
-    height: 1,
+ //   height: 1,
   );
   static TextStyle headlineSmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 24,
-    height: 1,
+ //   height: 1,
   );
 
   ///---Title---///
   static TextStyle titleLargeBold = const TextStyle(
     fontWeight: FontWeight.w800,
     fontSize: 22,
-    height: 1,
+ //   height: 1,
   );
   static TextStyle titleLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 22,
-    height: 1,
+  //  height: 1,
   );
 
   static TextStyle titleMediumBold = const TextStyle(
     fontWeight: FontWeight.w800,
     fontSize: 16,
-    height: 1,
+ //   height: 1,
   );
   static TextStyle titleMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 16,
-    height: 1,
+  //  height: 1,
   );
 
   static TextStyle titleSmallBold = const TextStyle(
     fontWeight: FontWeight.w800,
     fontSize: 14,
-    height: 1,
+  //  height: 1,
   );
   static TextStyle titleSmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 14,
-    height: 1,
+ //   height: 1,
   );
 
   ///---Body---///
   static TextStyle bodyLargeBold = const TextStyle(
     fontWeight: FontWeight.w800,
     fontSize: 16,
-    height: 1,
+ //   height: 1,
   );
   static TextStyle bodyLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 16,
-    height: 1,
+  //  height: 1,
   );
 
   static TextStyle bodyMediumBold = const TextStyle(
     fontWeight: FontWeight.w800,
     fontSize: 14,
-    height: 1,
+  //  height: 1,
   );
   static TextStyle bodyMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 14,
-    height: 1,
+  //  height: 1,
   );
 
   static TextStyle bodySmallBold = const TextStyle(
     fontWeight: FontWeight.w800,
     fontSize: 12,
-    height: 1,
+ //   height: 1,
   );
   static TextStyle bodySmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 12,
-    height: 1,
+  //  height: 1,
   );
 }

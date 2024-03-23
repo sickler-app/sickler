@@ -1,4 +1,6 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
 import '../../global_components/global_components.dart';
@@ -46,7 +48,7 @@ class _FeelingCardState extends State<FeelingCard> {
               ),
             ],
           ),
-          const SizedBox(height: 24),
+          const Gap( 24),
           Row(children: [
             Text(
               "No Pain",
@@ -58,7 +60,7 @@ class _FeelingCardState extends State<FeelingCard> {
               style: theme.textTheme.bodySmall,
             )
           ]),
-          const SizedBox(height: 12),
+          const Gap( 12),
           Slider(
               activeColor: theme.colorScheme.primary,
               inactiveColor: SicklerColours.neutral90,
@@ -70,20 +72,21 @@ class _FeelingCardState extends State<FeelingCard> {
                   sliderValue = value;
                 });
               }),
-          const SizedBox(height: 16),
+          const Gap( 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SicklerChipButton(
+               SicklerButton( isChipButton:true,
                   onPressed: () {},
                   label: "Cancel",
                   buttonType: SicklerButtonType.outline),
-              const SizedBox(width: 16),
-              SicklerChipButton(
+              const Gap( 16),
+               SicklerButton( isChipButton:true,
                   onPressed: () {},
                   label: "Save",
                   iconPath: "assets/svg/check.svg",
-                  showIcon: true,
+                  icon: FluentIcons.check_20_regular,
+
                   buttonType: SicklerButtonType.primary),
             ],
           ),

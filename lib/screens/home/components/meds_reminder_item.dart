@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
 
@@ -24,7 +25,7 @@ class MedsReminderItem extends StatelessWidget {
             style: theme.textTheme.bodyMedium!
                 .copyWith(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
+          const Gap( 8),
           Align(
             alignment: Alignment.centerRight,
             child: Text(

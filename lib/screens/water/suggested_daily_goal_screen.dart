@@ -1,4 +1,6 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
@@ -23,7 +25,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
             showTitle: false,
             pageTitle: "Your daily goal",
             actions: [
-              SicklerChipButton(
+               SicklerButton( isChipButton:true,
                   onPressed: () {},
                   label: "Skip",
                   buttonType: SicklerButtonType.text),
@@ -33,7 +35,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
             "Your daily goal",
             style: theme.textTheme.displaySmall,
           ),
-          const SizedBox(height: 24),
+          const Gap( 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -41,11 +43,11 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium),
           ),
-          const SizedBox(height: 64),
+          const Gap( 64),
           Text("$dailyGoal ml",
               style: theme.textTheme.displaySmall!
                   .copyWith(fontWeight: FontWeight.w800)),
-          const SizedBox(height: 24),
+          const Gap( 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -84,11 +86,10 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
                     );
                   },
                   label: "Change Goal",
-                  showIcon: true,
-                  iconPath: "assets/svg/edit.svg",
+                  icon: FluentIcons.edit_24_regular,
                   buttonType: SicklerButtonType.outline,
                 ),
-                const SizedBox(height: 16),
+                const Gap( 16),
                 SicklerButton(
                   onPressed: () {},
                   label: "Accept Goal & Continue",
@@ -96,7 +97,7 @@ class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 64)
+          const Gap( 64)
         ],
       ),
     );

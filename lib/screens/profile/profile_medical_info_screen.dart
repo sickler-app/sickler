@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 import '../../core/core.dart';
 import '../global_components/global_components.dart';
 
-class MedicalInfoScreen extends StatefulWidget {
-  const MedicalInfoScreen({super.key});
+class ProfileMedicalInfoScreen extends StatefulWidget {
+  const ProfileMedicalInfoScreen({super.key});
 
   @override
-  State<MedicalInfoScreen> createState() => _MedicalInfoScreenState();
+  State<ProfileMedicalInfoScreen> createState() =>
+      _ProfileMedicalInfoScreenState();
 }
 
-class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
+class _ProfileMedicalInfoScreenState extends State<ProfileMedicalInfoScreen> {
   bool labelSelected = false;
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,8 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
             SicklerAppBar(
               pageTitle: "Medical\nInfo",
               actions: [
-                SicklerChipButton(
+                SicklerButton(
+                  isChipButton: true,
                   onPressed: () {
                     //Todo: Skip Page
                   },
@@ -45,7 +48,7 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                     style: theme.textTheme.bodyLarge!
                         .copyWith(fontWeight: FontWeight.w800),
                   ),
-                  const SizedBox(height: 16),
+                  const Gap(16),
                   Text(
                     "How often do you experience a Sickle Cell crises?",
                     style: theme.textTheme.bodyMedium,
@@ -73,7 +76,7 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  const Gap(16),
                   Text(
                     "Pain Severity?",
                     style: theme.textTheme.bodyMedium,
@@ -81,13 +84,13 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
 
                   ///Todo: Make a Sickler Slider component
                   Slider(min: 0, max: 10, value: 7, onChanged: (value) {}),
-                  const SizedBox(height: 24),
+                  const Gap(24),
                   Text(
                     "Allergies",
                     style: theme.textTheme.bodyLarge!
                         .copyWith(fontWeight: FontWeight.w800),
                   ),
-                  const SizedBox(height: 12),
+                  const Gap(12),
 
                   TextFormField(
                     decoration: SicklerInputDecoration.inputDecoration(context)
@@ -108,7 +111,7 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const Gap(12),
                   const Wrap(
                     direction: Axis.horizontal,
                     spacing: 12,
@@ -128,13 +131,13 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
+                  const Gap(24),
                   Text(
                     "Medical Conditions",
                     style: theme.textTheme.bodyLarge!
                         .copyWith(fontWeight: FontWeight.w800),
                   ),
-                  const SizedBox(height: 12),
+                  const Gap(12),
 
                   TextFormField(
                     decoration: SicklerInputDecoration.inputDecoration(context)
@@ -155,7 +158,7 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const Gap(12),
                   const Wrap(
                     direction: Axis.horizontal,
                     spacing: 12,
@@ -171,11 +174,9 @@ class _MedicalInfoScreenState extends State<MedicalInfoScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 32),
+                  const Gap(32),
                   SicklerButton(onPressed: () {}, label: "Continue"),
-                  const SizedBox(
-                    height: 64,
-                  )
+                  const Gap(64)
                 ],
               ),
             ),

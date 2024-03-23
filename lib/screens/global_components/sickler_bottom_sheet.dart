@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import 'global_components.dart';
 
@@ -26,7 +27,7 @@ class SicklerBottomSheet extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 12),
+            const Gap( 12),
             Container(
               height: 6,
               width: 42,
@@ -34,7 +35,7 @@ class SicklerBottomSheet extends StatelessWidget {
                   color: theme.cardColor,
                   borderRadius: BorderRadius.circular(8)),
             ),
-            const SizedBox(height: 12),
+            const Gap( 12),
             Text(title,
                 style: theme.textTheme.titleMedium!
                     .copyWith(fontWeight: FontWeight.w800)),
@@ -42,7 +43,7 @@ class SicklerBottomSheet extends StatelessWidget {
               height: 16,
             ),
             child,
-            const SizedBox(height: 32),
+            const Gap( 32),
             SicklerButton(onPressed: onPressed, label: buttonLabel),
             const SizedBox(
               height: 64,
