@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/meds/components/sickler_calendar_day_selector.dart';
-import 'package:sickler/screens/user_info/components/sickler_radio.dart';
+import 'package:sickler/screens/profile/components/sickler_radio.dart';
 
 import '../../core/core.dart';
 
