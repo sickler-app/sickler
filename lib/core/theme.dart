@@ -119,7 +119,7 @@ class SicklerThemeData {
       secondaryContainer: SicklerColours.orange95,
       error: SicklerColours.red50,
       onError: SicklerColours.white,
-      errorContainer: SicklerColours.red90,
+      errorContainer: SicklerColours.red95,
       onErrorContainer: SicklerColours.red10,
     ),
   );
