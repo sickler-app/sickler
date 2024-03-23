@@ -1,7 +1,9 @@
 name: Analyze, Tests, and Builds for Sickler
 on:
   pull_request:
-    branches: ["main", "development"]
+    branches:
+      - main
+      - development
 
 jobs:
 
