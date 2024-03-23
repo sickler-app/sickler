@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
-import 'package:sickler/screens/profile/profile_screen.dart';
+import 'package:sickler/screens/profile/settings_screen.dart';
+
 
 
 void main() {
@@ -22,6 +23,6 @@ class MyApp extends StatelessWidget {
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 300),
         ),
-        home: const ProfileScreen());
+        home: const SettingsScreen());
   }
 }
