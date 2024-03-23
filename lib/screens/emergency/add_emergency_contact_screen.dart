@@ -19,7 +19,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController phoneController = TextEditingController();
- // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -40,25 +40,8 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
               const SicklerAppBar(
                 pageTitle: "Add Emergency\nContacts",
               ),
-              Stack(
-                children: [
-                  const CircleAvatar(
-                    radius: 64,
-                    backgroundImage: AssetImage("assets/images/memoji.png"),
-                  ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: IconButton.filled(
-                        color: theme.colorScheme.primary,
-                        onPressed: () {},
-                        icon: const Icon(
-                          FluentIcons.edit_24_regular,
-                          color: Colors.white,
-                        )),
-                  )
-                ],
-              ),
+              SicklerEditableAvatar(
+                  imagePath: "assets/images/memoji.png", onEditPressed: () {}),
               const Gap(
                 48,
               ),
@@ -86,8 +69,9 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                     ),
                     TextFormField(
                       controller: nameController,
-                      decoration: SicklerInputDecoration.inputDecoration(context)
-                          .copyWith(hintText: "Name"),
+                      decoration:
+                          SicklerInputDecoration.inputDecoration(context)
+                              .copyWith(hintText: "Name"),
                     ),
                     const Gap(
                       24,
@@ -109,15 +93,17 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                     const Gap(8),
                     TextFormField(
                       controller: phoneController,
-                      decoration: SicklerInputDecoration.inputDecoration(context)
-                          .copyWith(
+                      decoration:
+                          SicklerInputDecoration.inputDecoration(context)
+                              .copyWith(
                         hintText: "Phone Number",
                         suffixIcon: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              FluentIcons.add_24_regular,
-                              color: theme.colorScheme.primary,
-                            ),),
+                          onPressed: () {},
+                          icon: Icon(
+                            FluentIcons.add_24_regular,
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
                       ),
                     ),
                     const Gap(12),
@@ -149,12 +135,11 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                           "Relation",
                           style: theme.textTheme.bodyMedium,
                         ),
-        
                       ],
                     ),
                     const Gap(8),
                     Row(
-                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ///Todo: Replace with the actual relations
                         MedsTypeItem(
@@ -182,3 +167,4 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
     );
   }
 }
+
