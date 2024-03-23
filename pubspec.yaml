@@ -26,6 +26,9 @@ dependencies:
   fpdart: ^1.1.0
   gap: ^3.0.1
   fluentui_system_icons: ^1.1.231
+  percent_indicator: ^4.2.3
+  fl_chart: ^0.64.0
+
 
 
 dev_dependencies:
