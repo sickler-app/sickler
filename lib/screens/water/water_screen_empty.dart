@@ -18,7 +18,7 @@ class _WaterEmptyScreenState extends State<WaterEmptyScreen> {
     return Scaffold(
       body: Column(
         children: [
-          SicklerAppBar(
+          const SicklerAppBar(
             showTitle: true,
             pageTitle: "Water Intake",
             actions: [],

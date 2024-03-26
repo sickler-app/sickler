@@ -32,7 +32,7 @@ class WaterHistoryNextPreviousButton extends StatelessWidget {
                 "assets/svg/chevron-left.svg",
                 colorFilter: ColorFilter.mode(
                     !isDarkMode
-                        ? SicklerColours.black!
+                        ? SicklerColours.black
                         : SicklerColours.purple10,
                     BlendMode.srcIn),
               )),

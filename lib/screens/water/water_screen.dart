@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/constants.dart';
 import 'package:sickler/core/enums.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
-import 'package:sickler/screens/global_components/sickler_app_bar.dart';
-import 'package:sickler/screens/meds/components/components.dart';
 import 'package:sickler/screens/water/todays_log.dart';
 import 'package:sickler/screens/water/water_chart.dart';
 import 'package:sickler/screens/water/water_next_button.dart';
@@ -25,60 +24,54 @@ class _WaterScreenState extends State<WaterScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SicklerAppBar(pageTitle: "Water Intake"),
-          Expanded(
-              child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: SicklerCircularPercentIndicator(
-                    value: 37.toString(),
-                    animate: true,
-                    unit: "%",
-                    progress: 1.0,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Center(
-                  child: Text("$dailyGoal ml",
-                      style: theme.textTheme.displaySmall!
-                          .copyWith(fontWeight: FontWeight.w800)),
-                ),
-                const SizedBox(height: 10),
-                Center(
-                  child: Text(" remaining $dailyGoal ml",
-                      style: theme.textTheme.bodySmall!
-                          .copyWith(fontWeight: FontWeight.w400)),
-                ),
-                const SizedBox(height: 34),
-                Center(
-                  child: Text(" Looking great! Log your water intake ",
-                      style: theme.textTheme.bodySmall!
-                          .copyWith(fontWeight: FontWeight.w400)),
-                ),
-                Center(
-                  child: Text(" and hit that water goal ",
-                      style: theme.textTheme.bodySmall!
-                          .copyWith(fontWeight: FontWeight.w400)),
-                ),
-                const SizedBox(height: 10),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SicklerAppBar(pageTitle: "Water Intake"),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+
+               Column(
+                 children: [
+                   SicklerCircularPercentIndicator(
+                     value: 37.toString(),
+                     shouldAnimate: true,
+                     unit: "%",
+                     progress: 0.37,
+                   ),
+                   Gap( 16),
+                   Text("$dailyGoal ml",
+                       style: theme.textTheme.displaySmall!
+                           .copyWith(fontWeight: FontWeight.w800)),
+                   Gap( 16),
+                   Text(" remaining $dailyGoal ml",
+                       style: theme.textTheme.bodyMedium),
+                   Gap( 24),
+                   Text(" Looking great! Log your water intake and hit that water goal ",
+                       textAlign: TextAlign.center,
+                       style: theme.textTheme.bodyMedium),
+
+                 ],
+               )
+               ,
+
+        
+               Gap( 16),
                 WaterVolumeSelector(
                     selectedVolume: (VolumeType selectedVolumeType) {
-                  ///Todo: Add selected Medication to state
-                }),
+                      ///Todo: Add selected Medication to state
+                    }),
                 Text("Statistics",
-                    style: theme.textTheme.displaySmall!
-                        .copyWith(fontWeight: FontWeight.w400)),
-                const SizedBox(height: 10),
+                    style: theme.textTheme.headlineSmall),
+               Gap( 16),
                 Wrap(
                   direction: Axis.horizontal,
-                  spacing: 12,
+                  spacing: 8,
                   runSpacing: 4,
                   children: [
                     SicklerChip(
@@ -129,43 +122,41 @@ class _WaterScreenState extends State<WaterScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 34),
+               Gap( 24),
                 Text(" Weekly Average ",
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.w400)),
-                const SizedBox(height: 14),
+                    style: theme.textTheme.bodyMedium),
+               Gap( 16),
                 Text("$dailyGoal ml",
                     style: theme.textTheme.displaySmall!
                         .copyWith(fontWeight: FontWeight.w800)),
-                const SizedBox(height: 34),
+               Gap( 24),
                 Container(
                   decoration: BoxDecoration(
                       color: SicklerColours.blueSeed.withOpacity(0.08),
                       borderRadius: BorderRadius.circular(32)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 10),
-                        WaterHistoryNextPreviousButton(
-                            onNextPressed: () {},
-                            onPreviousPressed: () {},
-                            label: "Today"),
-                        BarChartSample3()
-                      ],
-                    ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                     Gap( 10),
+                      WaterHistoryNextPreviousButton(
+                          onNextPressed: () {},
+                          onPreviousPressed: () {},
+                          label: "Today"),
+                      const BarChartSample3()
+                    ],
                   ),
                 ),
-                const SizedBox(height: 10),
+               Gap( 10),
                 Text("Today's Logs",
                     style: theme.textTheme.displaySmall!
                         .copyWith(fontWeight: FontWeight.w400)),
-                const SizedBox(height: 20),
+               Gap( 20),
                 TodaysLog()
-              ],
-            ),
-          ))
-        ],
+              ],),
+            )
+        
+          ],
+        ),
       ),
     );
   }
@@ -194,10 +185,10 @@ class _WaterScreenState extends State<WaterScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              HistoryNextPreviousButton(
-                  onNextPressed: () {},
-                  onPreviousPressed: () {},
-                  label: "Today"),
+              // NextPreviousButton(
+              //     onNextPressed: () {},
+              //     onPreviousPressed: () {},
+              //     label: "Today"),
             ],
           ),
           const BarChartSample3()

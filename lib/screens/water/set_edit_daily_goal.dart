@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 import '../../core/core.dart';
-import '../user_info/components/sickler_radio.dart';
 
 class EditDailyGoalScreen extends StatefulWidget {
   const EditDailyGoalScreen({super.key});

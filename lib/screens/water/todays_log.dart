@@ -5,7 +5,7 @@ import 'package:sickler/core/core.dart';
 class TodaysLog extends StatelessWidget {
   TodaysLog({super.key});
 
-  List<dynamic> volume = ["150ml", "100ml"];
+ final List<dynamic> volume = ["150ml", "100ml"];
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +33,10 @@ class TodaysLog extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/svg/droplet.svg",
-                      colorFilter: ColorFilter.mode(
+                      colorFilter: const ColorFilter.mode(
                           SicklerColours.blueSeed, BlendMode.srcIn),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 6,
                     ),
                     Column(
@@ -52,20 +52,20 @@ class TodaysLog extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 Row(
                   children: [
                     SvgPicture.asset(
                       "assets/svg/edit.svg",
-                      colorFilter: ColorFilter.mode(
+                      colorFilter: const ColorFilter.mode(
                           SicklerColours.blueSeed, BlendMode.srcIn),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 6,
                     ),
                     SvgPicture.asset(
                       "assets/svg/delete.svg",
-                      colorFilter: ColorFilter.mode(
+                      colorFilter: const ColorFilter.mode(
                           SicklerColours.red60, BlendMode.srcIn),
                     ),
                   ],
