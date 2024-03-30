@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 import '../../core/core.dart';
-import '../user_info/components/sickler_radio.dart';
 
 class EditDailyGoalScreen extends StatefulWidget {
   const EditDailyGoalScreen({super.key});
@@ -14,7 +14,7 @@ class EditDailyGoalScreen extends StatefulWidget {
 class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
   final TextEditingController volumeController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
-  final TextEditingController timeintervalController = TextEditingController();
+  final TextEditingController timeIntervalController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _isReminderKnown = false;
@@ -30,7 +30,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
     super.dispose();
     volumeController.dispose();
     ageController.dispose();
-    timeintervalController.dispose();
+    timeIntervalController.dispose();
   }
 
   @override
@@ -55,7 +55,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Volume", style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        const Gap(8),
                         TextFormField(
                           controller: volumeController,
                           keyboardType: TextInputType.name,
@@ -63,7 +63,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                               SicklerInputDecoration.inputDecoration(context)
                                   .copyWith(hintText: "1000ml"),
                         ),
-                        const SizedBox(height: 24),
+                        const Gap(24),
                         Row(
                           children: [
                             Text("Enable reminders for this goal",
@@ -79,13 +79,13 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 24),
+                        const Gap(24),
                         Text("Notification Interval",
                             style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        const Gap(8),
                         TextFormField(
                           readOnly: true,
-                          controller: timeintervalController,
+                          controller: timeIntervalController,
                           keyboardType: TextInputType.streetAddress,
                           onTap: () async {
                             await showModalBottomSheet(
@@ -100,7 +100,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                                         itemExtent: 48,
                                         onSelectedItemChanged: (selectedValue) {
                                           setState(() {
-                                            timeintervalController.text =
+                                            timeIntervalController.text =
                                                 selectedValue.toString();
                                           });
                                         },
@@ -116,17 +116,12 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                             hintText: "Notification Interval",
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const Gap(24),
                         Text(
-                            "We will send you reminder every ${timeintervalController.text} hour to help you achieve this goal",
+                            "We will send you reminder every ${timeIntervalController.text} hour to help you achieve this goal",
                             style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 32),
-                        Text("Happy drinking",
-                            style: theme.textTheme.bodyMedium),
+                     
 
-                        const SizedBox(height: 16),
-
-                        const SizedBox(height: 32),
                         const Spacer(),
 
                         ///Buttons
@@ -136,7 +131,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                             },
                             label: "Save Goal"),
 
-                        const SizedBox(height: 64),
+                        const Gap(64),
                       ],
                     ),
                   ),

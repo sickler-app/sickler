@@ -6,3 +6,4 @@ export 'sickler_bottom_sheet.dart';
 export 'sickler_alert_dialog.dart';
 export 'sickler_date_switcher.dart';
 export 'sickler_editable_avatar.dart';
+export 'sickler_selector_item.dart';

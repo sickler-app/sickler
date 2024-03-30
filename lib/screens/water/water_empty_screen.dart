@@ -1,4 +1,6 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
@@ -18,12 +20,12 @@ class _WaterEmptyScreenState extends State<WaterEmptyScreen> {
     return Scaffold(
       body: Column(
         children: [
-          SicklerAppBar(
+          const SicklerAppBar(
             showTitle: true,
             pageTitle: "Water Intake",
             actions: [],
           ),
-          const SizedBox(height: 66),
+          const Gap(66),
           Container(
             height: 200,
             width: 200,
@@ -31,7 +33,7 @@ class _WaterEmptyScreenState extends State<WaterEmptyScreen> {
                 color: SicklerColours.blue80,
                 borderRadius: BorderRadius.circular(100)),
           ),
-          const SizedBox(height: 16),
+          const Gap(16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -44,15 +46,16 @@ class _WaterEmptyScreenState extends State<WaterEmptyScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                const SizedBox(height: 16),
+                const Gap(16),
                 SicklerButton(
                   onPressed: () {},
-                  label: "Accept Goal ",
+                  icon: FluentIcons.add_24_regular,
+                  label: "Add Goal ",
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 64)
+          const Gap(64)
         ],
       ),
     );

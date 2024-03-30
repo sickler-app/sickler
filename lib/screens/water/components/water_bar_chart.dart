@@ -3,20 +3,23 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sickler/core/core.dart';
 
-class _BarChart extends StatelessWidget {
-  const _BarChart();
+class WaterBarChart extends StatelessWidget {
+  const WaterBarChart({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BarChart(
-      BarChartData(
-        barTouchData: barTouchData,
-        titlesData: titlesData,
-        borderData: borderData,
-        barGroups: barGroups,
-        gridData: FlGridData(show: false),
-        alignment: BarChartAlignment.spaceAround,
-        maxY: 20,
+    return AspectRatio(
+      aspectRatio: 1.6,
+      child: BarChart(
+        BarChartData(
+          barTouchData: barTouchData,
+          titlesData: titlesData,
+          borderData: borderData,
+          barGroups: barGroups,
+          gridData: const FlGridData(show: false),
+          alignment: BarChartAlignment.spaceAround,
+          maxY: 18,
+        ),
       ),
     );
   }
@@ -47,7 +50,7 @@ class _BarChart extends StatelessWidget {
   Widget getTitles(double value, TitleMeta meta) {
     const style = TextStyle(
       color: SicklerColours.black,
-      fontWeight: FontWeight.bold,
+    // fontWeight: FontWeight.bold,
       fontSize: 14,
     );
     String text;
@@ -62,7 +65,7 @@ class _BarChart extends StatelessWidget {
         text = 'W';
         break;
       case 3:
-        text = 'TH';
+        text = 'T';
         break;
       case 4:
         text = 'F';
@@ -71,7 +74,7 @@ class _BarChart extends StatelessWidget {
         text = 'S';
         break;
       default:
-        text = 'Su';
+        text = 'S';
         break;
     }
     return SideTitleWidget(
@@ -90,16 +93,16 @@ class _BarChart extends StatelessWidget {
             getTitlesWidget: getTitles,
           ),
         ),
-        leftTitles: AxisTitles(
+        leftTitles: const AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
            
             ),
         ),
-        topTitles: AxisTitles(
+        topTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
-        rightTitles: AxisTitles(
+        rightTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
       );
@@ -166,7 +169,7 @@ class _BarChart extends StatelessWidget {
           showingTooltipIndicators: [0],
         ),
         BarChartGroupData(
-          x: 5,
+          x: 8,
           barRods: [
             BarChartRodData(
               toY: 10,
@@ -186,21 +189,4 @@ class _BarChart extends StatelessWidget {
           showingTooltipIndicators: [0],
         ),
       ];
-}
-
-class BarChartSample3 extends StatefulWidget {
-  const BarChartSample3({super.key});
-
-  @override
-  State<StatefulWidget> createState() => BarChartSample3State();
-}
-
-class BarChartSample3State extends State<BarChartSample3> {
-  @override
-  Widget build(BuildContext context) {
-    return const AspectRatio(
-      aspectRatio: 1.6,
-      child: _BarChart(),
-    );
-  }
 }

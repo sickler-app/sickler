@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
 
+///Todo: Refactor this widget into a more generic form so it can be used elsewhere
 class MedsTypeItem extends StatefulWidget {
   const MedsTypeItem({
     super.key,

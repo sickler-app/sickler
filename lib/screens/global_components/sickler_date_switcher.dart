@@ -9,11 +9,15 @@ class SicklerDateSwitcher extends StatelessWidget {
       {super.key,
       required this.onNextPressed,
       required this.onPreviousPressed,
-      required this.label});
+      required this.label,
+      this.backgroundColor,
+      this.color});
 
   final VoidCallback onNextPressed;
   final VoidCallback onPreviousPressed;
   final String label;
+  final Color? backgroundColor;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +26,17 @@ class SicklerDateSwitcher extends StatelessWidget {
     return Row(
       children: [
         IconButton.filled(
-          style: IconButton.styleFrom(
-            backgroundColor: isDarkMode
-                ? theme.colorScheme.primary
-                : theme.colorScheme.primaryContainer,
-            elevation: 0,
-          ),
-          onPressed: onPreviousPressed,
-          icon:  const Icon(FluentIcons.chevron_left_24_regular, color: SicklerColours.purple20,)
-
-          ),
+            style: IconButton.styleFrom(
+              backgroundColor: isDarkMode
+                  ? backgroundColor ??  theme.colorScheme.primary
+                  :  backgroundColor ?? theme.colorScheme.primaryContainer,
+              elevation: 0,
+            ),
+            onPressed: onPreviousPressed,
+            icon: const Icon(
+              FluentIcons.chevron_left_24_regular,
+              color: SicklerColours.purple20,
+            )),
         const Spacer(),
         AnimatedContainer(
           duration: 300.ms,
@@ -39,8 +44,8 @@ class SicklerDateSwitcher extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
             color: isDarkMode
-                ? theme.colorScheme.primary
-                : theme.colorScheme.primaryContainer,
+                ? backgroundColor?? theme.colorScheme.primary
+                : backgroundColor ?? theme.colorScheme.primaryContainer,
           ),
           child: Center(
             child: Padding(
@@ -48,9 +53,7 @@ class SicklerDateSwitcher extends StatelessWidget {
               child: Text(
                 label,
                 style: theme.textTheme.bodyMedium!.copyWith(
-                  color:
-                SicklerColours.purple20,
-
+                  color: color ?? SicklerColours.purple20,
                 ),
               ),
             ),
@@ -58,15 +61,16 @@ class SicklerDateSwitcher extends StatelessWidget {
         ),
         const Spacer(),
         IconButton.filled(
-          style: IconButton.styleFrom(
-            backgroundColor: isDarkMode
-                ? theme.colorScheme.primary
-                : theme.colorScheme.primaryContainer,
-          ),
-          onPressed: onNextPressed,
-          icon: const Icon(FluentIcons.chevron_right_24_regular, color:SicklerColours.purple20,)
-
-        )
+            style: IconButton.styleFrom(
+              backgroundColor: isDarkMode
+                  ? backgroundColor ?? theme.colorScheme.primary
+                  : backgroundColor ?? theme.colorScheme.primaryContainer,
+            ),
+            onPressed: onNextPressed,
+            icon: Icon(
+              FluentIcons.chevron_right_24_regular,
+              color: color ?? SicklerColours.purple20,
+            ))
       ],
     );
   }
