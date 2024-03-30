@@ -34,14 +34,16 @@ enum MedicationType {
 }
 
 
-enum VolumeType {
-  volume1,
-  volume2,
-  volume3,
-  volume4,
-  volume5,
 
-}
+// enum VolumeType {
+//   volume1,
+//   volume2,
+//   volume3,
+//   volume4,
+//   volume5,
+// }
+
+
 enum MedsScheduleEndingState {
   ///An Enum to define the states of the Medication repeat ending format.
   never,

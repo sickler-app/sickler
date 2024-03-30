@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/core/theme.dart';
-import 'package:sickler/screens/profile/settings_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
 

@@ -66,6 +66,13 @@ class SicklerThemeData {
             EdgeInsets.symmetric(horizontal: 16)),
         elevation: MaterialStatePropertyAll<double>(0),
       ),
+
+    ),
+    textButtonTheme: const TextButtonThemeData(
+        style: ButtonStyle(
+          elevation: MaterialStatePropertyAll<double>(0),
+          splashFactory: InkSparkle.splashFactory,
+        )
     ),
     chipTheme: ChipThemeData(
       labelStyle:
@@ -211,6 +218,12 @@ class SicklerThemeData {
             EdgeInsets.symmetric(horizontal: 16)),
         elevation: MaterialStatePropertyAll<double>(0),
       ),
+    ),
+    textButtonTheme: const TextButtonThemeData(
+        style: ButtonStyle(
+          elevation: MaterialStatePropertyAll<double>(0),
+          splashFactory: InkSparkle.splashFactory,
+        )
     ),
     chipTheme: ChipThemeData(
       elevation: 0,

@@ -4,17 +4,17 @@ import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-class SuggestedDailyGoalScreen extends StatefulWidget {
-  const SuggestedDailyGoalScreen({super.key});
+class SuggestedWaterDailyGoalScreen extends StatefulWidget {
+  const SuggestedWaterDailyGoalScreen({super.key});
 
   @override
-  State<SuggestedDailyGoalScreen> createState() =>
-      _SuggestedDailyGoalScreenState();
+  State<SuggestedWaterDailyGoalScreen> createState() =>
+      _SuggestedWaterDailyGoalScreenState();
 }
 
 int dailyGoal = 2000;
 
-class _SuggestedDailyGoalScreenState extends State<SuggestedDailyGoalScreen> {
+class _SuggestedWaterDailyGoalScreenState extends State<SuggestedWaterDailyGoalScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
