@@ -9,23 +9,26 @@ class WaterStatistics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isDarkMode = theme.brightness == Brightness.dark;
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-          color: SicklerColours.blueSeed.withOpacity(0.08),
+          color: isDarkMode ? theme.cardColor : SicklerColours.blue95,
           borderRadius: BorderRadius.circular(32)),
       child: Column(
         children: [
           SicklerDateSwitcher(
-              color: SicklerColours.blue20,
-              backgroundColor: SicklerColours.blue90,
-
-              onNextPressed: (){}, onPreviousPressed: (){}, label: "Today Two"),
+              color: isDarkMode ? theme.iconTheme.color : SicklerColours.blue20,
+              backgroundColor:
+                  isDarkMode ? SicklerColours.neutral30 : SicklerColours.blue90,
+              onNextPressed: () {},
+              onPreviousPressed: () {},
+              label: "Today Two"),
           const WaterBarChart(),
         ],
       ),
     );
   }
 }
-

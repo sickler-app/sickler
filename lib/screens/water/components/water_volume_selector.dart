@@ -28,6 +28,8 @@ class _WaterVolumeSelectorState extends State<WaterVolumeSelector> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isDarkMode = theme.brightness == Brightness.dark;
     return GridView.builder(
       padding: EdgeInsets.zero,
       itemCount: volumesData.length,
@@ -42,7 +44,7 @@ class _WaterVolumeSelectorState extends State<WaterVolumeSelector> {
         isVolumeSelected.putIfAbsent(index, () => false);
         return SicklerSelectorItem(
           color: SicklerColours.blueSeed,
-            backgroundColor: SicklerColours.blue95,
+            backgroundColor: isDarkMode? theme.cardColor: SicklerColours.blue95,
             icon: volumesData.values.toList()[index],
             label: volumesData.keys.toList()[index],
             unit: "ml",
@@ -50,7 +52,6 @@ class _WaterVolumeSelectorState extends State<WaterVolumeSelector> {
             onPressed: () {
               HapticFeedback.mediumImpact();
               Feedback.forTap(context);
-
               ///Does the logic to select what was pressed on,
               ///by deselecting everything else, then selecting what was chosen
               isVolumeSelected.updateAll((key, value) => false);

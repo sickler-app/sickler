@@ -28,6 +28,7 @@ class SicklerCircularPercentIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     final ThemeData theme = Theme.of(context);
+    final bool isDarkMode = theme.brightness == Brightness.dark;
     return CircularPercentIndicator(
       animateFromLastPercent: true,
       animation: shouldAnimate!,
@@ -35,7 +36,7 @@ class SicklerCircularPercentIndicator extends StatelessWidget {
       radius: screenSize.width * .22,
       progressColor: progressColour ?? SicklerColours.blueSeed,
       lineWidth: kDefaultPadding,
-      backgroundColor: backgroundColor ?? SicklerColours.blue90,
+      backgroundColor: backgroundColor ?? (isDarkMode? theme.cardColor: SicklerColours.blue90),
       percent: progress,
       center: RichText(
         text: TextSpan(

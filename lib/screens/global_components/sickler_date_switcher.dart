@@ -33,9 +33,9 @@ class SicklerDateSwitcher extends StatelessWidget {
               elevation: 0,
             ),
             onPressed: onPreviousPressed,
-            icon: const Icon(
+            icon: Icon(
               FluentIcons.chevron_left_24_regular,
-              color: SicklerColours.purple20,
+                color: color?? theme.iconTheme.color,
             )),
         const Spacer(),
         AnimatedContainer(
@@ -52,9 +52,7 @@ class SicklerDateSwitcher extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               child: Text(
                 label,
-                style: theme.textTheme.bodyMedium!.copyWith(
-                  color: color ?? SicklerColours.purple20,
-                ),
+                style: theme.textTheme.bodyMedium!.copyWith(color: color),
               ),
             ),
           ),
@@ -69,7 +67,7 @@ class SicklerDateSwitcher extends StatelessWidget {
             onPressed: onNextPressed,
             icon: Icon(
               FluentIcons.chevron_right_24_regular,
-              color: color ?? SicklerColours.purple20,
+              color: color,
             ))
       ],
     );

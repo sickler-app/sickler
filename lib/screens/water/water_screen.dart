@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:sickler/core/constants.dart';
 import 'package:sickler/core/enums.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/water/components/water_volume_selector.dart';
@@ -39,6 +40,7 @@ class _WaterScreenState extends State<WaterScreen> {
                         shouldAnimate: true,
                         unit: "%",
                         progress: 0.37,
+
                       ),
                       const Gap(16),
                       Text("$dailyGoal ml",
@@ -67,6 +69,8 @@ class _WaterScreenState extends State<WaterScreen> {
                     runSpacing: 4,
                     children: [
                       SicklerChip(
+                        unselectedColor: SicklerColours.blueSeed,
+                        unselectedBackgroundColor: SicklerColours.blueSeed,
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
                         label: "Daily",

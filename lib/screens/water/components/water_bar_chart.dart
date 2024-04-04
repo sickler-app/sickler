@@ -48,39 +48,34 @@ class WaterBarChart extends StatelessWidget {
       );
 
   Widget getTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: SicklerColours.black,
-    // fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
-    String text;
+    String horizontalLabel;
     switch (value.toInt()) {
       case 0:
-        text = 'M';
+        horizontalLabel = 'M';
         break;
       case 1:
-        text = 'T';
+        horizontalLabel = 'T';
         break;
       case 2:
-        text = 'W';
+        horizontalLabel = 'W';
         break;
       case 3:
-        text = 'T';
+        horizontalLabel = 'T';
         break;
       case 4:
-        text = 'F';
+        horizontalLabel = 'F';
         break;
       case 5:
-        text = 'S';
+        horizontalLabel = 'S';
         break;
       default:
-        text = 'S';
+        horizontalLabel = 'S';
         break;
     }
     return SideTitleWidget(
       axisSide: meta.axisSide,
       space: 4,
-      child: Text(text, style: style),
+      child: Text(horizontalLabel),
     );
   }
 
