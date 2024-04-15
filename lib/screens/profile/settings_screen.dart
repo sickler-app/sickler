@@ -28,7 +28,7 @@ class SettingsScreen extends StatelessWidget {
                   child: Text(
                     "Water Preferences",
                     style: theme.textTheme.titleMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
+                        .copyWith(fontWeight: FontWeight.w800),
                   ),
                 ),
                 const Gap(16),
@@ -55,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
                   child: Text(
                     "Units",
                     style: theme.textTheme.titleMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
+                        .copyWith(fontWeight: FontWeight.w800),
                   ),
                 ),
 
@@ -115,7 +115,7 @@ class SettingsScreen extends StatelessWidget {
                   child: Text(
                     "Profile Settings",
                     style: theme.textTheme.titleMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
+                        .copyWith(fontWeight: FontWeight.w800),
                   ),
                 ),
                 const Gap(16),

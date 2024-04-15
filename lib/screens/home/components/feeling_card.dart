@@ -86,7 +86,7 @@ class _FeelingCardState extends State<FeelingCard> {
                   isChipButton: true,
                   onPressed: () {},
                   label: "Save",
-                  icon: FluentIcons.check_20_regular,
+                  icon: FluentIcons.checkmark_20_regular,
                   buttonType: SicklerButtonType.primary),
             ],
           ),

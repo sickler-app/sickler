@@ -1,4 +1,3 @@
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sickler/core/core.dart';
@@ -40,7 +39,7 @@ class WaterBarChart extends StatelessWidget {
               rod.toY.round().toString(),
               const TextStyle(
                 color: Colors.transparent,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w800,
               ),
             );
           },
@@ -91,8 +90,7 @@ class WaterBarChart extends StatelessWidget {
         leftTitles: const AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
-           
-            ),
+          ),
         ),
         topTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
@@ -173,7 +171,7 @@ class WaterBarChart extends StatelessWidget {
           ],
           showingTooltipIndicators: [0],
         ),
-         BarChartGroupData(
+        BarChartGroupData(
           x: 6,
           barRods: [
             BarChartRodData(

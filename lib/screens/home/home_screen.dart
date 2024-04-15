@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sickler/screens/water/water_screen.dart';
 
 import '../../core/core.dart';
 import 'components/components.dart';
@@ -44,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 12,
                       ),
                       Text(
-                        "Your water intake looks good,\nGood Job!😉",
+                        "Your water intake looks good,Good Job!",
                         style: theme.textTheme.bodyMedium,
                       ),
                     ],
@@ -62,7 +64,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const FeelingCard(),
               const Gap(16),
-              const WaterCard(),
+              WaterCard(
+                onPressed: () {
+                  context.pushNamed(WaterScreen.id);
+                },
+              ),
               const SizedBox(
                 height: 32,
               ),
@@ -70,13 +76,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Your Health Info",
-                  style: theme.textTheme.headlineSmall,
+                  style: theme.textTheme.titleMedium,
                 ),
               ),
               const Gap(16),
               const MedsReminderCard(),
               const Gap(16),
-              const EmergencySharingCard(),
+              EmergencySharingCard(
+                onPressed: () {},
+              ),
               const SizedBox(
                 height: 64,
               )

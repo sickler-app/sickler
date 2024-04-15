@@ -6,6 +6,8 @@ void main() {
   runApp(const MyApp());
 }
 
+final AppRouter appRouter = AppRouter();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         curve: Curves.easeInOut,
         duration: const Duration(milliseconds: 300),
       ),
-      routerConfig: AppRouter().router,
+      routerConfig: appRouter.router,
     );
   }
 }

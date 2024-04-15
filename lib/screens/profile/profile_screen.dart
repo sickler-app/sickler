@@ -37,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
                           TextSpan(
                             text: "Amelia",
                             style: theme.textTheme.bodyMedium!
-                                .copyWith(fontWeight: FontWeight.bold),
+                                .copyWith(fontWeight: FontWeight.w800),
                           ),
                           TextSpan(
                               text: " Robertson",

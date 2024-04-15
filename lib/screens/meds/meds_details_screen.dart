@@ -70,7 +70,7 @@ class MedsDetailsScreen extends StatelessWidget {
             Text(
               "Medication History",
               style: theme.textTheme.bodyLarge!
-                  .copyWith(fontWeight: FontWeight.bold),
+                  .copyWith(fontWeight: FontWeight.w800),
             ),
             const Gap(12),
             const SicklerCalendar(),
