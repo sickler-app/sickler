@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sickler/core/constants.dart';
 
 import '../../core/core.dart';
 
@@ -11,7 +10,7 @@ class SicklerChip extends StatefulWidget {
     this.chipType = SicklerChipType.filter,
     this.unselectedColor = SicklerColours.black,
     this.unselectedBackgroundColor = SicklerColours.neutral95,
-    this.selectedColor =  SicklerColours.purple90,
+    this.selectedColor = SicklerColours.purple90,
     this.selectedBackgroundColor = SicklerColours.purpleSeed,
   });
 
@@ -42,20 +41,23 @@ class _SicklerChipState extends State<SicklerChip> {
 
     if (widget.chipType == SicklerChipType.filter) {
       return FilterChip(
-        backgroundColor: isSelected? widget.selectedBackgroundColor: widget.selectedBackgroundColor,
+          backgroundColor: isSelected
+              ? widget.selectedBackgroundColor
+              : widget.selectedBackgroundColor,
           side: isSelected
               ? BorderSide(
-                  width: 1, color: widget.unselectedColor ?? theme.colorScheme.primary)
+                  width: 1,
+                  color: widget.unselectedColor ?? theme.colorScheme.primary)
               : BorderSide.none,
           showCheckmark: true,
-          checkmarkColor: isSelected
-              ? widget.selectedColor
-              : widget.unselectedColor,
+          checkmarkColor:
+              isSelected ? widget.selectedColor : widget.unselectedColor,
           selected: isSelected,
           label: Text(
             widget.label,
             style: theme.textTheme.bodyMedium!.copyWith(
-                color: isSelected ? widget.selectedColor: widget.unselectedColor),
+                color:
+                    isSelected ? widget.selectedColor : widget.unselectedColor),
           ),
           onSelected: (value) {
             setState(() {
@@ -72,8 +74,8 @@ class _SicklerChipState extends State<SicklerChip> {
             : widget.unselectedBackgroundColor ?? theme.colorScheme.primary,
         label: Text(
           widget.label,
-          style: theme.textTheme.bodyMedium!
-              .copyWith(color: widget.unselectedColor ?? SicklerColours.purple10),
+          style: theme.textTheme.bodyMedium!.copyWith(
+              color: widget.unselectedColor ?? SicklerColours.purple10),
         ),
       );
     }

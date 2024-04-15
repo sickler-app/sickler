@@ -8,6 +8,7 @@ import 'package:sickler/screens/meds/components/meds_type_item.dart';
 import '../global_components/global_components.dart';
 
 class AddEmergencyContactScreen extends StatefulWidget {
+  static const String id = "add_emergency_contact";
   const AddEmergencyContactScreen({super.key});
 
   @override
@@ -167,4 +168,3 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
     );
   }
 }
-

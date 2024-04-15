@@ -8,6 +8,7 @@ import '../global_components/global_components.dart';
 import 'components/components.dart';
 
 class AddMedsScreen extends StatefulWidget {
+  static const String id = "add_meds";
   final bool isEditing;
   const AddMedsScreen({super.key, this.isEditing = false});
 
@@ -42,7 +43,8 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                 pageTitle:
                     widget.isEditing ? "Edit\nMedication" : "Add\nMedication",
                 actions: [
-                   SicklerButton( isChipButton:true,
+                  SicklerButton(
+                    isChipButton: true,
                     onPressed: () {
                       //Todo: Skip Page
                     },
@@ -57,12 +59,12 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Gap( 16),
+                    const Gap(16),
                     Text(
                       "Name",
                       style: theme.textTheme.bodyMedium,
                     ),
-                    const Gap( 12),
+                    const Gap(12),
                     TextFormField(
                       controller: nameController,
                       decoration:
@@ -78,12 +80,12 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         }
                       },
                     ),
-                    const Gap( 16),
+                    const Gap(16),
                     Text(
                       "Description",
                       style: theme.textTheme.bodyMedium,
                     ),
-                    const Gap( 12),
+                    const Gap(12),
                     TextFormField(
                       maxLines: 3,
                       controller: descriptionController,
@@ -93,16 +95,16 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         hintText: "Description",
                       ),
                     ),
-                    const Gap( 24),
+                    const Gap(24),
                     const Text("What type of medication are you taking?"),
-                    const Gap( 12),
+                    const Gap(12),
                     MedicationTypeSelector(selectedMedication:
                         (MedicationType selectedMedicationType) {
                       ///Todo: Add selected Medication to state
                     }),
-                    const Gap( 24),
+                    const Gap(24),
                     const Text("What's the dose of your medication "),
-                    const Gap( 12),
+                    const Gap(12),
                     Wrap(
                       direction: Axis.horizontal,
                       spacing: 12,
@@ -156,10 +158,10 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ),
                       ],
                     ),
-                    const Gap( 24),
+                    const Gap(24),
                     const Text(
                         "How often do you take your medication in a day?"),
-                    const Gap( 12),
+                    const Gap(12),
                     Wrap(
                       direction: Axis.horizontal,
                       spacing: 12,
@@ -187,7 +189,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ),
                       ],
                     ),
-                    const Gap( 24),
+                    const Gap(24),
                     Text(
                       "What time(s) do you take your medication?",
                       style: theme.textTheme.bodyMedium,
@@ -248,7 +250,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         )
                       ],
                     ),
-                    const Gap( 24),
+                    const Gap(24),
                     // const Text(
                     //     "How long have you been taking this medication?"),
                     // Gap( 12),
@@ -300,7 +302,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                             })
                       ],
                     ),
-                    const Gap( 12),
+                    const Gap(12),
                     Visibility(
                       visible: !isTakingMedsPermanently,
                       child: Row(
@@ -310,11 +312,11 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                                   style: theme.textTheme.bodyMedium)
                               : const SizedBox(),
                           widget.isEditing ? const Spacer() : const SizedBox(),
-                           SicklerButton( isChipButton:true,
+                          SicklerButton(
+                              isChipButton: true,
                               buttonType: SicklerButtonType.secondary,
-
                               onPressed: () {},
-                              icon:    FluentIcons.calendar_20_regular,
+                              icon: FluentIcons.calendar_20_regular,
                               label: widget.isEditing
                                   ? "12/05/2023"
                                   : "Select End Date",
@@ -322,7 +324,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         ],
                       ),
                     ),
-                    const Gap( 32),
+                    const Gap(32),
                     SicklerButton(
                         onPressed: () {},
                         label: widget.isEditing
@@ -330,8 +332,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                             : "Add Medication",
                         icon: FluentIcons.check_24_regular),
                     Visibility(
-                        visible: !widget.isEditing,
-                        child: const Gap( 16)),
+                        visible: !widget.isEditing, child: const Gap(16)),
                     Visibility(
                       visible: !widget.isEditing,
                       child: SicklerButton(

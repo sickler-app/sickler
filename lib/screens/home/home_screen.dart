@@ -5,6 +5,7 @@ import '../../core/core.dart';
 import 'components/components.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const String id = "home";
   const HomeScreen({super.key});
 
   @override
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              const Gap( 64 + 16),
+              const Gap(64 + 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -60,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 48,
               ),
               const FeelingCard(),
-              const Gap( 16),
+              const Gap(16),
               const WaterCard(),
               const SizedBox(
                 height: 32,
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: theme.textTheme.headlineSmall,
                 ),
               ),
-              const Gap( 16),
+              const Gap(16),
               const MedsReminderCard(),
               const Gap(16),
               const EmergencySharingCard(),

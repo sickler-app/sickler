@@ -6,6 +6,7 @@ import '../../core/core.dart';
 import 'components/sickler_radio.dart';
 
 class ProfileBasicInfoScreen extends StatefulWidget {
+  static const String id = "basic_info";
   final bool? isEditing;
 
   const ProfileBasicInfoScreen({super.key, this.isEditing = false});
@@ -48,17 +49,20 @@ class _ProfileBasicInfoScreenState extends State<ProfileBasicInfoScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SicklerAppBar(pageTitle: widget.isEditing!? "Edit Profile": "Tell us more\nabout you"),
-
+              SicklerAppBar(
+                  pageTitle: widget.isEditing!
+                      ? "Edit Profile"
+                      : "Tell us more\nabout you"),
               Visibility(
                 visible: widget.isEditing!,
-
-                child: SicklerEditableAvatar(onEditPressed: () {
-                ///Todo: Implement on Edit Pressed;
-              }, imagePath: "assets/images/memoji2.jpg",),),
-
+                child: SicklerEditableAvatar(
+                  onEditPressed: () {
+                    ///Todo: Implement on Edit Pressed;
+                  },
+                  imagePath: "assets/images/memoji2.jpg",
+                ),
+              ),
               const Gap(32),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
@@ -66,25 +70,25 @@ class _ProfileBasicInfoScreenState extends State<ProfileBasicInfoScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Full Names", style: theme.textTheme.bodyMedium),
-                    const Gap( 8),
+                    const Gap(8),
                     TextFormField(
                       controller: nameController,
                       keyboardType: TextInputType.name,
                       decoration:
-                      SicklerInputDecoration.inputDecoration(context)
-                          .copyWith(hintText: "Email"),
+                          SicklerInputDecoration.inputDecoration(context)
+                              .copyWith(hintText: "Email"),
                     ),
-                    const Gap( 24),
+                    const Gap(24),
                     Text("Age", style: theme.textTheme.bodyMedium),
-                    const Gap( 8),
+                    const Gap(8),
                     TextFormField(
                       readOnly: true,
                       showCursor: true,
                       controller: ageController,
                       keyboardType: TextInputType.number,
                       decoration:
-                      SicklerInputDecoration.inputDecoration(context)
-                          .copyWith(
+                          SicklerInputDecoration.inputDecoration(context)
+                              .copyWith(
                         hintText: "Age",
                       ),
                       onTap: () async {
@@ -93,41 +97,41 @@ class _ProfileBasicInfoScreenState extends State<ProfileBasicInfoScreen> {
                             context: context,
                             isScrollControlled: true,
                             builder: (context) => SicklerBottomSheet(
-                              title: "Age",
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: SicklerListWheelScrollViewPicker(
-                                itemExtent: 48,
-                                onSelectedItemChanged: (selectedValue) {
-                                  setState(() {
-                                    ageController.text =
-                                        selectedValue.toString();
-                                  });
-                                },
-                                primaryInitialValue: 0,
-                                primaryFinalValue: 100,
-                              ),
-                            ));
+                                  title: "Age",
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: SicklerListWheelScrollViewPicker(
+                                    itemExtent: 48,
+                                    onSelectedItemChanged: (selectedValue) {
+                                      setState(() {
+                                        ageController.text =
+                                            selectedValue.toString();
+                                      });
+                                    },
+                                    primaryInitialValue: 0,
+                                    primaryFinalValue: 100,
+                                  ),
+                                ));
                       },
                     ),
-                    const Gap( 24),
+                    const Gap(24),
                     Text("Address", style: theme.textTheme.bodyMedium),
-                    const Gap( 8),
+                    const Gap(8),
                     TextFormField(
                       controller: addressController,
                       keyboardType: TextInputType.streetAddress,
                       decoration:
-                      SicklerInputDecoration.inputDecoration(context)
-                          .copyWith(
+                          SicklerInputDecoration.inputDecoration(context)
+                              .copyWith(
                         hintText: "Address",
                       ),
                     ),
-                    const Gap( 24),
+                    const Gap(24),
                     Text("Sex", style: theme.textTheme.bodyMedium),
-                    const Gap( 8),
+                    const Gap(8),
 
-                    const Gap( 16),
+                    const Gap(16),
                     Row(
                       children: [
                         Expanded(
@@ -142,7 +146,7 @@ class _ProfileBasicInfoScreenState extends State<ProfileBasicInfoScreen> {
                             },
                           ),
                         ),
-                        const Gap( 16),
+                        const Gap(16),
                         Expanded(
                           child: SicklerRadio<Gender>(
                             label: "Male",
@@ -166,7 +170,7 @@ class _ProfileBasicInfoScreenState extends State<ProfileBasicInfoScreen> {
                         },
                         label: "Continue"),
 
-                    const Gap( 64),
+                    const Gap(64),
                   ],
                 ),
               ),

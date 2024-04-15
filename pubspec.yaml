@@ -28,6 +28,7 @@ dependencies:
   fluentui_system_icons: ^1.1.231
   percent_indicator: ^4.2.3
   fl_chart: ^0.64.0
+  go_router: ^13.2.4
 
 
 

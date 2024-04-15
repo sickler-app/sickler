@@ -6,6 +6,7 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 class MedsDetailsScreen extends StatelessWidget {
+  static const String id = "meds_details";
   const MedsDetailsScreen({super.key});
 
   @override
@@ -21,7 +22,7 @@ class MedsDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Gap( 24),
+            const Gap(24),
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -35,7 +36,7 @@ class MedsDetailsScreen extends StatelessWidget {
                   colorFilter: ColorFilter.mode(
                       theme.colorScheme.primary, BlendMode.srcIn),
                 ),
-                const Gap( 8),
+                const Gap(8),
                 Text(
                   "Tablets",
                   style: theme.textTheme.bodyMedium!
@@ -43,12 +44,12 @@ class MedsDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const Gap( 24),
+            const Gap(24),
             Text(
               "Lorem ipsum dolor sit amet consectetur. Ut ipsum et viverra adipiscing velit viverra sit venenatis facilisis. Vel laoreet pellentesque amet amet orci viverra eget.",
               style: theme.textTheme.bodyMedium!.copyWith(height: 1.5),
             ),
-            const Gap( 24),
+            const Gap(24),
             Wrap(
               runSpacing: 12,
               children: [
@@ -65,22 +66,22 @@ class MedsDetailsScreen extends StatelessWidget {
                     chipType: SicklerChipType.info, label: "3:00 PM"),
               ],
             ),
-            const Gap( 24),
+            const Gap(24),
             Text(
               "Medication History",
               style: theme.textTheme.bodyLarge!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
-            const Gap( 12),
+            const Gap(12),
             const SicklerCalendar(),
-            const Gap( 24),
+            const Gap(24),
             SicklerButton(
               onPressed: () {},
               label: "Edit Medication",
               icon: FluentIcons.edit_24_regular,
               iconPath: "assets/svg/edit.svg",
             ),
-            const Gap( 64),
+            const Gap(64),
           ],
         ),
       ),

@@ -7,6 +7,7 @@ import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/meds/components/components.dart';
 
 class MedsScreen extends StatelessWidget {
+  static const String id = "meds";
   const MedsScreen({super.key});
 
   @override
@@ -26,30 +27,29 @@ class MedsScreen extends StatelessWidget {
                     "Upcoming",
                     style: theme.textTheme.headlineSmall,
                   ),
-                  const Gap( 16),
+                  const Gap(16),
                   const MedsScreenReminderCard(
                     isCurrent: true,
                   ),
-                  const Gap( 12),
+                  const Gap(12),
                   const MedsScreenReminderCard(
                     isCurrent: false,
                   ),
-                  const Gap( 48),
+                  const Gap(48),
                   Text(
                     "My Medications",
                     style: theme.textTheme.headlineSmall,
                   ),
-                  const Gap( 16),
+                  const Gap(16),
                   const MyMedsCard(),
-                  const Gap( 12),
+                  const Gap(12),
                   const MyMedsCard(),
-                  const Gap( 12),
+                  const Gap(12),
                   const MyMedsCard(),
                   const SizedBox(
                     height: 32,
                   ),
                   SicklerButton(
-
                     iconPath: "assets/svg/plus.svg",
                     icon: FluentIcons.add_24_regular,
                     onPressed: () {
@@ -59,14 +59,15 @@ class MedsScreen extends StatelessWidget {
                           title: "Delete Log?",
                           message: "Are you sure you want to delete this log?",
                           actions: [
-                             SicklerButton( isChipButton:true,
-
+                            SicklerButton(
+                                isChipButton: true,
                                 icon: FluentIcons.dismiss_20_regular,
                                 iconPath: "assets/svg/cross.svg",
                                 buttonType: SicklerButtonType.primary,
                                 onPressed: () {},
                                 label: "Cancel"),
-                             SicklerButton( isChipButton:true,
+                            SicklerButton(
+                                isChipButton: true,
                                 icon: FluentIcons.delete_20_regular,
                                 iconPath: "assets/svg/delete.svg",
                                 color: theme.colorScheme.error,
@@ -103,7 +104,7 @@ class MedsScreen extends StatelessWidget {
                       onNextPressed: () {},
                       onPreviousPressed: () {},
                       label: "Today"),
-                  const Gap( 12),
+                  const Gap(12),
                   const MedsHistoryItem(
                     mode: MedsHistoryMode.weekly,
                   ),

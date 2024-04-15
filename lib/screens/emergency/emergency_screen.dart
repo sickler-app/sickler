@@ -6,6 +6,7 @@ import 'package:sickler/screens/emergency/components/components.dart';
 import '../global_components/global_components.dart';
 
 class EmergencyScreen extends StatelessWidget {
+  static const String id = "emergency";
   const EmergencyScreen({super.key});
 
   @override
@@ -37,7 +38,8 @@ class EmergencyScreen extends StatelessWidget {
                             style: theme.textTheme.headlineSmall,
                           ),
                           const Spacer(),
-                           SicklerButton( isChipButton:true,
+                          SicklerButton(
+                            isChipButton: true,
                             onPressed: () {},
                             label: "Add Contact",
                             buttonType: SicklerButtonType.text,

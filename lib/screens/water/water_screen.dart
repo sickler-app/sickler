@@ -9,6 +9,7 @@ import '../global_components/sickler_circular_percent_indicator.dart';
 import 'components/components.dart';
 
 class WaterScreen extends StatefulWidget {
+  static const String id = "water";
   const WaterScreen({super.key});
 
   @override

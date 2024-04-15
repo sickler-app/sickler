@@ -4,9 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+
 import 'components/components.dart';
 
 class ProfileScreen extends StatelessWidget {
+  static const String id = "profile";
   const ProfileScreen({super.key});
 
   @override
@@ -113,7 +115,6 @@ class ProfileScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           ///Todo: Add Edit Vitals Method
-
                         },
                         icon: Icon(
                           FluentIcons.edit_24_regular,
@@ -231,7 +232,6 @@ class ProfileScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           ///Todo: Add Add Allergies Method
-
                         },
                         icon: Icon(
                           FluentIcons.add_24_regular,
@@ -240,7 +240,6 @@ class ProfileScreen extends StatelessWidget {
                       )
                     ],
                   ),
-
                   const Wrap(
                     alignment: WrapAlignment.start,
                     runAlignment: WrapAlignment.start,
@@ -273,7 +272,6 @@ class ProfileScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           ///Todo: Add Medical Condtions Method
-
                         },
                         icon: Icon(
                           FluentIcons.add_24_regular,
@@ -282,7 +280,6 @@ class ProfileScreen extends StatelessWidget {
                       )
                     ],
                   ),
-
                   const Wrap(
                     alignment: WrapAlignment.start,
                     runAlignment: WrapAlignment.start,
@@ -301,7 +298,6 @@ class ProfileScreen extends StatelessWidget {
                           chipType: SicklerChipType.info, label: "Mango"),
                       SicklerChip(
                           chipType: SicklerChipType.info, label: "Mango"),
-
                     ],
                   ),
                   const Gap(64),
