@@ -36,7 +36,7 @@ class EmergencySharingCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 SvgPicture.asset(
-                  "assets/svg/emergency.svg",
+                  "assets/svg/emergency-alt.svg",
                   colorFilter: const ColorFilter.mode(
                       SicklerColours.red50, BlendMode.srcIn),
                 )
@@ -52,7 +52,7 @@ class EmergencySharingCard extends StatelessWidget {
               ),
               child: Center(
                 child: SvgPicture.asset(
-                  "assets/svg/emergency.svg",
+                  "assets/svg/emergency-alt.svg",
                   height: 48,
                   colorFilter: const ColorFilter.mode(
                       SicklerColours.red50, BlendMode.srcIn),

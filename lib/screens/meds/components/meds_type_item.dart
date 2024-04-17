@@ -94,7 +94,7 @@ class _MedsTypeItemState extends State<MedsTypeItem>
                 : SicklerColours.blue95)
             : SicklerColours.blue20;
         _color = !isDarkMode ? SicklerColours.blue60 : SicklerColours.blue90;
-        _iconPath = "assets/svg/droplet.svg";
+        _iconPath = "assets/svg/droplet-alt.svg";
         _label = "Droplets";
 
       case MedicationType.injections:
@@ -190,7 +190,7 @@ class _MedsTypeItemState extends State<MedsTypeItem>
             );
           },
         ),
-        const Gap( 8),
+        const Gap(8),
         Text(
           widget.label ?? _label,
           textAlign: TextAlign.center,

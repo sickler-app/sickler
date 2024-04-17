@@ -45,7 +45,7 @@ class EmergencyScreen extends StatelessWidget {
                             onPressed: () {},
                             label: "Add Contact",
                             buttonType: SicklerButtonType.text,
-                            iconPath: "assets/svg/emergency.svg",
+                            iconPath: "assets/svg/emergency-alt.svg",
                             color: Colors.white,
                           )
                         ],

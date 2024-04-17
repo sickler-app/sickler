@@ -37,6 +37,7 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return InkWell(
+      borderRadius: BorderRadius.circular(24),
       splashFactory: InkSparkle.splashFactory,
       splashColor: theme.colorScheme.primary.withOpacity(.2),
       onTap: () {
@@ -46,82 +47,83 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
           builder: (context) => const MedsDetailsScreen(),
         );
       },
-      child: AnimatedContainer(
-        duration: 250.ms,
-        curve: Curves.easeInOut,
-        height: 168,
-        padding: const EdgeInsets.all(12),
+      child: Ink(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24), color: theme.cardColor),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+            color: theme.cardColor, borderRadius: BorderRadius.circular(24)),
+        child: AnimatedContainer(
+          duration: 250.ms,
+          curve: Curves.easeInOut,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
 
-          ///The Expanded Mode
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  "Up Next",
-                  style: theme.textTheme.bodyMedium!
-                      .copyWith(color: theme.colorScheme.primary),
-                ),
-                const Spacer(),
-                SvgPicture.asset(
-                  "assets/svg/tablet.svg",
-                  colorFilter: ColorFilter.mode(
-                      theme.colorScheme.primary, BlendMode.srcIn),
-                ),
-                const Gap(8),
-                Text(
-                  "Tablet",
-                  style: theme.textTheme.bodyMedium!
-                      .copyWith(color: theme.colorScheme.primary),
-                ),
-                const Gap(8),
-              ],
-            ),
-            const Gap(8),
-            RepaintBoundary(
-              child:
-                  Text("Hydroxyl Urea", style: theme.textTheme.headlineMedium)
-                      .animate()
-                      .slideX(
-                          curve: Curves.easeOut,
-                          duration: 500.ms,
-                          begin: .3,
-                          end: 0)
-                      .fadeIn(
-                          delay: 200.ms,
-                          curve: Curves.easeOut,
-                          duration: 500.ms),
-            ),
-            Gap(8),
-            RepaintBoundary(
-              child: Text("8:00 pm",
-                      style: theme.textTheme.titleMedium!
-                          .copyWith(fontWeight: FontWeight.w800))
-                  .animate(delay: 500.ms)
-                  .fadeIn(
-                      delay: 200.ms, curve: Curves.easeOut, duration: 500.ms)
-                  .slideX(
-                      curve: Curves.easeOut,
-                      duration: 500.ms,
-                      begin: .3,
-                      end: 0),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: FittedBox(
-                child: SicklerButton(
-                    isChipButton: true,
-                    icon: FluentIcons.checkmark_20_regular,
-                    buttonType: SicklerButtonType.primary,
-                    onPressed: () {},
-                    label: "Taken"),
+            ///The Expanded Mode
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Up Next",
+                    style: theme.textTheme.bodyMedium!
+                        .copyWith(color: SicklerColours.neutral50),
+                  ),
+                  const Spacer(),
+                  SvgPicture.asset(
+                    "assets/svg/tablet.svg",
+                    colorFilter: ColorFilter.mode(
+                        SicklerColours.neutral50, BlendMode.srcIn),
+                  ),
+                  const Gap(8),
+                  Text(
+                    "Tablet",
+                    style: theme.textTheme.bodyMedium!
+                        .copyWith(color: SicklerColours.neutral50),
+                  ),
+                  const Gap(8),
+                ],
               ),
-            )
-          ],
+              const Gap(8),
+              RepaintBoundary(
+                child:
+                    Text("Hydroxyl Urea", style: theme.textTheme.headlineMedium)
+                        .animate()
+                        .slideX(
+                            curve: Curves.easeOut,
+                            duration: 500.ms,
+                            begin: .3,
+                            end: 0)
+                        .fadeIn(
+                            delay: 200.ms,
+                            curve: Curves.easeOut,
+                            duration: 500.ms),
+              ),
+              Gap(8),
+              RepaintBoundary(
+                child: Text("8:00 pm",
+                        style: theme.textTheme.titleMedium!
+                            .copyWith(fontWeight: FontWeight.w800))
+                    .animate(delay: 500.ms)
+                    .fadeIn(
+                        delay: 200.ms, curve: Curves.easeOut, duration: 500.ms)
+                    .slideX(
+                        curve: Curves.easeOut,
+                        duration: 500.ms,
+                        begin: .3,
+                        end: 0),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: FittedBox(
+                  child: SicklerButton(
+                      isChipButton: true,
+                      icon: FluentIcons.checkmark_20_regular,
+                      buttonType: SicklerButtonType.primary,
+                      onPressed: () {},
+                      label: "Taken"),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

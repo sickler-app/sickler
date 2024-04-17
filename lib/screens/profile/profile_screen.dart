@@ -94,7 +94,9 @@ class ProfileScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(24),
-                        color: theme.colorScheme.secondaryContainer),
+                        color: isDarkMode
+                            ? theme.cardColor
+                            : theme.colorScheme.secondaryContainer),
                     child: Row(
                       children: [
                         const Expanded(
@@ -105,11 +107,10 @@ class ProfileScreen extends StatelessWidget {
                           height: 72,
                           width: 72,
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: isDarkMode
-                                ? SicklerColours.orange20
-                                : SicklerColours.orange90,
-                          ),
+                              shape: BoxShape.circle,
+                              color: isDarkMode
+                                  ? SicklerColours.neutral30
+                                  : SicklerColours.orange90),
                         ),
                       ],
                     ),
@@ -182,7 +183,7 @@ class ProfileScreen extends StatelessWidget {
                             colorFilter: ColorFilter.mode(
                                 isDarkMode
                                     ? Colors.white
-                                    : theme.colorScheme.errorContainer,
+                                    : theme.colorScheme.error,
                                 BlendMode.srcIn),
                           ),
                         ),
@@ -206,11 +207,13 @@ class ProfileScreen extends StatelessWidget {
                           color: isDarkMode
                               ? Colors.white
                               : SicklerColours.blueSeed,
-                          icon: Icon(
-                            FluentIcons.drop_24_regular,
-                            color: isDarkMode
-                                ? Colors.white
-                                : SicklerColours.blueSeed,
+                          icon: SvgPicture.asset(
+                            "assets/svg/droplet-alt.svg",
+                            colorFilter: ColorFilter.mode(
+                                isDarkMode
+                                    ? Colors.white
+                                    : SicklerColours.blueSeed,
+                                BlendMode.srcIn),
                           ),
                         ),
                       ),

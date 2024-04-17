@@ -36,7 +36,7 @@ class WaterCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SvgPicture.asset(
-                  "assets/svg/droplet-filled.svg",
+                  "assets/svg/droplet-alt-filled.svg",
                   colorFilter: const ColorFilter.mode(
                       SicklerColours.blueSeed, BlendMode.srcIn),
                 ),

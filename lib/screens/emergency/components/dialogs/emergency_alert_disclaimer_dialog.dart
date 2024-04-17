@@ -47,7 +47,8 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
                 TextSpan(
                   text:
                       "Status updates and location would be shared with emergency contacts for",
-                  style: theme.textTheme.bodySmall!.copyWith(color: SicklerColours.neutral50),
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(color: SicklerColours.neutral50),
                 ),
                 TextSpan(
                   text: " 6 hours, ",
@@ -58,7 +59,8 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
                 ),
                 TextSpan(
                   text: "or until you stop sharing.",
-                  style: theme.textTheme.bodySmall!.copyWith(color: SicklerColours.neutral50),
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(color: SicklerColours.neutral50),
                 ),
               ],
             ),
@@ -78,7 +80,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
                   icon: FluentIcons.dismiss_24_regular,
                 ),
               ),
-              const Gap( 8),
+              const Gap(8),
               Expanded(
                 child: SicklerButton(
                   onPressed: () {},
@@ -86,7 +88,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
                   buttonType: SicklerButtonType.primary,
                   color: SicklerColours.white,
                   backgroundColor: theme.colorScheme.error,
-                  //   iconPath: "assets/svg/emergency.svg",
+                  //   iconPath: "assets/svg/emergency-alt.svg",
                 ),
               )
             ],

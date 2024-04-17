@@ -11,7 +11,7 @@ class EmergencyAlertSelectContactDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-  //  final bool isDarkMode = theme.colorScheme.brightness == Brightness.dark;
+    //  final bool isDarkMode = theme.colorScheme.brightness == Brightness.dark;
 
     ///TODO: Wrap with BackButton Listener
     return SicklerAlertDialog(
@@ -43,11 +43,10 @@ class EmergencyAlertSelectContactDialog extends StatelessWidget {
             buttonType: SicklerButtonType.primary,
             color: SicklerColours.white,
             backgroundColor: theme.colorScheme.error,
-            iconPath: "assets/svg/emergency.svg",
+            iconPath: "assets/svg/emergency-alt.svg",
           ),
         ],
       ),
     );
   }
 }
-
