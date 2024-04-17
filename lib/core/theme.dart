@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'core.dart';
 
 class SicklerThemeData {
+
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
-    primaryColor: SicklerColours.purple40,
+    primaryColor: SicklerColours.purpleSeed,
     primaryColorLight: SicklerColours.purple50,
     primaryColorDark: SicklerColours.purple30,
     scaffoldBackgroundColor: SicklerColours.white,
@@ -58,11 +59,20 @@ class SicklerThemeData {
     cardColor: SicklerColours.purple95,
     elevatedButtonTheme: const ElevatedButtonThemeData(
       style: ButtonStyle(
+        splashFactory: InkSparkle.splashFactory,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         fixedSize: MaterialStatePropertyAll<Size>(Size.fromHeight(52)),
         padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
             EdgeInsets.symmetric(horizontal: 16)),
         elevation: MaterialStatePropertyAll<double>(0),
       ),
+
+    ),
+    textButtonTheme: const TextButtonThemeData(
+        style: ButtonStyle(
+          elevation: MaterialStatePropertyAll<double>(0),
+          splashFactory: InkSparkle.splashFactory,
+        )
     ),
     chipTheme: ChipThemeData(
       labelStyle:
@@ -111,9 +121,12 @@ class SicklerThemeData {
       onPrimary: SicklerColours.white,
       primaryContainer: SicklerColours.purple90,
       onPrimaryContainer: SicklerColours.purple10,
+      secondary: SicklerColours.orangeSeed,
+      onSecondary: SicklerColours.white,
+      secondaryContainer: SicklerColours.orange95,
       error: SicklerColours.red50,
       onError: SicklerColours.white,
-      errorContainer: SicklerColours.red90,
+      errorContainer: SicklerColours.red95,
       onErrorContainer: SicklerColours.red10,
     ),
   );
@@ -124,6 +137,7 @@ class SicklerThemeData {
     primaryColor: SicklerColours.purple70,
     primaryColorLight: SicklerColours.purple90,
     primaryColorDark: SicklerColours.purple70,
+
     scaffoldBackgroundColor: SicklerColours.black,
     iconTheme: const IconThemeData(color: SicklerColours.white),
     primaryIconTheme: const IconThemeData(color: SicklerColours.white),
@@ -195,12 +209,21 @@ class SicklerThemeData {
     ),
     cardColor: SicklerColours.neutral20,
     elevatedButtonTheme: const ElevatedButtonThemeData(
+
       style: ButtonStyle(
+        splashFactory: InkSparkle.splashFactory,
+  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         fixedSize: MaterialStatePropertyAll<Size>(Size.fromHeight(52)),
         padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
             EdgeInsets.symmetric(horizontal: 16)),
         elevation: MaterialStatePropertyAll<double>(0),
       ),
+    ),
+    textButtonTheme: const TextButtonThemeData(
+        style: ButtonStyle(
+          elevation: MaterialStatePropertyAll<double>(0),
+          splashFactory: InkSparkle.splashFactory,
+        )
     ),
     chipTheme: ChipThemeData(
       elevation: 0,
@@ -212,7 +235,7 @@ class SicklerThemeData {
     sliderTheme: const SliderThemeData(
         activeTickMarkColor: SicklerColours.purple40,
         inactiveTrackColor: SicklerColours.neutral90,
-        trackHeight: 4,
+        trackHeight: 2,
         trackShape: RoundedRectSliderTrackShape(),
         thumbShape: RoundSliderThumbShape(
           elevation: 0,
@@ -230,6 +253,9 @@ class SicklerThemeData {
       onPrimary: SicklerColours.purple10,
       primaryContainer: SicklerColours.purple10,
       onPrimaryContainer: SicklerColours.purple95,
+      secondary: SicklerColours.orange70,
+      onSecondary: SicklerColours.black,
+      secondaryContainer: SicklerColours.orange10,
       error: SicklerColours.red60,
       onError: SicklerColours.white,
       errorContainer: SicklerColours.red10,

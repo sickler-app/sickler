@@ -1,10 +1,17 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/meds/add_edit_meds_screen.dart';
 
 class MedsDetailsScreen extends StatelessWidget {
+  static const String id = "meds_details";
   const MedsDetailsScreen({super.key});
+
+  ///Todo: Add more medication detail here, like the does, frequency, and stuff, reference Apple Health
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +26,7 @@ class MedsDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 24),
+            const Gap(24),
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -33,7 +40,7 @@ class MedsDetailsScreen extends StatelessWidget {
                   colorFilter: ColorFilter.mode(
                       theme.colorScheme.primary, BlendMode.srcIn),
                 ),
-                const SizedBox(width: 8),
+                const Gap(8),
                 Text(
                   "Tablets",
                   style: theme.textTheme.bodyMedium!
@@ -41,44 +48,41 @@ class MedsDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            const Gap(24),
             Text(
               "Lorem ipsum dolor sit amet consectetur. Ut ipsum et viverra adipiscing velit viverra sit venenatis facilisis. Vel laoreet pellentesque amet amet orci viverra eget.",
               style: theme.textTheme.bodyMedium!.copyWith(height: 1.5),
             ),
-            const SizedBox(height: 24),
-            Wrap(
+            const Gap(24),
+            const Wrap(
+              spacing: 12,
               runSpacing: 12,
               children: [
-                const SicklerChip(
+                SicklerChip(
                     chipType: SicklerChipType.info, label: "Daily"),
-                Container(
-                  width: 2,
-                  height: 24,
-                  decoration: const BoxDecoration(color: Colors.black),
-                ),
-                const SicklerChip(
+                SicklerChip(
                     chipType: SicklerChipType.info, label: "8:00 AM"),
-                const SicklerChip(
+                SicklerChip(
                     chipType: SicklerChipType.info, label: "3:00 PM"),
               ],
             ),
-            const SizedBox(height: 24),
+            const Gap(24),
             Text(
               "Medication History",
               style: theme.textTheme.bodyLarge!
-                  .copyWith(fontWeight: FontWeight.bold),
+                  .copyWith(fontWeight: FontWeight.w800),
             ),
-            const SizedBox(height: 12),
+            const Gap(12),
             const SicklerCalendar(),
-            const SizedBox(height: 24),
+            const Gap(24),
             SicklerButton(
-              onPressed: () {},
+              onPressed: () {
+                context.pushNamed(AddMedsScreen.id);
+              },
               label: "Edit Medication",
-              showIcon: true,
-              iconPath: "assets/svg/edit.svg",
+              icon: FluentIcons.edit_24_regular,
             ),
-            const SizedBox(height: 64),
+            const Gap(64),
           ],
         ),
       ),

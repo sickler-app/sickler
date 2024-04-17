@@ -33,9 +33,19 @@ enum MedicationType {
   custom
 }
 
+
+
+// enum VolumeType {
+//   volume1,
+//   volume2,
+//   volume3,
+//   volume4,
+//   volume5,
+// }
+
+
 enum MedsScheduleEndingState {
   ///An Enum to define the states of the Medication repeat ending format.
-
   never,
   onDate,
   afterNumberOfOccurrences
@@ -50,4 +60,17 @@ enum MedsHistoryMode {
   weekly,
   monthly,
   yearly
+}
+
+enum RelationType {
+  ///An Enum to define the Relation Types
+  ///Can be used for selecting Emergency Contact Relations
+
+  brother,
+  sister,
+  mother,
+  father,
+  doctor,
+  nurse,
+  friend,
 }

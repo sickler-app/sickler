@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 class RegisterScreen extends StatefulWidget {
+  static const String id = "register";
   const RegisterScreen({super.key});
 
   @override
@@ -48,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text("Email", style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        const Gap(8),
                         TextFormField(
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -63,9 +65,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                           },
                         ),
-                        const SizedBox(height: 24),
+                        const Gap(24),
                         Text("Password", style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        const Gap(8),
                         TextFormField(
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
@@ -101,10 +103,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                           },
                         ),
-                        const SizedBox(height: 24),
+                        const Gap(24),
                         Text("Confirm Password",
                             style: theme.textTheme.bodyMedium),
-                        const SizedBox(height: 8),
+                        const Gap(8),
                         TextFormField(
                           controller: confirmPasswordController,
                           keyboardType: TextInputType.visiblePassword,
@@ -143,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                           },
                         ),
-                        const SizedBox(height: 32),
+                        const Gap(32),
                         const Spacer(),
 
                         ///Buttons
@@ -154,7 +156,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                             },
                             label: "Sign In"),
-                        const SizedBox(height: 16),
+                        const Gap(16),
                         Row(
                           children: [
                             Expanded(
@@ -162,14 +164,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: theme.iconTheme.color,
                                   overrideIconColor: false,
                                   buttonType: SicklerButtonType.outline,
-                                  showIcon: true,
                                   iconPath: "assets/svg/google.svg",
                                   onPressed: () {
                                     //Todo: Perform Google Sign In Action
                                   },
                                   label: "Continue"),
                             ),
-                            const SizedBox(width: 16),
+                            const Gap(16),
                             Expanded(
                               child: SicklerButton(
                                   color: theme.iconTheme.color,
@@ -178,13 +179,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   onPressed: () {
                                     //Todo: Perform Apple Sign In Option
                                   },
-                                  showIcon: true,
                                   iconPath: "assets/svg/apple.svg",
                                   label: "Continue"),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        const Gap(12),
                         Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -195,14 +195,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         Align(
                             alignment: Alignment.center,
-                            child: SicklerChipButton(
+                            child: SicklerButton(
+                              isChipButton: true,
                               buttonType: SicklerButtonType.text,
                               onPressed: () {
                                 //  Todo: Navigate to Create Account Screen
                               },
                               label: "Create an Account",
                             )),
-                        const SizedBox(height: 64)
+                        const Gap(64)
                       ],
                     ),
                   ),

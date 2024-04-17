@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
 
+///Todo: Refactor this widget into a more generic form so it can be used elsewhere
 class MedsTypeItem extends StatefulWidget {
   const MedsTypeItem({
     super.key,
@@ -92,7 +94,7 @@ class _MedsTypeItemState extends State<MedsTypeItem>
                 : SicklerColours.blue95)
             : SicklerColours.blue20;
         _color = !isDarkMode ? SicklerColours.blue60 : SicklerColours.blue90;
-        _iconPath = "assets/svg/droplet.svg";
+        _iconPath = "assets/svg/droplet-alt.svg";
         _label = "Droplets";
 
       case MedicationType.injections:
@@ -188,7 +190,7 @@ class _MedsTypeItemState extends State<MedsTypeItem>
             );
           },
         ),
-        const SizedBox(height: 8),
+        const Gap(8),
         Text(
           widget.label ?? _label,
           textAlign: TextAlign.center,

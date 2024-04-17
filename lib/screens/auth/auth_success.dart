@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 class AuthSuccessScreen extends StatefulWidget {
@@ -22,9 +23,9 @@ class _AuthSuccessScreenState extends State<AuthSuccessScreen> {
               "Successfully Authenticated 😎",
               style: theme.textTheme.displaySmall,
             ),
-            const SizedBox(height: 32),
+            const Gap( 32),
             SicklerButton(onPressed: () {}, label: "Continue"),
-            const SizedBox(height: 64),
+            const Gap( 64),
           ],
         ),
       ),

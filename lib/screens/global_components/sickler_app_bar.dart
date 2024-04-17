@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class SicklerAppBar extends StatelessWidget {
   final String pageTitle;
@@ -19,12 +22,16 @@ class SicklerAppBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(height: 64),
+        const Gap(48),
         Row(
           children: [
             IconButton(
               padding: EdgeInsets.zero,
-              onPressed: () {},
+              onPressed: () {
+                HapticFeedback.mediumImpact();
+                Feedback.forTap(context);
+                context.pop();
+              },
               icon: SvgPicture.asset(
                 "assets/svg/chevron-back.svg",
                 colorFilter:
@@ -50,7 +57,7 @@ class SicklerAppBar extends StatelessWidget {
             child: Text(pageTitle, style: theme.textTheme.displaySmall),
           ),
         ),
-        const SizedBox(height: 48),
+        const Gap(48),
       ],
     );
   }

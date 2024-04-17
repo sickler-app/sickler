@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class OnboardingTemplateScreen extends StatelessWidget {
   final String text;
@@ -20,7 +21,7 @@ class OnboardingTemplateScreen extends StatelessWidget {
               text,
               style: theme.textTheme.displaySmall,
             ),
-            const SizedBox(height: 96 + 64),
+            const Gap( 96 + 64),
           ],
         ),
       ),
