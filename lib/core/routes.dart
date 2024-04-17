@@ -5,6 +5,7 @@ import 'package:sickler/screens/auth/sign_in_screen.dart';
 import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
 import 'package:sickler/screens/emergency/crisis_logs_screen.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';
+import 'package:sickler/screens/global_components/bottom_nav_bar.dart';
 import 'package:sickler/screens/home/home_screen.dart';
 import 'package:sickler/screens/meds/add_edit_meds_screen.dart';
 import 'package:sickler/screens/meds/meds_details_screen.dart';
@@ -22,11 +23,24 @@ import 'package:sickler/screens/water/water_empty_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
 class AppRouter {
+  final GlobalKey<NavigatorState> _rootNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: "root");
+  final GlobalKey<NavigatorState> _shellNavigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: "shell");
   final GoRouter router = GoRouter(
     debugLogDiagnostics: true,
-    routes: <GoRoute>[
+    routes: [
+      ///-------H
       GoRoute(
         path: "/",
+        name: BottomNavBar.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const BottomNavBar(),
+      ),
+
+      ///-------Home-------///
+      GoRoute(
+        path: "/${HomeScreen.id}",
         name: HomeScreen.id,
         builder: (BuildContext context, GoRouterState state) =>
             const HomeScreen(),
