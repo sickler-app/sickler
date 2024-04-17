@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-
 import '../../../core/core.dart';
 
 class MedsHistoryItem extends StatelessWidget {
@@ -112,7 +111,7 @@ class MedsHistoryItem extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-          )
+          ),
         ],
       ),
     );
