@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sickler/screens/emergency/emergency_screen.dart';
+import 'package:sickler/screens/meds/meds_screen.dart';
+import 'package:sickler/screens/profile/profile_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
 import '../../core/core.dart';
@@ -52,10 +55,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   const Spacer(),
-                  const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/memoji.png"),
-                    radius: 32,
-                    backgroundColor: SicklerColours.neutral90,
+                  InkWell(
+                    onTap: () {
+                      context.pushNamed(ProfileScreen.id);
+                    },
+                    child: const CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/memoji.png"),
+                      radius: 32,
+                      backgroundColor: SicklerColours.neutral90,
+                    ),
                   ),
                 ],
               ),
@@ -80,10 +88,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const Gap(16),
-              const MedsReminderCard(),
+              GestureDetector(
+                  onTap: () {
+                    context.goNamed(MedsScreen.id);
+                  },
+                  child: const MedsReminderCard()),
               const Gap(16),
               EmergencySharingCard(
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(EmergencyScreen.id);
+                },
               ),
               const SizedBox(
                 height: 64,

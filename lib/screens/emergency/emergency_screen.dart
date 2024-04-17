@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
 import 'package:sickler/screens/emergency/components/components.dart';
 
 import '../global_components/global_components.dart';
@@ -57,9 +59,12 @@ class EmergencyScreen extends StatelessWidget {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
-                    children: const [
+                    children: [
                       Gap(16),
                       ContactCard(
+                        onPressed: () {
+                          context.goNamed(AddEmergencyContactScreen.id);
+                        },
                         showAddContactButton: true,
                       ),
                       Gap(12),

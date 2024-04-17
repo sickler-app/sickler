@@ -23,6 +23,7 @@ import 'package:sickler/screens/water/water_screen.dart';
 
 class AppRouter {
   final GoRouter router = GoRouter(
+    debugLogDiagnostics: true,
     routes: <GoRoute>[
       GoRoute(
         path: "/",

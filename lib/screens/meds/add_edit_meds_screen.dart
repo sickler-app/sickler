@@ -2,6 +2,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/core.dart';
 import '../global_components/global_components.dart';
@@ -313,14 +314,14 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                               : const SizedBox(),
                           widget.isEditing ? const Spacer() : const SizedBox(),
                           SicklerButton(
-                              isChipButton: true,
-                              buttonType: SicklerButtonType.secondary,
-                              onPressed: () {},
-                              icon: FluentIcons.calendar_20_regular,
-                              label: widget.isEditing
-                                  ? "12/05/2023"
-                                  : "Select End Date",
-                              iconPath: "assets/svg/calendar.svg"),
+                            isChipButton: true,
+                            buttonType: SicklerButtonType.secondary,
+                            onPressed: () {},
+                            icon: FluentIcons.calendar_20_regular,
+                            label: widget.isEditing
+                                ? "12/05/2023"
+                                : "Select End Date",
+                          ),
                         ],
                       ),
                     ),
@@ -330,13 +331,15 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         label: widget.isEditing
                             ? "Save Medication"
                             : "Add Medication",
-                        icon: FluentIcons.check_24_regular),
+                        icon: FluentIcons.checkmark_24_regular),
                     Visibility(
                         visible: !widget.isEditing, child: const Gap(16)),
                     Visibility(
                       visible: !widget.isEditing,
                       child: SicklerButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.pop();
+                          },
                           label: "Done",
                           buttonType: SicklerButtonType.outline),
                     ),

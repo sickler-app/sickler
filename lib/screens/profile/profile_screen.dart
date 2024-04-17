@@ -2,8 +2,12 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
+import 'package:sickler/screens/profile/profile_vitals_info_screen.dart';
+import 'package:sickler/screens/water/water_screen.dart';
 
 import 'components/components.dart';
 
@@ -21,7 +25,10 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const SicklerAppBar(pageTitle: "Profile"),
             SicklerEditableAvatar(
-                onEditPressed: () {}, imagePath: "assets/images/memoji2.jpg"),
+                onEditPressed: () {
+                  context.pushNamed(ProfileBasicInfoScreen.id);
+                },
+                imagePath: "assets/images/memoji2.jpg"),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -114,6 +121,8 @@ class ProfileScreen extends StatelessWidget {
                       const Spacer(),
                       IconButton(
                         onPressed: () {
+                          context.pushNamed(ProfileVitalsInfoScreen.id);
+
                           ///Todo: Add Edit Vitals Method
                         },
                         icon: Icon(
@@ -128,6 +137,9 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: VitalsItemCard(
+                          onPressed: () {
+                            context.pushNamed(ProfileVitalsInfoScreen.id);
+                          },
                           label: "Height",
                           value: "178",
                           unit: " cm",
@@ -153,6 +165,9 @@ class ProfileScreen extends StatelessWidget {
                       const Gap(12),
                       Expanded(
                         child: VitalsItemCard(
+                          onPressed: () {
+                            context.pushNamed(ProfileVitalsInfoScreen.id);
+                          },
                           label: "Weight",
                           value: "64",
                           unit: " kg",
@@ -179,6 +194,9 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: VitalsItemCard(
+                          onPressed: () {
+                            context.pushNamed(WaterScreen.id);
+                          },
                           label: "Water",
                           value: "1200",
                           unit: " ml",
@@ -199,6 +217,7 @@ class ProfileScreen extends StatelessWidget {
                       const Gap(12),
                       Expanded(
                         child: VitalsItemCard(
+                          onPressed: () {},
                           label: "BMI",
                           value: "19.8",
                           // unit: " normal",

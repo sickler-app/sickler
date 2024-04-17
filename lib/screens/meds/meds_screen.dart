@@ -2,8 +2,10 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/meds/add_edit_meds_screen.dart';
 import 'package:sickler/screens/meds/components/components.dart';
 
 class MedsScreen extends StatelessWidget {
@@ -25,20 +27,14 @@ class MedsScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Upcoming",
-                    style: theme.textTheme.headlineSmall,
+                    style: theme.textTheme.titleLarge,
                   ),
                   const Gap(16),
-                  const MedsScreenReminderCard(
-                    isCurrent: true,
-                  ),
-                  const Gap(12),
-                  const MedsScreenReminderCard(
-                    isCurrent: false,
-                  ),
+                  const MedsScreenReminderCard(),
                   const Gap(48),
                   Text(
                     "My Medications",
-                    style: theme.textTheme.headlineSmall,
+                    style: theme.textTheme.titleLarge,
                   ),
                   const Gap(16),
                   const MyMedsCard(),
@@ -50,33 +46,47 @@ class MedsScreen extends StatelessWidget {
                     height: 32,
                   ),
                   SicklerButton(
-                    iconPath: "assets/svg/plus.svg",
                     icon: FluentIcons.add_24_regular,
                     onPressed: () {
-                      showAdaptiveDialog(
-                        context: context,
-                        builder: (context) => SicklerAlertDialog(
-                          title: "Delete Log?",
-                          message: "Are you sure you want to delete this log?",
-                          actions: [
-                            SicklerButton(
-                                isChipButton: true,
-                                icon: FluentIcons.dismiss_20_regular,
-                                iconPath: "assets/svg/cross.svg",
-                                buttonType: SicklerButtonType.primary,
-                                onPressed: () {},
-                                label: "Cancel"),
-                            SicklerButton(
-                                isChipButton: true,
-                                icon: FluentIcons.delete_20_regular,
-                                iconPath: "assets/svg/delete.svg",
-                                color: theme.colorScheme.error,
-                                buttonType: SicklerButtonType.outline,
-                                onPressed: () {},
-                                label: "Delete")
-                          ],
-                        ),
-                      );
+                      context.pushNamed(AddMedsScreen.id);
+                      // showAdaptiveDialog(
+                      //   context: context,
+                      //   builder: (context) => SicklerAlertDialog(
+                      //     child: Column(
+                      //       mainAxisSize: MainAxisSize.min,
+                      //       crossAxisAlignment: CrossAxisAlignment.center,
+                      //       children: [
+                      //         Text(
+                      //           "Are you sure you want to delete this log?",
+                      //           textAlign: TextAlign.center,
+                      //         ),
+                      //         Gap(24),
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.end,
+                      //           children: [
+                      //             SicklerButton(
+                      //                 isChipButton: true,
+                      //                 icon: FluentIcons.dismiss_20_regular,
+                      //                 buttonType: SicklerButtonType.text,
+                      //                 onPressed: () {
+                      //                   context.pop();
+                      //                 },
+                      //                 label: "Cancel"),
+                      //             Gap(12),
+                      //             SicklerButton(
+                      //                 isChipButton: true,
+                      //                 icon: FluentIcons.delete_20_regular,
+                      //                 color: theme.colorScheme.error,
+                      //                 buttonType: SicklerButtonType.text,
+                      //                 onPressed: () {},
+                      //                 label: "Delete")
+                      //           ],
+                      //         )
+                      //       ],
+                      //     ),
+                      //     title: "Delete Log?",
+                      //   ),
+                      // );
                     },
                     label: "Add Medication",
                     buttonType: SicklerButtonType.secondary,
@@ -88,7 +98,7 @@ class MedsScreen extends StatelessWidget {
                     children: [
                       Text(
                         "Today's History",
-                        style: theme.textTheme.headlineSmall,
+                        style: theme.textTheme.titleLarge,
                       ),
                       const Spacer(),
                       IconButton(

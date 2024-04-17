@@ -2,12 +2,16 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/meds/add_edit_meds_screen.dart';
 
 class MedsDetailsScreen extends StatelessWidget {
   static const String id = "meds_details";
   const MedsDetailsScreen({super.key});
+
+  ///Todo: Add more medication detail here, like the does, frequency, and stuff, reference Apple Health
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +55,11 @@ class MedsDetailsScreen extends StatelessWidget {
             ),
             const Gap(24),
             Wrap(
+              spacing: 12,
               runSpacing: 12,
               children: [
                 const SicklerChip(
                     chipType: SicklerChipType.info, label: "Daily"),
-                Container(
-                  width: 2,
-                  height: 24,
-                  decoration: const BoxDecoration(color: Colors.black),
-                ),
                 const SicklerChip(
                     chipType: SicklerChipType.info, label: "8:00 AM"),
                 const SicklerChip(
@@ -76,10 +76,11 @@ class MedsDetailsScreen extends StatelessWidget {
             const SicklerCalendar(),
             const Gap(24),
             SicklerButton(
-              onPressed: () {},
+              onPressed: () {
+                context.pushNamed(AddMedsScreen.id);
+              },
               label: "Edit Medication",
               icon: FluentIcons.edit_24_regular,
-              iconPath: "assets/svg/edit.svg",
             ),
             const Gap(64),
           ],
