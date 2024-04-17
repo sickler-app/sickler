@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-
 class CrisisHistoryMonthly extends StatelessWidget {
   const CrisisHistoryMonthly({super.key});
 
@@ -16,7 +15,7 @@ class CrisisHistoryMonthly extends StatelessWidget {
         Text(
           "Monthly",
           style:
-              theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+              theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w800),
         ),
 
         RichText(

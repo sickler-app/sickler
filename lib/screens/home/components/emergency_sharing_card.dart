@@ -5,61 +5,69 @@ import 'package:gap/gap.dart';
 import '../../../core/core.dart';
 
 class EmergencySharingCard extends StatelessWidget {
-  const EmergencySharingCard({super.key});
+  final VoidCallback onPressed;
+  const EmergencySharingCard({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Container(
-      height: 200,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: SicklerColours.red95,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            children: [
-              Text(
-                "Emergency",
-                style: theme.textTheme.bodyMedium!
-                    .copyWith(color: SicklerColours.red50),
-              ),
-              const Spacer(),
-              SvgPicture.asset(
-                "assets/svg/emergency.svg",
-                colorFilter: const ColorFilter.mode(
-                    SicklerColours.red50, BlendMode.srcIn),
-              )
-            ],
-          ),
-          const Spacer(),
-          Container(
-            height: 114,
-            width: 114,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: SicklerColours.red90,
+    final bool isDarkMode = theme.brightness == Brightness.dark;
+    return InkWell(
+      borderRadius: BorderRadius.circular(24),
+      splashFactory: InkSparkle.splashFactory,
+      splashColor: theme.colorScheme.error.withOpacity(.2),
+      onTap: onPressed,
+      child: Ink(
+        height: 200,
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: isDarkMode ? theme.cardColor : SicklerColours.red95,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Text(
+                  "Emergency",
+                  style: theme.textTheme.bodyMedium!
+                      .copyWith(color: SicklerColours.red50),
+                ),
+                const Spacer(),
+                SvgPicture.asset(
+                  "assets/svg/emergency-alt.svg",
+                  colorFilter: const ColorFilter.mode(
+                      SicklerColours.red50, BlendMode.srcIn),
+                )
+              ],
             ),
-            child: Center(
-              child: SvgPicture.asset(
-                "assets/svg/emergency.svg",
-                height: 48,
-                colorFilter: const ColorFilter.mode(
-                    SicklerColours.red50, BlendMode.srcIn),
+            const Spacer(),
+            Container(
+              height: 114,
+              width: 114,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isDarkMode ? SicklerColours.red10 : SicklerColours.red90,
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  "assets/svg/emergency-alt.svg",
+                  height: 48,
+                  colorFilter: const ColorFilter.mode(
+                      SicklerColours.red50, BlendMode.srcIn),
+                ),
               ),
             ),
-          ),
-          const Spacer(),
-          Text(
-            "Start Emergency Sharing",
-            textAlign: TextAlign.center,
-            style: theme.textTheme.bodyMedium,
-          ),
-          const Gap( 16),
-        ],
+            const Spacer(),
+            Text(
+              "Start Emergency Sharing",
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodyMedium,
+            ),
+            const Gap(16),
+          ],
+        ),
       ),
     );
   }

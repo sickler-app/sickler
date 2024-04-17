@@ -8,6 +8,7 @@ import 'package:sickler/screens/meds/components/meds_type_item.dart';
 import '../global_components/global_components.dart';
 
 class AddEmergencyContactScreen extends StatefulWidget {
+  static const String id = "add_emergency_contact";
   const AddEmergencyContactScreen({super.key});
 
   @override
@@ -48,6 +49,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
@@ -167,4 +169,3 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
     );
   }
 }
-

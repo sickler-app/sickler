@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -11,10 +10,10 @@ class EmergencyContactRadio extends StatelessWidget {
   final String number;
   const EmergencyContactRadio(
       {super.key,
-        required this.isSelected,
-        required this.name,
-        required this.imagePath,
-        required this.number});
+      required this.isSelected,
+      required this.name,
+      required this.imagePath,
+      required this.number});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +29,10 @@ class EmergencyContactRadio extends StatelessWidget {
           border: isSelected
               ? null
               : Border.all(
-              width: 1,
-              color: isDarkMode
-                  ? SicklerColours.neutral20
-                  : SicklerColours.neutral90)),
+                  width: 1,
+                  color: isDarkMode
+                      ? SicklerColours.neutral20
+                      : SicklerColours.neutral90)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -49,7 +48,7 @@ class EmergencyContactRadio extends StatelessWidget {
               Text(
                 name,
                 style: theme.textTheme.bodyMedium!
-                    .copyWith(fontWeight: FontWeight.bold),
+                    .copyWith(fontWeight: FontWeight.w800),
               ),
               const Gap(8),
 

@@ -5,6 +5,7 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 class SignInScreen extends StatefulWidget {
+  static const String id = "sign_in";
   const SignInScreen({super.key});
 
   @override
@@ -45,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text("Email", style: theme.textTheme.bodyMedium),
-                        const Gap( 8),
+                        const Gap(8),
                         TextFormField(
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -60,9 +61,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             }
                           },
                         ),
-                        const Gap( 24),
+                        const Gap(24),
                         Text("Password", style: theme.textTheme.bodyMedium),
-                        const Gap( 8),
+                        const Gap(8),
                         TextFormField(
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
@@ -95,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             }
                           },
                         ),
-                        const Gap( 32),
+                        const Gap(32),
                         const Spacer(),
 
                         ///Buttons
@@ -106,7 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               }
                             },
                             label: "Sign In"),
-                        const Gap( 16),
+                        const Gap(16),
                         Row(
                           children: [
                             Expanded(
@@ -120,7 +121,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   },
                                   label: "Continue"),
                             ),
-                            const Gap( 16),
+                            const Gap(16),
                             Expanded(
                               child: SicklerButton(
                                   color: theme.iconTheme.color,
@@ -129,13 +130,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                   onPressed: () {
                                     //Todo: Perform Apple Sign In Option
                                   },
-
                                   iconPath: "assets/svg/apple.svg",
                                   label: "Continue"),
                             ),
                           ],
                         ),
-                        const Gap( 12),
+                        const Gap(12),
                         Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -146,14 +146,15 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         Align(
                             alignment: Alignment.center,
-                            child:  SicklerButton( isChipButton:true,
+                            child: SicklerButton(
+                              isChipButton: true,
                               buttonType: SicklerButtonType.text,
                               onPressed: () {
                                 //  Todo: Navigate to Create Account Screen
                               },
                               label: "Create an Account",
                             )),
-                        const Gap( 64)
+                        const Gap(64)
                       ],
                     ),
                   ),

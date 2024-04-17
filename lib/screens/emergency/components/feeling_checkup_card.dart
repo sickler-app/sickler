@@ -14,13 +14,16 @@ class FeelingCheckupCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-      //  color: theme.cardColor,
+        //  color: theme.cardColor,
       ),
       child: Column(
         children: [
           Row(
             children: [
-               Text("How are you\nfeeling today?", style:  theme.textTheme.headlineSmall,),
+              Text(
+                "How are you\nfeeling today?",
+                style: theme.textTheme.headlineSmall,
+              ),
               const Spacer(),
               RichText(
                   text: TextSpan(children: [
@@ -32,33 +35,37 @@ class FeelingCheckupCard extends StatelessWidget {
               ]))
             ],
           ),
-          const Gap( 24),
+          const Gap(24),
           Row(
             children: [
-              Text("No Pain", style: theme.textTheme.bodySmall,), const Spacer(),
-              Text("Extreme Pain", style: theme.textTheme.bodySmall,)
+              Text(
+                "No Pain",
+                style: theme.textTheme.bodySmall,
+              ),
+              const Spacer(),
+              Text(
+                "Extreme Pain",
+                style: theme.textTheme.bodySmall,
+              )
             ],
           ),
           Slider(value: .7, onChanged: (value) {}),
-          const Gap( 24),
+          const Gap(24),
           TextFormField(
             maxLines: 4,
             decoration: SicklerInputDecoration.inputDecoration(context)
                 .copyWith(hintText: "Description"),
           ),
-
-    const Gap( 16),
+          const Gap(16),
           SicklerButton(
             onPressed: () {
               showDialog(
                 context: context,
                 builder: (context) => const EmergencyAlertNoContactDialog(),
               );
-
             },
-
             label: "Trigger SOS Alert",
-           iconPath: "assets/svg/emergency.svg",
+            iconPath: "assets/svg/emergency-alt.svg",
           ),
         ],
       ),

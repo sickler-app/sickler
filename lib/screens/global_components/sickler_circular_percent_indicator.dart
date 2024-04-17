@@ -9,6 +9,8 @@ class SicklerCircularPercentIndicator extends StatelessWidget {
   final bool? shouldAnimate;
   final String unit;
   final double progress;
+  final double? radius;
+  final bool? isSmall;
 
   /// Between 0 and 1
 
@@ -20,6 +22,8 @@ class SicklerCircularPercentIndicator extends StatelessWidget {
     this.shouldAnimate = true,
     required this.unit,
     required this.progress,
+    this.radius,
+    this.isSmall = false,
 
     ///Between 0 and 1
   });
@@ -28,22 +32,27 @@ class SicklerCircularPercentIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     final ThemeData theme = Theme.of(context);
+    final bool isDarkMode = theme.brightness == Brightness.dark;
     return CircularPercentIndicator(
       animateFromLastPercent: true,
       animation: shouldAnimate!,
       circularStrokeCap: CircularStrokeCap.round,
-      radius: screenSize.width * .22,
+      radius: radius ?? screenSize.width * .22,
       progressColor: progressColour ?? SicklerColours.blueSeed,
-      lineWidth: kDefaultPadding,
-      backgroundColor: backgroundColor ?? SicklerColours.blue90,
+      lineWidth: 24,
+      backgroundColor: backgroundColor ??
+          (isDarkMode ? theme.cardColor : SicklerColours.blue90),
       percent: progress,
       center: RichText(
         text: TextSpan(
           children: [
             TextSpan(
-                text: "37",
-                style: theme.textTheme.displayMedium!
-                    .copyWith(fontWeight: FontWeight.bold)),
+                text: "39",
+                style: isSmall!
+                    ? theme.textTheme.headlineSmall!
+                        .copyWith(fontWeight: FontWeight.w800)
+                    : theme.textTheme.displayMedium!
+                        .copyWith(fontWeight: FontWeight.w800)),
             TextSpan(text: " %", style: theme.textTheme.bodyMedium)
           ],
         ),

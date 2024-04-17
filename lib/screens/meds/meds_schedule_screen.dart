@@ -8,6 +8,7 @@ import 'package:sickler/screens/profile/components/sickler_radio.dart';
 import '../../core/core.dart';
 
 class MedsScheduleScreen extends StatefulWidget {
+  static const String id = "meds_schedule";
   const MedsScheduleScreen({super.key});
 
   @override
@@ -67,7 +68,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                                             context)
                                         .copyWith(hintText: "1")),
                           ),
-                          const Gap( 16),
+                          const Gap(16),
                           Expanded(
                             child: TextFormField(
                               controller: repeatIntervalController,
@@ -89,13 +90,13 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                           const Spacer(),
                         ],
                       ),
-                      const Gap( 24),
+                      const Gap(24),
                       SicklerCalendarDaySelector(selectedDays: (selectedDay) {
                         ///Todo:Add the selected day to state;
                       }),
-                      const Gap( 24),
+                      const Gap(24),
                       const Text("Ends on"),
-                      const Gap( 24),
+                      const Gap(24),
                       SicklerRadio<MedsScheduleEndingState>(
                         showBorder: false,
                         unselectedBackgroundColor: Colors.transparent,
@@ -109,7 +110,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                           });
                         },
                       ),
-                      const Gap( 12),
+                      const Gap(12),
                       Row(
                         children: [
                           Expanded(
@@ -147,7 +148,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                           const Spacer(),
                         ],
                       ),
-                      const Gap( 12),
+                      const Gap(12),
                       Row(
                         children: [
                           Expanded(
@@ -195,7 +196,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                             ///Todo: save data, add to state and pop
                           },
                           label: "Continue"),
-                      const Gap( 64),
+                      const Gap(64),
                     ],
                   ),
                 ),

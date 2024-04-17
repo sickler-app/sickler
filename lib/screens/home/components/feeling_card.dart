@@ -48,7 +48,7 @@ class _FeelingCardState extends State<FeelingCard> {
               ),
             ],
           ),
-          const Gap( 24),
+          const Gap(24),
           Row(children: [
             Text(
               "No Pain",
@@ -60,7 +60,7 @@ class _FeelingCardState extends State<FeelingCard> {
               style: theme.textTheme.bodySmall,
             )
           ]),
-          const Gap( 12),
+          const Gap(12),
           Slider(
               activeColor: theme.colorScheme.primary,
               inactiveColor: SicklerColours.neutral90,
@@ -72,21 +72,21 @@ class _FeelingCardState extends State<FeelingCard> {
                   sliderValue = value;
                 });
               }),
-          const Gap( 16),
+          const Gap(16),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-               SicklerButton( isChipButton:true,
+              SicklerButton(
+                  isChipButton: true,
                   onPressed: () {},
                   label: "Cancel",
                   buttonType: SicklerButtonType.outline),
-              const Gap( 16),
-               SicklerButton( isChipButton:true,
+              const Gap(16),
+              SicklerButton(
+                  isChipButton: true,
                   onPressed: () {},
                   label: "Save",
-                  iconPath: "assets/svg/check.svg",
-                  icon: FluentIcons.check_20_regular,
-
+                  icon: FluentIcons.checkmark_20_regular,
                   buttonType: SicklerButtonType.primary),
             ],
           ),

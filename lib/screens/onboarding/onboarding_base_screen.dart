@@ -4,6 +4,7 @@ import 'package:sickler/screens/onboarding/onboarding_template_screen.dart';
 import 'components/onboarding_button.dart';
 
 class OnboardingBaseScreen extends StatefulWidget {
+  static const String id = "onboarding";
   const OnboardingBaseScreen({super.key});
 
   @override

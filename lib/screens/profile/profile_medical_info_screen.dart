@@ -6,6 +6,7 @@ import '../../core/core.dart';
 import '../global_components/global_components.dart';
 
 class ProfileMedicalInfoScreen extends StatefulWidget {
+  static const String id = "medical_info";
   const ProfileMedicalInfoScreen({super.key});
 
   @override

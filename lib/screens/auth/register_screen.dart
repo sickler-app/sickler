@@ -5,6 +5,7 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 class RegisterScreen extends StatefulWidget {
+  static const String id = "register";
   const RegisterScreen({super.key});
 
   @override
@@ -49,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text("Email", style: theme.textTheme.bodyMedium),
-                        const Gap( 8),
+                        const Gap(8),
                         TextFormField(
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -64,9 +65,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                           },
                         ),
-                        const Gap( 24),
+                        const Gap(24),
                         Text("Password", style: theme.textTheme.bodyMedium),
-                        const Gap( 8),
+                        const Gap(8),
                         TextFormField(
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
@@ -102,10 +103,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                           },
                         ),
-                        const Gap( 24),
+                        const Gap(24),
                         Text("Confirm Password",
                             style: theme.textTheme.bodyMedium),
-                        const Gap( 8),
+                        const Gap(8),
                         TextFormField(
                           controller: confirmPasswordController,
                           keyboardType: TextInputType.visiblePassword,
@@ -144,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             }
                           },
                         ),
-                        const Gap( 32),
+                        const Gap(32),
                         const Spacer(),
 
                         ///Buttons
@@ -155,7 +156,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                             },
                             label: "Sign In"),
-                        const Gap( 16),
+                        const Gap(16),
                         Row(
                           children: [
                             Expanded(
@@ -169,7 +170,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   },
                                   label: "Continue"),
                             ),
-                            const Gap( 16),
+                            const Gap(16),
                             Expanded(
                               child: SicklerButton(
                                   color: theme.iconTheme.color,
@@ -178,13 +179,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   onPressed: () {
                                     //Todo: Perform Apple Sign In Option
                                   },
-
                                   iconPath: "assets/svg/apple.svg",
                                   label: "Continue"),
                             ),
                           ],
                         ),
-                        const Gap( 12),
+                        const Gap(12),
                         Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -195,14 +195,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         Align(
                             alignment: Alignment.center,
-                            child:  SicklerButton( isChipButton:true,
+                            child: SicklerButton(
+                              isChipButton: true,
                               buttonType: SicklerButtonType.text,
                               onPressed: () {
                                 //  Todo: Navigate to Create Account Screen
                               },
                               label: "Create an Account",
                             )),
-                        const Gap( 64)
+                        const Gap(64)
                       ],
                     ),
                   ),

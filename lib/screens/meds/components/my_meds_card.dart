@@ -29,9 +29,9 @@ class MyMedsCard extends StatelessWidget {
                 Text(
                   "Hydroxyl Urea",
                   style: theme.textTheme.bodyLarge!
-                      .copyWith(fontWeight: FontWeight.bold),
+                      .copyWith(fontWeight: FontWeight.w800),
                 ),
-                const Gap( 8),
+                const Gap(8),
                 Row(
                   children: [
                     SvgPicture.asset(
@@ -39,7 +39,7 @@ class MyMedsCard extends StatelessWidget {
                       colorFilter: ColorFilter.mode(
                           theme.colorScheme.primary, BlendMode.srcIn),
                     ),
-                    const Gap( 8),
+                    const Gap(8),
                     Text(
                       "Tablet",
                       style: theme.textTheme.bodyMedium!
@@ -63,8 +63,9 @@ class MyMedsCard extends StatelessWidget {
               ),
             ),
           ),
-          const Gap( 8),
-           SicklerButton( isChipButton:true,
+          const Gap(8),
+          SicklerButton(
+              isChipButton: true,
               iconPath: "assets/svg/check.svg",
               buttonType: SicklerButtonType.primary,
               onPressed: () {

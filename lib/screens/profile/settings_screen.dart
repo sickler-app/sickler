@@ -6,6 +6,7 @@ import 'package:sickler/screens/global_components/global_components.dart';
 import 'components/components.dart';
 
 class SettingsScreen extends StatelessWidget {
+  static const String id = "settings";
   const SettingsScreen({super.key});
 
   @override
@@ -27,7 +28,7 @@ class SettingsScreen extends StatelessWidget {
                   child: Text(
                     "Water Preferences",
                     style: theme.textTheme.titleMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
+                        .copyWith(fontWeight: FontWeight.w800),
                   ),
                 ),
                 const Gap(16),
@@ -54,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
                   child: Text(
                     "Units",
                     style: theme.textTheme.titleMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
+                        .copyWith(fontWeight: FontWeight.w800),
                   ),
                 ),
 
@@ -100,10 +101,11 @@ class SettingsScreen extends StatelessWidget {
                   icon: FluentIcons.weather_moon_24_regular,
                   onPressed: () {},
                   trailingWidget: Switch(
-                      value: false,
-                      onChanged: (value) {
-                        ///Todo: Save Theme Preferences
-                      },),
+                    value: false,
+                    onChanged: (value) {
+                      ///Todo: Save Theme Preferences
+                    },
+                  ),
                 ),
 
                 ///---------------Profile Settings--------------///
@@ -113,7 +115,7 @@ class SettingsScreen extends StatelessWidget {
                   child: Text(
                     "Profile Settings",
                     style: theme.textTheme.titleMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
+                        .copyWith(fontWeight: FontWeight.w800),
                   ),
                 ),
                 const Gap(16),
@@ -144,4 +146,3 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
-
