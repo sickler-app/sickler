@@ -54,15 +54,15 @@ class MedsDetailsScreen extends StatelessWidget {
               style: theme.textTheme.bodyMedium!.copyWith(height: 1.5),
             ),
             const Gap(24),
-            Wrap(
+            const Wrap(
               spacing: 12,
               runSpacing: 12,
               children: [
-                const SicklerChip(
+                SicklerChip(
                     chipType: SicklerChipType.info, label: "Daily"),
-                const SicklerChip(
+                SicklerChip(
                     chipType: SicklerChipType.info, label: "8:00 AM"),
-                const SicklerChip(
+                SicklerChip(
                     chipType: SicklerChipType.info, label: "3:00 PM"),
               ],
             ),

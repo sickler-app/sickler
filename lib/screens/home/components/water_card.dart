@@ -40,7 +40,7 @@ class WaterCard extends StatelessWidget {
                   colorFilter: const ColorFilter.mode(
                       SicklerColours.blueSeed, BlendMode.srcIn),
                 ),
-                Gap(4),
+                const Gap(4),
                 Text(
                   "Water",
                   style: theme.textTheme.bodyMedium!.copyWith(
@@ -49,7 +49,7 @@ class WaterCard extends StatelessWidget {
                 ),
               ],
             ),
-            Gap(8),
+            const Gap(8),
             Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,7 +69,7 @@ class WaterCard extends StatelessWidget {
                                   height: 1)),
                         ],
                       ),
-                      Gap(8),
+                      const Gap(8),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -84,7 +84,7 @@ class WaterCard extends StatelessWidget {
                                   fontWeight: FontWeight.w800, height: 1)),
                         ],
                       ),
-                      Gap(8),
+                      const Gap(8),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -101,7 +101,7 @@ class WaterCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Gap(16),
+                const Gap(16),
                 CircularPercentIndicator(
                   animateFromLastPercent: true,
                   animation: true,

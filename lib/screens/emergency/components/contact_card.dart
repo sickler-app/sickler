@@ -71,11 +71,11 @@ class ContactCard extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "Are you sure you want to delete this emergency contact?",
                                   textAlign: TextAlign.center,
                                 ),
-                                Gap(16),
+                                const Gap(16),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [

@@ -70,7 +70,7 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                   const Spacer(),
                   SvgPicture.asset(
                     "assets/svg/tablet.svg",
-                    colorFilter: ColorFilter.mode(
+                    colorFilter: const ColorFilter.mode(
                         SicklerColours.neutral50, BlendMode.srcIn),
                   ),
                   const Gap(8),
@@ -97,7 +97,7 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                             curve: Curves.easeOut,
                             duration: 500.ms),
               ),
-              Gap(8),
+              const Gap(8),
               RepaintBoundary(
                 child: Text("8:00 pm",
                         style: theme.textTheme.titleMedium!

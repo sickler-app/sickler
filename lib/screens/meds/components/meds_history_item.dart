@@ -34,7 +34,7 @@ class MedsHistoryItem extends StatelessWidget {
                 "assets/svg/medication.svg",
                 height: 20,
                 colorFilter:
-                    ColorFilter.mode(SicklerColours.neutral50, BlendMode.srcIn),
+                    const ColorFilter.mode(SicklerColours.neutral50, BlendMode.srcIn),
               ),
             ),
           ),
@@ -72,13 +72,13 @@ class MedsHistoryItem extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Visibility(
             visible: mode == MedsHistoryMode.weekly,
             child: SizedBox(
               height: 16,
               child: ListView.separated(
-                separatorBuilder: (context, index) => Gap(4),
+                separatorBuilder: (context, index) => const Gap(4),
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: 7,
@@ -101,12 +101,12 @@ class MedsHistoryItem extends StatelessWidget {
           Visibility(
             visible: mode == MedsHistoryMode.daily,
             child: Container(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: theme.colorScheme.primary,
               ),
-              child: Icon(
+              child: const Icon(
                 size: 16,
                 FluentIcons.checkmark_20_filled,
                 color: Colors.white,

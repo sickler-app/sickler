@@ -60,18 +60,18 @@ class EmergencyScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     children: [
-                      Gap(16),
+                      const Gap(16),
                       ContactCard(
                         onPressed: () {
                           context.goNamed(AddEmergencyContactScreen.id);
                         },
                         showAddContactButton: true,
                       ),
-                      Gap(12),
-                      ContactCard(),
-                      Gap(12),
-                      ContactCard(),
-                      Gap(16),
+                      const Gap(12),
+                      const ContactCard(),
+                      const Gap(12),
+                      const ContactCard(),
+                      const Gap(16),
                     ],
                   ),
                 ),

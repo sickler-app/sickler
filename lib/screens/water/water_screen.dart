@@ -5,7 +5,6 @@ import 'package:sickler/core/enums.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/water/components/water_volume_selector.dart';
 
-import '../global_components/sickler_circular_percent_indicator.dart';
 import 'components/components.dart';
 
 class WaterScreen extends StatefulWidget {

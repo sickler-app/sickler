@@ -76,7 +76,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 label: "Home",
                 icon: SvgPicture.asset(
                   "assets/svg/home-alt.svg",
-                  colorFilter: ColorFilter.mode(
+                  colorFilter: const ColorFilter.mode(
                       SicklerColours.neutral50, BlendMode.srcIn),
                 ),
                 selectedIcon: SvgPicture.asset(
@@ -88,7 +88,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 label: "Water",
                 icon: SvgPicture.asset(
                   "assets/svg/droplet-alt.svg",
-                  colorFilter: ColorFilter.mode(
+                  colorFilter: const ColorFilter.mode(
                       SicklerColours.neutral50, BlendMode.srcIn),
                 ),
                 selectedIcon: SvgPicture.asset(
@@ -100,7 +100,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 label: "Emergency",
                 icon: SvgPicture.asset(
                   "assets/svg/emergency-alt.svg",
-                  colorFilter: ColorFilter.mode(
+                  colorFilter: const ColorFilter.mode(
                       SicklerColours.neutral50, BlendMode.srcIn),
                 ),
                 selectedIcon: SvgPicture.asset(
