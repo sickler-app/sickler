@@ -23,10 +23,6 @@ import 'package:sickler/screens/water/water_empty_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
 class AppRouter {
-  final GlobalKey<NavigatorState> _rootNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: "root");
-  final GlobalKey<NavigatorState> _shellNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: "shell");
   final GoRouter router = GoRouter(
     debugLogDiagnostics: true,
     routes: [
