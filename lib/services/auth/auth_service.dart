@@ -47,16 +47,3 @@ class AuthService {
     return loggedInUser;
   }
 }
-
-///A Try catch wrapper, might do same for either
-T callMethod<T>(T Function() function) {
-  try {
-    return function();
-  } on FirebaseException catch (e) {
-    ///A Firebase Exception has occurred
-    throw Exception(e.message);
-  } catch (e) {
-    ///An exception has occurred;
-    throw Exception(e.toString());
-  }
-}
