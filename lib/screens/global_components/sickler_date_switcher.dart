@@ -2,8 +2,6 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../core/core.dart';
-
 class SicklerDateSwitcher extends StatelessWidget {
   const SicklerDateSwitcher(
       {super.key,
@@ -28,14 +26,14 @@ class SicklerDateSwitcher extends StatelessWidget {
         IconButton.filled(
             style: IconButton.styleFrom(
               backgroundColor: isDarkMode
-                  ? backgroundColor ??  theme.colorScheme.primary
-                  :  backgroundColor ?? theme.colorScheme.primaryContainer,
+                  ? backgroundColor ?? theme.colorScheme.primary
+                  : backgroundColor ?? theme.colorScheme.primaryContainer,
               elevation: 0,
             ),
             onPressed: onPreviousPressed,
-            icon: const Icon(
+            icon: Icon(
               FluentIcons.chevron_left_24_regular,
-              color: SicklerColours.purple20,
+              color: color ?? theme.iconTheme.color,
             )),
         const Spacer(),
         AnimatedContainer(
@@ -44,7 +42,7 @@ class SicklerDateSwitcher extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
             color: isDarkMode
-                ? backgroundColor?? theme.colorScheme.primary
+                ? backgroundColor ?? theme.colorScheme.primary
                 : backgroundColor ?? theme.colorScheme.primaryContainer,
           ),
           child: Center(
@@ -52,9 +50,7 @@ class SicklerDateSwitcher extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               child: Text(
                 label,
-                style: theme.textTheme.bodyMedium!.copyWith(
-                  color: color ?? SicklerColours.purple20,
-                ),
+                style: theme.textTheme.bodyMedium!.copyWith(color: color),
               ),
             ),
           ),
@@ -69,7 +65,7 @@ class SicklerDateSwitcher extends StatelessWidget {
             onPressed: onNextPressed,
             icon: Icon(
               FluentIcons.chevron_right_24_regular,
-              color: color ?? SicklerColours.purple20,
+              color: color,
             ))
       ],
     );

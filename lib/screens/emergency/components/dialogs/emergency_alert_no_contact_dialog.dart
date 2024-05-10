@@ -1,9 +1,10 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
-
 
 class EmergencyAlertNoContactDialog extends StatelessWidget {
   const EmergencyAlertNoContactDialog({super.key});
@@ -34,25 +35,26 @@ class EmergencyAlertNoContactDialog extends StatelessWidget {
           ),
           const Gap(16),
           SicklerButton(
-            onPressed: () {},
+            onPressed: () {
+              context.pushNamed(AddEmergencyContactScreen.id);
+            },
             label: "Add a Contact",
             buttonType: SicklerButtonType.primary,
             color: SicklerColours.white,
             backgroundColor: theme.colorScheme.error,
             icon: FluentIcons.add_24_regular,
           ),
-          const Gap(8),
-          SicklerButton(
-            onPressed: () {},
-            label: "Select from phone",
-            buttonType: SicklerButtonType.outline,
-           color: theme.colorScheme.error,
-           // backgroundColor: theme.colorScheme.error,
-            icon: FluentIcons.call_24_regular,
-          ),
+          //  const Gap(8),
+          // SicklerButton(
+          //   onPressed: () {},
+          //   label: "Select from phone",
+          //   buttonType: SicklerButtonType.outline,
+          //   color: theme.colorScheme.error,
+          //   // backgroundColor: theme.colorScheme.error,
+          //   icon: FluentIcons.call_24_regular,
+          // ),
         ],
       ),
     );
   }
 }
-

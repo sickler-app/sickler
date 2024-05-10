@@ -35,7 +35,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
                 width: 1),
         color: isDarkMode
             ? theme.cardColor
-            : (isExpanded ? theme.cardColor: Colors.transparent),
+            : (isExpanded ? theme.cardColor : Colors.transparent),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -45,7 +45,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
               Text(
                 "Crises Event",
                 style: theme.textTheme.bodyMedium!
-                    .copyWith(fontWeight: FontWeight.bold),
+                    .copyWith(fontWeight: FontWeight.w800),
               ),
               const Spacer(),
               IconButton(
@@ -57,7 +57,6 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
                   icon: const Icon(FluentIcons.chevron_down_24_regular)),
             ],
           ),
-
           Row(
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
@@ -65,7 +64,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
               Text(
                 "7",
                 style: theme.textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w800,
                     color: theme.colorScheme.primary),
               ),
               Text(
@@ -96,15 +95,19 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
                             elevation: 0,
                             backgroundColor: theme.colorScheme.error),
                         onPressed: () {},
-                        icon: const Icon(FluentIcons.delete_20_regular, color: Colors.white,)),
-                   // const Gap(4),
+                        icon: const Icon(
+                          FluentIcons.delete_20_regular,
+                          color: Colors.white,
+                        )),
+                    // const Gap(4),
                     IconButton.filled(
                         style: IconButton.styleFrom(
-                          splashFactory: InkSparkle.splashFactory,
+                            splashFactory: InkSparkle.splashFactory,
                             elevation: 0,
                             backgroundColor: theme.colorScheme.primary),
                         onPressed: () {},
-                        icon: const Icon(FluentIcons.edit_20_regular, color: Colors.white)),
+                        icon: const Icon(FluentIcons.edit_20_regular,
+                            color: Colors.white)),
                   ],
                 )
               ],

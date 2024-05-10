@@ -5,6 +5,7 @@ import 'package:sickler/screens/global_components/global_components.dart';
 import '../../core/core.dart';
 
 class EditDailyGoalScreen extends StatefulWidget {
+  static const String id = "edit_daily_goal";
   const EditDailyGoalScreen({super.key});
 
   @override
@@ -120,7 +121,6 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                         Text(
                             "We will send you reminder every ${timeIntervalController.text} hour to help you achieve this goal",
                             style: theme.textTheme.bodyMedium),
-                     
 
                         const Spacer(),
 

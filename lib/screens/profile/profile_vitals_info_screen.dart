@@ -9,6 +9,7 @@ import '../../core/core.dart';
 import 'components/genotype_selector.dart';
 
 class ProfileVitalsInfoScreen extends StatefulWidget {
+  static const String id = "vitals";
   final bool? isEditing;
   const ProfileVitalsInfoScreen({super.key, this.isEditing = false});
 
@@ -47,21 +48,22 @@ class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
               children: [
                 SicklerAppBar(
                   pageTitle:
-                  widget.isEditing! ? "Edit Vitals" : "Personal\nInfo",
+                      widget.isEditing! ? "Edit Vitals" : "Personal\nInfo",
                   actions: !widget.isEditing!
                       ? [
-                    SicklerButton(
-                      isChipButton: true,
-                      onPressed: () {
-                        //Todo: Skip Page
-                      },
-                      label: "Skip",
-                      buttonType: SicklerButtonType.text,
-                    )
-                  ]
+                          SicklerButton(
+                            isChipButton: true,
+                            onPressed: () {
+                              //Todo: Skip Page
+                            },
+                            label: "Skip",
+                            buttonType: SicklerButtonType.text,
+                          )
+                        ]
                       : null,
                 ),
-///Content
+
+                ///Content
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
@@ -85,8 +87,8 @@ class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
                         controller: heightController,
                         keyboardType: TextInputType.number,
                         decoration:
-                        SicklerInputDecoration.inputDecoration(context)
-                            .copyWith(hintText: "Height"),
+                            SicklerInputDecoration.inputDecoration(context)
+                                .copyWith(hintText: "Height"),
                       ),
                       const Gap(24),
                       Row(
@@ -106,8 +108,8 @@ class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
                         controller: weightController,
                         keyboardType: TextInputType.number,
                         decoration:
-                        SicklerInputDecoration.inputDecoration(context)
-                            .copyWith(
+                            SicklerInputDecoration.inputDecoration(context)
+                                .copyWith(
                           hintText: "Weight",
                         ),
                       ),
@@ -125,7 +127,6 @@ class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
                         ],
                       ),
                       const Gap(8),
-
                       SizedBox(
                         height: 72,
                         child: ListView.separated(
@@ -134,8 +135,7 @@ class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            isGenotypeSelected.putIfAbsent(
-                                index, () => false);
+                            isGenotypeSelected.putIfAbsent(index, () => false);
 
                             return GenotypeSelector(
                               onPressed: () {
@@ -144,15 +144,14 @@ class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
                                 isGenotypeSelected
                                     .updateAll((key, value) => false);
                                 isGenotypeSelected.update(index,
-                                        (value) => !isGenotypeSelected[index]!);
+                                    (value) => !isGenotypeSelected[index]!);
                                 setState(() {});
                               },
                               isSelected: isGenotypeSelected[index]!,
                               genotype: genotypeData[index],
                             );
                           },
-                          separatorBuilder:
-                              (BuildContext context, int index) {
+                          separatorBuilder: (BuildContext context, int index) {
                             return const Gap(16);
                           },
                         ),
@@ -173,25 +172,25 @@ class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
                           ),
                         ],
                       ),
-
                     ],
                   ),
-
                 ),
 
                 const Spacer(),
+
                 ///Buttons
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: SicklerButton(
-                    icon: widget.isEditing!? FluentIcons.checkmark_24_regular : null,
+                      icon: widget.isEditing!
+                          ? FluentIcons.checkmark_24_regular
+                          : null,
                       onPressed: () {
                         //Todo: Continue
                       },
-                      label: widget.isEditing!? "Save": "Continue"),
+                      label: widget.isEditing! ? "Save" : "Continue"),
                 ),
                 const Gap(64),
-
               ],
             ),
           ),

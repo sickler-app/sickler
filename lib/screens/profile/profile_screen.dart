@@ -2,11 +2,17 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
+import 'package:sickler/screens/profile/profile_vitals_info_screen.dart';
+import 'package:sickler/screens/water/water_screen.dart';
+
 import 'components/components.dart';
 
 class ProfileScreen extends StatelessWidget {
+  static const String id = "profile";
   const ProfileScreen({super.key});
 
   @override
@@ -19,7 +25,10 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const SicklerAppBar(pageTitle: "Profile"),
             SicklerEditableAvatar(
-                onEditPressed: () {}, imagePath: "assets/images/memoji2.jpg"),
+                onEditPressed: () {
+                  context.pushNamed(ProfileBasicInfoScreen.id);
+                },
+                imagePath: "assets/images/memoji2.jpg"),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -35,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
                           TextSpan(
                             text: "Amelia",
                             style: theme.textTheme.bodyMedium!
-                                .copyWith(fontWeight: FontWeight.bold),
+                                .copyWith(fontWeight: FontWeight.w800),
                           ),
                           TextSpan(
                               text: " Robertson",
@@ -85,7 +94,9 @@ class ProfileScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(24),
-                        color: theme.colorScheme.secondaryContainer),
+                        color: isDarkMode
+                            ? theme.cardColor
+                            : theme.colorScheme.secondaryContainer),
                     child: Row(
                       children: [
                         const Expanded(
@@ -96,11 +107,10 @@ class ProfileScreen extends StatelessWidget {
                           height: 72,
                           width: 72,
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: isDarkMode
-                                ? SicklerColours.orange20
-                                : SicklerColours.orange90,
-                          ),
+                              shape: BoxShape.circle,
+                              color: isDarkMode
+                                  ? SicklerColours.neutral30
+                                  : SicklerColours.orange90),
                         ),
                       ],
                     ),
@@ -112,8 +122,9 @@ class ProfileScreen extends StatelessWidget {
                       const Spacer(),
                       IconButton(
                         onPressed: () {
-                          ///Todo: Add Edit Vitals Method
+                          context.pushNamed(ProfileVitalsInfoScreen.id);
 
+                          ///Todo: Add Edit Vitals Method
                         },
                         icon: Icon(
                           FluentIcons.edit_24_regular,
@@ -127,6 +138,9 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: VitalsItemCard(
+                          onPressed: () {
+                            context.pushNamed(ProfileVitalsInfoScreen.id);
+                          },
                           label: "Height",
                           value: "178",
                           unit: " cm",
@@ -152,6 +166,9 @@ class ProfileScreen extends StatelessWidget {
                       const Gap(12),
                       Expanded(
                         child: VitalsItemCard(
+                          onPressed: () {
+                            context.pushNamed(ProfileVitalsInfoScreen.id);
+                          },
                           label: "Weight",
                           value: "64",
                           unit: " kg",
@@ -166,7 +183,7 @@ class ProfileScreen extends StatelessWidget {
                             colorFilter: ColorFilter.mode(
                                 isDarkMode
                                     ? Colors.white
-                                    : theme.colorScheme.errorContainer,
+                                    : theme.colorScheme.error,
                                 BlendMode.srcIn),
                           ),
                         ),
@@ -178,6 +195,9 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: VitalsItemCard(
+                          onPressed: () {
+                            context.pushNamed(WaterScreen.id);
+                          },
                           label: "Water",
                           value: "1200",
                           unit: " ml",
@@ -187,17 +207,20 @@ class ProfileScreen extends StatelessWidget {
                           color: isDarkMode
                               ? Colors.white
                               : SicklerColours.blueSeed,
-                          icon: Icon(
-                            FluentIcons.drop_24_regular,
-                            color: isDarkMode
-                                ? Colors.white
-                                : SicklerColours.blueSeed,
+                          icon: SvgPicture.asset(
+                            "assets/svg/droplet-alt.svg",
+                            colorFilter: ColorFilter.mode(
+                                isDarkMode
+                                    ? Colors.white
+                                    : SicklerColours.blueSeed,
+                                BlendMode.srcIn),
                           ),
                         ),
                       ),
                       const Gap(12),
                       Expanded(
                         child: VitalsItemCard(
+                          onPressed: () {},
                           label: "BMI",
                           value: "19.8",
                           // unit: " normal",
@@ -231,7 +254,6 @@ class ProfileScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           ///Todo: Add Add Allergies Method
-
                         },
                         icon: Icon(
                           FluentIcons.add_24_regular,
@@ -240,7 +262,6 @@ class ProfileScreen extends StatelessWidget {
                       )
                     ],
                   ),
-
                   const Wrap(
                     alignment: WrapAlignment.start,
                     runAlignment: WrapAlignment.start,
@@ -273,7 +294,6 @@ class ProfileScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           ///Todo: Add Medical Condtions Method
-
                         },
                         icon: Icon(
                           FluentIcons.add_24_regular,
@@ -282,7 +302,6 @@ class ProfileScreen extends StatelessWidget {
                       )
                     ],
                   ),
-
                   const Wrap(
                     alignment: WrapAlignment.start,
                     runAlignment: WrapAlignment.start,
@@ -301,7 +320,6 @@ class ProfileScreen extends StatelessWidget {
                           chipType: SicklerChipType.info, label: "Mango"),
                       SicklerChip(
                           chipType: SicklerChipType.info, label: "Mango"),
-
                     ],
                   ),
                   const Gap(64),

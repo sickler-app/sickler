@@ -5,6 +5,7 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 class WaterEmptyScreen extends StatefulWidget {
+  static const String id = "water_goal_empty";
   const WaterEmptyScreen({super.key});
 
   @override

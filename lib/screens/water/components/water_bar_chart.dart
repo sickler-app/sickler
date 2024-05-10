@@ -1,4 +1,3 @@
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sickler/core/core.dart';
@@ -40,7 +39,7 @@ class WaterBarChart extends StatelessWidget {
               rod.toY.round().toString(),
               const TextStyle(
                 color: Colors.transparent,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w800,
               ),
             );
           },
@@ -48,39 +47,34 @@ class WaterBarChart extends StatelessWidget {
       );
 
   Widget getTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: SicklerColours.black,
-    // fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
-    String text;
+    String horizontalLabel;
     switch (value.toInt()) {
       case 0:
-        text = 'M';
+        horizontalLabel = 'M';
         break;
       case 1:
-        text = 'T';
+        horizontalLabel = 'T';
         break;
       case 2:
-        text = 'W';
+        horizontalLabel = 'W';
         break;
       case 3:
-        text = 'T';
+        horizontalLabel = 'T';
         break;
       case 4:
-        text = 'F';
+        horizontalLabel = 'F';
         break;
       case 5:
-        text = 'S';
+        horizontalLabel = 'S';
         break;
       default:
-        text = 'S';
+        horizontalLabel = 'S';
         break;
     }
     return SideTitleWidget(
       axisSide: meta.axisSide,
       space: 4,
-      child: Text(text, style: style),
+      child: Text(horizontalLabel),
     );
   }
 
@@ -96,8 +90,7 @@ class WaterBarChart extends StatelessWidget {
         leftTitles: const AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
-           
-            ),
+          ),
         ),
         topTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
@@ -178,7 +171,7 @@ class WaterBarChart extends StatelessWidget {
           ],
           showingTooltipIndicators: [0],
         ),
-         BarChartGroupData(
+        BarChartGroupData(
           x: 6,
           barRods: [
             BarChartRodData(

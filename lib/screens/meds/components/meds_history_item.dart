@@ -1,10 +1,9 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-
 import '../../../core/core.dart';
-import '../../global_components/global_components.dart';
 
 class MedsHistoryItem extends StatelessWidget {
   const MedsHistoryItem({super.key, this.mode = MedsHistoryMode.daily});
@@ -13,6 +12,7 @@ class MedsHistoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool isDarkMode = theme.brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -21,20 +21,23 @@ class MedsHistoryItem extends StatelessWidget {
         ///The Compressed Mode
         children: [
           Container(
-            height: 40,
-            width: 40,
+            height: 48,
+            width: 48,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: theme.colorScheme.primaryContainer),
+                color: isDarkMode
+                    ? SicklerColours.neutral20
+                    : SicklerColours.neutral95),
             child: Center(
               child: SvgPicture.asset(
                 "assets/svg/medication.svg",
-                colorFilter: ColorFilter.mode(
-                    theme.colorScheme.primary, BlendMode.srcIn),
+                height: 20,
+                colorFilter:
+                    const ColorFilter.mode(SicklerColours.neutral50, BlendMode.srcIn),
               ),
             ),
           ),
-          const Gap( 16),
+          const Gap(16),
           RepaintBoundary(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -52,7 +55,7 @@ class MedsHistoryItem extends StatelessWidget {
                         end: 0)
                     .fadeIn(
                         delay: 200.ms, curve: Curves.easeOut, duration: 500.ms),
-                const Gap( 8),
+                const Gap(8),
                 Text(
                   "8:00 pm",
                   style: theme.textTheme.bodyMedium,
@@ -68,11 +71,47 @@ class MedsHistoryItem extends StatelessWidget {
               ],
             ),
           ),
-          mode == MedsHistoryMode.daily ? const Spacer() : const SizedBox(),
-          mode == MedsHistoryMode.daily
-              ? const SicklerChip(
-                  chipType: SicklerChipType.info, label: "Taken")
-              : const SizedBox(),
+          const Spacer(),
+          Visibility(
+            visible: mode == MedsHistoryMode.weekly,
+            child: SizedBox(
+              height: 16,
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const Gap(4),
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: 7,
+                itemBuilder: (context, index) => Container(
+                  height: 16,
+                  width: 16,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: isDarkMode
+                          ? theme.cardColor
+                          : SicklerColours.neutral90,
+                    ),
+                    shape: BoxShape.circle,
+                    // color: theme.colorScheme.primary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Visibility(
+            visible: mode == MedsHistoryMode.daily,
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: theme.colorScheme.primary,
+              ),
+              child: const Icon(
+                size: 16,
+                FluentIcons.checkmark_20_filled,
+                color: Colors.white,
+              ),
+            ),
+          ),
         ],
       ),
     );

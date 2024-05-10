@@ -3,13 +3,17 @@ import 'dart:io';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 import '../../../core/core.dart';
 
 class ContactCard extends StatelessWidget {
   final bool showAddContactButton;
-  const ContactCard({super.key, this.showAddContactButton = false});
+  final VoidCallback? onPressed;
+  const ContactCard(
+      {super.key, this.showAddContactButton = false, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +32,20 @@ class ContactCard extends StatelessWidget {
       child: showAddContactButton
           ? Center(
               child: IconButton.filled(
-                  style: IconButton.styleFrom(
-                    fixedSize: const Size.square(100),
-                    elevation: 0,
-                    foregroundColor: theme.cardColor,
-                    backgroundColor: theme.cardColor,
-                  ),
-                  splashRadius: 40,
-                  onPressed: () {},
-                  icon: Icon(
-                    FluentIcons.add_16_regular,
-                    color: theme.colorScheme.primary,
-                  )),
+                style: IconButton.styleFrom(
+                  splashFactory: InkSparkle.splashFactory,
+                  fixedSize: const Size.square(100),
+                  elevation: 1,
+                  foregroundColor: theme.cardColor,
+                  backgroundColor: theme.cardColor,
+                ),
+                splashRadius: 40,
+                onPressed: onPressed,
+                icon: Icon(
+                  FluentIcons.add_16_regular,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
             )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +57,9 @@ class ContactCard extends StatelessWidget {
                     Text("Brother", style: theme.textTheme.bodyMedium),
                     const Spacer(),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.pushNamed(AddEmergencyContactScreen.id);
+                        },
                         icon: const Icon(FluentIcons.edit_16_regular)),
                     IconButton(
                       onPressed: () {
@@ -59,33 +67,47 @@ class ContactCard extends StatelessWidget {
                           context: context,
                           builder: (context) => SicklerAlertDialog(
                             title: "Delete Contact",
-                            message:
-                                "Are you sure you want to delete this emergency contact?",
-                            actions: [
-                              SicklerButton(
-                                isChipButton: true,
-                                onPressed: () {},
-                                label: "Cancel",
-                                buttonType: SicklerButtonType.text,
-                              ),
-                              SicklerButton(
-                                isChipButton: true,
-                                onPressed: () {
-                                  ///Todo:Delete contact
-                                },
-                                label: "Delete",
-                                icon: FluentIcons.delete_16_regular,
-                                color: Platform.isIOS
-                                    ? theme.colorScheme.error
-                                    : Colors.white,
-                                backgroundColor: Platform.isIOS
-                                    ? null
-                                    : theme.colorScheme.error,
-                                buttonType: Platform.isIOS
-                                    ? SicklerButtonType.text
-                                    : SicklerButtonType.primary,
-                              ),
-                            ],
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Are you sure you want to delete this emergency contact?",
+                                  textAlign: TextAlign.center,
+                                ),
+                                const Gap(16),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    SicklerButton(
+                                      isChipButton: true,
+                                      onPressed: () {
+                                        context.pop();
+                                      },
+                                      label: "Cancel",
+                                      buttonType: SicklerButtonType.text,
+                                    ),
+                                    SicklerButton(
+                                      isChipButton: true,
+                                      onPressed: () {
+                                        ///Todo:Delete contact
+                                      },
+                                      label: "Delete",
+                                      icon: FluentIcons.delete_16_regular,
+                                      color: Platform.isIOS
+                                          ? theme.colorScheme.error
+                                          : Colors.white,
+                                      backgroundColor: Platform.isIOS
+                                          ? null
+                                          : theme.colorScheme.error,
+                                      buttonType: Platform.isIOS
+                                          ? SicklerButtonType.text
+                                          : SicklerButtonType.primary,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },

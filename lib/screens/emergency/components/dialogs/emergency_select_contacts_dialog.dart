@@ -15,7 +15,6 @@ class EmergencySelectContactsDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-
           Container(
             width: 140,
             height: 140,
@@ -31,7 +30,7 @@ class EmergencySelectContactsDialog extends StatelessWidget {
             buttonType: SicklerButtonType.primary,
             color: SicklerColours.white,
             backgroundColor: theme.colorScheme.error,
-            iconPath: "assets/svg/emergency.svg",
+            iconPath: "assets/svg/emergency-alt.svg",
           ),
           const Gap(12),
           SicklerButton(

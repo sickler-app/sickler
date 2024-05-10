@@ -5,6 +5,7 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 class SuggestedWaterDailyGoalScreen extends StatefulWidget {
+  static const String id = "suggested_daily_goal";
   const SuggestedWaterDailyGoalScreen({super.key});
 
   @override
@@ -14,7 +15,8 @@ class SuggestedWaterDailyGoalScreen extends StatefulWidget {
 
 int dailyGoal = 2000;
 
-class _SuggestedWaterDailyGoalScreenState extends State<SuggestedWaterDailyGoalScreen> {
+class _SuggestedWaterDailyGoalScreenState
+    extends State<SuggestedWaterDailyGoalScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -25,7 +27,8 @@ class _SuggestedWaterDailyGoalScreenState extends State<SuggestedWaterDailyGoalS
             showTitle: false,
             pageTitle: "Your daily goal",
             actions: [
-               SicklerButton( isChipButton:true,
+              SicklerButton(
+                  isChipButton: true,
                   onPressed: () {},
                   label: "Skip",
                   buttonType: SicklerButtonType.text),
@@ -35,7 +38,7 @@ class _SuggestedWaterDailyGoalScreenState extends State<SuggestedWaterDailyGoalS
             "Your daily goal",
             style: theme.textTheme.displaySmall,
           ),
-          const Gap( 24),
+          const Gap(24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -43,11 +46,11 @@ class _SuggestedWaterDailyGoalScreenState extends State<SuggestedWaterDailyGoalS
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium),
           ),
-          const Gap( 64),
+          const Gap(64),
           Text("$dailyGoal ml",
               style: theme.textTheme.displaySmall!
                   .copyWith(fontWeight: FontWeight.w800)),
-          const Gap( 24),
+          const Gap(24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -89,7 +92,7 @@ class _SuggestedWaterDailyGoalScreenState extends State<SuggestedWaterDailyGoalS
                   icon: FluentIcons.edit_24_regular,
                   buttonType: SicklerButtonType.outline,
                 ),
-                const Gap( 16),
+                const Gap(16),
                 SicklerButton(
                   onPressed: () {},
                   label: "Accept Goal & Continue",
@@ -97,7 +100,7 @@ class _SuggestedWaterDailyGoalScreenState extends State<SuggestedWaterDailyGoalS
               ],
             ),
           ),
-          const Gap( 64)
+          const Gap(64)
         ],
       ),
     );

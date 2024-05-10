@@ -1,4 +1,3 @@
-
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,13 +33,13 @@ class WaterLogListItem extends StatelessWidget {
                 IconButton(
                   onPressed: () {},
                   icon: SvgPicture.asset(
-                    "assets/svg/droplet.svg",
+                    "assets/svg/droplet-alt.svg",
                     colorFilter: const ColorFilter.mode(
                         SicklerColours.neutral50, BlendMode.srcIn),
                   ),
                 ),
                 const Gap(
-                   4,
+                  4,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,10 +68,16 @@ class WaterLogListItem extends StatelessWidget {
                   onPressed: () {
                     //Todo: Implement Edit
                   },
-                  icon: Icon(
-                    FluentIcons.delete_24_regular,
-                    color: theme.colorScheme.error,
+                  icon: SvgPicture.asset(
+                    "assets/svg/delete.svg",
+                    colorFilter: ColorFilter.mode(
+                        theme.colorScheme.error, BlendMode.srcIn),
                   ),
+
+                  // Icon(
+                  //   FluentIcons.delete_24_regular,
+                  //   color: theme.colorScheme.error,
+                  // ),
                 ),
               ],
             )

@@ -24,7 +24,7 @@ class SicklerAlertDialog extends StatelessWidget {
       title: Text(title,
           textAlign: TextAlign.center,
           style: theme.textTheme.titleMedium!
-              .copyWith(fontWeight: FontWeight.bold)),
+              .copyWith(fontWeight: FontWeight.w800)),
       content: message != null
           ? Text(
               message!,

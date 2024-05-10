@@ -7,9 +7,9 @@ class SicklerEditableAvatar extends StatelessWidget {
   final double? radius;
   const SicklerEditableAvatar(
       {super.key,
-        required this.onEditPressed,
-        required this.imagePath,
-        this.radius});
+      required this.onEditPressed,
+      required this.imagePath,
+      this.radius});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SicklerEditableAvatar extends StatelessWidget {
     return Stack(
       children: [
         CircleAvatar(
-          radius: radius?? 64,
+          radius: radius ?? 64,
           backgroundImage: AssetImage(imagePath),
         ),
         Positioned(
@@ -25,7 +25,7 @@ class SicklerEditableAvatar extends StatelessWidget {
           bottom: 0,
           child: IconButton.filled(
               color: theme.colorScheme.primary,
-              onPressed: () {},
+              onPressed: onEditPressed,
               icon: const Icon(
                 FluentIcons.edit_24_regular,
                 color: Colors.white,
