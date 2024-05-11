@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/models/auth/sickler_user_model.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-class SignInScreen extends StatefulWidget {
+import '../../main.dart';
+
+class SignInScreen extends ConsumerStatefulWidget {
   static const String id = "sign_in";
   const SignInScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  ConsumerState<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignInScreenState extends ConsumerState<SignInScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -28,7 +32,9 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-
+    final authProviderNotifier = ref.watch(authProvider.notifier);
+    print("print the state during sign in");
+print(ref.watch(authProvider));
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
@@ -101,12 +107,18 @@ class _SignInScreenState extends State<SignInScreen> {
 
                         ///Buttons
                         SicklerButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                //Todo: Perform sign in action
+                                await authProviderNotifier
+                                    .signInWithEmailAndPassword(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                );
                               }
+
                             },
                             label: "Sign In"),
+
                         const Gap(16),
                         Row(
                           children: [

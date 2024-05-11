@@ -4,47 +4,38 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/models/auth/sickler_user_model.dart';
 import 'package:sickler/repositories/auth/auth_repository.dart';
 
-class AuthProviderNotifier extends Notifier<SicklerUser?> {
+class AuthProviderNotifier extends AutoDisposeAsyncNotifier<SicklerUser?> {
   final AuthRepository authRepository;
 
-  AuthProviderNotifier({required this.authRepository});
-
-  AppState appState = AppState.initial;
-  //SicklerUser? _currentUser = SicklerUser.empty;
-
   @override
-  SicklerUser build() {
+  Future<SicklerUser> build() async {
     return SicklerUser.empty;
   }
 
-  void signInWithEmailAndPassword(
+  AuthProviderNotifier({required this.authRepository});
+  Future<void> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     final Either<Failure, SicklerUser?> response = await authRepository
         .signInWithEmailAndPassword(email: email, password: password);
-
+    state = const AsyncValue.loading();
     response.fold((failure) {
-      appState = AppState.error;
-      state = SicklerUser.empty;
-      // state = AsyncValue.error(failure, StackTrace.current);
+      state = AsyncValue.data(SicklerUser.empty);
     }, (sicklerUser) {
-      appState = AppState.success;
-      // _currentUser = sicklerUser;
-      state = sicklerUser;
+      state = AsyncValue.data(sicklerUser);
     });
   }
 
-  void authStateChanges() async {
+  Future<void> authStateChanges() async {
     final Either<Failure, Stream<SicklerUser?>> response =
-        await authRepository.getAuthStateChanges();
+        authRepository.getAuthStateChanges();
 
+    state = const AsyncValue.loading();
     response.fold((failure) {
-      appState = AppState.error;
-      state = SicklerUser.empty;
-      // state = AsyncValue.error(failure, StackTrace.current);
+     // state = AsyncValue.data(SicklerUser.empty);
+      state = AsyncValue.error(failure, StackTrace.current);
     }, (stream) {
-      appState = AppState.success;
       stream.listen((event) {
-        state = event;
+        state = AsyncValue.data(event);
       });
     });
   }
