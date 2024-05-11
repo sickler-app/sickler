@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/models/auth/sickler_user_model.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
 import '../../main.dart';

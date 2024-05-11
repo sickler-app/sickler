@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sickler/core/routes.dart';
 import 'package:sickler/core/theme.dart';
+import 'package:sickler/firebase_options.dart';
 import 'package:sickler/providers/auth/auth_provider.dart';
 import 'package:sickler/repositories/auth/auth_repository.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
@@ -19,7 +20,7 @@ final authProvider =
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -43,7 +44,7 @@ class MyApp extends ConsumerWidget {
         duration: const Duration(milliseconds: 300),
       ),
     //  routerConfig: appRouter.router,
-      home: SignInScreen(),
+      home: const SignInScreen(),
     );
   }
 }
