@@ -14,22 +14,13 @@ class AuthService {
     return newUser;
   }
 
-  Stream<User?> getCurrentUser() {
-    return _firebaseAuth.authStateChanges();
-  }
-
   Future<UserCredential> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
     UserCredential loggedInUser = await _firebaseAuth
         .signInWithEmailAndPassword(email: email, password: password);
-
     return loggedInUser;
-  }
-
-  void signOut() async {
-    await _firebaseAuth.signOut();
   }
 
   Future<UserCredential> signInWithGoogle() async {
@@ -45,5 +36,23 @@ class AuthService {
     UserCredential loggedInUser =
         await _firebaseAuth.signInWithCredential(credential);
     return loggedInUser;
+  }
+
+  Stream<User?> getCurrentUser() {
+    return _firebaseAuth.authStateChanges();
+  }
+
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
+  Future<void> sendPasswordResetEmail({required String email}) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  Future<void> confirmPasswordReset(
+      {required String code, required String newPassword}) async {
+    await _firebaseAuth.confirmPasswordReset(
+        code: code, newPassword: newPassword);
   }
 }

@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/main.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 import 'package:sickler/screens/profile/profile_vitals_info_screen.dart';
@@ -21,7 +20,6 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final ThemeData theme = Theme.of(context);
     final bool isDarkMode = theme.colorScheme.brightness == Brightness.dark;
-    final sicklerUserData = ref.watch(authProvider);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

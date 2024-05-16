@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,11 +9,13 @@ class SicklerAppBar extends StatelessWidget {
   final String pageTitle;
   final List<Widget>? actions;
   final bool? showTitle;
+  final bool? showBackButton;
 
   const SicklerAppBar(
       {super.key,
       required this.pageTitle,
       this.actions,
+        this.showBackButton = true,
       this.showTitle = true});
 
   @override
@@ -25,17 +28,20 @@ class SicklerAppBar extends StatelessWidget {
         const Gap(48),
         Row(
           children: [
-            IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                HapticFeedback.mediumImpact();
-                Feedback.forTap(context);
-                context.pop();
-              },
-              icon: SvgPicture.asset(
-                "assets/svg/chevron-back.svg",
-                colorFilter:
-                    ColorFilter.mode(theme.iconTheme.color!, BlendMode.srcIn),
+            Visibility(
+              visible: showBackButton!,
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  HapticFeedback.mediumImpact();
+                  Feedback.forTap(context);
+                  context.pop();
+                },
+                icon: SvgPicture.asset(
+                  "assets/svg/chevron-back.svg",
+                  colorFilter:
+                      ColorFilter.mode(theme.iconTheme.color!, BlendMode.srcIn),
+                ),
               ),
             ),
             const Spacer(),

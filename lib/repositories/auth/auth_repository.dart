@@ -9,6 +9,8 @@ import '../../core/core.dart';
 
 class AuthRepository {
   final AuthService authService;
+  final StreamController<SicklerUser?> sicklerUserStreamController =
+      StreamController();
 
   AuthRepository({required this.authService});
   // FutureEither<User?> signInWithEmailAndPassword({
@@ -50,12 +52,6 @@ class AuthRepository {
     });
   }
 
-  FutureEither<void> signOut() {
-    return callFutureMethod(() async {
-      authService.signOut();
-    });
-  }
-
   FutureEither<SicklerUser> signInWithGoogle() {
     return callFutureMethod(() async {
       final UserCredential userCredential =
@@ -66,10 +62,14 @@ class AuthRepository {
     });
   }
 
+  FutureEither<void> signOut() {
+    return callFutureMethod(() async {
+      authService.signOut();
+    });
+  }
+
   Either<Failure, Stream<SicklerUser?>> getAuthStateChanges() {
     return callMethod(() {
-      final StreamController<SicklerUser?> sicklerUserStreamController =
-          StreamController();
       authService.getCurrentUser().listen((User? event) {
         ///Listens to the current user stream and outputs another stream of sickler
         ///users on every event;
@@ -78,5 +78,27 @@ class AuthRepository {
 
       return sicklerUserStreamController.stream;
     });
+  }
+
+  FutureEither<void> sendPasswordResetEmail({
+    required String email,
+  }) async {
+    return callFutureMethod(() async {
+      await authService.sendPasswordResetEmail(email: email);
+    });
+  }
+
+  FutureEither<void> confirmPasswordReset({
+    required String code,
+    required String newPassword,
+  }) async {
+    return callFutureMethod(() async {
+      await authService.confirmPasswordReset(
+          code: code, newPassword: newPassword);
+    });
+  }
+
+  Future<void> disposeAuthStateChangesStream()async {
+    sicklerUserStreamController.close();
   }
 }

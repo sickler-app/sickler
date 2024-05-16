@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/main.dart';
+import 'package:sickler/screens/auth/sign_in_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   static const String id = "register";
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
@@ -32,6 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     bool isDarkMode = theme.brightness == Brightness.dark;
+    final authProviderNotifier = ref.watch(authProvider.notifier);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -41,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             key: _formKey,
             child: Column(
               children: [
-                const SicklerAppBar(pageTitle: "Register"),
+                const SicklerAppBar(pageTitle: "Register", showBackButton: false,),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -150,38 +155,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                         ///Buttons
                         SicklerButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                //Todo: Perform sign in action
+                                await authProviderNotifier
+                                    .registerWithEmailAndPassword(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                );
                               }
                             },
-                            label: "Sign In"),
+                            label: "Sign Up"),
                         const Gap(16),
                         Row(
                           children: [
                             Expanded(
                               child: SicklerButton(
-                                  color: theme.iconTheme.color,
+                                  color: theme.colorScheme.primary,
                                   overrideIconColor: false,
                                   buttonType: SicklerButtonType.outline,
                                   iconPath: "assets/svg/google.svg",
-                                  onPressed: () {
-                                    //Todo: Perform Google Sign In Action
+                                  onPressed: () async {
+
+                                    await authProviderNotifier.singInWithGoogle();
                                   },
                                   label: "Continue"),
                             ),
-                            const Gap(16),
-                            Expanded(
-                              child: SicklerButton(
-                                  color: theme.iconTheme.color,
-                                  // overrideIconColor: false,
-                                  buttonType: SicklerButtonType.outline,
-                                  onPressed: () {
-                                    //Todo: Perform Apple Sign In Option
-                                  },
-                                  iconPath: "assets/svg/apple.svg",
-                                  label: "Continue"),
-                            ),
+                            // const Gap(16),
+                            // Expanded(
+                            //   child: SicklerButton(
+                            //       color: theme.iconTheme.color,
+                            //       // overrideIconColor: false,
+                            //       buttonType: SicklerButtonType.outline,
+                            //       onPressed: () {
+                            //         //Todo: Perform Apple Sign In Option
+                            //       },
+                            //       iconPath: "assets/svg/apple.svg",
+                            //       label: "Continue"),
+                            // ),
                           ],
                         ),
                         const Gap(12),
@@ -195,13 +205,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         Align(
                             alignment: Alignment.center,
-                            child: SicklerButton(
-                              isChipButton: true,
-                              buttonType: SicklerButtonType.text,
-                              onPressed: () {
-                                //  Todo: Navigate to Create Account Screen
-                              },
-                              label: "Create an Account",
+                            child: FittedBox(
+                              child: SicklerButton(
+                                isChipButton: true,
+                                buttonType: SicklerButtonType.text,
+                                onPressed: () {
+                                  // context.pushReplacementNamed(SignInScreen.id);
+
+                                  context.goNamed(SignInScreen.id);
+
+                                 // Navigator.push(context, MaterialPageRoute(builder: (context)=> const SignInScreen()));
+                                },
+                                label: "Sign In Instead",
+                              ),
                             )),
                         const Gap(64)
                       ],

@@ -7,8 +7,10 @@ import 'package:sickler/firebase_options.dart';
 import 'package:sickler/providers/auth/auth_provider.dart';
 import 'package:sickler/repositories/auth/auth_repository.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
+import 'package:sickler/screens/global_components/bottom_nav_bar.dart';
 import 'package:sickler/services/auth/auth_service.dart';
 
+import 'core/core.dart';
 import 'models/auth/sickler_user_model.dart';
 
 ///Providers
@@ -18,22 +20,40 @@ final authProvider =
     AsyncNotifierProvider.autoDispose<AuthProviderNotifier, SicklerUser?>(
         () => AuthProviderNotifier(authRepository: authRepository));
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const ProviderScope(child: MyApp()));
 }
 
-final AppRouter appRouter = AppRouter();
-
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+
+    super.initState();
+  }
 
 
-    return MaterialApp(
+  @override
+  void didChangeDependencies() {
+   // ref.watch(authProvider.notifier).authStateChanges();
+   // appRouter = AppRouter(ref: ref);
+    super.didChangeDependencies();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+final router = ref.watch(routerProvider);
+
+    return MaterialApp.router(
       title: 'Sickler',
       debugShowCheckedModeBanner: false,
       theme: SicklerThemeData.lightTheme,
@@ -43,8 +63,9 @@ class MyApp extends ConsumerWidget {
         curve: Curves.easeInOut,
         duration: const Duration(milliseconds: 300),
       ),
-    //  routerConfig: appRouter.router,
-      home: const SignInScreen(),
+     //home: ref.watch(authProvider.notifier).authState == AuthState.authenticated ? BottomNavBar(): SignInScreen(),
+      routerConfig: router,
+
     );
   }
 }

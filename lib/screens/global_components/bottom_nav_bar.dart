@@ -1,5 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sickler/core/constants.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';
@@ -8,15 +9,22 @@ import 'package:sickler/screens/meds/meds_screen.dart';
 import 'package:sickler/screens/profile/profile_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
-class BottomNavBar extends StatefulWidget {
+
+class BottomNavBar extends ConsumerStatefulWidget {
   static const String id = "nav_bar";
   const BottomNavBar({super.key});
 
   @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
+  ConsumerState<BottomNavBar> createState() => _BottomNavBarState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class _BottomNavBarState extends ConsumerState<BottomNavBar> {
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   final List<Widget> pages = [
     const HomeScreen(
       key: PageStorageKey(HomeScreen.id),
