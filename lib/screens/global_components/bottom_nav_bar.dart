@@ -42,17 +42,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget _bottomNavBar(
       {required int selectedIndex, required Color selectedItemColor}) {
     return Stack(
+      alignment: Alignment.bottomCenter,
       children: [
         Container(
           width: double.infinity,
-          height: 115,
+          height: 100,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
                 Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
-                Theme.of(context).scaffoldBackgroundColor,
+                //  Colors.red,
                 Theme.of(context).scaffoldBackgroundColor,
                 Theme.of(context).scaffoldBackgroundColor,
               ],
@@ -60,9 +61,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
         ),
         NavigationBar(
-          surfaceTintColor: Colors.transparent,
-          indicatorColor: Colors.transparent,
-          backgroundColor: Colors.transparent,
+          height: 70,
+          surfaceTintColor:
+              Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+          indicatorColor:
+              Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+          backgroundColor:
+              Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
           labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
           onDestinationSelected: (int index) {
             setState(() {
