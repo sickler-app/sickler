@@ -26,7 +26,6 @@ class WaterBarChart extends StatelessWidget {
   BarTouchData get barTouchData => BarTouchData(
         enabled: false,
         touchTooltipData: BarTouchTooltipData(
-          tooltipBgColor: Colors.transparent,
           tooltipPadding: EdgeInsets.zero,
           tooltipMargin: 8,
           getTooltipItem: (

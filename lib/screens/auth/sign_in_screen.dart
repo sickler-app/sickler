@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/screens/auth/register_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-class SignInScreen extends StatefulWidget {
+import '../../providers/providers.dart';
+
+class SignInScreen extends ConsumerStatefulWidget {
   static const String id = "sign_in";
   const SignInScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  ConsumerState<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignInScreenState extends ConsumerState<SignInScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -28,6 +33,8 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final authProviderNotifier = ref.watch(authProvider.notifier);
+    final user = ref.watch(authProvider);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -37,7 +44,7 @@ class _SignInScreenState extends State<SignInScreen> {
             key: _formKey,
             child: Column(
               children: [
-                const SicklerAppBar(pageTitle: "Sign In"),
+                const SicklerAppBar(pageTitle: "Sign In", showBackButton: false,),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -96,43 +103,71 @@ class _SignInScreenState extends State<SignInScreen> {
                             }
                           },
                         ),
+
                         const Gap(32),
                         const Spacer(),
 
                         ///Buttons
                         SicklerButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                //Todo: Perform sign in action
+                                await authProviderNotifier
+                                    .signInWithEmailAndPassword(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                )
+                                    .then((value) {
+                                  if (user.hasError) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            "${(user.error as Failure).errorMessage}"),
+                                      ),
+                                    );
+                                  }
+                                });
                               }
                             },
                             label: "Sign In"),
+
                         const Gap(16),
                         Row(
                           children: [
                             Expanded(
                               child: SicklerButton(
-                                  color: theme.iconTheme.color,
-                                  overrideIconColor: false,
-                                  buttonType: SicklerButtonType.outline,
-                                  iconPath: "assets/svg/google.svg",
-                                  onPressed: () {
-                                    //Todo: Perform Google Sign In Action
-                                  },
-                                  label: "Continue"),
-                            ),
-                            const Gap(16),
-                            Expanded(
-                              child: SicklerButton(
-                                  color: theme.iconTheme.color,
+                                  color: theme.colorScheme.primary,
                                   // overrideIconColor: false,
                                   buttonType: SicklerButtonType.outline,
-                                  onPressed: () {
-                                    //Todo: Perform Apple Sign In Option
+                                  iconPath: "assets/svg/google.svg",
+                                  onPressed: () async {
+                                    await authProviderNotifier
+                                        .singInWithGoogle()
+                                        .then((value) {
+                                      if (user.hasError) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                                "${(user.error as Failure).errorMessage}"),
+                                          ),
+                                        );
+                                      }
+                                    });
                                   },
-                                  iconPath: "assets/svg/apple.svg",
                                   label: "Continue"),
                             ),
+                            // const Gap(16),
+                            // Expanded(
+                            //   child: SicklerButton(
+                            //       color: theme.colorScheme.primary,
+                            //       // overrideIconColor: false,
+                            //       buttonType: SicklerButtonType.outline,
+                            //       onPressed: () {
+                            //         //Todo: Perform Apple Sign In Option
+                            //       },
+                            //       iconPath: "assets/svg/apple.svg",
+                            //       label: "Continue"),
+                            // ),
                           ],
                         ),
                         const Gap(12),
@@ -146,13 +181,17 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         Align(
                             alignment: Alignment.center,
-                            child: SicklerButton(
-                              isChipButton: true,
-                              buttonType: SicklerButtonType.text,
-                              onPressed: () {
-                                //  Todo: Navigate to Create Account Screen
-                              },
-                              label: "Create an Account",
+                            child: FittedBox(
+                              child: SicklerButton(
+                                isChipButton: true,
+                                buttonType: SicklerButtonType.text,
+                                onPressed: () {
+                                  context.goNamed(RegisterScreen.id);
+
+                                  //      Navigator.push(context, MaterialPageRoute(builder: (context)=> const RegisterScreen()));
+                                },
+                                label: "Create an Account",
+                              ),
                             )),
                         const Gap(64)
                       ],
