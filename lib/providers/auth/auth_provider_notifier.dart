@@ -1,14 +1,15 @@
-import 'package:flutter_animate/flutter_animate.dart';
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/models/auth/sickler_user_model.dart';
 import 'package:sickler/repositories/auth/auth_repository.dart';
 
-class AuthProviderNotifier extends AutoDisposeAsyncNotifier<SicklerUser?> {
+class AuthProviderNotifier extends AsyncNotifier<SicklerUser?> {
   final AuthRepository _authRepository;
   String? errorMessage;
-  AuthState authState = AuthState.loading;
+  AuthState authState = AuthState.unauthenticated;
 
   AuthProviderNotifier({required AuthRepository authRepository})
       : _authRepository = authRepository;
@@ -96,36 +97,18 @@ class AuthProviderNotifier extends AutoDisposeAsyncNotifier<SicklerUser?> {
     }, (empty) {
       ///Do something?
     });
-
-
   }
 
-  Future<void> authStateChanges() async {
-    final Either<Failure, Stream<SicklerUser?>> response =
-    _authRepository.getAuthStateChanges();
+  Stream<SicklerUser?> getAuthStateChanges(){
 
-    response.fold((failure) {
-      errorMessage = failure.errorMessage;
-    //  state = AsyncValue.error(failure, StackTrace.current);
-    }, (stream) {
-      ///Do something?
-      ///
-      ///
-      print(authState);
-      stream.listen((event) {
-        print("listening to auth state stream");
-        if (event == null || event.isEmpty) {
-          print("un-authenticated event occurred");
-          authState = AuthState.unauthenticated;
-          print(authState);
-        } else {
-          print("authenticated event occurred");
-          authState = AuthState.authenticated;
-          print(authState);
-        }
+    final Stream<SicklerUser?>  userStream = _authRepository.getAuthStateChanges();
 
-        state = AsyncValue.data(event);       ///Just adding a state assignment so RiverPod rebuilds
-      });
+    userStream.listen((event) {
+      state = AsyncValue.data(event);
+    }).onError((error){
+      state = AsyncValue.error(error, StackTrace.current);
     });
+
+    return userStream;
   }
 }

@@ -1,6 +1,6 @@
 enum AppState { initial, submitting, success, error }
 
-enum AuthState { loading, authenticated, unauthenticated }
+enum AuthState {  authenticated, unauthenticated }
 
 enum SicklerButtonType { primary, secondary, outline, text }
 

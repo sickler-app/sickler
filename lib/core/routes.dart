@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/main.dart';
+import 'package:sickler/models/auth/sickler_user_model.dart';
+import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/auth/register_screen.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
 import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
@@ -26,27 +26,19 @@ import 'package:sickler/screens/water/suggested_water_daily_goal_screen.dart';
 import 'package:sickler/screens/water/water_empty_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
-final firebaseAuthProvider =
-    Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
 
-final authStateChangesProvider = StreamProvider<User?>((ref) {
-  print("listening to auth state changes");
-  return ref.watch(firebaseAuthProvider).authStateChanges();
-});
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authStateChangesProvider);
+  final authState = ref.watch(currentUserStreamProvider);
 
   return GoRouter(
-    //debugLogDiagnostics: true,
     initialLocation: "/",
     redirect: (BuildContext context, GoRouterState state) {
-      final User? user = authState.value;
-      print("user from auth state is");
-      print(user);
-      final bool isLoggedIn = user != null;
-      print("is logged in");
-      print(isLoggedIn);
+      final SicklerUser? user = authState.value;
+      final bool isLoggedIn = (user != null && user.isNotEmpty);
+      // final AuthState authenticationState = (user != null && user.isNotEmpty)
+      //     ? AuthState.authenticated
+      //     : AuthState.unauthenticated;
 
       if (!isLoggedIn &&
           state.matchedLocation != "/${SignInScreen.id}" &&

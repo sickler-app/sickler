@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../core/core.dart';
 
 class SicklerUser extends Equatable {
-  final String displayName;
-  final String email;
+  final String? displayName;
+  final String? email;
   final String? photoURL;
   final String? phoneNumber;
   final bool? isAnonymous;
@@ -74,14 +74,19 @@ class SicklerUser extends Equatable {
   }
 
   factory SicklerUser.fromUser({required User? user}) {
+    if (user == null) {
+      return SicklerUser.empty;
+    } else {
+
     return SicklerUser(
-      displayName: user?.displayName ?? "",
-      email: user?.email ?? "",
-      uid: user?.uid ?? "",
-      phoneNumber: user?.phoneNumber,
-      isEmailVerified: user?.emailVerified,
-      isAnonymous: user?.isAnonymous,
+      displayName: user.displayName,
+      email: user.email,
+      uid: user.uid,
+      phoneNumber: user.phoneNumber,
+      isEmailVerified: user.emailVerified,
+      isAnonymous: user.isAnonymous,
     );
+  }
   }
 
   ///-------Empty--------///

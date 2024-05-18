@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:sickler/models/auth/sickler_user_model.dart';
 import 'package:sickler/services/auth/auth_service.dart';
 
@@ -9,8 +8,6 @@ import '../../core/core.dart';
 
 class AuthRepository {
   final AuthService authService;
-  final StreamController<SicklerUser?> sicklerUserStreamController =
-      StreamController();
 
   AuthRepository({required this.authService});
   // FutureEither<User?> signInWithEmailAndPassword({
@@ -68,16 +65,39 @@ class AuthRepository {
     });
   }
 
-  Either<Failure, Stream<SicklerUser?>> getAuthStateChanges() {
-    return callMethod(() {
-      authService.getCurrentUser().listen((User? event) {
-        ///Listens to the current user stream and outputs another stream of sickler
-        ///users on every event;
-        sicklerUserStreamController.add(SicklerUser.fromUser(user: event));
-      });
+  // Either<Failure, Stream<SicklerUser?>> getAuthStateChanges() {
+  //
+  //
+  //   return callMethod(() {
+  //     final StreamController<SicklerUser?> sicklerUserStreamController =
+  //     StreamController();
+  //     authService.getCurrentUser().listen((User? event) {
+  //       ///Listens to the current user stream and outputs another stream of sickler
+  //       ///users on every event;
+  //       sicklerUserStreamController.add(SicklerUser.fromUser(user: event));
+  //     });
+  //
+  //     return sicklerUserStreamController.stream;
+  //   });
+  // }
 
-      return sicklerUserStreamController.stream;
+  Stream<SicklerUser?> getAuthStateChanges() {
+    final StreamController<SicklerUser?> sicklerUserStreamController =
+        StreamController.broadcast();
+
+    final Stream<User?> userStream = authService.getCurrentUser();
+
+    userStream.listen((event) {
+      final SicklerUser sicklerUser = SicklerUser.fromUser(user: event);
+
+      sicklerUserStreamController.add(sicklerUser);
+    }, onError: (error) {
+      sicklerUserStreamController.addError(error);
+    }, onDone: () {
+      sicklerUserStreamController.close();
     });
+
+    return sicklerUserStreamController.stream;
   }
 
   FutureEither<void> sendPasswordResetEmail({
@@ -96,9 +116,5 @@ class AuthRepository {
       await authService.confirmPasswordReset(
           code: code, newPassword: newPassword);
     });
-  }
-
-  Future<void> disposeAuthStateChangesStream()async {
-    sicklerUserStreamController.close();
   }
 }

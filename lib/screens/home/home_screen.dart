@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/main.dart';
 import 'package:sickler/models/auth/sickler_user_model.dart';
+import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';
 import 'package:sickler/screens/meds/meds_screen.dart';
 import 'package:sickler/screens/profile/profile_screen.dart';
@@ -22,12 +22,19 @@ import 'components/components.dart';
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
 
+@override
+  void initState() {
+    super.initState();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
-    final SicklerUser? user =   ref.watch(authProvider).value;
-    print(user);
     final ThemeData theme = Theme.of(context);
+
+    final SicklerUser? user = ref.watch(authProvider).value;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -53,7 +60,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         height: 12,
                       ),
                       Text(
-                           user?.email ?? "",
+                          user?.displayName ?? user?.email ?? "Person",
                           style: theme.textTheme.headlineSmall!
                               .copyWith(fontWeight: FontWeight.w800)),
 

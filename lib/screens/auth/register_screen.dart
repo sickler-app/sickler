@@ -4,9 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/main.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+
+import '../../providers/providers.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   static const String id = "register";

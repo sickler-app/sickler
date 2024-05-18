@@ -7,7 +7,7 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/auth/register_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-import '../../main.dart';
+import '../../providers/providers.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   static const String id = "sign_in";
