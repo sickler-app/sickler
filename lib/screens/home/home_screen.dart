@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sickler/models/auth/sickler_user_model.dart';
+import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';
 import 'package:sickler/screens/meds/meds_screen.dart';
 import 'package:sickler/screens/profile/profile_screen.dart';
@@ -9,18 +12,29 @@ import 'package:sickler/screens/water/water_screen.dart';
 import '../../core/core.dart';
 import 'components/components.dart';
 
-class HomeScreen extends StatefulWidget {
+  class HomeScreen extends ConsumerStatefulWidget {
   static const String id = "home";
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+
+@override
+  void initState() {
+    super.initState();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+
+    final SicklerUser? user = ref.watch(authProvider).value;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -40,18 +54,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         TextSpan(
                             text: "Welcome, ",
                             style: theme.textTheme.headlineSmall),
-                        TextSpan(
-                            text: "Joe",
-                            style: theme.textTheme.headlineSmall!
-                                .copyWith(fontWeight: FontWeight.w800)),
+
                       ])),
                       const SizedBox(
                         height: 12,
                       ),
                       Text(
-                        "Your water intake looks good,Good Job!",
-                        style: theme.textTheme.bodyMedium,
-                      ),
+                          user?.displayName ?? user?.email ?? "Person",
+                          style: theme.textTheme.headlineSmall!
+                              .copyWith(fontWeight: FontWeight.w800)),
+
                     ],
                   ),
                   const Spacer(),

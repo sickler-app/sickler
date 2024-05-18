@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 ///-------Paddings--------///
 const double kDefaultPadding = 16.0;
 const double kDefaultPaddingLarge = 24.0;
+const double kPadding4 = 4.0;
+const double kPadding8 = 8.0;
+const double kPadding12 = 12.0;
+const double kPadding16 = 16.0;
+const double kPadding24 = 24.0;
+const double kPadding32 = 32.0;
+const double kPadding64 = 64.0;
 
 ///------Input Decorations-------///
 class SicklerInputDecoration {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'core.dart';
 
 class SicklerThemeData {
-
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     primaryColor: SicklerColours.purpleSeed,
@@ -66,14 +66,17 @@ class SicklerThemeData {
             EdgeInsets.symmetric(horizontal: 16)),
         elevation: MaterialStatePropertyAll<double>(0),
       ),
-
     ),
+    iconButtonTheme: const IconButtonThemeData(
+        style: ButtonStyle(
+      splashFactory: InkSparkle.splashFactory,
+      elevation: MaterialStatePropertyAll<double>(0),
+    )),
     textButtonTheme: const TextButtonThemeData(
         style: ButtonStyle(
-          elevation: MaterialStatePropertyAll<double>(0),
-          splashFactory: InkSparkle.splashFactory,
-        )
-    ),
+      elevation: MaterialStatePropertyAll<double>(0),
+      splashFactory: InkSparkle.splashFactory,
+    )),
     chipTheme: ChipThemeData(
       labelStyle:
           SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.purple10),
@@ -117,7 +120,7 @@ class SicklerThemeData {
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.light,
       seedColor: SicklerColours.purpleSeed,
-      primary: SicklerColours.purple40,
+      primary: SicklerColours.purpleSeed,
       onPrimary: SicklerColours.white,
       primaryContainer: SicklerColours.purple90,
       onPrimaryContainer: SicklerColours.purple10,
@@ -137,7 +140,6 @@ class SicklerThemeData {
     primaryColor: SicklerColours.purple70,
     primaryColorLight: SicklerColours.purple90,
     primaryColorDark: SicklerColours.purple70,
-
     scaffoldBackgroundColor: SicklerColours.black,
     iconTheme: const IconThemeData(color: SicklerColours.white),
     primaryIconTheme: const IconThemeData(color: SicklerColours.white),
@@ -209,22 +211,25 @@ class SicklerThemeData {
     ),
     cardColor: SicklerColours.neutral20,
     elevatedButtonTheme: const ElevatedButtonThemeData(
-
       style: ButtonStyle(
         splashFactory: InkSparkle.splashFactory,
-  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         fixedSize: MaterialStatePropertyAll<Size>(Size.fromHeight(52)),
         padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
             EdgeInsets.symmetric(horizontal: 16)),
         elevation: MaterialStatePropertyAll<double>(0),
       ),
     ),
+    iconButtonTheme: const IconButtonThemeData(
+        style: ButtonStyle(
+      splashFactory: InkSparkle.splashFactory,
+      elevation: MaterialStatePropertyAll<double>(0),
+    )),
     textButtonTheme: const TextButtonThemeData(
         style: ButtonStyle(
-          elevation: MaterialStatePropertyAll<double>(0),
-          splashFactory: InkSparkle.splashFactory,
-        )
-    ),
+      elevation: MaterialStatePropertyAll<double>(0),
+      splashFactory: InkSparkle.splashFactory,
+    )),
     chipTheme: ChipThemeData(
       elevation: 0,
       selectedColor: SicklerColours.purple70,

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "153884223348",
+    "project_id": "sickler",
+    "storage_bucket": "sickler.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153884223348:android:a5796916c9503a171a6e21",
+        "android_client_info": {
+          "package_name": "com.sickler.sickler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153884223348-a0ed4e3orf72fm3vkktlkn6tnfpht19i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sickler.sickler",
+            "certificate_hash": "8e286304f7aadbafabd85e3bd935d74f07c65279"
+          }
+        },
+        {
+          "client_id": "153884223348-erudt6ag04cvmf648qns398ou7nvvool.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX2B02wF7awuG9I2K_BSQd__w0S39GJO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153884223348-erudt6ag04cvmf648qns398ou7nvvool.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "153884223348-ir50vpt2ab3cgjjc2ctgeo9j7eitrd3d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sickler.sickler"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
