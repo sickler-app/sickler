@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/core.dart';
 
 class SicklerListWheelScrollViewPicker extends StatefulWidget {
@@ -754,6 +755,7 @@ class _SicklerListWheelScrollViewPickerState
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool isDarkMode = theme.brightness == Brightness.dark;
     return SizedBox(
       height: widget.height,
       child: Stack(
@@ -767,7 +769,9 @@ class _SicklerListWheelScrollViewPickerState
                   border: Border.symmetric(
                     horizontal: BorderSide(
                       width: 1,
-                      color: theme.colorScheme.primary,
+                      color: isDarkMode
+                          ? SicklerColours.neutral20
+                          : SicklerColours.neutral90,
                     ),
                   ),
                 ),

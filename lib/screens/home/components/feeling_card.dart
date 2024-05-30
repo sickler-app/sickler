@@ -1,9 +1,7 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
-import '../../global_components/global_components.dart';
 
 class FeelingCard extends StatefulWidget {
   const FeelingCard({super.key});
@@ -17,9 +15,14 @@ class _FeelingCardState extends State<FeelingCard> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool isDarkMode = theme.brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
+        // border: Border.all(
+        //     color: isDarkMode
+        //         ? SicklerColours.neutral20
+        //         : SicklerColours.neutral90),
         color: theme.cardColor,
         borderRadius: BorderRadius.circular(24),
       ),
@@ -72,24 +75,24 @@ class _FeelingCardState extends State<FeelingCard> {
                   sliderValue = value;
                 });
               }),
-          const Gap(16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SicklerButton(
-                  isChipButton: true,
-                  onPressed: () {},
-                  label: "Cancel",
-                  buttonType: SicklerButtonType.outline),
-              const Gap(16),
-              SicklerButton(
-                  isChipButton: true,
-                  onPressed: () {},
-                  label: "Save",
-                  icon: FluentIcons.checkmark_20_regular,
-                  buttonType: SicklerButtonType.primary),
-            ],
-          ),
+          // const Gap(16),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   children: [
+          //     SicklerButton(
+          //         isChipButton: true,
+          //         onPressed: () {},
+          //         label: "Cancel",
+          //         buttonType: SicklerButtonType.outline),
+          //     const Gap(16),
+          //     SicklerButton(
+          //         isChipButton: true,
+          //         onPressed: () {},
+          //         label: "Save",
+          //         icon: FluentIcons.checkmark_20_regular,
+          //         buttonType: SicklerButtonType.primary),
+          //   ],
+          // ),
         ],
       ),
     );

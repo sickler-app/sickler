@@ -5,14 +5,13 @@ import 'package:go_router/go_router.dart';
 import 'package:sickler/models/auth/sickler_user_model.dart';
 import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';
-import 'package:sickler/screens/meds/meds_screen.dart';
 import 'package:sickler/screens/profile/profile_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
 import '../../core/core.dart';
 import 'components/components.dart';
 
-  class HomeScreen extends ConsumerStatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   static const String id = "home";
   const HomeScreen({super.key});
 
@@ -21,19 +20,20 @@ import 'components/components.dart';
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-
-@override
+  @override
   void initState() {
     super.initState();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
     final SicklerUser? user = ref.watch(authProvider).value;
+
+    final String displayName = user?.displayName != null
+        ? user!.displayName!.split(" ").first
+        : user?.email ?? "User";
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -50,69 +50,69 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       RichText(
-                          text: TextSpan(children: [
-                        TextSpan(
-                            text: "Welcome, ",
-                            style: theme.textTheme.headlineSmall),
-
-                      ])),
-                      const SizedBox(
-                        height: 12,
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                                text: "Welcome,",
+                                style: theme.textTheme.titleMedium),
+                          ],
+                        ),
                       ),
-                      Text(
-                          user?.displayName ?? user?.email ?? "Person",
+                      Text(displayName,
                           style: theme.textTheme.headlineSmall!
                               .copyWith(fontWeight: FontWeight.w800)),
-
                     ],
                   ),
                   const Spacer(),
                   InkWell(
+                    splashColor: theme.colorScheme.primary.withOpacity(.2),
+                    splashFactory: InkSparkle.splashFactory,
+                    borderRadius: BorderRadius.circular(kPadding64),
                     onTap: () {
                       context.pushNamed(ProfileScreen.id);
                     },
-                    child: const CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/memoji.png"),
+                    child: CircleAvatar(
+                      backgroundImage: user?.photoURL != null
+                          ? NetworkImage(user!.photoURL!)
+                          : AssetImage("assets/images/memoji.png")
+                              as ImageProvider,
                       radius: 32,
                       backgroundColor: SicklerColours.neutral90,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 48,
-              ),
+              Gap(kPadding24),
               const FeelingCard(),
-              const Gap(16),
+              const Gap(kPadding16),
               WaterCard(
                 onPressed: () {
                   context.pushNamed(WaterScreen.id);
                 },
               ),
-              const SizedBox(
-                height: 32,
-              ),
+              const Gap(kPadding32),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Your Health Info",
-                  style: theme.textTheme.titleMedium,
+                  style: theme.textTheme.titleMedium!
+                      .copyWith(fontWeight: FontWeight.w800),
                 ),
               ),
-              const Gap(16),
-              GestureDetector(
-                  onTap: () {
-                    context.goNamed(MedsScreen.id);
-                  },
-                  child: const MedsReminderCard()),
-              const Gap(16),
+              // const Gap(kPadding16),
+              // GestureDetector(
+              //     onTap: () {
+              //       context.goNamed(MedsScreen.id);
+              //     },
+              //     child: const MedsReminderCard()),
+              const Gap(kPadding16),
               EmergencySharingCard(
                 onPressed: () {
                   context.pushNamed(EmergencyScreen.id);
                 },
               ),
               const SizedBox(
-                height: 64,
+                height: kPadding64 * 2,
               )
             ],
           ),

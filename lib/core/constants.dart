@@ -57,8 +57,10 @@ class SicklerInputDecoration {
 
 ///------Colours-------///
 class SicklerColours {
-  static const Color black = Color(0xFF1C1A22);
-  static const Color white = Color(0xFFFFFBFF);
+  // static const Color black = Color(0xFF1C1A22);
+  static const Color black = Color(0xFF0E0D11);
+  // static const Color white = Color(0xFFFFFBFF);
+  static const Color white = Color(0xFFFFFFFF);
 
   ///-----------Purple---------///
   static const Color purpleSeed = Color(0xFF7B4FFF);
