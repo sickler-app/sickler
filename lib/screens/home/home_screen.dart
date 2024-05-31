@@ -74,7 +74,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     child: CircleAvatar(
                       backgroundImage: user?.photoURL != null
                           ? NetworkImage(user!.photoURL!)
-                          : AssetImage("assets/images/memoji.png")
+                          : const AssetImage("assets/images/memoji.png")
                               as ImageProvider,
                       radius: 32,
                       backgroundColor: SicklerColours.neutral90,
@@ -82,7 +82,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ],
               ),
-              Gap(kPadding24),
+              const Gap(kPadding24),
               const FeelingCard(),
               const Gap(kPadding16),
               WaterCard(
