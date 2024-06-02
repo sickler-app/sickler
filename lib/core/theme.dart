@@ -61,20 +61,20 @@ class SicklerThemeData {
       style: ButtonStyle(
         splashFactory: InkSparkle.splashFactory,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        fixedSize: MaterialStatePropertyAll<Size>(Size.fromHeight(52)),
-        padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+        fixedSize: WidgetStatePropertyAll<Size>(Size.fromHeight(52)),
+        padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
             EdgeInsets.symmetric(horizontal: 16)),
-        elevation: MaterialStatePropertyAll<double>(0),
+        elevation: WidgetStatePropertyAll<double>(0),
       ),
     ),
     iconButtonTheme: const IconButtonThemeData(
         style: ButtonStyle(
       splashFactory: InkSparkle.splashFactory,
-      elevation: MaterialStatePropertyAll<double>(0),
+      elevation: WidgetStatePropertyAll<double>(0),
     )),
     textButtonTheme: const TextButtonThemeData(
         style: ButtonStyle(
-      elevation: MaterialStatePropertyAll<double>(0),
+      elevation: WidgetStatePropertyAll<double>(0),
       splashFactory: InkSparkle.splashFactory,
     )),
     chipTheme: ChipThemeData(
@@ -101,20 +101,20 @@ class SicklerThemeData {
         overlayColor: Colors.transparent,
         overlayShape: RoundSliderOverlayShape(overlayRadius: 0)),
     switchTheme: SwitchThemeData(
-      thumbColor: const MaterialStatePropertyAll<Color>(SicklerColours.white),
-      trackColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      thumbColor: const WidgetStatePropertyAll<Color>(SicklerColours.white),
+      trackColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return SicklerColours.purple40;
         }
         return SicklerColours.purple90;
       }),
-      trackOutlineColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      trackOutlineColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return SicklerColours.purple40;
         }
         return SicklerColours.purple90;
       }),
-      trackOutlineWidth: const MaterialStatePropertyAll<double>(0),
+      trackOutlineWidth: const WidgetStatePropertyAll<double>(0),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
     colorScheme: ColorScheme.fromSeed(
@@ -144,25 +144,25 @@ class SicklerThemeData {
     iconTheme: const IconThemeData(color: SicklerColours.white),
     primaryIconTheme: const IconThemeData(color: SicklerColours.white),
     switchTheme: SwitchThemeData(
-      thumbColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      thumbColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return SicklerColours.purple10;
         }
         return SicklerColours.neutral70;
       }),
-      trackColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      trackColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return SicklerColours.purple70;
         }
         return SicklerColours.neutral20;
       }),
-      trackOutlineColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      trackOutlineColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return SicklerColours.purple70;
         }
         return SicklerColours.neutral20;
       }),
-      trackOutlineWidth: const MaterialStatePropertyAll<double>(0),
+      trackOutlineWidth: const WidgetStatePropertyAll<double>(0),
     ),
     cardTheme: CardTheme(
       color: SicklerColours.neutral20,
@@ -214,20 +214,20 @@ class SicklerThemeData {
       style: ButtonStyle(
         splashFactory: InkSparkle.splashFactory,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        fixedSize: MaterialStatePropertyAll<Size>(Size.fromHeight(52)),
-        padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+        fixedSize: WidgetStatePropertyAll<Size>(Size.fromHeight(52)),
+        padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
             EdgeInsets.symmetric(horizontal: 16)),
-        elevation: MaterialStatePropertyAll<double>(0),
+        elevation: WidgetStatePropertyAll<double>(0),
       ),
     ),
     iconButtonTheme: const IconButtonThemeData(
         style: ButtonStyle(
       splashFactory: InkSparkle.splashFactory,
-      elevation: MaterialStatePropertyAll<double>(0),
+      elevation: WidgetStatePropertyAll<double>(0),
     )),
     textButtonTheme: const TextButtonThemeData(
         style: ButtonStyle(
-      elevation: MaterialStatePropertyAll<double>(0),
+      elevation: WidgetStatePropertyAll<double>(0),
       splashFactory: InkSparkle.splashFactory,
     )),
     chipTheme: ChipThemeData(

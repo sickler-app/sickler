@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +11,6 @@ import 'package:sickler/screens/meds/meds_screen.dart';
 import 'package:sickler/screens/profile/profile_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
-
 class BottomNavBar extends ConsumerStatefulWidget {
   static const String id = "nav_bar";
   const BottomNavBar({super.key});
@@ -19,7 +20,6 @@ class BottomNavBar extends ConsumerStatefulWidget {
 }
 
 class _BottomNavBarState extends ConsumerState<BottomNavBar> {
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -52,30 +52,11 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        Container(
-          width: double.infinity,
-          height: 100,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
-                //  Colors.red,
-                Theme.of(context).scaffoldBackgroundColor,
-                Theme.of(context).scaffoldBackgroundColor,
-              ],
-            ),
-          ),
-        ),
         NavigationBar(
-          height: 70,
-          surfaceTintColor:
-              Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
-          indicatorColor:
-              Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
-          backgroundColor:
-              Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+          indicatorColor: Platform.isIOS
+              ? Theme.of(context).scaffoldBackgroundColor.withOpacity(0)
+              : Theme.of(context).colorScheme.primaryContainer,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
           onDestinationSelected: (int index) {
             setState(() {
@@ -90,7 +71,7 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
                 icon: SvgPicture.asset(
                   "assets/svg/home-alt.svg",
                   colorFilter: const ColorFilter.mode(
-                      SicklerColours.neutral50, BlendMode.srcIn),
+                      SicklerColours.black, BlendMode.srcIn),
                 ),
                 selectedIcon: SvgPicture.asset(
                   "assets/svg/home-alt-filled.svg",
@@ -98,23 +79,24 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
                       Theme.of(context).colorScheme.primary, BlendMode.srcIn),
                 )),
             NavigationDestination(
-                label: "Water",
-                icon: SvgPicture.asset(
-                  "assets/svg/droplet-alt.svg",
-                  colorFilter: const ColorFilter.mode(
-                      SicklerColours.neutral50, BlendMode.srcIn),
-                ),
-                selectedIcon: SvgPicture.asset(
-                  "assets/svg/droplet-alt-filled.svg",
-                  colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.primary, BlendMode.srcIn),
-                )),
+              label: "Water",
+              icon: SvgPicture.asset(
+                "assets/svg/droplet-alt.svg",
+                colorFilter: const ColorFilter.mode(
+                    SicklerColours.black, BlendMode.srcIn),
+              ),
+              selectedIcon: SvgPicture.asset(
+                "assets/svg/droplet-alt-filled.svg",
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.primary, BlendMode.srcIn),
+              ),
+            ),
             NavigationDestination(
                 label: "Emergency",
                 icon: SvgPicture.asset(
                   "assets/svg/emergency-alt.svg",
                   colorFilter: const ColorFilter.mode(
-                      SicklerColours.neutral50, BlendMode.srcIn),
+                      SicklerColours.black, BlendMode.srcIn),
                 ),
                 selectedIcon: SvgPicture.asset(
                   "assets/svg/emergency-alt-filled.svg",
@@ -124,14 +106,14 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
             NavigationDestination(
               label: "Meds",
               icon: const Icon(FluentIcons.pill_24_regular,
-                  color: SicklerColours.neutral50),
+                  color: SicklerColours.black),
               selectedIcon: Icon(FluentIcons.pill_24_filled,
                   color: Theme.of(context).colorScheme.primary),
             ),
             NavigationDestination(
               label: "Profile",
               icon: const Icon(FluentIcons.person_24_regular,
-                  color: SicklerColours.neutral50),
+                  color: SicklerColours.black),
               selectedIcon: Icon(FluentIcons.person_24_filled,
                   color: Theme.of(context).colorScheme.primary),
             ),

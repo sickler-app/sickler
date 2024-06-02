@@ -1,1 +1,1 @@
-export 'auth/auth_provider_notifier.dart';
+export 'auth/auth_notifier.dart';

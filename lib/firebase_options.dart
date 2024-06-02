@@ -63,8 +63,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '153884223348',
     projectId: 'sickler',
     storageBucket: 'sickler.appspot.com',
-    androidClientId: '153884223348-a0ed4e3orf72fm3vkktlkn6tnfpht19i.apps.googleusercontent.com',
+    androidClientId: '153884223348-1fo58e0j3968923ka2cbtbbvu8hj0aq6.apps.googleusercontent.com',
     iosClientId: '153884223348-ir50vpt2ab3cgjjc2ctgeo9j7eitrd3d.apps.googleusercontent.com',
     iosBundleId: 'com.sickler.sickler',
   );
+
 }

@@ -40,7 +40,6 @@ class _WaterScreenState extends State<WaterScreen> {
                         shouldAnimate: true,
                         unit: "%",
                         progress: 0.37,
-
                       ),
                       const Gap(16),
                       Text("$dailyGoal ml",
@@ -56,7 +55,6 @@ class _WaterScreenState extends State<WaterScreen> {
                           style: theme.textTheme.bodyMedium),
                     ],
                   ),
-
                   const Gap(16),
                   WaterVolumeSelector(selectedVolume: (double? selectedVolume) {
                     ///Todo: Add selected Medication to state
@@ -69,28 +67,31 @@ class _WaterScreenState extends State<WaterScreen> {
                     runSpacing: 4,
                     children: [
                       SicklerChip(
-                        unselectedColor: SicklerColours.blueSeed,
-                        unselectedBackgroundColor: SicklerColours.blueSeed,
+                        selectedBackgroundColor: SicklerColours.blueSeed,
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
                         label: "Daily",
                       ),
                       SicklerChip(
+                        selectedBackgroundColor: SicklerColours.blueSeed,
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
                         label: "Weekly",
                       ),
                       SicklerChip(
+                        selectedBackgroundColor: SicklerColours.blueSeed,
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
                         label: "Monthly",
                       ),
                       SicklerChip(
+                        selectedBackgroundColor: SicklerColours.blueSeed,
                         onSelected: (value) {},
                         chipType: SicklerChipType.filter,
                         label: "Yearly",
                       ),
                       SicklerChip(
+                        selectedBackgroundColor: SicklerColours.blueSeed,
                         onSelected: (value) async {
                           /// Select Dose Bottom Sheet
                           await showModalBottomSheet(
@@ -125,11 +126,9 @@ class _WaterScreenState extends State<WaterScreen> {
                       style: theme.textTheme.displaySmall!
                           .copyWith(fontWeight: FontWeight.w800)),
                   const Gap(24),
-
                   const WaterStatistics(),
                   const Gap(24),
-                  Text("Today's Logs",
-                      style: theme.textTheme.titleLarge),
+                  Text("Today's Logs", style: theme.textTheme.titleLarge),
                   const Gap(16),
                   const TodaysLog(),
                   const Gap(64)

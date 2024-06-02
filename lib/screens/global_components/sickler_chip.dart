@@ -8,18 +8,14 @@ class SicklerChip extends StatefulWidget {
     this.onSelected,
     required this.label,
     this.chipType = SicklerChipType.filter,
-    this.unselectedColor = SicklerColours.black,
-    this.unselectedBackgroundColor = SicklerColours.neutral95,
-    this.selectedColor = SicklerColours.purple90,
-    this.selectedBackgroundColor = SicklerColours.purpleSeed,
+    this.selectedColor,
+    this.selectedBackgroundColor,
   });
 
   final Function(bool)? onSelected;
   final SicklerChipType chipType;
   final String label;
-  final Color? unselectedColor;
   final Color? selectedColor;
-  final Color? unselectedBackgroundColor;
   final Color? selectedBackgroundColor;
 
   @override
@@ -36,28 +32,32 @@ class _SicklerChipState extends State<SicklerChip> {
       throw ErrorHint(
           "onSelected must not be null on a Filter Chip type, please consider adding the onSelected parameter");
     }
+
     final ThemeData theme = Theme.of(context);
-    bool isDarkMode = theme.brightness == Brightness.dark;
+    final bool isDarkMode = theme.brightness == Brightness.dark;
 
     if (widget.chipType == SicklerChipType.filter) {
       return FilterChip(
-          backgroundColor: isSelected
-              ? widget.selectedBackgroundColor
-              : widget.selectedBackgroundColor,
+          padding: const EdgeInsets.symmetric(
+              horizontal: kPadding16, vertical: kPadding12),
           side: isSelected
-              ? BorderSide(
+              ? null
+              : BorderSide(
                   width: 1,
-                  color: widget.unselectedColor ?? theme.colorScheme.primary)
-              : BorderSide.none,
+                  color: isDarkMode
+                      ? SicklerColours.neutral20
+                      : SicklerColours.neutral90),
+          backgroundColor: theme.scaffoldBackgroundColor,
+          selectedColor:
+              widget.selectedBackgroundColor ?? theme.colorScheme.primary,
           showCheckmark: true,
-          checkmarkColor:
-              isSelected ? widget.selectedColor : widget.unselectedColor,
+          checkmarkColor: widget.selectedColor ?? Colors.white,
           selected: isSelected,
           label: Text(
             widget.label,
             style: theme.textTheme.bodyMedium!.copyWith(
                 color:
-                    isSelected ? widget.selectedColor : widget.unselectedColor),
+                    isSelected ? (widget.selectedColor ?? Colors.white) : null),
           ),
           onSelected: (value) {
             setState(() {
@@ -68,14 +68,21 @@ class _SicklerChipState extends State<SicklerChip> {
           });
     } else {
       return Chip(
-        //side: BorderSide(width: 1, color: theme.colorScheme.primary),
-        backgroundColor: !isDarkMode
-            ? widget.unselectedBackgroundColor ?? SicklerColours.purple90
-            : widget.unselectedBackgroundColor ?? theme.colorScheme.primary,
+        visualDensity: VisualDensity.comfortable,
+        padding:
+            const EdgeInsets.symmetric(horizontal: kPadding16, vertical: kPadding12),
+        backgroundColor: theme.scaffoldBackgroundColor,
+        side: BorderSide(
+            width: 1,
+            color: isDarkMode
+                ? SicklerColours.neutral20
+                : SicklerColours.neutral90),
         label: Text(
           widget.label,
           style: theme.textTheme.bodyMedium!.copyWith(
-              color: widget.unselectedColor ?? SicklerColours.purple10),
+              color: isSelected
+                  ? (widget.selectedColor ?? theme.colorScheme.primary)
+                  : null),
         ),
       );
     }

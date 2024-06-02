@@ -61,7 +61,7 @@ class AuthRepository {
 
   FutureEither<void> signOut() {
     return callFutureMethod(() async {
-      authService.signOut();
+      await authService.signOut();
     });
   }
 

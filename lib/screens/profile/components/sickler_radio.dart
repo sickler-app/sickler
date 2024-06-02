@@ -34,19 +34,19 @@ class SicklerRadio<T> extends StatelessWidget {
       selectedTileColor:
           selectedBackgroundColor ?? theme.colorScheme.primaryContainer,
       overlayColor:
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
+          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
           return SicklerColours.purple90;
-        } else if (states.contains(MaterialState.disabled)) {
+        } else if (states.contains(WidgetState.disabled)) {
           return SicklerColours.neutral90;
         }
         return null;
       }),
       title: Text(label, style: theme.textTheme.bodyMedium),
-      fillColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
+      fillColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
           return fillColor ?? theme.colorScheme.primary;
-        } else if (states.contains(MaterialState.disabled)) {
+        } else if (states.contains(WidgetState.disabled)) {
           return SicklerColours.neutral50;
         }
         return null;
