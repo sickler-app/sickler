@@ -24,7 +24,8 @@ class AuthService {
   }
 
   Future<UserCredential> signInWithGoogle() async {
-    GoogleSignIn googleSignIn = GoogleSignIn(scopes: ["email", "profile"]);
+    GoogleSignIn googleSignIn =
+        GoogleSignIn(scopes: ["email", "profile", "openid"]);
 
     GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 

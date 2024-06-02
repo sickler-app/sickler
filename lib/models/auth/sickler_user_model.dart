@@ -8,8 +8,8 @@ class SicklerUser extends Equatable {
   final String? email;
   final String? photoURL;
   final String? phoneNumber;
-  final bool? isAnonymous;
-  final bool? isEmailVerified;
+  final bool isAnonymous;
+  final bool isEmailVerified;
   final Genotype? genotype;
   final String uid;
 
@@ -19,8 +19,8 @@ class SicklerUser extends Equatable {
     this.genotype,
     this.photoURL,
     this.phoneNumber,
-    this.isAnonymous,
-    this.isEmailVerified,
+    required this.isAnonymous,
+    required this.isEmailVerified,
     required this.uid,
   });
 
@@ -77,21 +77,24 @@ class SicklerUser extends Equatable {
     if (user == null) {
       return SicklerUser.empty;
     } else {
-
-    return SicklerUser(
-      displayName: user.displayName,
-      email: user.email,
-      uid: user.uid,
-      phoneNumber: user.phoneNumber,
-      isEmailVerified: user.emailVerified,
-      isAnonymous: user.isAnonymous,
-    );
-  }
+      return SicklerUser(
+        displayName: user.displayName,
+        email: user.email,
+        uid: user.uid,
+        phoneNumber: user.phoneNumber,
+        isEmailVerified: user.emailVerified,
+        isAnonymous: user.isAnonymous,
+      );
+    }
   }
 
   ///-------Empty--------///
-  static SicklerUser empty =
-      const SicklerUser(displayName: "", email: "", uid: "");
+  static SicklerUser empty = const SicklerUser(
+      displayName: "",
+      email: "",
+      uid: "",
+      isAnonymous: false,
+      isEmailVerified: true);
   bool get isEmpty => this == SicklerUser.empty;
   bool get isNotEmpty => this != SicklerUser.empty;
 

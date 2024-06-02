@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "153884223348-a0ed4e3orf72fm3vkktlkn6tnfpht19i.apps.googleusercontent.com",
+          "client_id": "153884223348-1fo58e0j3968923ka2cbtbbvu8hj0aq6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sickler.sickler",
-            "certificate_hash": "8e286304f7aadbafabd85e3bd935d74f07c65279"
+            "certificate_hash": "97f51dc28a914c34fa4128a783d8875743278a54"
           }
         },
         {

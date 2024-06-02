@@ -6,12 +6,10 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/models/auth/sickler_user_model.dart';
 import 'package:sickler/repositories/auth/auth_repository.dart';
 
-class AuthProviderNotifier extends AsyncNotifier<SicklerUser?> {
+class AuthNotifier extends AsyncNotifier<SicklerUser?> {
   final AuthRepository _authRepository;
   String? errorMessage;
-  AuthState authState = AuthState.unauthenticated;
-
-  AuthProviderNotifier({required AuthRepository authRepository})
+  AuthNotifier({required AuthRepository authRepository})
       : _authRepository = authRepository;
 
   @override
@@ -81,7 +79,7 @@ class AuthProviderNotifier extends AsyncNotifier<SicklerUser?> {
       errorMessage = failure.errorMessage;
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
-      ///Do something?
+      state = AsyncValue.data(SicklerUser.empty);
     });
   }
 
@@ -95,17 +93,17 @@ class AuthProviderNotifier extends AsyncNotifier<SicklerUser?> {
       errorMessage = failure.errorMessage;
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
-      ///Do something?
+      state = AsyncValue.data(SicklerUser.empty);
     });
   }
 
-  Stream<SicklerUser?> getAuthStateChanges(){
-
-    final Stream<SicklerUser?>  userStream = _authRepository.getAuthStateChanges();
+  Stream<SicklerUser?> getAuthStateChanges() {
+    final Stream<SicklerUser?> userStream =
+        _authRepository.getAuthStateChanges();
 
     userStream.listen((event) {
       state = AsyncValue.data(event);
-    }).onError((error){
+    }).onError((error) {
       state = AsyncValue.error(error, StackTrace.current);
     });
 
