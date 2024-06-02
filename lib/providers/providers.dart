@@ -5,14 +5,12 @@ import '../repositories/repositories.dart';
 import '../services/services.dart';
 import 'provider_notifiers.dart';
 
-
 ///------Auth Related Providers------///
 final AuthService authService = AuthService();
 final AuthRepository authRepository = AuthRepository(authService: authService);
 
-final authProvider =
-AsyncNotifierProvider<AuthProviderNotifier, SicklerUser?>(
-        () => AuthProviderNotifier(authRepository: authRepository));
+final authProvider = AsyncNotifierProvider<AuthNotifier, SicklerUser?>(
+    () => AuthNotifier(authRepository: authRepository));
 
 final currentUserStreamProvider = StreamProvider<SicklerUser?>((ref) {
   return ref.watch(authProvider.notifier).getAuthStateChanges();
