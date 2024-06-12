@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/models/auth/sickler_user_model.dart';
 import 'package:sickler/providers/providers.dart';
+import 'package:sickler/screens/auth/google_sign_in_screen.dart';
 import 'package:sickler/screens/auth/register_screen.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
 import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
@@ -27,17 +28,21 @@ import 'package:sickler/screens/water/water_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(currentUserStreamProvider);
+  bool isFirstTime = true;
+  bool isOnboarded = false;
 
   return GoRouter(
-    initialLocation: "/",
+    initialLocation: isFirstTime ? "/${OnboardingBaseScreen.id}" : "/}",
     redirect: (BuildContext context, GoRouterState state) {
       final SicklerUser? user = authState.value;
       final bool isLoggedIn = (user != null && user.isNotEmpty);
 
       if (!isLoggedIn &&
           state.matchedLocation != "/${SignInScreen.id}" &&
-          state.matchedLocation != "/${RegisterScreen.id}") {
-        return "/${SignInScreen.id}";
+          state.matchedLocation != "/${RegisterScreen.id}" &&
+          state.matchedLocation != "/${GoogleSignInScreen.id}" &&
+          state.matchedLocation != "/${OnboardingBaseScreen.id}") {
+        return "/${GoogleSignInScreen.id}";
       }
 
       return null;
@@ -183,6 +188,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: RegisterScreen.id,
         builder: (BuildContext context, GoRouterState state) =>
             const RegisterScreen(),
+      ),
+      GoRoute(
+        path: "/${GoogleSignInScreen.id}",
+        name: GoogleSignInScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const GoogleSignInScreen(),
       ),
       GoRoute(
         path: "/${OnboardingBaseScreen.id}",
