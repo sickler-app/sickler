@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class SicklerHealthInfo extends Equatable {
+class SicklerUserHealthInfo extends Equatable {
+  final String uid;
   final String? genotype;
   final String? height;
   final String? weight;
@@ -9,8 +10,9 @@ class SicklerHealthInfo extends Equatable {
   final List<String>? allergies;
   final List<String>? medicalConditions;
 
-  const SicklerHealthInfo(
-      {this.genotype,
+  const SicklerUserHealthInfo(
+      {required this.uid,
+      this.genotype,
       this.height,
       this.weight,
       this.bmi,
@@ -18,15 +20,17 @@ class SicklerHealthInfo extends Equatable {
       this.allergies,
       this.medicalConditions});
 
-  SicklerHealthInfo copyWith(
-      {String? genotype,
+  SicklerUserHealthInfo copyWith(
+      {String? uid,
+      String? genotype,
       String? height,
       String? weight,
       String? bmi,
       String? bloodType,
       List<String>? allergies,
       List<String>? medicalConditions}) {
-    return SicklerHealthInfo(
+    return SicklerUserHealthInfo(
+        uid: uid ?? this.uid,
         genotype: genotype ?? this.genotype,
         height: height ?? this.height,
         weight: weight ?? this.weight,
@@ -40,6 +44,7 @@ class SicklerHealthInfo extends Equatable {
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {
+      "uid": uid,
       "genotype": genotype,
       "height": height,
       "weight": weight,
@@ -51,8 +56,9 @@ class SicklerHealthInfo extends Equatable {
     return data;
   }
 
-  factory SicklerHealthInfo.fromMap(Map<String, dynamic> data) {
-    return SicklerHealthInfo(
+  factory SicklerUserHealthInfo.fromMap(Map<String, dynamic> data) {
+    return SicklerUserHealthInfo(
+        uid: data["uid"],
         genotype: data["genotype"],
         height: data["height"],
         weight: data["weight"],
@@ -64,7 +70,8 @@ class SicklerHealthInfo extends Equatable {
 
   ///-------------Empty----------///
 
-  static SicklerHealthInfo empty = const SicklerHealthInfo(
+  static SicklerUserHealthInfo empty = const SicklerUserHealthInfo(
+      uid: "",
       genotype: "",
       height: "",
       weight: "",
@@ -73,8 +80,8 @@ class SicklerHealthInfo extends Equatable {
       allergies: [],
       medicalConditions: []);
 
-  bool get isEmpty => this == SicklerHealthInfo.empty;
-  bool get isNotEmpty => this != SicklerHealthInfo.empty;
+  bool get isEmpty => this == SicklerUserHealthInfo.empty;
+  bool get isNotEmpty => this != SicklerUserHealthInfo.empty;
 
   @override
   String toString() {
@@ -82,6 +89,14 @@ class SicklerHealthInfo extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [genotype, height, weight, bmi, bloodType, allergies, medicalConditions];
+  List<Object?> get props => [
+        uid,
+        genotype,
+        height,
+        weight,
+        bmi,
+        bloodType,
+        allergies,
+        medicalConditions
+      ];
 }
