@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/models/profile/sickler_health_info_model.dart';
 import 'package:sickler/services/user/user_service.dart';
 
 import '../../models/models.dart';
@@ -12,42 +11,45 @@ class UserRepository {
 
   ///------ Get User Profile Data -------///
   Map<String, dynamic>? userData;
-  Future<void> getAllUserData() async {
+  Future<void> getAllUserData(String uid) async {
     ///Todo: Get data from local storage first
     DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await userService.getUserProfileData();
+        await userService.getUserProfileData(uid);
     userData = documentSnapshot.data();
   }
 
-  FutureEither<SicklerUser> getUserProfileData() async {
+  FutureEither<SicklerUserProfileInfo> getUserProfileData(String uid) async {
     return callFutureMethod(() async {
       if (userData != null) {
         Map<String, dynamic> profileData = userData?["profile"];
-        SicklerUser user = SicklerUser.fromMap(data: profileData);
-        return user;
+        SicklerUserProfileInfo profileInfo =
+            SicklerUserProfileInfo.fromMap(profileData);
+        return profileInfo;
       } else {
         ///If null, get all user data again
-        await getAllUserData();
+        await getAllUserData(uid);
         Map<String, dynamic> profileData = userData?["profile"];
-        SicklerUser user = SicklerUser.fromMap(data: profileData);
-        return user;
+
+        SicklerUserProfileInfo profileInfo =
+            SicklerUserProfileInfo.fromMap(profileData);
+        return profileInfo;
       }
     });
   }
 
-  FutureEither<SicklerHealthInfo> getUserHealthData() async {
+  FutureEither<SicklerUserHealthInfo> getUserHealthData(String uid) async {
     return callFutureMethod(() async {
       if (userData != null) {
         Map<String, dynamic> healthData = userData?["health"];
-        SicklerHealthInfo userHealthInfo =
-            SicklerHealthInfo.fromMap(healthData);
+        SicklerUserHealthInfo userHealthInfo =
+            SicklerUserHealthInfo.fromMap(healthData);
         return userHealthInfo;
       } else {
         ///If null, get all user data again
-        await getAllUserData();
+        await getAllUserData(uid);
         Map<String, dynamic> healthData = userData?["health"];
-        SicklerHealthInfo userHealthInfo =
-            SicklerHealthInfo.fromMap(healthData);
+        SicklerUserHealthInfo userHealthInfo =
+            SicklerUserHealthInfo.fromMap(healthData);
         return userHealthInfo;
       }
     });
@@ -65,36 +67,39 @@ class UserRepository {
   // }
 
   ///------User Profile Data---------///
-  FutureEither<void> addUserProfileData(SicklerUser user) async {
+  FutureEither<void> addUserProfileData(
+      SicklerUserProfileInfo userProfileInfo) async {
     return callFutureMethod(() async {
-      await userService.addUserProfileData(user);
+      await userService.addUserProfileData(userProfileInfo);
     });
   }
 
-  FutureEither<void> updateUserProfileData(SicklerUser user) async {
+  FutureEither<void> updateUserProfileData(
+      SicklerUserProfileInfo userProfileInfo) async {
     return callFutureMethod(() async {
-      await userService.updateUserProfileData(user);
+      await userService.updateUserProfileData(userProfileInfo);
     });
   }
 
   ///------User Health Data---------///
-  FutureEither<void> addUserHealthDataData(SicklerHealthInfo healthInfo) async {
+  FutureEither<void> addUserHealthDataData(
+      SicklerUserHealthInfo healthInfo) async {
     return callFutureMethod(() async {
       await userService.addUserHealthData(healthInfo);
     });
   }
 
   FutureEither<void> updateUserHealthDataData(
-      SicklerHealthInfo healthInfo) async {
+      SicklerUserHealthInfo healthInfo) async {
     return callFutureMethod(() async {
       await userService.updateUserHealthData(healthInfo);
     });
   }
 
   /// --------- Delete User Data --------///
-  FutureEither<void> deleteUserProfileData() async {
+  FutureEither<void> deleteUserData(String uid) async {
     return callFutureMethod(() async {
-      await userService.deleteUserProfileData();
+      await userService.deleteUserData(uid);
     });
   }
 }
