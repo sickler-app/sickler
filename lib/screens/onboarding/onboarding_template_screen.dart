@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 
 class OnboardingTemplateScreen extends StatelessWidget {
@@ -19,9 +20,15 @@ class OnboardingTemplateScreen extends StatelessWidget {
           children: [
             Text(
               text,
-              style: theme.textTheme.displaySmall,
-            ),
-            const Gap( 96 + 64),
+              style: theme.textTheme.displayMedium!
+                  .copyWith(fontWeight: FontWeight.w600, height: 1.5),
+            ).animate().fade(delay: 300.ms, duration: 600.ms).moveY(
+                delay: 300.ms,
+                duration: 600.ms,
+                begin: 72,
+                end: 0,
+                curve: Curves.easeInOut),
+            const Gap(96 + 64),
           ],
         ),
       ),
