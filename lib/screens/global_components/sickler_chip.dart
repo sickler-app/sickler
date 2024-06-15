@@ -6,6 +6,7 @@ class SicklerChip extends StatefulWidget {
   const SicklerChip({
     super.key,
     this.onSelected,
+    this.onDeleted,
     required this.label,
     this.chipType = SicklerChipType.filter,
     this.selectedColor,
@@ -13,6 +14,7 @@ class SicklerChip extends StatefulWidget {
   });
 
   final Function(bool)? onSelected;
+  final VoidCallback? onDeleted;
   final SicklerChipType chipType;
   final String label;
   final Color? selectedColor;
@@ -59,6 +61,7 @@ class _SicklerChipState extends State<SicklerChip> {
                 color:
                     isSelected ? (widget.selectedColor ?? Colors.white) : null),
           ),
+          onDeleted: widget.onDeleted,
           onSelected: (value) {
             setState(() {
               isSelected = value;
@@ -68,9 +71,10 @@ class _SicklerChipState extends State<SicklerChip> {
           });
     } else {
       return Chip(
+        onDeleted: widget.onDeleted,
         visualDensity: VisualDensity.comfortable,
-        padding:
-            const EdgeInsets.symmetric(horizontal: kPadding16, vertical: kPadding12),
+        padding: const EdgeInsets.symmetric(
+            horizontal: kPadding16, vertical: kPadding12),
         backgroundColor: theme.scaffoldBackgroundColor,
         side: BorderSide(
             width: 1,

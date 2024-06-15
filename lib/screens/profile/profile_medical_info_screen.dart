@@ -1,25 +1,54 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:sickler/models/models.dart';
 
 import '../../core/core.dart';
+import '../../providers/providers.dart';
 import '../global_components/global_components.dart';
 
-class ProfileMedicalInfoScreen extends StatefulWidget {
+class ProfileMedicalInfoScreen extends ConsumerStatefulWidget {
   static const String id = "medical_info";
   const ProfileMedicalInfoScreen({super.key});
 
   @override
-  State<ProfileMedicalInfoScreen> createState() =>
+  ConsumerState<ProfileMedicalInfoScreen> createState() =>
       _ProfileMedicalInfoScreenState();
 }
 
-class _ProfileMedicalInfoScreenState extends State<ProfileMedicalInfoScreen> {
+class _ProfileMedicalInfoScreenState
+    extends ConsumerState<ProfileMedicalInfoScreen> {
+  final TextEditingController allergiesController = TextEditingController();
+  final TextEditingController medicalConditionsController =
+      TextEditingController();
+
   bool labelSelected = false;
+  List<String> medicalConditions = [];
+  List<String> allergies = [];
+  List<String> crisisFrequency = [];
+
+  @override
+  void dispose() {
+    allergiesController.dispose();
+    medicalConditionsController.dispose();
+    super.dispose();
+  }
+
+  void _showSnackBar(String message) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+      ));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    bool isDarkMode = theme.brightness == Brightness.dark;
+    final userInfoProviderNotifier = ref.watch(userInfoProvider.notifier);
+    final userInfoState = ref.watch(userInfoProvider);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -94,42 +123,45 @@ class _ProfileMedicalInfoScreenState extends State<ProfileMedicalInfoScreen> {
                   const Gap(12),
 
                   TextFormField(
+                    controller: allergiesController,
+                    textCapitalization: TextCapitalization.sentences,
+                    onFieldSubmitted: (String value) {
+                      setState(() {
+                        allergies.add(allergiesController.text.trim());
+                        allergiesController.clear();
+                      });
+                    },
                     decoration: SicklerInputDecoration.inputDecoration(context)
                         .copyWith(
                       hintText: "e.g. Peanuts",
                       suffixIcon: IconButton(
-                        onPressed: () {
-                          ///Todo: add to list of allergies
-                        },
-                        icon: SvgPicture.asset(
-                          "assets/svg/check.svg",
-                          colorFilter: ColorFilter.mode(
-                              !isDarkMode
-                                  ? theme.colorScheme.primary
-                                  : theme.iconTheme.color!,
-                              BlendMode.srcIn),
-                        ),
-                      ),
+                          onPressed: () {
+                            setState(() {
+                              allergies.add(allergiesController.text.trim());
+                              allergiesController.clear();
+                            });
+                          },
+                          icon: Icon(
+                            FluentIcons.checkmark_24_filled,
+                          )),
                     ),
                   ),
                   const Gap(12),
-                  const Wrap(
+                  Wrap(
                     direction: Axis.horizontal,
                     spacing: 12,
                     runSpacing: 4,
                     children: [
-                      SicklerChip(
-                        chipType: SicklerChipType.info,
-                        label: "Peanuts",
-                      ),
-                      SicklerChip(
-                        chipType: SicklerChipType.info,
-                        label: "Bees",
-                      ),
-                      SicklerChip(
-                        chipType: SicklerChipType.info,
-                        label: "Dogs",
-                      ),
+                      for (String allergy in allergies)
+                        SicklerChip(
+                          label: allergy,
+                          chipType: SicklerChipType.info,
+                          onDeleted: () {
+                            setState(() {
+                              allergies.remove(allergy);
+                            });
+                          },
+                        ),
                     ],
                   ),
                   const Gap(24),
@@ -141,42 +173,100 @@ class _ProfileMedicalInfoScreenState extends State<ProfileMedicalInfoScreen> {
                   const Gap(12),
 
                   TextFormField(
+                    controller: medicalConditionsController,
+                    textCapitalization: TextCapitalization.sentences,
+                    onFieldSubmitted: (String value) {
+                      setState(() {
+                        medicalConditions
+                            .add(medicalConditionsController.text.trim());
+                        medicalConditionsController.clear();
+                      });
+                    },
                     decoration: SicklerInputDecoration.inputDecoration(context)
                         .copyWith(
                       hintText: "e.g. Acute Chest Syndrome",
                       suffixIcon: IconButton(
-                        onPressed: () {
-                          ///Todo: add to list of medical conditions
-                        },
-                        icon: SvgPicture.asset(
-                          "assets/svg/check.svg",
-                          colorFilter: ColorFilter.mode(
-                              !isDarkMode
-                                  ? theme.colorScheme.primary
-                                  : theme.iconTheme.color!,
-                              BlendMode.srcIn),
-                        ),
-                      ),
+                          onPressed: () {
+                            setState(() {
+                              medicalConditions
+                                  .add(medicalConditionsController.text.trim());
+                              medicalConditionsController.clear();
+                            });
+                          },
+                          icon: Icon(
+                            FluentIcons.checkmark_24_filled,
+                          )),
                     ),
                   ),
                   const Gap(12),
-                  const Wrap(
+                  Wrap(
                     direction: Axis.horizontal,
                     spacing: 12,
                     runSpacing: 4,
                     children: [
-                      SicklerChip(
-                        chipType: SicklerChipType.info,
-                        label: "Aneamia",
-                      ),
-                      SicklerChip(
-                        chipType: SicklerChipType.info,
-                        label: "Cold",
-                      ),
+                      for (String medicalCondition in medicalConditions)
+                        SicklerChip(
+                          label: medicalCondition,
+                          chipType: SicklerChipType.info,
+                          onDeleted: () {
+                            setState(() {
+                              medicalConditions.remove(medicalCondition);
+                            });
+                          },
+                        ),
                     ],
                   ),
                   const Gap(32),
-                  SicklerButton(onPressed: () {}, label: "Continue"),
+                  SicklerButton(
+                      onPressed: () async {
+                        ///Todo: add the rest of the health data;
+                        ///
+
+                        final SicklerUserInfo updatedUserInfo =
+                            userInfoState.value!.copyWith(
+                          allergies: allergies,
+                          medicalConditions: medicalConditions,
+                          bmi: userInfoState.value!.calculateBMI(),
+                        );
+
+                        await userInfoProviderNotifier
+                            .addUserData(updatedUserInfo)
+                            .then((_) {
+                          if (userInfoState.hasValue &&
+                              !userInfoState.hasError) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                              "success",
+                              style: theme.textTheme.bodyMedium!
+                                  .copyWith(color: Colors.green),
+                            )));
+                          }
+                        });
+
+                        // if (userInfoState.hasError) {
+                        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        //       content: Text(
+                        //     (userInfoState.error as Failure).errorMessage ??
+                        //         "error occured",
+                        //     style: theme.textTheme.bodyMedium!
+                        //         .copyWith(color: theme.colorScheme.error),
+                        //   )));
+                        // }
+                        //
+                        // if (userInfoState.isLoading) {
+                        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        //       content: Text(
+                        //     "loading",
+                        //     style: theme.textTheme.bodyMedium!
+                        //         .copyWith(color: theme.colorScheme.secondary),
+                        //   )));
+                        // }
+
+                        ///Todo: perform proper error and state notification;
+                        ///Todo: navigate to the page for showing recommended water goal
+                        //   context.pushNamed(SuggestedWaterDailyGoalScreen.id);
+                      },
+                      label: "Continue"),
                   const Gap(64)
                 ],
               ),

@@ -1,6 +1,6 @@
 enum AppState { initial, submitting, success, error }
 
-enum AuthState {  authenticated, unauthenticated }
+enum AuthState { authenticated, unauthenticated }
 
 enum SicklerButtonType { primary, secondary, outline, text }
 
@@ -12,7 +12,7 @@ enum SelectorColors { purple, blue, green, red, orange }
 
 enum Gender { male, female }
 
-enum Genotype { as, ss, aa }
+enum Genotype { as, ss, aa, na }
 
 enum SicklerListWheelScrollViewPickerMode {
   integer,
@@ -33,8 +33,6 @@ enum MedicationType {
   custom
 }
 
-
-
 // enum VolumeType {
 //   volume1,
 //   volume2,
@@ -42,7 +40,6 @@ enum MedicationType {
 //   volume4,
 //   volume5,
 // }
-
 
 enum MedsScheduleEndingState {
   ///An Enum to define the states of the Medication repeat ending format.

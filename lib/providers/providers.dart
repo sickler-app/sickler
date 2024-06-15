@@ -21,11 +21,7 @@ final currentUserStreamProvider = StreamProvider<SicklerUser?>((ref) {
 /// ------ User and Profile Providers ------ ///
 final UserService userService = UserService();
 final UserRepository userRepository = UserRepository(userService: userService);
-final userProfileDataProvider =
-    AsyncNotifierProvider<UserProfileInfoNotifier, SicklerUserProfileInfo>(
-        () => UserProfileInfoNotifier(userRepository: userRepository));
 
-final userHealthDataProvider =
-    AsyncNotifierProvider<UserHealthInfoNotifier, SicklerUserHealthInfo>(
-  () => UserHealthInfoNotifier(userRepository: userRepository),
-);
+final userInfoProvider =
+    AsyncNotifierProvider<UserInfoNotifier, SicklerUserInfo>(
+        () => UserInfoNotifier(userRepository: userRepository));

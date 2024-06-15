@@ -33,6 +33,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
   return GoRouter(
     initialLocation: isFirstTime ? "/${OnboardingBaseScreen.id}" : "/}",
+    //initialLocation: "/${ProfileScreen.id}/${ProfileMedicalInfoScreen.id}",
     redirect: (BuildContext context, GoRouterState state) {
       final SicklerUser? user = authState.value;
       final bool isLoggedIn = (user != null && user.isNotEmpty);

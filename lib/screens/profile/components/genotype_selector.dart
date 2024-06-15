@@ -1,90 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
+import 'components.dart';
 
 class GenotypeSelector extends StatefulWidget {
-  const GenotypeSelector({
-    super.key,
-    required this.onPressed,
-    this.label,
-    required this.genotype,
-    this.isSelected = false,
-    this.color,
-    this.backgroundColor,
-  });
-
-  final String? label;
-  final Color? color;
-  final Color? backgroundColor;
-  final VoidCallback onPressed;
-  final bool isSelected;
-  final Genotype genotype;
+  final Function(Genotype selectedGenotype) onGenotypeSelect;
+  const GenotypeSelector({super.key, required this.onGenotypeSelect});
 
   @override
   State<GenotypeSelector> createState() => _GenotypeSelectorState();
 }
 
 class _GenotypeSelectorState extends State<GenotypeSelector> {
-  Color _backgroundColor = SicklerColours.purple95;
-
-  Color _color = SicklerColours.purple40;
-  String _label = "AA";
-
+  Map<int, bool> isGenotypeSelected = {3: true};
+  List<Genotype> genotypeData = Genotype.values;
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final Size size = MediaQuery.sizeOf(context);
-    bool isDarkMode = theme.brightness == Brightness.dark;
+    return SizedBox(
+      height: 72,
+      child: ListView.separated(
+        padding: EdgeInsets.zero,
+        itemCount: genotypeData.length,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          isGenotypeSelected.putIfAbsent(index, () => false);
 
-    switch (widget.genotype) {
-      case Genotype.aa:
-        _backgroundColor =
-            !isDarkMode ? SicklerColours.green95 : SicklerColours.green20;
-        _color = !isDarkMode ? SicklerColours.green60 : SicklerColours.green80;
-        _label = "AA";
-        break;
-      case Genotype.as:
-        _backgroundColor =
-            !isDarkMode ? SicklerColours.blue95 : SicklerColours.blue20;
-        _color = !isDarkMode ? SicklerColours.blue60 : SicklerColours.blue80;
-        _label = "AS";
-        break;
-      case Genotype.ss:
-        _backgroundColor =
-            !isDarkMode ? SicklerColours.red95 : SicklerColours.red10;
-        _color = !isDarkMode ? SicklerColours.red50 : SicklerColours.red80;
-        _label = "SS";
-        break;
-    }
+          return GenotypeSelectorItem(
+            onPressed: () {
+              HapticFeedback.mediumImpact();
+              Feedback.forTap(context);
+              isGenotypeSelected.updateAll((key, value) => false);
+              isGenotypeSelected.update(
+                  index, (value) => !isGenotypeSelected[index]!);
 
-    return InkWell(
-      onTap: widget.onPressed,
-      splashColor: widget.color?.withOpacity(.2) ?? _color.withOpacity(.2),
-      splashFactory: InkSparkle.splashFactory,
-      borderRadius: BorderRadius.circular(72),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOut,
-        height: 72,
-        width: widget.isSelected ? (size.width - ((72 * 2) + (16 * 4))) : 72,
-        child: Ink(
-          decoration: BoxDecoration(
-              border: widget.isSelected
-                  ? Border.all(color: widget.color ?? _color, width: 1)
-                  : null,
-              color: widget.backgroundColor ?? _backgroundColor,
-              borderRadius: BorderRadius.circular(72)),
-          child: Center(
-            child: Text(
-              widget.label ?? _label,
-              style: widget.isSelected
-                  ? theme.textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w800,
-                      color: widget.color ?? _color)
-                  : theme.textTheme.bodyLarge,
-            ),
-          ),
-        ),
+              setState(() {});
+              widget.onGenotypeSelect.call(genotypeData[index]);
+            },
+            isSelected: isGenotypeSelected[index]!,
+            genotype: genotypeData[index],
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const Gap(16);
+        },
       ),
     );
   }

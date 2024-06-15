@@ -7,49 +7,22 @@ class UserService {
   UserService();
 
   ///----Get User Data--------///
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserProfileData(
-      String uid) async {
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserData(String uid) async {
     DocumentSnapshot<Map<String, dynamic>> snapshot =
         await firestore.collection('users').doc(uid).get();
     return snapshot;
   }
 
-  ///--------User Profile Data--------///
-  Future<void> addUserProfileData(
-      SicklerUserProfileInfo userProfileInfo) async {
-    Map<String, Map<String, dynamic>> profileData = {
-      "profile": userProfileInfo.toMap()
-    };
+  ///--------Add and Update User Data--------///
+  Future<void> addUserData(SicklerUserInfo userInfo) async {
+    await firestore.collection('users').doc(userInfo.uid).set(userInfo.toMap());
+  }
+
+  Future<void> updateUserData(SicklerUserInfo userInfo) async {
     await firestore
         .collection('users')
-        .doc(userProfileInfo.uid)
-        .set(profileData);
-  }
-
-  Future<void> updateUserProfileData(
-      SicklerUserProfileInfo userProfileInfo) async {
-    Map<String, Map<String, dynamic>> profileData = {
-      "profile": userProfileInfo.toMap()
-    };
-    await firestore
-        .collection('users')
-        .doc(userProfileInfo.uid)
-        .update(profileData);
-  }
-
-  ///--------User Health Data--------///
-  Future<void> addUserHealthData(SicklerUserHealthInfo healthInfo) async {
-    Map<String, Map<String, dynamic>> healthData = {
-      "health": healthInfo.toMap()
-    };
-    await firestore.collection('users').doc(healthInfo.uid).set(healthData);
-  }
-
-  Future<void> updateUserHealthData(SicklerUserHealthInfo healthInfo) async {
-    Map<String, Map<String, dynamic>> healthData = {
-      "health": healthInfo.toMap()
-    };
-    await firestore.collection('users').doc(healthInfo.uid).update(healthData);
+        .doc(userInfo.uid)
+        .update(userInfo.toMap());
   }
 
   ///-----Delete -----///

@@ -1,32 +1,35 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sickler/models/models.dart';
+import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/profile/profile_medical_info_screen.dart';
 
 import '../../core/core.dart';
-import 'components/genotype_selector.dart';
+import 'components/components.dart';
 
-class ProfileVitalsInfoScreen extends StatefulWidget {
+class ProfileVitalsInfoScreen extends ConsumerStatefulWidget {
   static const String id = "vitals";
   final bool? isEditing;
   const ProfileVitalsInfoScreen({super.key, this.isEditing = false});
 
   @override
-  State<ProfileVitalsInfoScreen> createState() =>
+  ConsumerState<ProfileVitalsInfoScreen> createState() =>
       _ProfileVitalsInfoScreenState();
 }
 
-class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
+class _ProfileVitalsInfoScreenState
+    extends ConsumerState<ProfileVitalsInfoScreen> {
   final TextEditingController heightController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  bool _isGenotypeKnown = false;
-  Map<int, bool> isGenotypeSelected = {0: true};
-  List<Genotype> genotypeData = Genotype.values;
+  Genotype selectedGenotype = Genotype.na;
 
   @override
   void dispose() {
@@ -38,6 +41,9 @@ class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+
+    final userInfoProviderNotifier = ref.watch(userInfoProvider.notifier);
+    final userInfoState = ref.watch(userInfoProvider);
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
@@ -127,50 +133,12 @@ class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
                         ],
                       ),
                       const Gap(8),
-                      SizedBox(
-                        height: 72,
-                        child: ListView.separated(
-                          padding: EdgeInsets.zero,
-                          itemCount: genotypeData.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            isGenotypeSelected.putIfAbsent(index, () => false);
-
-                            return GenotypeSelector(
-                              onPressed: () {
-                                HapticFeedback.mediumImpact();
-                                Feedback.forTap(context);
-                                isGenotypeSelected
-                                    .updateAll((key, value) => false);
-                                isGenotypeSelected.update(index,
-                                    (value) => !isGenotypeSelected[index]!);
-                                setState(() {});
-                              },
-                              isSelected: isGenotypeSelected[index]!,
-                              genotype: genotypeData[index],
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const Gap(16);
-                          },
-                        ),
-                      ),
-                      const Gap(16),
-                      Row(
-                        children: [
-                          Text("I don't know my genotype",
-                              style: theme.textTheme.bodyMedium),
-                          const Spacer(),
-                          Switch(
-                            value: _isGenotypeKnown,
-                            onChanged: (value) {
-                              setState(() {
-                                _isGenotypeKnown = value;
-                              });
-                            },
-                          ),
-                        ],
+                      GenotypeSelector(
+                        onGenotypeSelect: (Genotype genotype) {
+                          setState(() {
+                            selectedGenotype = genotype;
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -187,6 +155,23 @@ class _ProfileVitalsInfoScreenState extends State<ProfileVitalsInfoScreen> {
                           : null,
                       onPressed: () {
                         //Todo: Continue
+                        if (_formKey.currentState!.validate()) {
+                          ///Save Data to State and continue in the next page
+
+                          final SicklerUserInfo updatedUserInfo =
+                              userInfoState.value!.copyWith(
+                            height:
+                                double.tryParse(heightController.text.trim()),
+                            weight:
+                                double.tryParse(weightController.text.trim()),
+                            genotype: selectedGenotype.toString().toUpperCase(),
+                          );
+
+                          //Save data to state
+                          userInfoProviderNotifier
+                              .saveDataToState(updatedUserInfo);
+                          context.pushNamed(ProfileMedicalInfoScreen.id);
+                        }
                       },
                       label: widget.isEditing! ? "Save" : "Continue"),
                 ),

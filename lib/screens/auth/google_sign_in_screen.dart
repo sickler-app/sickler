@@ -38,22 +38,24 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
                     buttonType: SicklerButtonType.secondary,
                     iconPath: "assets/svg/google.svg",
                     onPressed: () async {
-                      await authProviderNotifier
-                          .singInWithGoogle()
-                          .then((value) {
-                        if (user.hasError) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                  "${(user.error as Failure).errorMessage}"),
-                            ),
-                          );
-                        } else {
-                          ///todo: Navigate to user profile setup or home screen if the user in onboarded
-                          context
-                              .pushReplacementNamed(ProfileBasicInfoScreen.id);
-                        }
-                      });
+                      context.pushReplacementNamed(ProfileBasicInfoScreen.id);
+
+                      // await authProviderNotifier
+                      //     .singInWithGoogle()
+                      //     .then((value) {
+                      //   if (user.hasError) {
+                      //     ScaffoldMessenger.of(context).showSnackBar(
+                      //       SnackBar(
+                      //         content: Text(
+                      //             "${(user.error as Failure).errorMessage}"),
+                      //       ),
+                      //     );
+                      //   } else {
+                      //     ///todo: Navigate to user profile setup or home screen if the user in onboarded
+                      //     context
+                      //         .pushReplacementNamed(ProfileBasicInfoScreen.id);
+                      //   }
+                      // });
                     },
                     label: "Continue")
                 .animate()
