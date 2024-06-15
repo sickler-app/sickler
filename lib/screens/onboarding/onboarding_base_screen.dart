@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sickler/screens/auth/google_sign_in_screen.dart';
 import 'package:sickler/screens/onboarding/onboarding_template_screen.dart';
 
 import 'components/onboarding_button.dart';
@@ -14,7 +16,7 @@ class OnboardingBaseScreen extends StatefulWidget {
 class _OnboardingBaseScreenState extends State<OnboardingBaseScreen> {
   final List<Map<String, String>> onboardingInfo = [
     {
-      "text": "We help you manage Sickle Cell",
+      "text": "We help you manage\nSickle Cell",
       "image": "",
     },
     {
@@ -22,7 +24,7 @@ class _OnboardingBaseScreenState extends State<OnboardingBaseScreen> {
       "image": "",
     },
     {
-      "text": "Get daily reminders so you never miss our on our medication",
+      "text": "Never miss our on your medication",
       "image": "",
     },
     {
@@ -69,6 +71,10 @@ class _OnboardingBaseScreenState extends State<OnboardingBaseScreen> {
                 pageController.nextPage(
                     duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut);
+              }
+              if (currentPageIndex == onboardingInfo.length - 1) {
+                //go to sign in
+                context.pushNamed(GoogleSignInScreen.id);
               }
             }),
           ),

@@ -9,8 +9,6 @@ import 'package:sickler/firebase_options.dart';
 import 'core/core.dart';
 import 'providers/providers.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -55,6 +53,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         duration: const Duration(milliseconds: 300),
       ),
       routerConfig: router,
+      // home: BlobScreen(),
     );
   }
 }

@@ -13,7 +13,7 @@ class SicklerButton extends StatelessWidget {
     this.backgroundColor,
     this.iconPath,
     this.icon,
-    this.overrideIconColor = false,
+    this.overrideIconColor = true,
     this.buttonType = SicklerButtonType.primary,
     this.isChipButton = false,
   });
@@ -34,10 +34,10 @@ class SicklerButton extends StatelessWidget {
       throw ErrorHint(
           "Cannot set both an icon and an iconPath property simultaneously, consider removing one");
     }
-    if (overrideIconColor == true && color == null) {
-      throw ErrorHint(
-          "Must provide a color property if overrideIconColor is set to true");
-    }
+    // if (overrideIconColor == true && color == null) {
+    //   throw ErrorHint(
+    //       "Must provide a color property if overrideIconColor is set to true");
+    // }
 
     ButtonStyle style = ElevatedButton.styleFrom(
       backgroundColor: backgroundColor ?? theme.colorScheme.primary,
@@ -71,13 +71,14 @@ class SicklerButton extends StatelessWidget {
         labelColor = color ?? theme.colorScheme.primary;
 
         style = ElevatedButton.styleFrom(
-            fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
-            backgroundColor: Colors.transparent,
-            foregroundColor: color ?? theme.colorScheme.primary,
-            side: BorderSide(
-              width: 1,
-              color: labelColor,
-            ),);
+          fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
+          backgroundColor: Colors.transparent,
+          foregroundColor: color ?? theme.colorScheme.primary,
+          side: BorderSide(
+            width: 1,
+            color: labelColor,
+          ),
+        );
 
         break;
       case SicklerButtonType.text:
@@ -100,33 +101,34 @@ class SicklerButton extends StatelessWidget {
     }
 
     return ElevatedButton(
-            onPressed: onPressed,
-            style: style,
-            child: Center(
+      onPressed: onPressed,
+      style: style,
+      child: Center(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Visibility(
+              visible: icon != null || iconPath != null,
               child: Row(
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Visibility(
-                    visible: icon != null || iconPath != null,
-                    child: Row(
-                      children: [
-                        icon != null
-                            ? Icon(icon)
-                            : SvgPicture.asset(iconPath ?? "",
-                                colorFilter: ColorFilter.mode(
-                                    labelColor, BlendMode.srcIn)),
-                        const Gap(8)
-                      ],
-                    ),
-                  ),
-                  Text(label,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(color: labelColor)),
+                  icon != null
+                      ? Icon(icon)
+                      : SvgPicture.asset(iconPath ?? "",
+                          colorFilter: overrideIconColor!
+                              ? ColorFilter.mode(labelColor, BlendMode.srcIn)
+                              : null),
+                  const Gap(8)
                 ],
               ),
             ),
-          );
+            Text(label,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: labelColor)),
+          ],
+        ),
+      ),
+    );
   }
 }

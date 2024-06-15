@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/profile/profile_vitals_info_screen.dart';
 
 import '../../core/core.dart';
+import '../../models/models.dart';
 import 'components/sickler_radio.dart';
 
-class ProfileBasicInfoScreen extends StatefulWidget {
+class ProfileBasicInfoScreen extends ConsumerStatefulWidget {
   static const String id = "basic_info";
   final bool? isEditing;
 
   const ProfileBasicInfoScreen({super.key, this.isEditing = false});
 
   @override
-  State<ProfileBasicInfoScreen> createState() => _ProfileBasicInfoScreenState();
+  ConsumerState<ProfileBasicInfoScreen> createState() =>
+      _ProfileBasicInfoScreenState();
 }
 
-class _ProfileBasicInfoScreenState extends State<ProfileBasicInfoScreen> {
+class _ProfileBasicInfoScreenState
+    extends ConsumerState<ProfileBasicInfoScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
@@ -40,7 +47,18 @@ class _ProfileBasicInfoScreenState extends State<ProfileBasicInfoScreen> {
   }
 
   @override
+  void initState() {
+    nameController.text =
+        ref.read(currentUserStreamProvider).value!.displayName ?? "";
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final userInfoProviderNotifier = ref.watch(userInfoProvider.notifier);
+
+    final SicklerUser? currentUser = ref.watch(currentUserStreamProvider).value;
+
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -91,8 +109,13 @@ class _ProfileBasicInfoScreenState extends State<ProfileBasicInfoScreen> {
                               .copyWith(
                         hintText: "Age",
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter your age";
+                        }
+                        return null;
+                      },
                       onTap: () async {
-                        //Todo: Trigger Bottom Sheet
                         await showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
@@ -116,17 +139,17 @@ class _ProfileBasicInfoScreenState extends State<ProfileBasicInfoScreen> {
                       },
                     ),
                     const Gap(24),
-                    Text("Address", style: theme.textTheme.bodyMedium),
-                    const Gap(8),
-                    TextFormField(
-                      controller: addressController,
-                      keyboardType: TextInputType.streetAddress,
-                      decoration:
-                          SicklerInputDecoration.inputDecoration(context)
-                              .copyWith(
-                        hintText: "Address",
-                      ),
-                    ),
+                    // Text("Address", style: theme.textTheme.bodyMedium),
+                    // const Gap(8),
+                    // TextFormField(
+                    //   controller: addressController,
+                    //   keyboardType: TextInputType.streetAddress,
+                    //   decoration:
+                    //       SicklerInputDecoration.inputDecoration(context)
+                    //           .copyWith(
+                    //     hintText: "Address",
+                    //   ),
+                    // ),
                     const Gap(24),
                     Text("Sex", style: theme.textTheme.bodyMedium),
                     const Gap(8),
@@ -165,8 +188,18 @@ class _ProfileBasicInfoScreenState extends State<ProfileBasicInfoScreen> {
 
                     ///Buttons
                     SicklerButton(
-                        onPressed: () {
-                          //Todo: Edit Action
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final SicklerUserInfo userInfo = SicklerUserInfo(
+                                uid: currentUser!.uid,
+                                age: int.parse(ageController.text.trim()),
+                                gender: selectedRadioValue.toString(),
+                                fullName: nameController.text.trim(),
+                                displayName: currentUser.displayName!);
+
+                            userInfoProviderNotifier.saveDataToState(userInfo);
+                            context.pushNamed(ProfileVitalsInfoScreen.id);
+                          }
                         },
                         label: "Continue"),
 
