@@ -22,42 +22,57 @@ const UserPreferencesSchema = CollectionSchema(
       name: r'dailyWaterGoal',
       type: IsarType.double,
     ),
-    r'isFirstTime': PropertySchema(
+    r'isEmpty': PropertySchema(
       id: 1,
+      name: r'isEmpty',
+      type: IsarType.bool,
+    ),
+    r'isFirstTime': PropertySchema(
+      id: 2,
       name: r'isFirstTime',
       type: IsarType.bool,
     ),
+    r'isNotEmpty': PropertySchema(
+      id: 3,
+      name: r'isNotEmpty',
+      type: IsarType.bool,
+    ),
     r'isOnboarded': PropertySchema(
-      id: 2,
+      id: 4,
       name: r'isOnboarded',
       type: IsarType.bool,
     ),
     r'lengthUnit': PropertySchema(
-      id: 3,
+      id: 5,
       name: r'lengthUnit',
       type: IsarType.string,
       enumMap: _UserPreferenceslengthUnitEnumValueMap,
     ),
     r'massUnit': PropertySchema(
-      id: 4,
+      id: 6,
       name: r'massUnit',
       type: IsarType.string,
       enumMap: _UserPreferencesmassUnitEnumValueMap,
     ),
     r'themeMode': PropertySchema(
-      id: 5,
+      id: 7,
       name: r'themeMode',
       type: IsarType.string,
       enumMap: _UserPreferencesthemeModeEnumValueMap,
     ),
+    r'uid': PropertySchema(
+      id: 8,
+      name: r'uid',
+      type: IsarType.string,
+    ),
     r'volumeUnit': PropertySchema(
-      id: 6,
+      id: 9,
       name: r'volumeUnit',
       type: IsarType.string,
       enumMap: _UserPreferencesvolumeUnitEnumValueMap,
     ),
     r'waterInputVolume': PropertySchema(
-      id: 7,
+      id: 10,
       name: r'waterInputVolume',
       type: IsarType.double,
     )
@@ -100,6 +115,7 @@ int _userPreferencesEstimateSize(
       bytesCount += 3 + value.name.length * 3;
     }
   }
+  bytesCount += 3 + object.uid.length * 3;
   {
     final value = object.volumeUnit;
     if (value != null) {
@@ -116,13 +132,16 @@ void _userPreferencesSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeDouble(offsets[0], object.dailyWaterGoal);
-  writer.writeBool(offsets[1], object.isFirstTime);
-  writer.writeBool(offsets[2], object.isOnboarded);
-  writer.writeString(offsets[3], object.lengthUnit?.name);
-  writer.writeString(offsets[4], object.massUnit?.name);
-  writer.writeString(offsets[5], object.themeMode?.name);
-  writer.writeString(offsets[6], object.volumeUnit?.name);
-  writer.writeDouble(offsets[7], object.waterInputVolume);
+  writer.writeBool(offsets[1], object.isEmpty);
+  writer.writeBool(offsets[2], object.isFirstTime);
+  writer.writeBool(offsets[3], object.isNotEmpty);
+  writer.writeBool(offsets[4], object.isOnboarded);
+  writer.writeString(offsets[5], object.lengthUnit?.name);
+  writer.writeString(offsets[6], object.massUnit?.name);
+  writer.writeString(offsets[7], object.themeMode?.name);
+  writer.writeString(offsets[8], object.uid);
+  writer.writeString(offsets[9], object.volumeUnit?.name);
+  writer.writeDouble(offsets[10], object.waterInputVolume);
 }
 
 UserPreferences _userPreferencesDeserialize(
@@ -133,17 +152,18 @@ UserPreferences _userPreferencesDeserialize(
 ) {
   final object = UserPreferences(
     dailyWaterGoal: reader.readDoubleOrNull(offsets[0]),
-    isFirstTime: reader.readBoolOrNull(offsets[1]),
-    isOnboarded: reader.readBoolOrNull(offsets[2]),
+    isFirstTime: reader.readBoolOrNull(offsets[2]),
+    isOnboarded: reader.readBoolOrNull(offsets[4]),
     lengthUnit: _UserPreferenceslengthUnitValueEnumMap[
-        reader.readStringOrNull(offsets[3])],
-    massUnit: _UserPreferencesmassUnitValueEnumMap[
-        reader.readStringOrNull(offsets[4])],
-    themeMode: _UserPreferencesthemeModeValueEnumMap[
         reader.readStringOrNull(offsets[5])],
-    volumeUnit: _UserPreferencesvolumeUnitValueEnumMap[
+    massUnit: _UserPreferencesmassUnitValueEnumMap[
         reader.readStringOrNull(offsets[6])],
-    waterInputVolume: reader.readDoubleOrNull(offsets[7]),
+    themeMode: _UserPreferencesthemeModeValueEnumMap[
+        reader.readStringOrNull(offsets[7])],
+    uid: reader.readString(offsets[8]),
+    volumeUnit: _UserPreferencesvolumeUnitValueEnumMap[
+        reader.readStringOrNull(offsets[9])],
+    waterInputVolume: reader.readDoubleOrNull(offsets[10]),
   );
   return object;
 }
@@ -158,22 +178,28 @@ P _userPreferencesDeserializeProp<P>(
     case 0:
       return (reader.readDoubleOrNull(offset)) as P;
     case 1:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 2:
       return (reader.readBoolOrNull(offset)) as P;
     case 3:
+      return (reader.readBool(offset)) as P;
+    case 4:
+      return (reader.readBoolOrNull(offset)) as P;
+    case 5:
       return (_UserPreferenceslengthUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 4:
+    case 6:
       return (_UserPreferencesmassUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 5:
+    case 7:
       return (_UserPreferencesthemeModeValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 6:
+    case 8:
+      return (reader.readString(offset)) as P;
+    case 9:
       return (_UserPreferencesvolumeUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 7:
+    case 10:
       return (reader.readDoubleOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -533,6 +559,16 @@ extension UserPreferencesQueryFilter
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      isEmptyEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isEmpty',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
       isFirstTimeIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -555,6 +591,16 @@ extension UserPreferencesQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'isFirstTime',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      isNotEmptyEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isNotEmpty',
         value: value,
       ));
     });
@@ -1051,6 +1097,142 @@ extension UserPreferencesQueryFilter
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'uid',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'uid',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'uid',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'uid',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
       volumeUnitIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1311,6 +1493,19 @@ extension UserPreferencesQuerySortBy
     });
   }
 
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> sortByIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isEmpty', Sort.asc);
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
+      sortByIsEmptyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isEmpty', Sort.desc);
+    });
+  }
+
   QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
       sortByIsFirstTime() {
     return QueryBuilder.apply(this, (query) {
@@ -1322,6 +1517,20 @@ extension UserPreferencesQuerySortBy
       sortByIsFirstTimeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isFirstTime', Sort.desc);
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
+      sortByIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isNotEmpty', Sort.asc);
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
+      sortByIsNotEmptyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isNotEmpty', Sort.desc);
     });
   }
 
@@ -1378,6 +1587,18 @@ extension UserPreferencesQuerySortBy
       sortByThemeModeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'themeMode', Sort.desc);
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> sortByUid() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uid', Sort.asc);
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> sortByUidDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uid', Sort.desc);
     });
   }
 
@@ -1438,6 +1659,19 @@ extension UserPreferencesQuerySortThenBy
     });
   }
 
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> thenByIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isEmpty', Sort.asc);
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
+      thenByIsEmptyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isEmpty', Sort.desc);
+    });
+  }
+
   QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
       thenByIsFirstTime() {
     return QueryBuilder.apply(this, (query) {
@@ -1449,6 +1683,20 @@ extension UserPreferencesQuerySortThenBy
       thenByIsFirstTimeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isFirstTime', Sort.desc);
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
+      thenByIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isNotEmpty', Sort.asc);
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
+      thenByIsNotEmptyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isNotEmpty', Sort.desc);
     });
   }
 
@@ -1508,6 +1756,18 @@ extension UserPreferencesQuerySortThenBy
     });
   }
 
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> thenByUid() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uid', Sort.asc);
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> thenByUidDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uid', Sort.desc);
+    });
+  }
+
   QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
       thenByVolumeUnit() {
     return QueryBuilder.apply(this, (query) {
@@ -1547,9 +1807,23 @@ extension UserPreferencesQueryWhereDistinct
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QDistinct>
+      distinctByIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isEmpty');
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QDistinct>
       distinctByIsFirstTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isFirstTime');
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QDistinct>
+      distinctByIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isNotEmpty');
     });
   }
 
@@ -1578,6 +1852,13 @@ extension UserPreferencesQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'themeMode', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QDistinct> distinctByUid(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'uid', caseSensitive: caseSensitive);
     });
   }
 
@@ -1611,9 +1892,21 @@ extension UserPreferencesQueryProperty
     });
   }
 
+  QueryBuilder<UserPreferences, bool, QQueryOperations> isEmptyProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isEmpty');
+    });
+  }
+
   QueryBuilder<UserPreferences, bool?, QQueryOperations> isFirstTimeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isFirstTime');
+    });
+  }
+
+  QueryBuilder<UserPreferences, bool, QQueryOperations> isNotEmptyProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isNotEmpty');
     });
   }
 
@@ -1639,6 +1932,12 @@ extension UserPreferencesQueryProperty
       themeModeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'themeMode');
+    });
+  }
+
+  QueryBuilder<UserPreferences, String, QQueryOperations> uidProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'uid');
     });
   }
 
