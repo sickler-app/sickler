@@ -7,10 +7,9 @@ class UserPreferencesService {
   ///---Get User Preferences
   ///
 
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserPreferences() async {
-    ///Todo: Implement getUserPreferences
-
-    throw UnimplementedError();
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserPreferences(
+      String uid) async {
+    return await firestore.collection('user').doc(uid).get();
   }
 
   Future<void> addUserPreferences(
