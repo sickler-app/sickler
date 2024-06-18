@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/models/auth/sickler_user_model.dart';
+import 'package:sickler/models/models.dart';
 import 'package:sickler/providers/providers.dart';
+import 'package:sickler/screens/auth/auth_success.dart';
 import 'package:sickler/screens/auth/google_sign_in_screen.dart';
 import 'package:sickler/screens/auth/register_screen.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
@@ -16,6 +17,7 @@ import 'package:sickler/screens/meds/meds_details_screen.dart';
 import 'package:sickler/screens/meds/meds_schedule_screen.dart';
 import 'package:sickler/screens/meds/meds_screen.dart';
 import 'package:sickler/screens/onboarding/onboarding_base_screen.dart';
+import 'package:sickler/screens/profile/loading_screen.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 import 'package:sickler/screens/profile/profile_medical_info_screen.dart';
 import 'package:sickler/screens/profile/profile_screen.dart';
@@ -27,27 +29,68 @@ import 'package:sickler/screens/water/water_empty_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(currentUserStreamProvider);
-  bool isFirstTime = true;
-  bool isOnboarded = false;
+  String evaluateInitialLocation() {
+    final SicklerUser? user = ref.watch(currentUserStreamProvider).value;
+    final UserPreferences preferences =
+        ref.watch(userPreferencesProvider).value!;
+
+    final bool isFirstTime = preferences.isFirstTime;
+    final bool isOnboardingComplete = preferences.isOnboardingComplete;
+    final bool isLoggedIn = (user != null && user.isNotEmpty);
+
+    if (isLoggedIn) {
+      if (!isOnboardingComplete) {
+        ///not onboarded
+        return "/${ProfileScreen.id}/${ProfileBasicInfoScreen.id}";
+      } else {
+        ///Logged in and onboarded
+        return "/";
+      }
+    } else {
+      ///Is not Logged In
+      if (isFirstTime) {
+        return "/${OnboardingBaseScreen.id}";
+      } else {
+        return "/auth/${GoogleSignInScreen.id}";
+      }
+    }
+  }
 
   return GoRouter(
-    initialLocation: isFirstTime ? "/${OnboardingBaseScreen.id}" : "/}",
-    //initialLocation: "/${ProfileScreen.id}/${ProfileMedicalInfoScreen.id}",
-    redirect: (BuildContext context, GoRouterState state) {
-      final SicklerUser? user = authState.value;
-      final bool isLoggedIn = (user != null && user.isNotEmpty);
-
-      if (!isLoggedIn &&
-          state.matchedLocation != "/${SignInScreen.id}" &&
-          state.matchedLocation != "/${RegisterScreen.id}" &&
-          state.matchedLocation != "/${GoogleSignInScreen.id}" &&
-          state.matchedLocation != "/${OnboardingBaseScreen.id}") {
-        return "/${GoogleSignInScreen.id}";
-      }
-
-      return null;
-    },
+    //initialLocation: isFirstTime ? "/${OnboardingBaseScreen.id}" : "/",
+    initialLocation: evaluateInitialLocation(),
+    // redirect: (BuildContext context, GoRouterState state) {
+    //   final UserPreferences preferences =
+    //       ref.watch(userPreferencesProvider).value!;
+    //   if (preferences == UserPreferences.empty) {
+    //     return "/${LoadingScreen.id}";
+    //   }
+    //   return null;
+    // },
+    // redirect: (BuildContext context, GoRouterState state) {
+    //   final SicklerUser? user = authState.value;
+    //   final bool isLoggedIn = (user != null && user.isNotEmpty);
+    //
+    //   ///Case where it is not logged in, return google sign in screen by default
+    //   if (!isLoggedIn &&
+    //       state.matchedLocation != "/auth/${SignInScreen.id}" &&
+    //       state.matchedLocation != "/auth/${RegisterScreen.id}" &&
+    //       state.matchedLocation != "/auth/${GoogleSignInScreen.id}" &&
+    //       state.matchedLocation != "/auth/${AuthSuccessScreen.id}" &&
+    //       state.matchedLocation != "/${OnboardingBaseScreen.id}" &&
+    //       state.matchedLocation !=
+    //           "/${ProfileScreen.id}/${ProfileBasicInfoScreen.id}" &&
+    //       state.matchedLocation !=
+    //           "/${ProfileScreen.id}/${ProfileVitalsInfoScreen.id}" &&
+    //       state.matchedLocation !=
+    //           "/${ProfileScreen.id}/${ProfileMedicalInfoScreen.id}" &&
+    //       state.matchedLocation !=
+    //           "/${WaterScreen.id}/${SuggestedWaterDailyGoalScreen.id}") {
+    //     return "/${GoogleSignInScreen.id}";
+    //   }
+    //
+    //   return null;
+    // },
     routes: [
       ///-------H
       GoRoute(
@@ -55,6 +98,13 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: BottomNavBar.id,
         builder: (BuildContext context, GoRouterState state) =>
             const BottomNavBar(),
+      ),
+
+      GoRoute(
+        path: "/${LoadingScreen.id}",
+        name: LoadingScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const LoadingScreen(),
       ),
 
       ///-------Home-------///
@@ -179,22 +229,28 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       ///------ Onboarding Auth-------///
       GoRoute(
-        path: "/${SignInScreen.id}",
+        path: "/auth/${SignInScreen.id}",
         name: SignInScreen.id,
         builder: (BuildContext context, GoRouterState state) =>
             const SignInScreen(),
       ),
       GoRoute(
-        path: "/${RegisterScreen.id}",
+        path: "/auth/${RegisterScreen.id}",
         name: RegisterScreen.id,
         builder: (BuildContext context, GoRouterState state) =>
             const RegisterScreen(),
       ),
       GoRoute(
-        path: "/${GoogleSignInScreen.id}",
+        path: "/auth/${GoogleSignInScreen.id}",
         name: GoogleSignInScreen.id,
         builder: (BuildContext context, GoRouterState state) =>
             const GoogleSignInScreen(),
+      ),
+      GoRoute(
+        path: "/auth/${AuthSuccessScreen.id}",
+        name: AuthSuccessScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const AuthSuccessScreen(),
       ),
       GoRoute(
         path: "/${OnboardingBaseScreen.id}",

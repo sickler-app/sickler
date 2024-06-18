@@ -1,22 +1,27 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-class SuggestedWaterDailyGoalScreen extends StatefulWidget {
+import '../global_components/bottom_nav_bar.dart';
+
+class SuggestedWaterDailyGoalScreen extends ConsumerStatefulWidget {
   static const String id = "suggested_daily_goal";
   const SuggestedWaterDailyGoalScreen({super.key});
 
   @override
-  State<SuggestedWaterDailyGoalScreen> createState() =>
+  ConsumerState<SuggestedWaterDailyGoalScreen> createState() =>
       _SuggestedWaterDailyGoalScreenState();
 }
 
 int dailyGoal = 2000;
 
 class _SuggestedWaterDailyGoalScreenState
-    extends State<SuggestedWaterDailyGoalScreen> {
+    extends ConsumerState<SuggestedWaterDailyGoalScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -94,7 +99,21 @@ class _SuggestedWaterDailyGoalScreenState
                 ),
                 const Gap(16),
                 SicklerButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    ////Mark onboarding as complete
+                    ref
+                        .watch(userPreferencesProvider.notifier)
+                        .addUserPreferencesToLocal(ref
+                            .watch(userPreferencesProvider)
+                            .value!
+                            .copyWith(isOnboardingComplete: true));
+
+                    ref
+                        .watch(userInfoProvider.notifier)
+                        .addUserData(ref.watch(userInfoProvider).value!);
+
+                    context.goNamed(BottomNavBar.id);
+                  },
                   label: "Accept Goal & Continue",
                 ),
               ],

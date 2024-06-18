@@ -2,11 +2,13 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sickler/models/models.dart';
 
 import '../../core/core.dart';
 import '../../providers/providers.dart';
 import '../global_components/global_components.dart';
+import '../water/suggested_water_daily_goal_screen.dart';
 
 class ProfileMedicalInfoScreen extends ConsumerStatefulWidget {
   static const String id = "medical_info";
@@ -141,7 +143,7 @@ class _ProfileMedicalInfoScreenState
                               allergiesController.clear();
                             });
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             FluentIcons.checkmark_24_filled,
                           )),
                     ),
@@ -193,7 +195,7 @@ class _ProfileMedicalInfoScreenState
                               medicalConditionsController.clear();
                             });
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             FluentIcons.checkmark_24_filled,
                           )),
                     ),
@@ -228,6 +230,17 @@ class _ProfileMedicalInfoScreenState
                           medicalConditions: medicalConditions,
                           bmi: userInfoState.value!.calculateBMI(),
                         );
+
+                        ///Set onboarding to complete here
+
+                        ref
+                            .watch(userPreferencesProvider.notifier)
+                            .addUserPreferencesToLocal(ref
+                                .watch(userPreferencesProvider)
+                                .value!
+                                .copyWith(
+                                  isOnboardingComplete: true,
+                                ));
 
                         await userInfoProviderNotifier
                             .addUserData(updatedUserInfo)
@@ -264,7 +277,9 @@ class _ProfileMedicalInfoScreenState
 
                         ///Todo: perform proper error and state notification;
                         ///Todo: navigate to the page for showing recommended water goal
-                        //   context.pushNamed(SuggestedWaterDailyGoalScreen.id);
+                        if (context.mounted) {
+                          context.pushNamed(SuggestedWaterDailyGoalScreen.id);
+                        }
                       },
                       label: "Continue"),
                   const Gap(64)

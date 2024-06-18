@@ -53,7 +53,9 @@ class SicklerThemeData {
           SicklerTextStyles.bodySmall.copyWith(color: SicklerColours.black),
     ),
     appBarTheme: const AppBarTheme(
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.dark,
+            statusBarColor: Colors.white),
         elevation: 0,
         backgroundColor: Colors.transparent),
     cardColor: SicklerColours.purple95,
@@ -205,7 +207,8 @@ class SicklerThemeData {
           SicklerTextStyles.bodySmall.copyWith(color: SicklerColours.white),
     ),
     appBarTheme: const AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle.light,
+      systemOverlayStyle:
+          SystemUiOverlayStyle(statusBarColor: SicklerColours.black),
       elevation: 0,
       backgroundColor: Colors.transparent,
     ),

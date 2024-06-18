@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class BlobScreen extends StatefulWidget {
+  const BlobScreen({super.key});
+
   @override
   _BlobScreenState createState() => _BlobScreenState();
 }
@@ -19,7 +21,7 @@ class _BlobScreenState extends State<BlobScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 10),
+      duration: const Duration(seconds: 10),
     )..repeat();
 
     _controller.addListener(() {

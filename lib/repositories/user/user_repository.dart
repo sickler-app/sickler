@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/services/user/user_service.dart';
+import 'package:sickler/services/user/remote/user_service.dart';
 
 import '../../models/models.dart';
 

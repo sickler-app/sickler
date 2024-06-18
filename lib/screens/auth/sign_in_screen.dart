@@ -8,7 +8,10 @@ import 'package:sickler/screens/auth/register_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
+import '../../models/user/user_preferences.dart';
 import '../../providers/providers.dart';
+import '../global_components/bottom_nav_bar.dart';
+import 'auth_success.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   static const String id = "sign_in";
@@ -35,7 +38,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final authProviderNotifier = ref.watch(authProvider.notifier);
-    final user = ref.watch(authProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -101,35 +103,43 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 ),
 
                 const Gap(16),
-                Spacer(),
+                const Spacer(),
 
                 ///Buttons
                 SicklerButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        final UserPreferences? userPreferences =
+                            ref.watch(userPreferencesProvider).value;
+
                         await authProviderNotifier
                             .signInWithEmailAndPassword(
                           email: emailController.text.trim(),
                           password: passwordController.text.trim(),
                         )
-                            .whenComplete(() {
-                          if (user.hasError) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                    "${(user.error as Failure).errorMessage}"),
-                              ),
-                            );
-                          } else {
-                            ///todo: Navigate to user profile setup or home screen if the user in onboarded
-                            context.pushReplacementNamed(
-                                ProfileBasicInfoScreen.id);
+                            .then((_) {
+                          if (context.mounted) {
+                            if (userPreferences!.isFirstTime) {
+                              ref
+                                  .watch(userPreferencesProvider.notifier)
+                                  .addUserPreferencesToLocal(userPreferences
+                                      .copyWith(isFirstTime: false));
+
+                              //mark as not first time
+                              context.goNamed(AuthSuccessScreen.id);
+                            } else {
+                              if (userPreferences.isOnboardingComplete) {
+                                context.goNamed(BottomNavBar.id);
+                              } else {
+                                context.goNamed(ProfileBasicInfoScreen.id);
+                              }
+                            }
                           }
                         });
                       }
                     },
                     label: "Sign In"),
-                Gap(kPadding16),
+                const Gap(kPadding16),
                 Align(
                   alignment: Alignment.center,
                   child: Text(

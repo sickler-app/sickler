@@ -4,10 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/screens/auth/auth_success.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
+import 'package:sickler/screens/global_components/bottom_nav_bar.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
+import '../../models/user/user_preferences.dart';
 import '../../providers/providers.dart';
 
 class GoogleSignInScreen extends ConsumerStatefulWidget {
@@ -20,10 +23,22 @@ class GoogleSignInScreen extends ConsumerStatefulWidget {
 
 class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final UserPreferences? userPreferences =
+          ref.read(userPreferencesProvider).value;
+
+      ref
+          .read(userPreferencesProvider.notifier)
+          .addUserPreferencesToLocal(userPreferences!);
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final authProviderNotifier = ref.watch(authProvider.notifier);
-    final user = ref.watch(authProvider);
 
     return Scaffold(
       body: Padding(
@@ -31,31 +46,51 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Spacer(),
+            const Spacer(),
             SicklerButton(
                     color: theme.colorScheme.primary,
                     overrideIconColor: false,
                     buttonType: SicklerButtonType.secondary,
                     iconPath: "assets/svg/google.svg",
                     onPressed: () async {
-                      context.pushReplacementNamed(ProfileBasicInfoScreen.id);
+                      final UserPreferences? userPreferences =
+                          ref.watch(userPreferencesProvider).value;
 
-                      // await authProviderNotifier
-                      //     .singInWithGoogle()
-                      //     .then((value) {
-                      //   if (user.hasError) {
-                      //     ScaffoldMessenger.of(context).showSnackBar(
-                      //       SnackBar(
-                      //         content: Text(
-                      //             "${(user.error as Failure).errorMessage}"),
-                      //       ),
-                      //     );
-                      //   } else {
-                      //     ///todo: Navigate to user profile setup or home screen if the user in onboarded
-                      //     context
-                      //         .pushReplacementNamed(ProfileBasicInfoScreen.id);
-                      //   }
-                      // });
+                      await authProviderNotifier.singInWithGoogle().then((_) {
+                        if (context.mounted) {
+                          if (userPreferences!.isFirstTime) {
+                            ref
+                                .watch(userPreferencesProvider.notifier)
+                                .addUserPreferencesToLocal(userPreferences
+                                    .copyWith(isFirstTime: false));
+
+                            //mark as not first time
+                            context.goNamed(AuthSuccessScreen.id);
+                          } else {
+                            if (userPreferences.isOnboardingComplete) {
+                              context.goNamed(BottomNavBar.id);
+                            } else {
+                              context.goNamed(ProfileBasicInfoScreen.id);
+                            }
+                          }
+                        }
+                      });
+
+                      // if (!user.hasError && user.hasValue) {
+                      //Check if user is onboarded and either go to info screen or home screen
+                      // final UserPreferences? userPreferences =
+                      //     ref.watch(userPreferencesProvider).value;
+                      // print("new user prefs");
+                      // print(userPreferences);
+
+                      // } else {
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //     SnackBar(
+                      //       content: Text(
+                      //           "${(user.error as Failure).errorMessage}"),
+                      //     ),
+                      //   );
+                      // }
                     },
                     label: "Continue")
                 .animate()
@@ -66,8 +101,8 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
                     begin: 64,
                     end: 0,
                     curve: Curves.easeInOut),
-            Gap(kPadding16),
-            Text("Or").animate().fade(delay: 600.ms, duration: 200.ms),
+            const Gap(kPadding16),
+            const Text("Or").animate().fade(delay: 600.ms, duration: 200.ms),
             FittedBox(
               child: SicklerButton(
                       buttonType: SicklerButtonType.text,
@@ -78,7 +113,7 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
                   .animate()
                   .fade(delay: 700.ms, duration: 200.ms),
             ),
-            Gap(kPadding32),
+            const Gap(kPadding32),
           ],
         ),
       ),

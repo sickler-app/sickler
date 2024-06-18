@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../models/models.dart';
+import '../../../models/models.dart';
 
 class UserService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  UserService();
 
   ///----Get User Data--------///
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserData(String uid) async {
