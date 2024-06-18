@@ -59,6 +59,10 @@ class _ProfileBasicInfoScreenState
 
     final SicklerUser? currentUser = ref.watch(currentUserStreamProvider).value;
 
+    final userPreferencesProviderNotifier =
+        ref.watch(userPreferencesProvider.notifier);
+    final userPreferencesState = ref.watch(userPreferencesProvider);
+
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -196,9 +200,26 @@ class _ProfileBasicInfoScreenState
                                 gender: selectedRadioValue.toString(),
                                 fullName: nameController.text.trim(),
                                 displayName: currentUser.displayName!);
-
+                            //Save Data to Set
                             userInfoProviderNotifier.saveDataToState(userInfo);
-                            context.pushNamed(ProfileVitalsInfoScreen.id);
+
+                            //Mark User as Onboarded since the other pages are shippable
+                            //and we don't want the user to repeat the whole onboarding
+                            // process because he skipped it the first time,
+                            //they can always do that later
+                            final UserPreferences? userPreferences =
+                                userPreferencesState.value;
+                            if (userPreferences != null && !widget.isEditing!) {
+                              await userPreferencesProviderNotifier
+                                  .addUserPreferencesToLocal(
+                                      userPreferences.copyWith(
+                                          uid: currentUser.uid,
+                                          isOnboardingComplete: false));
+                            }
+
+                            if (context.mounted) {
+                              context.pushNamed(ProfileVitalsInfoScreen.id);
+                            }
                           }
                         },
                         label: "Continue"),

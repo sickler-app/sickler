@@ -7,8 +7,11 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
+import '../../models/user/user_preferences.dart';
 import '../../providers/providers.dart';
+import '../global_components/bottom_nav_bar.dart';
 import '../profile/profile_basic_info_screen.dart';
+import 'auth_success.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   static const String id = "register";
@@ -153,21 +156,40 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         },
                       ),
                       const Gap(32),
-                      Spacer(),
+                      const Spacer(),
 
                       ///Buttons
                       SicklerButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
+                              final UserPreferences? userPreferences =
+                                  ref.watch(userPreferencesProvider).value;
+
                               await authProviderNotifier
                                   .registerWithEmailAndPassword(
                                 email: emailController.text.trim(),
                                 password: passwordController.text.trim(),
                               )
-                                  .whenComplete(() {
-                                ///todo: Navigate to user profile setup or home screen if the user in onboarded
-                                context.pushReplacementNamed(
-                                    ProfileBasicInfoScreen.id);
+                                  .then((_) {
+                                if (context.mounted) {
+                                  if (userPreferences!.isFirstTime) {
+                                    ref
+                                        .watch(userPreferencesProvider.notifier)
+                                        .addUserPreferencesToLocal(
+                                            userPreferences.copyWith(
+                                                isFirstTime: false));
+
+                                    //mark as not first time
+                                    context.goNamed(AuthSuccessScreen.id);
+                                  } else {
+                                    if (userPreferences.isOnboardingComplete) {
+                                      context.goNamed(BottomNavBar.id);
+                                    } else {
+                                      context
+                                          .goNamed(ProfileBasicInfoScreen.id);
+                                    }
+                                  }
+                                }
                               });
                             }
                           },

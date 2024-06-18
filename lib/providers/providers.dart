@@ -40,7 +40,7 @@ final UserPreferencesRepository userPreferencesRepository =
         userPreferencesLocalDatabaseService:
             userPreferencesLocalDatabaseService);
 
-final UserPreferencesProvider =
+final userPreferencesProvider =
     AsyncNotifierProvider<UserPreferencesNotifier, UserPreferences>(() =>
         UserPreferencesNotifier(
             userPrefsRepository: userPreferencesRepository));

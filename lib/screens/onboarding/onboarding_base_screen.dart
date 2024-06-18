@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/screens/auth/google_sign_in_screen.dart';
 import 'package:sickler/screens/onboarding/onboarding_template_screen.dart';
 
 import 'components/onboarding_button.dart';
 
-class OnboardingBaseScreen extends StatefulWidget {
+class OnboardingBaseScreen extends ConsumerStatefulWidget {
   static const String id = "onboarding";
   const OnboardingBaseScreen({super.key});
 
   @override
-  State<OnboardingBaseScreen> createState() => _OnboardingBaseScreenState();
+  ConsumerState<OnboardingBaseScreen> createState() =>
+      _OnboardingBaseScreenState();
 }
 
-class _OnboardingBaseScreenState extends State<OnboardingBaseScreen> {
+class _OnboardingBaseScreenState extends ConsumerState<OnboardingBaseScreen> {
   final List<Map<String, String>> onboardingInfo = [
     {
       "text": "We help you manage\nSickle Cell",
@@ -38,12 +40,6 @@ class _OnboardingBaseScreenState extends State<OnboardingBaseScreen> {
   );
 
   int currentPageIndex = 0;
-
-  @override
-  void dispose() {
-    super.dispose();
-    pageController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

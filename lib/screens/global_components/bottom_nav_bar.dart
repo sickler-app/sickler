@@ -4,7 +4,6 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sickler/core/constants.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';
 import 'package:sickler/screens/home/home_screen.dart';
 import 'package:sickler/screens/meds/meds_screen.dart';
@@ -70,8 +69,8 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
                 label: "Home",
                 icon: SvgPicture.asset(
                   "assets/svg/home-alt.svg",
-                  colorFilter: const ColorFilter.mode(
-                      SicklerColours.black, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(
+                      Theme.of(context).iconTheme.color!, BlendMode.srcIn),
                 ),
                 selectedIcon: SvgPicture.asset(
                   "assets/svg/home-alt-filled.svg",
@@ -82,8 +81,8 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
               label: "Water",
               icon: SvgPicture.asset(
                 "assets/svg/droplet-alt.svg",
-                colorFilter: const ColorFilter.mode(
-                    SicklerColours.black, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).iconTheme.color!, BlendMode.srcIn),
               ),
               selectedIcon: SvgPicture.asset(
                 "assets/svg/droplet-alt-filled.svg",
@@ -95,8 +94,8 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
                 label: "Emergency",
                 icon: SvgPicture.asset(
                   "assets/svg/emergency-alt.svg",
-                  colorFilter: const ColorFilter.mode(
-                      SicklerColours.black, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(
+                      Theme.of(context).iconTheme.color!, BlendMode.srcIn),
                 ),
                 selectedIcon: SvgPicture.asset(
                   "assets/svg/emergency-alt-filled.svg",
@@ -105,15 +104,15 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
                 )),
             NavigationDestination(
               label: "Meds",
-              icon: const Icon(FluentIcons.pill_24_regular,
-                  color: SicklerColours.black),
+              icon: Icon(FluentIcons.pill_24_regular,
+                  color: Theme.of(context).iconTheme.color!),
               selectedIcon: Icon(FluentIcons.pill_24_filled,
                   color: Theme.of(context).colorScheme.primary),
             ),
             NavigationDestination(
               label: "Profile",
-              icon: const Icon(FluentIcons.person_24_regular,
-                  color: SicklerColours.black),
+              icon: Icon(FluentIcons.person_24_regular,
+                  color: Theme.of(context).iconTheme.color!),
               selectedIcon: Icon(FluentIcons.person_24_filled,
                   color: Theme.of(context).colorScheme.primary),
             ),

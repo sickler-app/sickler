@@ -18,9 +18,11 @@ FutureEither<T> callFutureMethod<T>(Future<T> Function() function) async {
     return Left(Failure.firebase(errorMessage: e.message));
   } catch (e) {
     ///An exception has occurred;
-    debugPrint("A Firebase exception has occurred");
+    debugPrint("An exception exception has occurred");
     debugPrint(e.toString());
+    debugPrintStack(label: "Firebase Exception error stacktrace");
     String errorMessage = e.toString().split(": ").last;
+
     return Left(Failure.generic(errorMessage: errorMessage));
   }
 }
