@@ -37,12 +37,11 @@ class UserPreferences extends Equatable {
       this.volumeUnit,
       this.lengthUnit,
       this.massUnit,
-      this.isFirstTime,
-      this.isOnboarded,
+      this.isFirstTime = true,
+      this.isOnboardingComplete = false,
       this.themeMode});
 
-  final Id id = Isar
-      .autoIncrement; //Keeping it final because we want only 1 user preferences object, might as well just put a fixed id like '0';
+  final Id id = 1; //Make it fixed so so we have 1 ID to auto increment
 
   //Water Preferences
   final double? dailyWaterGoal;
@@ -56,9 +55,9 @@ class UserPreferences extends Equatable {
   @Enumerated(EnumType.name)
   final Units? massUnit;
 
-  // Water bool
-  final bool? isFirstTime;
-  final bool? isOnboarded;
+  final bool isFirstTime;
+  //final bool isOnboarding;
+  final bool isOnboardingComplete;
 
   @Enumerated(EnumType.name)
   final ThemeMode? themeMode;
@@ -72,7 +71,8 @@ class UserPreferences extends Equatable {
     final Units? lengthUnit,
     final Units? massUnit,
     final bool? isFirstTime,
-    final bool? isOnboarded,
+    final bool? isOnboardingComplete,
+    //  final bool? isOnboarding,
     final ThemeMode? themeMode,
   }) {
     return UserPreferences(
@@ -83,7 +83,8 @@ class UserPreferences extends Equatable {
       massUnit: massUnit ?? this.massUnit,
       lengthUnit: lengthUnit ?? this.lengthUnit,
       isFirstTime: isFirstTime ?? this.isFirstTime,
-      isOnboarded: isOnboarded ?? this.isOnboarded,
+      // isOnboarding: isOnboarding ?? this.isOnboarding,
+      isOnboardingComplete: isOnboardingComplete ?? this.isOnboardingComplete,
     );
   }
 
@@ -96,7 +97,7 @@ class UserPreferences extends Equatable {
       "lengthUnit": lengthUnit,
       "massUnit": massUnit,
       "isFirstTime": isFirstTime,
-      "isOnboarded": isOnboarded,
+      "isOnboardingComplete": isOnboardingComplete,
       "themeMode": themeMode,
     };
 
@@ -112,7 +113,7 @@ class UserPreferences extends Equatable {
       massUnit: (data["massUnit"] as String).convertToUnit(),
       lengthUnit: (data["lengthUnit"] as String).convertToUnit(),
       isFirstTime: data["isFirstTime"] as bool,
-      isOnboarded: data["isOnboarded"] as bool,
+      isOnboardingComplete: data["isOnboardingComplete"] as bool,
       themeMode: (data["themeMode"] as String).convertToThemeMode(),
     );
   }
@@ -124,14 +125,20 @@ class UserPreferences extends Equatable {
     volumeUnit: null,
     lengthUnit: null,
     massUnit: null,
-    isFirstTime: null,
-    isOnboarded: null,
+    isFirstTime: true,
+    isOnboardingComplete: false,
     themeMode: null,
   );
 
+  @ignore
   bool get isEmpty => this == UserPreferences.empty;
-
+  @ignore
   bool get isNotEmpty => this != UserPreferences.empty;
+
+  @override
+  String toString() {
+    return "UserPreferences(uid: $uid, dailyWaterGoal: $dailyWaterGoal, waterInputVolume: $waterInputVolume, volumeUnit: $volumeUnit, massUnit: $massUnit, lengthUnit: $lengthUnit, isFirstTime: $isFirstTime, isOnboardingComplete: $isOnboardingComplete,)";
+  }
 
   @ignore
   @override
@@ -144,7 +151,7 @@ class UserPreferences extends Equatable {
         massUnit,
         themeMode,
         isFirstTime,
-        isOnboarded,
+        isOnboardingComplete,
       ];
 }
 

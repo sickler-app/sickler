@@ -14,11 +14,17 @@ class UserPreferencesService {
 
   Future<void> addUserPreferences(
       {required UserPreferences preferences, required String uid}) async {
-    await firestore.collection('users').doc(uid).set(preferences.toMap());
+    Map<String, Map<String, dynamic>> preferencesMap = {
+      "preferences": preferences.toMap()
+    };
+    await firestore.collection('users').doc(uid).set(preferencesMap);
   }
 
   Future<void> updateUserPreferences(
       {required UserPreferences preferences, required String uid}) async {
-    await firestore.collection('users').doc(uid).update(preferences.toMap());
+    Map<String, Map<String, dynamic>> preferencesMap = {
+      "preferences": preferences.toMap()
+    };
+    await firestore.collection('users').doc(uid).update(preferencesMap);
   }
 }

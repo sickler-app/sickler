@@ -22,57 +22,47 @@ const UserPreferencesSchema = CollectionSchema(
       name: r'dailyWaterGoal',
       type: IsarType.double,
     ),
-    r'isEmpty': PropertySchema(
-      id: 1,
-      name: r'isEmpty',
-      type: IsarType.bool,
-    ),
     r'isFirstTime': PropertySchema(
-      id: 2,
+      id: 1,
       name: r'isFirstTime',
       type: IsarType.bool,
     ),
-    r'isNotEmpty': PropertySchema(
-      id: 3,
-      name: r'isNotEmpty',
-      type: IsarType.bool,
-    ),
-    r'isOnboarded': PropertySchema(
-      id: 4,
-      name: r'isOnboarded',
+    r'isOnboardingComplete': PropertySchema(
+      id: 2,
+      name: r'isOnboardingComplete',
       type: IsarType.bool,
     ),
     r'lengthUnit': PropertySchema(
-      id: 5,
+      id: 3,
       name: r'lengthUnit',
       type: IsarType.string,
       enumMap: _UserPreferenceslengthUnitEnumValueMap,
     ),
     r'massUnit': PropertySchema(
-      id: 6,
+      id: 4,
       name: r'massUnit',
       type: IsarType.string,
       enumMap: _UserPreferencesmassUnitEnumValueMap,
     ),
     r'themeMode': PropertySchema(
-      id: 7,
+      id: 5,
       name: r'themeMode',
       type: IsarType.string,
       enumMap: _UserPreferencesthemeModeEnumValueMap,
     ),
     r'uid': PropertySchema(
-      id: 8,
+      id: 6,
       name: r'uid',
       type: IsarType.string,
     ),
     r'volumeUnit': PropertySchema(
-      id: 9,
+      id: 7,
       name: r'volumeUnit',
       type: IsarType.string,
       enumMap: _UserPreferencesvolumeUnitEnumValueMap,
     ),
     r'waterInputVolume': PropertySchema(
-      id: 10,
+      id: 8,
       name: r'waterInputVolume',
       type: IsarType.double,
     )
@@ -132,16 +122,14 @@ void _userPreferencesSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeDouble(offsets[0], object.dailyWaterGoal);
-  writer.writeBool(offsets[1], object.isEmpty);
-  writer.writeBool(offsets[2], object.isFirstTime);
-  writer.writeBool(offsets[3], object.isNotEmpty);
-  writer.writeBool(offsets[4], object.isOnboarded);
-  writer.writeString(offsets[5], object.lengthUnit?.name);
-  writer.writeString(offsets[6], object.massUnit?.name);
-  writer.writeString(offsets[7], object.themeMode?.name);
-  writer.writeString(offsets[8], object.uid);
-  writer.writeString(offsets[9], object.volumeUnit?.name);
-  writer.writeDouble(offsets[10], object.waterInputVolume);
+  writer.writeBool(offsets[1], object.isFirstTime);
+  writer.writeBool(offsets[2], object.isOnboardingComplete);
+  writer.writeString(offsets[3], object.lengthUnit?.name);
+  writer.writeString(offsets[4], object.massUnit?.name);
+  writer.writeString(offsets[5], object.themeMode?.name);
+  writer.writeString(offsets[6], object.uid);
+  writer.writeString(offsets[7], object.volumeUnit?.name);
+  writer.writeDouble(offsets[8], object.waterInputVolume);
 }
 
 UserPreferences _userPreferencesDeserialize(
@@ -152,18 +140,18 @@ UserPreferences _userPreferencesDeserialize(
 ) {
   final object = UserPreferences(
     dailyWaterGoal: reader.readDoubleOrNull(offsets[0]),
-    isFirstTime: reader.readBoolOrNull(offsets[2]),
-    isOnboarded: reader.readBoolOrNull(offsets[4]),
+    isFirstTime: reader.readBoolOrNull(offsets[1]) ?? true,
+    isOnboardingComplete: reader.readBoolOrNull(offsets[2]) ?? false,
     lengthUnit: _UserPreferenceslengthUnitValueEnumMap[
-        reader.readStringOrNull(offsets[5])],
+        reader.readStringOrNull(offsets[3])],
     massUnit: _UserPreferencesmassUnitValueEnumMap[
-        reader.readStringOrNull(offsets[6])],
+        reader.readStringOrNull(offsets[4])],
     themeMode: _UserPreferencesthemeModeValueEnumMap[
-        reader.readStringOrNull(offsets[7])],
-    uid: reader.readString(offsets[8]),
+        reader.readStringOrNull(offsets[5])],
+    uid: reader.readString(offsets[6]),
     volumeUnit: _UserPreferencesvolumeUnitValueEnumMap[
-        reader.readStringOrNull(offsets[9])],
-    waterInputVolume: reader.readDoubleOrNull(offsets[10]),
+        reader.readStringOrNull(offsets[7])],
+    waterInputVolume: reader.readDoubleOrNull(offsets[8]),
   );
   return object;
 }
@@ -178,28 +166,24 @@ P _userPreferencesDeserializeProp<P>(
     case 0:
       return (reader.readDoubleOrNull(offset)) as P;
     case 1:
-      return (reader.readBool(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? true) as P;
     case 2:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 3:
-      return (reader.readBool(offset)) as P;
-    case 4:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 5:
       return (_UserPreferenceslengthUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 6:
+    case 4:
       return (_UserPreferencesmassUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 7:
+    case 5:
       return (_UserPreferencesthemeModeValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 8:
+    case 6:
       return (reader.readString(offset)) as P;
-    case 9:
+    case 7:
       return (_UserPreferencesvolumeUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 10:
+    case 8:
       return (reader.readDoubleOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -559,35 +543,7 @@ extension UserPreferencesQueryFilter
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      isEmptyEqualTo(bool value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isEmpty',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      isFirstTimeIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'isFirstTime',
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      isFirstTimeIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'isFirstTime',
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      isFirstTimeEqualTo(bool? value) {
+      isFirstTimeEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'isFirstTime',
@@ -597,38 +553,10 @@ extension UserPreferencesQueryFilter
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      isNotEmptyEqualTo(bool value) {
+      isOnboardingCompleteEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isNotEmpty',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      isOnboardedIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'isOnboarded',
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      isOnboardedIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'isOnboarded',
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      isOnboardedEqualTo(bool? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isOnboarded',
+        property: r'isOnboardingComplete',
         value: value,
       ));
     });
@@ -1493,19 +1421,6 @@ extension UserPreferencesQuerySortBy
     });
   }
 
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> sortByIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isEmpty', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByIsEmptyDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isEmpty', Sort.desc);
-    });
-  }
-
   QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
       sortByIsFirstTime() {
     return QueryBuilder.apply(this, (query) {
@@ -1521,30 +1436,16 @@ extension UserPreferencesQuerySortBy
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByIsNotEmpty() {
+      sortByIsOnboardingComplete() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isNotEmpty', Sort.asc);
+      return query.addSortBy(r'isOnboardingComplete', Sort.asc);
     });
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByIsNotEmptyDesc() {
+      sortByIsOnboardingCompleteDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isNotEmpty', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByIsOnboarded() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isOnboarded', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByIsOnboardedDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isOnboarded', Sort.desc);
+      return query.addSortBy(r'isOnboardingComplete', Sort.desc);
     });
   }
 
@@ -1659,19 +1560,6 @@ extension UserPreferencesQuerySortThenBy
     });
   }
 
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> thenByIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isEmpty', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByIsEmptyDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isEmpty', Sort.desc);
-    });
-  }
-
   QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
       thenByIsFirstTime() {
     return QueryBuilder.apply(this, (query) {
@@ -1687,30 +1575,16 @@ extension UserPreferencesQuerySortThenBy
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByIsNotEmpty() {
+      thenByIsOnboardingComplete() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isNotEmpty', Sort.asc);
+      return query.addSortBy(r'isOnboardingComplete', Sort.asc);
     });
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByIsNotEmptyDesc() {
+      thenByIsOnboardingCompleteDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isNotEmpty', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByIsOnboarded() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isOnboarded', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByIsOnboardedDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isOnboarded', Sort.desc);
+      return query.addSortBy(r'isOnboardingComplete', Sort.desc);
     });
   }
 
@@ -1807,13 +1681,6 @@ extension UserPreferencesQueryWhereDistinct
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QDistinct>
-      distinctByIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isEmpty');
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct>
       distinctByIsFirstTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isFirstTime');
@@ -1821,16 +1688,9 @@ extension UserPreferencesQueryWhereDistinct
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QDistinct>
-      distinctByIsNotEmpty() {
+      distinctByIsOnboardingComplete() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isNotEmpty');
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct>
-      distinctByIsOnboarded() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isOnboarded');
+      return query.addDistinctBy(r'isOnboardingComplete');
     });
   }
 
@@ -1892,27 +1752,16 @@ extension UserPreferencesQueryProperty
     });
   }
 
-  QueryBuilder<UserPreferences, bool, QQueryOperations> isEmptyProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'isEmpty');
-    });
-  }
-
-  QueryBuilder<UserPreferences, bool?, QQueryOperations> isFirstTimeProperty() {
+  QueryBuilder<UserPreferences, bool, QQueryOperations> isFirstTimeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isFirstTime');
     });
   }
 
-  QueryBuilder<UserPreferences, bool, QQueryOperations> isNotEmptyProperty() {
+  QueryBuilder<UserPreferences, bool, QQueryOperations>
+      isOnboardingCompleteProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'isNotEmpty');
-    });
-  }
-
-  QueryBuilder<UserPreferences, bool?, QQueryOperations> isOnboardedProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'isOnboarded');
+      return query.addPropertyName(r'isOnboardingComplete');
     });
   }
 

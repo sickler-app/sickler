@@ -11,13 +11,12 @@ class UserPreferencesLocalDBService extends LocalDatabaseService {
 
   Stream<List<UserPreferences>> listenUserPreferences() async* {
     final isar = await db;
-    yield* isar.userPreferences.where().watch(fireImmediately: true);
+    yield* isar.userPreferences.where().watch();
   }
 
   Future<UserPreferences> getUserPreferences() async {
     final isar = await db;
-    return (isar.userPreferences.where().findAll() as List<UserPreferences>)
-        .first;
+    return (await isar.userPreferences.where().findAll()).first;
   }
 
   Future<void> addUserPreferences(UserPreferences userPreferences) async {

@@ -17,30 +17,47 @@ class UserPreferencesRepository {
         _userPreferencesLocalDatabaseService =
             userPreferencesLocalDatabaseService;
 
-  FutureEither<UserPreferences> getUserPreferences(String uid) async {
+  FutureEither<UserPreferences> getUserPreferences(String? uid) async {
     return callFutureMethod(() async {
-      //Get from local
-      UserPreferences localPrefs =
-          await _userPreferencesLocalDatabaseService.getUserPreferences();
+      if (uid == null || uid.isEmpty) {
+        //If no uid is provided get from local
+        UserPreferences localPrefs =
+            await _userPreferencesLocalDatabaseService.getUserPreferences();
 
-      if (localPrefs.isEmpty) {
-        //Get from remote if local is empty
+        if (localPrefs.isEmpty) {
+          return UserPreferences.empty;
+        } else {
+          return localPrefs;
+        }
+      } else {
+        //Get from remote if remote if uid is provided
         DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
             await _userPreferencesService.getUserPreferences(uid);
         Map<String, dynamic>? preferencesMap = documentSnapshot.data();
         return UserPreferences.fromMap(data: preferencesMap!);
       }
-
-      return localPrefs;
     });
   }
 
-  FutureEither<void> addUserPreferences(UserPreferences userPreferences) async {
+  FutureEither<Stream<List<UserPreferences>>> listenUserPreferences() async {
+    return callFutureMethod(() async {
+      //Get from local
+      return _userPreferencesLocalDatabaseService.listenUserPreferences();
+    });
+  }
+
+  FutureEither<void> addUserPreferencesToLocal(
+      UserPreferences userPreferences) async {
     return callFutureMethod(() async {
       //Add to Local
       await _userPreferencesLocalDatabaseService
           .addUserPreferences(userPreferences);
+    });
+  }
 
+  FutureEither<void> addUserPreferencesToRemote(
+      UserPreferences userPreferences) async {
+    return callFutureMethod(() async {
       //Add to remote
       await _userPreferencesService.addUserPreferences(
           preferences: userPreferences, uid: userPreferences.uid);
