@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/models/models.dart';
-import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/auth/auth_success.dart';
 import 'package:sickler/screens/auth/google_sign_in_screen.dart';
 import 'package:sickler/screens/auth/register_screen.dart';
@@ -29,36 +27,26 @@ import 'package:sickler/screens/water/water_empty_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  String evaluateInitialLocation() {
-    final SicklerUser? user = ref.watch(currentUserStreamProvider).value;
-    final UserPreferences preferences =
-        ref.watch(userPreferencesProvider).value!;
+  // final SicklerUser? user = ref.watch(currentUserStreamProvider).value;
+  // late UserPreferences preferences;
+  // late bool isFirstTime;
+  // late bool isOnboardingComplete;
 
-    final bool isFirstTime = preferences.isFirstTime;
-    final bool isOnboardingComplete = preferences.isOnboardingComplete;
-    final bool isLoggedIn = (user != null && user.isNotEmpty);
-
-    if (isLoggedIn) {
-      if (!isOnboardingComplete) {
-        ///not onboarded
-        return "/${ProfileScreen.id}/${ProfileBasicInfoScreen.id}";
-      } else {
-        ///Logged in and onboarded
-        return "/";
-      }
-    } else {
-      ///Is not Logged In
-      if (isFirstTime) {
-        return "/${OnboardingBaseScreen.id}";
-      } else {
-        return "/auth/${GoogleSignInScreen.id}";
-      }
-    }
-  }
+  void getUserPreferences() async {}
 
   return GoRouter(
     //initialLocation: isFirstTime ? "/${OnboardingBaseScreen.id}" : "/",
-    initialLocation: evaluateInitialLocation(),
+    initialLocation: "/${LoadingScreen.id}",
+    // redirectLimit: 1,
+    // redirect: (context, state) {
+    //   if (preferences == UserPreferences.empty) {
+    //     print("R E D I R E C T I N G   T O ${LoadingScreen.id}");
+    //     return "/${LoadingScreen.id}";
+    //   } else {
+    //     return null;
+    //   }
+    // },
+
     // redirect: (BuildContext context, GoRouterState state) {
     //   final UserPreferences preferences =
     //       ref.watch(userPreferencesProvider).value!;

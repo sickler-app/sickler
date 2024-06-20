@@ -81,8 +81,8 @@ class AuthRepository {
   //   });
   // }
 
-  Stream<SicklerUser?> getAuthStateChanges() {
-    final StreamController<SicklerUser?> sicklerUserStreamController =
+  Stream<SicklerUser> getAuthStateChanges() {
+    final StreamController<SicklerUser> sicklerUserStreamController =
         StreamController.broadcast();
 
     final Stream<User?> userStream = authService.getCurrentUser();

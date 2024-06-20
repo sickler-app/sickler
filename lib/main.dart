@@ -15,6 +15,11 @@ void main() async {
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
   //     statusBarIconBrightness: Brightness.dark, statusBarColor: Colors.white));
 
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -30,24 +35,21 @@ class _MyAppState extends ConsumerState<MyApp> {
   GoRouter? router;
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      ref.watch(currentUserStreamProvider);
-      await ref
-          .watch(userPreferencesProvider.notifier)
-          .getUserPreferences()
-          .then((_) {
-        router = ref.watch(routerProvider);
-      });
-    });
+    router = ref.read(routerProvider);
 
     super.initState();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (kDebugMode) {
-      print("printing state of authProvider");
-      print(ref.watch(authProvider).value);
+      print("printing state of currentUserStreamProvider");
+      print(ref.watch(currentUserStreamProvider).value);
     }
 
     return MaterialApp.router(
@@ -60,8 +62,8 @@ class _MyAppState extends ConsumerState<MyApp> {
         curve: Curves.easeInOut,
         duration: const Duration(milliseconds: 300),
       ),
-      routerConfig: router ?? ref.watch(routerProvider),
-      // home: BlobScreen(),
+      routerConfig: router,
+      //home: AuthSuccessScreen(),
     );
   }
 }

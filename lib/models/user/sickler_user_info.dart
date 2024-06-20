@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:sickler/models/user/user_preferences.dart';
 
 class SicklerUserInfo extends Equatable {
   ///Profile Info
@@ -20,6 +21,9 @@ class SicklerUserInfo extends Equatable {
   final List<String>? allergies;
   final List<String>? medicalConditions;
 
+  ///Preferences
+  final UserPreferences? preferences;
+
   const SicklerUserInfo(
       {
       ///Profile Info
@@ -38,6 +42,7 @@ class SicklerUserInfo extends Equatable {
       this.bmi,
       this.bloodType,
       this.allergies,
+      this.preferences,
       this.medicalConditions});
 
   SicklerUserInfo copyWith(
@@ -54,7 +59,8 @@ class SicklerUserInfo extends Equatable {
       int? painSeverity,
       String? crisisFrequency,
       List<String>? allergies,
-      List<String>? medicalConditions}) {
+      List<String>? medicalConditions,
+      UserPreferences? preferences}) {
     return SicklerUserInfo(
 
         ///Profile Info
@@ -73,7 +79,8 @@ class SicklerUserInfo extends Equatable {
         bmi: bmi ?? this.bmi,
         bloodType: bloodType ?? this.bloodType,
         allergies: allergies ?? this.allergies,
-        medicalConditions: medicalConditions ?? this.medicalConditions);
+        medicalConditions: medicalConditions ?? this.medicalConditions,
+        preferences: preferences ?? this.preferences);
   }
 
   ///-----To and From Map-------///
@@ -101,26 +108,30 @@ class SicklerUserInfo extends Equatable {
     Map<String, Map<String, dynamic>> userData = {
       "profile": profileData,
       "health": healthData,
+      "preferences": preferences!.toMap(),
     };
     return userData;
   }
 
   factory SicklerUserInfo.fromMap(Map<String, dynamic> data) {
     return SicklerUserInfo(
-        uid: data["profile"]["uid"] as String,
-        gender: data["profile"]["gender"] as String,
-        fullName: data["profile"]["fullName"] as String,
-        displayName: data["profile"]["displayName"] as String?,
-        age: data["profile"]["age"] as int,
-        painSeverity: data["health"]["painSeverity"] as int?,
-        crisisFrequency: data["health"]["crisisFrequency"] as String?,
-        genotype: data["health"]["genotype"] as String?,
-        height: data["health"]["height"] as double?,
-        weight: data["health"]["weight"] as double?,
-        bmi: data["health"]["bmi"] as double?,
-        bloodType: data["health"]["bloodType"] as String?,
-        allergies: data["health"]["allergies"] as List<String>,
-        medicalConditions: data["health"]["medicalConditions"] as List<String>);
+      uid: data["profile"]["uid"] as String,
+      gender: data["profile"]["gender"] as String,
+      fullName: data["profile"]["fullName"] as String,
+      displayName: data["profile"]["displayName"] as String?,
+      age: data["profile"]["age"] as int,
+      painSeverity: data["health"]["painSeverity"] as int?,
+      crisisFrequency: data["health"]["crisisFrequency"] as String?,
+      genotype: data["health"]["genotype"] as String?,
+      height: data["health"]["height"] as double?,
+      weight: data["health"]["weight"] as double?,
+      bmi: data["health"]["bmi"] as double?,
+      bloodType: data["health"]["bloodType"] as String?,
+      allergies: data["health"]["allergies"] as List<String>,
+      medicalConditions: data["health"]["medicalConditions"] as List<String>,
+      preferences: UserPreferences.fromMap(
+          data: data["preferences"] as Map<String, dynamic>),
+    );
   }
 
   ///
@@ -134,19 +145,20 @@ class SicklerUserInfo extends Equatable {
 
   ///-------------Empty----------///
 
-  static SicklerUserInfo empty = const SicklerUserInfo(
+  static SicklerUserInfo empty = SicklerUserInfo(
       uid: "",
       genotype: "",
       height: 0,
       weight: 0,
       bmi: 0,
       bloodType: "",
-      allergies: [],
-      medicalConditions: [],
+      allergies: const [],
+      medicalConditions: const [],
       gender: "",
       fullName: "",
       age: 0,
-      displayName: "");
+      displayName: "",
+      preferences: UserPreferences.empty);
 
   bool get isEmpty => this == SicklerUserInfo.empty;
   bool get isNotEmpty => this != SicklerUserInfo.empty;
@@ -170,6 +182,7 @@ class SicklerUserInfo extends Equatable {
       bloodType: $bloodType,
       allergies: $allergies,
       medicalConditions: $medicalConditions,
+      preferences: $preferences
     );""";
   }
 
@@ -186,6 +199,7 @@ class SicklerUserInfo extends Equatable {
         bmi,
         bloodType,
         allergies,
-        medicalConditions
+        medicalConditions,
+        preferences,
       ];
 }

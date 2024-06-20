@@ -17,8 +17,8 @@ final AuthRepository authRepository = AuthRepository(authService: authService);
 final authProvider = AsyncNotifierProvider<AuthNotifier, SicklerUser?>(
     () => AuthNotifier(authRepository: authRepository));
 
-final currentUserStreamProvider = StreamProvider<SicklerUser?>((ref) {
-  return ref.watch(authProvider.notifier).getAuthStateChanges();
+final currentUserStreamProvider = StreamProvider<SicklerUser>((ref) async* {
+  yield* ref.watch(authProvider.notifier).getAuthStateChanges();
 });
 
 /// ------ User and Profile Providers ------ ///

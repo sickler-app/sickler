@@ -207,9 +207,9 @@ class _ProfileBasicInfoScreenState
                             //and we don't want the user to repeat the whole onboarding
                             // process because he skipped it the first time,
                             //they can always do that later
-                            final UserPreferences? userPreferences =
-                                userPreferencesState.value;
-                            if (userPreferences != null && !widget.isEditing!) {
+                            final UserPreferences userPreferences =
+                                userPreferencesState.value!;
+                            if (!widget.isEditing!) {
                               await userPreferencesProviderNotifier
                                   .addUserPreferencesToLocal(
                                       userPreferences.copyWith(

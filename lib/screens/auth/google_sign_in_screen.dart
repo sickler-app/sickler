@@ -53,12 +53,12 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
                     buttonType: SicklerButtonType.secondary,
                     iconPath: "assets/svg/google.svg",
                     onPressed: () async {
-                      final UserPreferences? userPreferences =
-                          ref.watch(userPreferencesProvider).value;
+                      final UserPreferences userPreferences =
+                          ref.watch(userPreferencesProvider).value!;
 
                       await authProviderNotifier.singInWithGoogle().then((_) {
                         if (context.mounted) {
-                          if (userPreferences!.isFirstTime) {
+                          if (userPreferences.isFirstTime) {
                             ref
                                 .watch(userPreferencesProvider.notifier)
                                 .addUserPreferencesToLocal(userPreferences
