@@ -1,37 +1,106 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sickler/core/constants.dart';
+import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
-class AuthSuccessScreen extends StatefulWidget {
+import '../../models/auth/sickler_user_model.dart';
+
+class AuthSuccessScreen extends ConsumerWidget {
   static const id = "auth_success";
   const AuthSuccessScreen({super.key});
 
   @override
-  State<AuthSuccessScreen> createState() => _AuthSuccessScreenState();
-}
-
-class _AuthSuccessScreenState extends State<AuthSuccessScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final ThemeData theme = Theme.of(context);
+    final SicklerUser? currentUser = ref.watch(currentUserStreamProvider).value;
+    final String userName = currentUser!.displayName ?? currentUser.email!;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            const Spacer(),
             Text(
-              "Successfully Authenticated 😎",
-              style: theme.textTheme.displaySmall,
-            ),
-            const Gap(32),
+              "Hey there,",
+              style: theme.textTheme.headlineLarge,
+            )
+                .animate()
+                .moveY(
+                    duration: 1500.ms,
+                    curve: Curves.easeInOutQuart,
+                    begin: 150,
+                    end: 0)
+                .fadeIn(duration: 800.ms, delay: 600.ms),
+            const Gap(kPadding16),
+            Text(
+              userName.split(" ").first,
+              style: theme.textTheme.displayLarge!.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: theme.colorScheme.primary),
+            )
+                .animate(delay: 1000.ms)
+                .moveY(
+                    duration: 1500.ms,
+                    curve: Curves.easeInOutQuart,
+                    begin: 120,
+                    end: 0)
+                .fadeIn(duration: 800.ms, delay: 600.ms),
+            const Gap(kPadding48),
+            Text(
+              "We're glad you're here!",
+              style: theme.textTheme.headlineLarge,
+            )
+                .animate(delay: 2500.ms)
+                .moveY(
+                    duration: 1500.ms,
+                    curve: Curves.easeInOutQuart,
+                    begin: 120,
+                    end: 0)
+                .fadeIn(duration: 800.ms, delay: 600.ms),
+
+            // Row(
+            //   children: [
+            //     Text("Welcome to ", style: theme.textTheme.headlineLarge)
+            //         .animate(delay: 3000.ms)
+            //         .moveY(
+            //             duration: 1500.ms,
+            //             curve: Curves.easeInOutQuart,
+            //             begin: 120,
+            //             end: 0)
+            //         .fadeIn(duration: 800.ms, delay: 600.ms),
+            //     Text("Sickler",
+            //             style: theme.textTheme.headlineLarge!.copyWith(
+            //                 fontWeight: FontWeight.w800,
+            //                 color: theme.colorScheme.primary))
+            //         .animate(delay: 3500.ms)
+            //         .moveY(
+            //             duration: 1500.ms,
+            //             curve: Curves.easeInOutQuart,
+            //             begin: 120,
+            //             end: 0)
+            //         .fadeIn(duration: 800.ms, delay: 600.ms),
+            //   ],
+            // ),
+            const Spacer(),
             SicklerButton(
-                onPressed: () {
-                  context.goNamed(ProfileBasicInfoScreen.id);
-                },
-                label: "Continue"),
+                    onPressed: () {
+                      context.goNamed(ProfileBasicInfoScreen.id);
+                    },
+                    label: "Continue")
+                .animate(delay: 3500.ms)
+                .moveY(
+                    duration: 1500.ms,
+                    curve: Curves.easeInOutQuart,
+                    begin: 150,
+                    end: 0)
+                .fadeIn(duration: 800.ms, delay: 600.ms),
             const Gap(64),
           ],
         ),

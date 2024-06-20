@@ -6,10 +6,10 @@ class BlobScreen extends StatefulWidget {
   const BlobScreen({super.key});
 
   @override
-  _BlobScreenState createState() => _BlobScreenState();
+  BlobScreenState createState() => BlobScreenState();
 }
 
-class _BlobScreenState extends State<BlobScreen>
+class BlobScreenState extends State<BlobScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late List<Blob> _blobs;
@@ -75,7 +75,7 @@ class Blob {
   Offset position;
   Offset velocity;
   double size;
-  final Random _random = Random();
+  // final Random _random = Random();
 
   Blob()
       : position = Offset(100 + Random().nextDouble() * 300,

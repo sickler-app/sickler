@@ -9,6 +9,7 @@ const double kPadding12 = 12.0;
 const double kPadding16 = 16.0;
 const double kPadding24 = 24.0;
 const double kPadding32 = 32.0;
+const double kPadding48 = 48.0;
 const double kPadding64 = 64.0;
 
 ///------Input Decorations-------///

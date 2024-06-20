@@ -37,13 +37,13 @@ class _ProfileMedicalInfoScreenState
     super.dispose();
   }
 
-  void _showSnackBar(String message) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(message),
-      ));
-    });
-  }
+  // void _showSnackBar(String message) {
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text(message),
+  //     ));
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -224,43 +224,52 @@ class _ProfileMedicalInfoScreenState
                         ///Todo: add the rest of the health data;
                         ///
 
-                        final SicklerUserInfo updatedUserInfo =
-                            userInfoState.value!.copyWith(
-                          allergies: allergies,
-                          medicalConditions: medicalConditions,
-                          bmi: userInfoState.value!.calculateBMI(),
-                        );
-
-                        ///Set onboarding to complete here
-
                         ref
                             .watch(userPreferencesProvider.notifier)
-                            .addUserPreferencesToLocal(ref
-                                .watch(userPreferencesProvider)
-                                .value!
-                                .copyWith(
-                                  isOnboardingComplete: true,
-                                ));
+                            .getUserPreferences()
+                            .then((_) async {
+                          //Update User Preferences
+                          final UserPreferences finalPrefs = ref
+                              .watch(userPreferencesProvider)
+                              .value!
+                              .copyWith(
+                                isOnboardingComplete: true,
+                              );
+                          //Save updated preferences to local
+                          await ref
+                              .watch(userPreferencesProvider.notifier)
+                              .addUserPreferencesToLocal(finalPrefs);
 
-                        await userInfoProviderNotifier
-                            .addUserData(updatedUserInfo)
-                            .then((_) {
-                          if (userInfoState.hasValue &&
-                              !userInfoState.hasError) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                              "success",
-                              style: theme.textTheme.bodyMedium!
-                                  .copyWith(color: Colors.green),
-                            )));
-                          }
+                          //Add updated preferences to user data going to firebase
+                          final SicklerUserInfo updatedUserInfo =
+                              userInfoState.value!.copyWith(
+                                  allergies: allergies,
+                                  medicalConditions: medicalConditions,
+                                  bmi: userInfoState.value!.calculateBMI(),
+                                  preferences: finalPrefs);
+
+                          //Send data to firebase
+                          await userInfoProviderNotifier
+                              .addUserData(updatedUserInfo)
+                              .then((_) {
+                            if (userInfoState.hasValue &&
+                                !userInfoState.hasError) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                      content: Text(
+                                "success",
+                                style: theme.textTheme.bodyMedium!
+                                    .copyWith(color: Colors.green),
+                              )));
+                            }
+                          });
                         });
 
                         // if (userInfoState.hasError) {
                         //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         //       content: Text(
                         //     (userInfoState.error as Failure).errorMessage ??
-                        //         "error occured",
+                        //         "error occurred",
                         //     style: theme.textTheme.bodyMedium!
                         //         .copyWith(color: theme.colorScheme.error),
                         //   )));

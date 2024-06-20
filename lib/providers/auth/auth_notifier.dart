@@ -97,8 +97,8 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
     });
   }
 
-  Stream<SicklerUser?> getAuthStateChanges() {
-    final Stream<SicklerUser?> userStream =
+  Stream<SicklerUser> getAuthStateChanges() {
+    final Stream<SicklerUser> userStream =
         _authRepository.getAuthStateChanges();
 
     userStream.listen((event) {
