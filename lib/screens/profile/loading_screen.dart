@@ -44,7 +44,7 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
   }
 
   Future<void> evaluateInitialLocation() async {
-    print("EVALUATING INITIAL LOCATION");
+    // print("EVALUATING INITIAL LOCATION");
     final SicklerUser user = ref.watch(currentUserStreamProvider).value!;
     late UserPreferences preferences;
     late bool isFirstTime;
@@ -63,23 +63,23 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
         if (isLoggedIn) {
           if (!isOnboardingComplete) {
             ///not onboarded
-            print("NAVIGATING TO ONBOARDING BEGINING SCREEN");
+            //  print("NAVIGATING TO ONBOARDING BEGINING SCREEN");
             context.goNamed(ProfileBasicInfoScreen.id);
             // return "/${ProfileScreen.id}/${ProfileBasicInfoScreen.id}";
           } else {
             ///Logged in and onboarded
-            print("NAVIGATE HOME");
+            //  print("NAVIGATE HOME");
             context.goNamed(BottomNavBar.id);
             // return "/";
           }
         } else {
           ///Is not Logged In
           if (isFirstTime) {
-            print("NAVIGATING TO ONBOARDING SCREENS");
+            //   print("NAVIGATING TO ONBOARDING SCREENS");
             context.goNamed(OnboardingBaseScreen.id);
             //  return "/${OnboardingBaseScreen.id}";
           } else {
-            print("NAVIGATING TO GOOGLE SIGN IN SCREEN");
+            //   print("NAVIGATING TO GOOGLE SIGN IN SCREEN");
             context.goNamed(GoogleSignInScreen.id);
             //  return "/auth/${GoogleSignInScreen.id}";
           }

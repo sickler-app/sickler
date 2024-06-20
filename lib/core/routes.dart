@@ -27,58 +27,8 @@ import 'package:sickler/screens/water/water_empty_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  // final SicklerUser? user = ref.watch(currentUserStreamProvider).value;
-  // late UserPreferences preferences;
-  // late bool isFirstTime;
-  // late bool isOnboardingComplete;
-
-  void getUserPreferences() async {}
-
   return GoRouter(
-    //initialLocation: isFirstTime ? "/${OnboardingBaseScreen.id}" : "/",
     initialLocation: "/${LoadingScreen.id}",
-    // redirectLimit: 1,
-    // redirect: (context, state) {
-    //   if (preferences == UserPreferences.empty) {
-    //     print("R E D I R E C T I N G   T O ${LoadingScreen.id}");
-    //     return "/${LoadingScreen.id}";
-    //   } else {
-    //     return null;
-    //   }
-    // },
-
-    // redirect: (BuildContext context, GoRouterState state) {
-    //   final UserPreferences preferences =
-    //       ref.watch(userPreferencesProvider).value!;
-    //   if (preferences == UserPreferences.empty) {
-    //     return "/${LoadingScreen.id}";
-    //   }
-    //   return null;
-    // },
-    // redirect: (BuildContext context, GoRouterState state) {
-    //   final SicklerUser? user = authState.value;
-    //   final bool isLoggedIn = (user != null && user.isNotEmpty);
-    //
-    //   ///Case where it is not logged in, return google sign in screen by default
-    //   if (!isLoggedIn &&
-    //       state.matchedLocation != "/auth/${SignInScreen.id}" &&
-    //       state.matchedLocation != "/auth/${RegisterScreen.id}" &&
-    //       state.matchedLocation != "/auth/${GoogleSignInScreen.id}" &&
-    //       state.matchedLocation != "/auth/${AuthSuccessScreen.id}" &&
-    //       state.matchedLocation != "/${OnboardingBaseScreen.id}" &&
-    //       state.matchedLocation !=
-    //           "/${ProfileScreen.id}/${ProfileBasicInfoScreen.id}" &&
-    //       state.matchedLocation !=
-    //           "/${ProfileScreen.id}/${ProfileVitalsInfoScreen.id}" &&
-    //       state.matchedLocation !=
-    //           "/${ProfileScreen.id}/${ProfileMedicalInfoScreen.id}" &&
-    //       state.matchedLocation !=
-    //           "/${WaterScreen.id}/${SuggestedWaterDailyGoalScreen.id}") {
-    //     return "/${GoogleSignInScreen.id}";
-    //   }
-    //
-    //   return null;
-    // },
     routes: [
       ///-------H
       GoRoute(

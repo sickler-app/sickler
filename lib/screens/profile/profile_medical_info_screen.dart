@@ -37,13 +37,13 @@ class _ProfileMedicalInfoScreenState
     super.dispose();
   }
 
-  void _showSnackBar(String message) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(message),
-      ));
-    });
-  }
+  // void _showSnackBar(String message) {
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text(message),
+  //     ));
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
