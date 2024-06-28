@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/screens/auth/auth_success.dart';
 import 'package:sickler/screens/auth/google_sign_in_screen.dart';
+import 'package:sickler/screens/auth/loading_screen.dart';
 import 'package:sickler/screens/auth/register_screen.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
 import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
@@ -15,7 +16,6 @@ import 'package:sickler/screens/meds/meds_details_screen.dart';
 import 'package:sickler/screens/meds/meds_schedule_screen.dart';
 import 'package:sickler/screens/meds/meds_screen.dart';
 import 'package:sickler/screens/onboarding/onboarding_base_screen.dart';
-import 'package:sickler/screens/profile/loading_screen.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 import 'package:sickler/screens/profile/profile_medical_info_screen.dart';
 import 'package:sickler/screens/profile/profile_screen.dart';
@@ -109,32 +109,30 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: ProfileScreen.id,
         builder: (BuildContext context, GoRouterState state) =>
             const ProfileScreen(),
-        routes: <GoRoute>[
-          GoRoute(
-            path: SettingsScreen.id,
-            name: SettingsScreen.id,
-            builder: (BuildContext context, GoRouterState state) =>
-                const SettingsScreen(),
-          ),
-          GoRoute(
-            path: ProfileBasicInfoScreen.id,
-            name: ProfileBasicInfoScreen.id,
-            builder: (BuildContext context, GoRouterState state) =>
-                const ProfileBasicInfoScreen(),
-          ),
-          GoRoute(
-            path: ProfileMedicalInfoScreen.id,
-            name: ProfileMedicalInfoScreen.id,
-            builder: (BuildContext context, GoRouterState state) =>
-                const ProfileMedicalInfoScreen(),
-          ),
-          GoRoute(
-            path: ProfileVitalsInfoScreen.id,
-            name: ProfileVitalsInfoScreen.id,
-            builder: (BuildContext context, GoRouterState state) =>
-                const ProfileVitalsInfoScreen(),
-          ),
-        ],
+      ),
+      GoRoute(
+        path: "/${SettingsScreen.id}",
+        name: SettingsScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const SettingsScreen(),
+      ),
+      GoRoute(
+        path: "/${ProfileBasicInfoScreen.id}",
+        name: ProfileBasicInfoScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ProfileBasicInfoScreen(),
+      ),
+      GoRoute(
+        path: "/${ProfileMedicalInfoScreen.id}",
+        name: ProfileMedicalInfoScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ProfileMedicalInfoScreen(),
+      ),
+      GoRoute(
+        path: "/${ProfileVitalsInfoScreen.id}",
+        name: ProfileVitalsInfoScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ProfileVitalsInfoScreen(),
       ),
 
       ///------Medication-------///

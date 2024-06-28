@@ -49,7 +49,7 @@ class _ProfileBasicInfoScreenState
   @override
   void initState() {
     nameController.text =
-        ref.read(currentUserStreamProvider).value!.displayName ?? "";
+        ref.read(authStateChangesStreamProvider).value!.displayName ?? "";
     super.initState();
   }
 
@@ -57,7 +57,8 @@ class _ProfileBasicInfoScreenState
   Widget build(BuildContext context) {
     final userInfoProviderNotifier = ref.watch(userInfoProvider.notifier);
 
-    final SicklerUser? currentUser = ref.watch(currentUserStreamProvider).value;
+    final SicklerUser? currentUser =
+        ref.watch(authStateChangesStreamProvider).value;
 
     final userPreferencesProviderNotifier =
         ref.watch(userPreferencesProvider.notifier);

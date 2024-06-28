@@ -85,7 +85,7 @@ class AuthRepository {
     final StreamController<SicklerUser> sicklerUserStreamController =
         StreamController.broadcast();
 
-    final Stream<User?> userStream = authService.getCurrentUser();
+    final Stream<User?> userStream = authService.authStateChanges();
 
     userStream.listen((event) {
       final SicklerUser sicklerUser = SicklerUser.fromUser(user: event);
@@ -105,6 +105,19 @@ class AuthRepository {
   }) async {
     return callFutureMethod(() async {
       await authService.sendPasswordResetEmail(email: email);
+    });
+  }
+
+  FutureEither<SicklerUser> getCurrentUser() async {
+    return callFutureMethod(() async {
+      if (await authService.getCurrentUser() == null) {
+        return SicklerUser.empty;
+      } else {
+        final SicklerUser user = SicklerUser.fromUser(
+          user: await authService.getCurrentUser(),
+        );
+        return user;
+      }
     });
   }
 

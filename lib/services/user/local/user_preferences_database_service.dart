@@ -16,7 +16,13 @@ class UserPreferencesLocalDBService extends LocalDatabaseService {
 
   Future<UserPreferences> getUserPreferences() async {
     final isar = await db;
-    return (await isar.userPreferences.where().findAll()).first;
+    List<UserPreferences> userPreferencesList =
+        await isar.userPreferences.where().findAll();
+    if (userPreferencesList.isEmpty) {
+      return UserPreferences.empty;
+    } else {
+      return userPreferencesList.first;
+    }
   }
 
   Future<void> addUserPreferences(UserPreferences userPreferences) async {

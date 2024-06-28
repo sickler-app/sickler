@@ -20,7 +20,7 @@ FutureEither<T> callFutureMethod<T>(Future<T> Function() function) async {
     ///An exception has occurred;
     debugPrint("An exception exception has occurred");
     debugPrint(e.toString());
-    debugPrintStack(label: "Exception error stacktrace");
+    debugPrintStack(label: "Exception error stacktrace:");
     String errorMessage = e.toString().split(": ").last;
 
     return Left(Failure.generic(errorMessage: errorMessage));

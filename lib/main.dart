@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +7,6 @@ import 'package:sickler/core/theme.dart';
 import 'package:sickler/firebase_options.dart';
 
 import 'core/core.dart';
-import 'providers/providers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,21 +34,15 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     router = ref.read(routerProvider);
-
     super.initState();
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (kDebugMode) {
-      print("printing state of currentUserStreamProvider");
-      print(ref.watch(currentUserStreamProvider).value);
-    }
+    // if (kDebugMode) {
+    //   print("printing state of currentUserStreamProvider");
+    //   print(ref.watch(authStateChangesStreamProvider).value);
+    // }
 
     return MaterialApp.router(
       title: 'Sickler',
@@ -63,7 +55,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         duration: const Duration(milliseconds: 300),
       ),
       routerConfig: router,
-      //home: AuthSuccessScreen(),
+      //  home: OnboardingBaseScreen(),
     );
   }
 }

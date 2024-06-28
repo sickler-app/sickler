@@ -83,6 +83,19 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
     });
   }
 
+  Future<void> getCurrentUser() async {
+    state = const AsyncValue.loading();
+    final Either<Failure, SicklerUser> response =
+        await _authRepository.getCurrentUser();
+
+    response.fold((failure) {
+      errorMessage = failure.errorMessage;
+      state = AsyncValue.error(failure, StackTrace.current);
+    }, (sicklerUser) {
+      state = AsyncValue.data(sicklerUser);
+    });
+  }
+
   Future<void> confirmPasswordReset(
       {required String code, required String newPassword}) async {
     state = const AsyncValue.loading();
@@ -97,7 +110,7 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
     });
   }
 
-  Stream<SicklerUser> getAuthStateChanges() {
+  Stream<SicklerUser> authStateChanges() {
     final Stream<SicklerUser> userStream =
         _authRepository.getAuthStateChanges();
 

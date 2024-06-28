@@ -22,12 +22,17 @@ class OnboardingTemplateScreen extends StatelessWidget {
               text,
               style: theme.textTheme.displayMedium!
                   .copyWith(fontWeight: FontWeight.w600, height: 1.5),
-            ).animate().fade(delay: 300.ms, duration: 600.ms).moveY(
-                delay: 300.ms,
-                duration: 600.ms,
-                begin: 72,
-                end: 0,
-                curve: Curves.easeInOut),
+            )
+                .animate()
+                .moveY(
+                    duration: 1200.ms,
+                    begin: 120,
+                    end: 0,
+                    curve: Curves.easeInOutQuart)
+                .fadeIn(
+                  delay: 300.ms,
+                  duration: 800.ms,
+                ),
             const Gap(96 + 64),
           ],
         ),

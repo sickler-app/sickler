@@ -98,6 +98,12 @@ class SicklerUser extends Equatable {
   bool get isEmpty => this == SicklerUser.empty;
   bool get isNotEmpty => this != SicklerUser.empty;
 
+  //override sickler user to string
+  @override
+  String toString() {
+    return "SicklerUser(displayName: $displayName, email: $email, phoneNumber: $phoneNumber, isAnonymous: $isAnonymous, isEmailVerified: $isEmailVerified, genotype: $genotype, uid: $uid)";
+  }
+
   @override
   List<Object?> get props => [
         displayName,

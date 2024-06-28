@@ -17,7 +17,8 @@ class AuthSuccessScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ThemeData theme = Theme.of(context);
-    final SicklerUser? currentUser = ref.watch(currentUserStreamProvider).value;
+    final SicklerUser? currentUser =
+        ref.watch(authStateChangesStreamProvider).value;
     final String userName = currentUser!.displayName ?? currentUser.email!;
     return Scaffold(
       body: Padding(
