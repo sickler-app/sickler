@@ -20,8 +20,8 @@ class OnboardingTemplateScreen extends StatelessWidget {
           children: [
             Text(
               text,
-              style: theme.textTheme.displayMedium!
-                  .copyWith(fontWeight: FontWeight.w600, height: 1.5),
+              style: theme.textTheme.displaySmall!
+                  .copyWith(fontWeight: FontWeight.w700, height: 1.2),
             )
                 .animate()
                 .moveY(

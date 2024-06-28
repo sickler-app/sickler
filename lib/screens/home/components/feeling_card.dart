@@ -32,7 +32,8 @@ class _FeelingCardState extends State<FeelingCard> {
             children: [
               Text(
                 "How are you\nfeeling today?",
-                style: theme.textTheme.headlineSmall,
+                style: theme.textTheme.headlineSmall!
+                    .copyWith(fontWeight: FontWeight.w800),
               ),
               const Spacer(),
               RichText(
