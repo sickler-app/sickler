@@ -14,7 +14,7 @@ class SicklerAppBar extends StatelessWidget {
       {super.key,
       required this.pageTitle,
       this.actions,
-        this.showBackButton = true,
+      this.showBackButton = true,
       this.showTitle = true});
 
   @override
@@ -59,7 +59,9 @@ class SicklerAppBar extends StatelessWidget {
           visible: showTitle!,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(pageTitle, style: theme.textTheme.displaySmall),
+            child: Text(pageTitle,
+                style: theme.textTheme.headlineMedium!
+                    .copyWith(fontWeight: FontWeight.w800)),
           ),
         ),
         const Gap(48),

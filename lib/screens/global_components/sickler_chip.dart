@@ -41,7 +41,7 @@ class _SicklerChipState extends State<SicklerChip> {
     if (widget.chipType == SicklerChipType.filter) {
       return FilterChip(
           padding: const EdgeInsets.symmetric(
-              horizontal: kPadding16, vertical: kPadding12),
+              horizontal: kPadding12, vertical: kPadding8),
           side: isSelected
               ? null
               : BorderSide(
@@ -74,7 +74,7 @@ class _SicklerChipState extends State<SicklerChip> {
         onDeleted: widget.onDeleted,
         visualDensity: VisualDensity.comfortable,
         padding: const EdgeInsets.symmetric(
-            horizontal: kPadding16, vertical: kPadding12),
+            horizontal: kPadding12, vertical: kPadding8),
         backgroundColor: theme.scaffoldBackgroundColor,
         side: BorderSide(
             width: 1,

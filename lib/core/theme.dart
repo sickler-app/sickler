@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'core.dart';
 
 class SicklerThemeData {
   static ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
     useMaterial3: true,
     primaryColor: SicklerColours.purpleSeed,
     primaryColorLight: SicklerColours.purple50,
@@ -12,6 +12,7 @@ class SicklerThemeData {
     scaffoldBackgroundColor: SicklerColours.white,
     iconTheme: const IconThemeData(color: SicklerColours.black),
     primaryIconTheme: const IconThemeData(color: SicklerColours.black),
+    splashFactory: InkSparkle.splashFactory,
     cardTheme: CardTheme(
       color: SicklerColours.purple95,
       elevation: 0,
@@ -27,24 +28,18 @@ class SicklerThemeData {
           SicklerTextStyles.displayMedium.copyWith(color: SicklerColours.black),
       displaySmall:
           SicklerTextStyles.displaySmall.copyWith(color: SicklerColours.black),
-
-      ///
       headlineLarge:
           SicklerTextStyles.headlineLarge.copyWith(color: SicklerColours.black),
       headlineSmall:
           SicklerTextStyles.headlineSmall.copyWith(color: SicklerColours.black),
       headlineMedium: SicklerTextStyles.headlineMedium
           .copyWith(color: SicklerColours.black),
-
-      ///
       titleLarge:
           SicklerTextStyles.titleLarge.copyWith(color: SicklerColours.black),
       titleMedium:
           SicklerTextStyles.titleMedium.copyWith(color: SicklerColours.black),
       titleSmall:
           SicklerTextStyles.titleSmall.copyWith(color: SicklerColours.black),
-
-      ///
       bodyLarge:
           SicklerTextStyles.bodyLarge.copyWith(color: SicklerColours.black),
       bodyMedium:
@@ -52,12 +47,8 @@ class SicklerThemeData {
       bodySmall:
           SicklerTextStyles.bodySmall.copyWith(color: SicklerColours.black),
     ),
-    appBarTheme: const AppBarTheme(
-        systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.dark,
-            statusBarColor: Colors.white),
-        elevation: 0,
-        backgroundColor: Colors.transparent),
+    appBarTheme:
+        const AppBarTheme(elevation: 0, backgroundColor: Colors.transparent),
     cardColor: SicklerColours.purple95,
     elevatedButtonTheme: const ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -139,12 +130,14 @@ class SicklerThemeData {
   ///--------Dark Theme-------///
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
+    brightness: Brightness.dark,
     primaryColor: SicklerColours.purple70,
     primaryColorLight: SicklerColours.purple90,
     primaryColorDark: SicklerColours.purple70,
     scaffoldBackgroundColor: SicklerColours.black,
     iconTheme: const IconThemeData(color: SicklerColours.white),
     primaryIconTheme: const IconThemeData(color: SicklerColours.white),
+    splashFactory: InkSparkle.splashFactory,
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
@@ -181,24 +174,18 @@ class SicklerThemeData {
           SicklerTextStyles.displayMedium.copyWith(color: SicklerColours.white),
       displaySmall:
           SicklerTextStyles.displaySmall.copyWith(color: SicklerColours.white),
-
-      ///
       headlineLarge:
           SicklerTextStyles.headlineLarge.copyWith(color: SicklerColours.white),
       headlineSmall:
           SicklerTextStyles.headlineSmall.copyWith(color: SicklerColours.white),
       headlineMedium: SicklerTextStyles.headlineMedium
           .copyWith(color: SicklerColours.white),
-
-      ///
       titleLarge:
           SicklerTextStyles.titleLarge.copyWith(color: SicklerColours.white),
       titleMedium:
           SicklerTextStyles.titleMedium.copyWith(color: SicklerColours.white),
       titleSmall:
           SicklerTextStyles.titleSmall.copyWith(color: SicklerColours.white),
-
-      ///
       bodyLarge:
           SicklerTextStyles.bodyLarge.copyWith(color: SicklerColours.white),
       bodyMedium:
@@ -207,8 +194,6 @@ class SicklerThemeData {
           SicklerTextStyles.bodySmall.copyWith(color: SicklerColours.white),
     ),
     appBarTheme: const AppBarTheme(
-      systemOverlayStyle:
-          SystemUiOverlayStyle(statusBarColor: SicklerColours.black),
       elevation: 0,
       backgroundColor: Colors.transparent,
     ),
