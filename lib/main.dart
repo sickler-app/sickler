@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/routes.dart';
@@ -10,14 +11,6 @@ import 'core/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //     statusBarIconBrightness: Brightness.dark, statusBarColor: Colors.white));
-
-  // SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitUp,
-  //   DeviceOrientation.portraitDown,
-  // ]);
-
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -39,23 +32,27 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // if (kDebugMode) {
-    //   print("printing state of currentUserStreamProvider");
-    //   print(ref.watch(authStateChangesStreamProvider).value);
-    // }
-
-    return MaterialApp.router(
-      title: 'Sickler',
-      debugShowCheckedModeBanner: false,
-      theme: SicklerThemeData.lightTheme,
-      darkTheme: SicklerThemeData.darkTheme,
-      themeMode: ThemeMode.system,
-      themeAnimationStyle: AnimationStyle(
-        curve: Curves.easeInOut,
-        duration: const Duration(milliseconds: 300),
+    final ThemeData theme = Theme.of(context);
+    bool isDarkMode = theme.brightness == Brightness.dark;
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: isDarkMode
+          ? SystemUiOverlayStyle.dark
+              .copyWith(statusBarColor: Colors.transparent)
+          : SystemUiOverlayStyle.light
+              .copyWith(statusBarColor: Colors.transparent),
+      child: MaterialApp.router(
+        title: 'Sickler',
+        debugShowCheckedModeBanner: false,
+        theme: SicklerThemeData.lightTheme,
+        darkTheme: SicklerThemeData.darkTheme,
+        themeMode: ThemeMode.system,
+        themeAnimationStyle: AnimationStyle(
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 300),
+        ),
+        routerConfig: router,
+        //  home: const OnboardingBaseScreen(),
       ),
-      routerConfig: router,
-      //  home: OnboardingBaseScreen(),
     );
   }
 }
