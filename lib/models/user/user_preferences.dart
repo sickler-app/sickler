@@ -29,7 +29,6 @@ enum Units {
 }
 
 @Embedded(inheritance: false)
-@Collection(inheritance: false)
 class UserPreferences extends Equatable {
   const UserPreferences(
       {this.uid,
@@ -41,8 +40,6 @@ class UserPreferences extends Equatable {
       this.isFirstTime = true,
       this.isOnboardingComplete = false,
       this.themeMode});
-
-  final Id id = 1; //Make it fixed so so we have 1 ID to auto increment
 
   //Water Preferences
   final double? dailyWaterGoal;
@@ -105,7 +102,6 @@ class UserPreferences extends Equatable {
 
   factory UserPreferences.fromMap({required Map<String, dynamic> data}) {
     return UserPreferences(
-      uid: data["uid"] as String,
       dailyWaterGoal: data["dailyWaterGoal"] as double?,
       waterInputVolume: data["waterInputVolume"] as double?,
       volumeUnit: Units.values.byName(data["volumeUnit"] as String),
@@ -117,7 +113,7 @@ class UserPreferences extends Equatable {
     );
   }
 
-  static UserPreferences empty = const UserPreferences();
+  static const UserPreferences empty = UserPreferences();
 
   @ignore
   bool get isEmpty => this == UserPreferences.empty;
@@ -126,13 +122,14 @@ class UserPreferences extends Equatable {
 
   @override
   String toString() {
+    if (this == UserPreferences.empty) return "UserPreferences.empty";
+
     return "UserPreferences(uid: $uid, dailyWaterGoal: $dailyWaterGoal, waterInputVolume: $waterInputVolume, volumeUnit: $volumeUnit, massUnit: $massUnit, lengthUnit: $lengthUnit, isFirstTime: $isFirstTime, isOnboardingComplete: $isOnboardingComplete,)";
   }
 
   @ignore
   @override
   List<Object?> get props => [
-        id,
         dailyWaterGoal,
         waterInputVolume,
         volumeUnit,

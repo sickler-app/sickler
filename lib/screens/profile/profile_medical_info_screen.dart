@@ -222,37 +222,25 @@ class _ProfileMedicalInfoScreenState
                       onPressed: () async {
                         ///Todo: add the rest of the health data;
 
-                        ref
-                            .watch(userPreferencesProvider.notifier)
-                            .getUserPreferences();
-
-                        //Update User Preferences
-                        final UserPreferences prefs =
-                            ref.watch(userPreferencesProvider).value!.copyWith(
-                                  isOnboardingComplete: true,
-                                );
-                        //Save updated preferences
-                        await ref
-                            .watch(userPreferencesProvider.notifier)
-                            .addUserPreferences(prefs);
-
-                        //Add updated preferences to user data going to firebase
-
                         SicklerUser currentUser =
                             ref.watch(userProvider).value!;
 
-                        UserProfile profile = currentUser.profile.copyWith(
-                            allergies: allergies,
-                            medicalConditions: medicalConditions,
-                            preferences: prefs);
+                        UserPreferences updatedPrefs = currentUser.preferences
+                            .copyWith(isOnboardingComplete: true);
 
+                        UserProfile updatedProfile = currentUser.profile
+                            .copyWith(
+                                allergies: allergies,
+                                medicalConditions: medicalConditions,
+                                bmi: currentUser.profile.calculateBMI());
+
+                        //Update current user
                         currentUser = currentUser.copyWith(
-                          profile:
-                              profile.copyWith(bmi: profile.calculateBMI()),
-                        );
+                            preferences: updatedPrefs, profile: updatedProfile);
 
                         //Send data to firebase
-                        await userProviderNotifier.addUserData(currentUser);
+                        await userProviderNotifier.addUserData(
+                            user: currentUser, updateRemote: true);
 
                         if (ref.watch(userProvider).hasValue &&
                             !ref.watch(userProvider).hasError) {

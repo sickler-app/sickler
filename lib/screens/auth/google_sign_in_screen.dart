@@ -4,13 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/models/models.dart';
 import 'package:sickler/screens/auth/auth_success.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
 import 'package:sickler/screens/global_components/bottom_nav_bar.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
-import '../../models/user/user_preferences.dart';
 import '../../providers/providers.dart';
 
 class GoogleSignInScreen extends ConsumerStatefulWidget {
@@ -23,18 +23,6 @@ class GoogleSignInScreen extends ConsumerStatefulWidget {
 
 class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
   @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final UserPreferences? userPreferences =
-          ref.read(userPreferencesProvider).value;
-
-      ref
-          .read(userPreferencesProvider.notifier)
-          .addUserPreferences(userPreferences!);
-    });
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -54,27 +42,29 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
                     iconPath: "assets/svg/google.svg",
                     onPressed: () async {
                       final UserPreferences userPreferences =
-                          ref.watch(userPreferencesProvider).value!;
+                          ref.watch(userProvider).value!.preferences;
 
-                      await authProviderNotifier.singInWithGoogle().then((_) {
-                        if (context.mounted) {
-                          if (userPreferences.isFirstTime) {
-                            ref
-                                .watch(userPreferencesProvider.notifier)
-                                .addUserPreferences(userPreferences.copyWith(
-                                    isFirstTime: false));
+                      await authProviderNotifier.singInWithGoogle();
 
-                            //mark as not first time
-                            context.goNamed(AuthSuccessScreen.id);
+                      if (context.mounted) {
+                        if (userPreferences.isFirstTime) {
+                          SicklerUser user = ref.watch(userProvider).value!;
+                          UserPreferences prefs = user.preferences;
+                          ref.watch(userProvider.notifier).addUserData(
+                              user: user.copyWith(
+                                  preferences:
+                                      prefs.copyWith(isFirstTime: false)));
+
+                          //mark as not first time
+                          context.goNamed(AuthSuccessScreen.id);
+                        } else {
+                          if (userPreferences.isOnboardingComplete) {
+                            context.goNamed(BottomNavBar.id);
                           } else {
-                            if (userPreferences.isOnboardingComplete) {
-                              context.goNamed(BottomNavBar.id);
-                            } else {
-                              context.goNamed(ProfileBasicInfoScreen.id);
-                            }
+                            context.goNamed(ProfileBasicInfoScreen.id);
                           }
                         }
-                      });
+                      }
 
                       // if (!user.hasError && user.hasValue) {
                       //Check if user is onboarded and either go to info screen or home screen

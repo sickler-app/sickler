@@ -51,11 +51,11 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
     late UserPreferences? preferences;
     late bool isFirstTime;
     late bool isOnboardingComplete;
-    await ref.watch(userPreferencesProvider.notifier).getUserPreferences();
+    await ref.watch(userProvider.notifier).getUserData();
 
     ///Getting user data
-    preferences = ref.watch(userPreferencesProvider).value;
-    isFirstTime = preferences!.isFirstTime;
+    preferences = ref.watch(userProvider).value!.preferences;
+    isFirstTime = preferences.isFirstTime;
     isOnboardingComplete = preferences.isOnboardingComplete;
     final bool isLoggedIn = user.isNotEmpty;
     if (context.mounted) {

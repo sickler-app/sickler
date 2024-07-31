@@ -4,10 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/models/models.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-import '../../models/user/user_preferences.dart';
 import '../../providers/providers.dart';
 import '../global_components/bottom_nav_bar.dart';
 import '../profile/profile_basic_info_screen.dart';
@@ -162,34 +162,44 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       SicklerButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              final UserPreferences? userPreferences =
-                                  ref.watch(userPreferencesProvider).value;
-
+                              //Register
                               await authProviderNotifier
                                   .registerWithEmailAndPassword(
                                 email: emailController.text.trim(),
                                 password: passwordController.text.trim(),
-                              )
-                                  .then((_) {
-                                if (context.mounted) {
-                                  if (userPreferences!.isFirstTime) {
-                                    ref
-                                        .watch(userPreferencesProvider.notifier)
-                                        .addUserPreferences(userPreferences
-                                            .copyWith(isFirstTime: false));
+                              );
 
-                                    //mark as not first time
-                                    context.goNamed(AuthSuccessScreen.id);
+                              //Get the user from authProvider after signing up.
+                              await ref
+                                  .watch(authProvider.notifier)
+                                  .getCurrentUser();
+                              SicklerUser user = ref.watch(authProvider).value!;
+
+                              //Get User Prefs
+                              final UserPreferences prefs =
+                                  ref.watch(userProvider).value!.preferences;
+
+                              if (context.mounted) {
+                                if (prefs.isFirstTime) {
+                                  //Set is first time to false and update db
+                                  user = user.copyWith(
+                                      preferences:
+                                          prefs.copyWith(isFirstTime: false));
+
+                                  ref
+                                      .watch(userProvider.notifier)
+                                      .addUserData(user: user);
+
+                                  //mark as not first time
+                                  context.goNamed(AuthSuccessScreen.id);
+                                } else {
+                                  if (prefs.isOnboardingComplete) {
+                                    context.goNamed(BottomNavBar.id);
                                   } else {
-                                    if (userPreferences.isOnboardingComplete) {
-                                      context.goNamed(BottomNavBar.id);
-                                    } else {
-                                      context
-                                          .goNamed(ProfileBasicInfoScreen.id);
-                                    }
+                                    context.goNamed(ProfileBasicInfoScreen.id);
                                   }
                                 }
-                              });
+                              }
                             }
                           },
                           label: "Sign Up"),

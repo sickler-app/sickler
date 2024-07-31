@@ -18,7 +18,7 @@ class UserNotifier extends AsyncNotifier<SicklerUser> {
     state = AsyncValue.data(user);
   }
 
-  Future<void> getUserData(String uid) async {
+  Future<void> getUserData({String? uid}) async {
     state = const AsyncValue.loading();
     //Get all user data first
     await _userRepository.getUserData(uid).whenComplete(() async {
@@ -32,10 +32,11 @@ class UserNotifier extends AsyncNotifier<SicklerUser> {
     });
   }
 
-  Future<void> addUserData(SicklerUser user) async {
+  Future<void> addUserData(
+      {required SicklerUser user, bool updateRemote = false}) async {
     state = const AsyncValue.loading();
-    final Either<Failure, void> response =
-        await _userRepository.addUserData(user);
+    final Either<Failure, void> response = await _userRepository.addUserData(
+        user: user, updateRemote: updateRemote);
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
@@ -44,10 +45,11 @@ class UserNotifier extends AsyncNotifier<SicklerUser> {
     });
   }
 
-  Future<void> updateUserData(SicklerUser user) async {
+  Future<void> updateUserData(
+      {required SicklerUser user, bool updateRemote = false}) async {
     state = const AsyncValue.loading();
-    final Either<Failure, void> response =
-        await _userRepository.updateUserData(user);
+    final Either<Failure, void> response = await _userRepository.updateUserData(
+        user: user, updateRemote: updateRemote);
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
@@ -56,10 +58,11 @@ class UserNotifier extends AsyncNotifier<SicklerUser> {
     });
   }
 
-  Future<void> deleteUserData(String uid) async {
+  Future<void> deleteUserData(
+      {required SicklerUser user, bool updateRemote = false}) async {
     state = const AsyncValue.loading();
-    final Either<Failure, void> response =
-        await _userRepository.deleteUserData(uid);
+    final Either<Failure, void> response = await _userRepository.deleteUserData(
+        user: user, updateRemote: updateRemote);
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {

@@ -3,17 +3,13 @@
 part of 'user_preferences.dart';
 
 // **************************************************************************
-// IsarCollectionGenerator
+// IsarEmbeddedGenerator
 // **************************************************************************
 
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetUserPreferencesCollection on Isar {
-  IsarCollection<UserPreferences> get userPreferences => this.collection();
-}
-
-const UserPreferencesSchema = CollectionSchema(
+const UserPreferencesSchema = Schema(
   name: r'UserPreferences',
   id: -7545901164102504045,
   properties: {
@@ -71,14 +67,6 @@ const UserPreferencesSchema = CollectionSchema(
   serialize: _userPreferencesSerialize,
   deserialize: _userPreferencesDeserialize,
   deserializeProp: _userPreferencesDeserializeProp,
-  idName: r'id',
-  indexes: {},
-  links: {},
-  embeddedSchemas: {},
-  getId: _userPreferencesGetId,
-  getLinks: _userPreferencesGetLinks,
-  attach: _userPreferencesAttach,
-  version: '3.1.0+1',
 );
 
 int _userPreferencesEstimateSize(
@@ -105,7 +93,12 @@ int _userPreferencesEstimateSize(
       bytesCount += 3 + value.name.length * 3;
     }
   }
-  bytesCount += 3 + object.uid.length * 3;
+  {
+    final value = object.uid;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.volumeUnit;
     if (value != null) {
@@ -148,7 +141,7 @@ UserPreferences _userPreferencesDeserialize(
         reader.readStringOrNull(offsets[4])],
     themeMode: _UserPreferencesthemeModeValueEnumMap[
         reader.readStringOrNull(offsets[5])],
-    uid: reader.readString(offsets[6]),
+    uid: reader.readStringOrNull(offsets[6]),
     volumeUnit: _UserPreferencesvolumeUnitValueEnumMap[
         reader.readStringOrNull(offsets[7])],
     waterInputVolume: reader.readDoubleOrNull(offsets[8]),
@@ -179,7 +172,7 @@ P _userPreferencesDeserializeProp<P>(
       return (_UserPreferencesthemeModeValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
     case 6:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 7:
       return (_UserPreferencesvolumeUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
@@ -309,97 +302,6 @@ const _UserPreferencesvolumeUnitValueEnumMap = {
   r'gallons': Units.gallons,
 };
 
-Id _userPreferencesGetId(UserPreferences object) {
-  return object.id;
-}
-
-List<IsarLinkBase<dynamic>> _userPreferencesGetLinks(UserPreferences object) {
-  return [];
-}
-
-void _userPreferencesAttach(
-    IsarCollection<dynamic> col, Id id, UserPreferences object) {}
-
-extension UserPreferencesQueryWhereSort
-    on QueryBuilder<UserPreferences, UserPreferences, QWhere> {
-  QueryBuilder<UserPreferences, UserPreferences, QAfterWhere> anyId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(const IdWhereClause.any());
-    });
-  }
-}
-
-extension UserPreferencesQueryWhere
-    on QueryBuilder<UserPreferences, UserPreferences, QWhereClause> {
-  QueryBuilder<UserPreferences, UserPreferences, QAfterWhereClause> idEqualTo(
-      Id id) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: id,
-        upper: id,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterWhereClause>
-      idNotEqualTo(Id id) {
-    return QueryBuilder.apply(this, (query) {
-      if (query.whereSort == Sort.asc) {
-        return query
-            .addWhereClause(
-              IdWhereClause.lessThan(upper: id, includeUpper: false),
-            )
-            .addWhereClause(
-              IdWhereClause.greaterThan(lower: id, includeLower: false),
-            );
-      } else {
-        return query
-            .addWhereClause(
-              IdWhereClause.greaterThan(lower: id, includeLower: false),
-            )
-            .addWhereClause(
-              IdWhereClause.lessThan(upper: id, includeUpper: false),
-            );
-      }
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterWhereClause>
-      idGreaterThan(Id id, {bool include = false}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IdWhereClause.greaterThan(lower: id, includeLower: include),
-      );
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterWhereClause> idLessThan(
-      Id id,
-      {bool include = false}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IdWhereClause.lessThan(upper: id, includeUpper: include),
-      );
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterWhereClause> idBetween(
-    Id lowerId,
-    Id upperId, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: lowerId,
-        includeLower: includeLower,
-        upper: upperId,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-}
-
 extension UserPreferencesQueryFilter
     on QueryBuilder<UserPreferences, UserPreferences, QFilterCondition> {
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
@@ -482,62 +384,6 @@ extension UserPreferencesQueryFilter
         upper: upper,
         includeUpper: includeUpper,
         epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      idEqualTo(Id value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      idGreaterThan(
-    Id value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      idLessThan(
-    Id value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'id',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      idBetween(
-    Id lower,
-    Id upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'id',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
       ));
     });
   }
@@ -1025,8 +871,26 @@ extension UserPreferencesQueryFilter
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'uid',
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      uidIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'uid',
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
       uidEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1040,7 +904,7 @@ extension UserPreferencesQueryFilter
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
       uidGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1056,7 +920,7 @@ extension UserPreferencesQueryFilter
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
       uidLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1072,8 +936,8 @@ extension UserPreferencesQueryFilter
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
       uidBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -1401,405 +1265,3 @@ extension UserPreferencesQueryFilter
 
 extension UserPreferencesQueryObject
     on QueryBuilder<UserPreferences, UserPreferences, QFilterCondition> {}
-
-extension UserPreferencesQueryLinks
-    on QueryBuilder<UserPreferences, UserPreferences, QFilterCondition> {}
-
-extension UserPreferencesQuerySortBy
-    on QueryBuilder<UserPreferences, UserPreferences, QSortBy> {
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByDailyWaterGoal() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dailyWaterGoal', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByDailyWaterGoalDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dailyWaterGoal', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByIsFirstTime() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isFirstTime', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByIsFirstTimeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isFirstTime', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByIsOnboardingComplete() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isOnboardingComplete', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByIsOnboardingCompleteDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isOnboardingComplete', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByLengthUnit() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lengthUnit', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByLengthUnitDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lengthUnit', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByMassUnit() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'massUnit', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByMassUnitDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'massUnit', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByThemeMode() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'themeMode', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByThemeModeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'themeMode', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> sortByUid() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'uid', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> sortByUidDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'uid', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByVolumeUnit() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'volumeUnit', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByVolumeUnitDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'volumeUnit', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByWaterInputVolume() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'waterInputVolume', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      sortByWaterInputVolumeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'waterInputVolume', Sort.desc);
-    });
-  }
-}
-
-extension UserPreferencesQuerySortThenBy
-    on QueryBuilder<UserPreferences, UserPreferences, QSortThenBy> {
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByDailyWaterGoal() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dailyWaterGoal', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByDailyWaterGoalDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'dailyWaterGoal', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> thenById() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> thenByIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByIsFirstTime() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isFirstTime', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByIsFirstTimeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isFirstTime', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByIsOnboardingComplete() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isOnboardingComplete', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByIsOnboardingCompleteDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'isOnboardingComplete', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByLengthUnit() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lengthUnit', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByLengthUnitDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lengthUnit', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByMassUnit() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'massUnit', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByMassUnitDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'massUnit', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByThemeMode() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'themeMode', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByThemeModeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'themeMode', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> thenByUid() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'uid', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy> thenByUidDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'uid', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByVolumeUnit() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'volumeUnit', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByVolumeUnitDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'volumeUnit', Sort.desc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByWaterInputVolume() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'waterInputVolume', Sort.asc);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterSortBy>
-      thenByWaterInputVolumeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'waterInputVolume', Sort.desc);
-    });
-  }
-}
-
-extension UserPreferencesQueryWhereDistinct
-    on QueryBuilder<UserPreferences, UserPreferences, QDistinct> {
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct>
-      distinctByDailyWaterGoal() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'dailyWaterGoal');
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct>
-      distinctByIsFirstTime() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isFirstTime');
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct>
-      distinctByIsOnboardingComplete() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'isOnboardingComplete');
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct>
-      distinctByLengthUnit({bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'lengthUnit', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct> distinctByMassUnit(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'massUnit', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct> distinctByThemeMode(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'themeMode', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct> distinctByUid(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'uid', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct>
-      distinctByVolumeUnit({bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'volumeUnit', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QDistinct>
-      distinctByWaterInputVolume() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'waterInputVolume');
-    });
-  }
-}
-
-extension UserPreferencesQueryProperty
-    on QueryBuilder<UserPreferences, UserPreferences, QQueryProperty> {
-  QueryBuilder<UserPreferences, int, QQueryOperations> idProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'id');
-    });
-  }
-
-  QueryBuilder<UserPreferences, double?, QQueryOperations>
-      dailyWaterGoalProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'dailyWaterGoal');
-    });
-  }
-
-  QueryBuilder<UserPreferences, bool, QQueryOperations> isFirstTimeProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'isFirstTime');
-    });
-  }
-
-  QueryBuilder<UserPreferences, bool, QQueryOperations>
-      isOnboardingCompleteProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'isOnboardingComplete');
-    });
-  }
-
-  QueryBuilder<UserPreferences, Units?, QQueryOperations> lengthUnitProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'lengthUnit');
-    });
-  }
-
-  QueryBuilder<UserPreferences, Units?, QQueryOperations> massUnitProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'massUnit');
-    });
-  }
-
-  QueryBuilder<UserPreferences, ThemeMode?, QQueryOperations>
-      themeModeProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'themeMode');
-    });
-  }
-
-  QueryBuilder<UserPreferences, String, QQueryOperations> uidProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'uid');
-    });
-  }
-
-  QueryBuilder<UserPreferences, Units?, QQueryOperations> volumeUnitProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'volumeUnit');
-    });
-  }
-
-  QueryBuilder<UserPreferences, double?, QQueryOperations>
-      waterInputVolumeProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'waterInputVolume');
-    });
-  }
-}

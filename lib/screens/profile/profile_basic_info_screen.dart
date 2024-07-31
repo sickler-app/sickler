@@ -60,10 +60,6 @@ class _ProfileBasicInfoScreenState
 
     final SicklerUser? currentUser = ref.watch(userProvider).value;
 
-    final userPrefsProviderNotifier =
-        ref.watch(userPreferencesProvider.notifier);
-    final userPreferencesState = ref.watch(userPreferencesProvider);
-
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -210,19 +206,6 @@ class _ProfileBasicInfoScreenState
 
                             //Save Data to Set
                             userProviderNotifier.saveDataToState(updatedUser);
-
-                            //Mark User as Onboarded since the other pages are shippable
-                            //and we don't want the user to repeat the whole onboarding
-                            // process because he skipped it the first time,
-                            //they can always do that later
-                            final UserPreferences userPreferences =
-                                userPreferencesState.value!;
-                            if (!widget.isEditing!) {
-                              await userPrefsProviderNotifier
-                                  .addUserPreferences(userPreferences.copyWith(
-                                      uid: currentUser.uid,
-                                      isOnboardingComplete: false));
-                            }
 
                             if (context.mounted) {
                               context.pushNamed(ProfileVitalsInfoScreen.id);
