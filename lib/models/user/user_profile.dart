@@ -1,37 +1,50 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:isar/isar.dart';
 import 'package:sickler/models/user/user_preferences.dart';
 
-class SicklerUserInfo extends Equatable {
+import '../../core/enums.dart';
+import 'user_profile.g.dart';
+
+@Embedded(inheritance: false)
+class UserProfile extends Equatable {
   ///Profile Info
-  final String uid;
-  final String gender;
-  final String fullName;
+  final String? uid;
+  @Enumerated(EnumType.name)
+  final Gender? gender;
+  final String? name;
   final String? displayName;
-  final int age;
+  final int? age;
+  final String? email;
+  final String? photoUrl;
+  final String? phone;
+  @Enumerated(EnumType.name)
+  final Genotype? genotype;
 
   /// Health Info
-  //final DateTime updatedAt;
   final int? painSeverity;
   final String? crisisFrequency;
-  final String? genotype;
   final double? height;
   final double? weight;
   final double? bmi;
-  final String? bloodType;
+  final String? bloodGroup;
   final List<String>? allergies;
   final List<String>? medicalConditions;
 
   ///Preferences
   final UserPreferences? preferences;
 
-  const SicklerUserInfo(
+  const UserProfile(
       {
       ///Profile Info
-      required this.uid,
-      required this.gender,
-      required this.fullName,
+      this.uid,
+      this.gender,
+      this.name,
+      this.age,
       this.displayName,
-      required this.age,
+      this.email,
+      this.photoUrl,
+      this.phone,
 
       ///Health Info
       this.crisisFrequency,
@@ -40,67 +53,74 @@ class SicklerUserInfo extends Equatable {
       this.height,
       this.weight,
       this.bmi,
-      this.bloodType,
+      this.bloodGroup,
       this.allergies,
       this.preferences,
       this.medicalConditions});
 
-  SicklerUserInfo copyWith(
-      {String? uid,
-      String? gender,
-      String? fullName,
-      String? displayName,
-      int? age,
-      String? genotype,
-      double? height,
-      double? weight,
-      double? bmi,
-      String? bloodType,
-      int? painSeverity,
-      String? crisisFrequency,
-      List<String>? allergies,
-      List<String>? medicalConditions,
-      UserPreferences? preferences}) {
-    return SicklerUserInfo(
+  //Write a copy with method
 
-        ///Profile Info
+  UserProfile copyWith({
+    String? uid,
+    Gender? gender,
+    String? name,
+    String? displayName,
+    int? age,
+    String? email,
+    String? photoUrl,
+    String? phone,
+    Genotype? genotype,
+    int? painSeverity,
+    String? crisisFrequency,
+    double? height,
+    double? weight,
+    double? bmi,
+    String? bloodGroup,
+    List<String>? allergies,
+    List<String>? medicalConditions,
+    UserPreferences? preferences,
+  }) {
+    return UserProfile(
         uid: uid ?? this.uid,
         gender: gender ?? this.gender,
-        fullName: fullName ?? this.fullName,
+        name: name ?? this.name,
         displayName: displayName ?? this.displayName,
         age: age ?? this.age,
-
-        ///Health Info
+        email: email ?? this.email,
+        phone: phone ?? this.phone,
+        photoUrl: photoUrl ?? this.photoUrl,
         painSeverity: painSeverity ?? this.painSeverity,
         crisisFrequency: crisisFrequency ?? this.crisisFrequency,
         genotype: genotype ?? this.genotype,
         height: height ?? this.height,
         weight: weight ?? this.weight,
         bmi: bmi ?? this.bmi,
-        bloodType: bloodType ?? this.bloodType,
+        bloodGroup: bloodGroup ?? this.bloodGroup,
         allergies: allergies ?? this.allergies,
         medicalConditions: medicalConditions ?? this.medicalConditions,
         preferences: preferences ?? this.preferences);
   }
 
   ///-----To and From Map-------///
-
   Map<String, dynamic> toMap() {
     Map<String, dynamic> profileData = {
       "uid": uid,
       "gender": gender,
-      "fullName": fullName,
+      "name": name,
       "displayName": displayName,
       "age": age,
+      "photoUrl": photoUrl,
+      "phone": phone,
+      "email": email,
     };
     Map<String, dynamic> healthData = {
       "painSeverity": painSeverity,
       "crisisFrequency": crisisFrequency,
-      "genotype": genotype,
+      "genotype": genotype?.name,
       "height": height,
       "weight": weight,
       "bmi": bmi,
-      "bloodType": bloodType,
+      "bloodGroup": bloodGroup,
       "allergies": allergies,
       "medicalConditions": medicalConditions,
     };
@@ -113,24 +133,33 @@ class SicklerUserInfo extends Equatable {
     return userData;
   }
 
-  factory SicklerUserInfo.fromMap(Map<String, dynamic> data) {
-    return SicklerUserInfo(
+  factory UserProfile.fromMap(Map<String, dynamic> data) {
+    return UserProfile(
       uid: data["profile"]["uid"] as String,
-      gender: data["profile"]["gender"] as String,
-      fullName: data["profile"]["fullName"] as String,
+      gender: Gender.values.byName(data["gender"] as String),
+      name: data["profile"]["name"] as String,
       displayName: data["profile"]["displayName"] as String?,
       age: data["profile"]["age"] as int,
       painSeverity: data["health"]["painSeverity"] as int?,
       crisisFrequency: data["health"]["crisisFrequency"] as String?,
-      genotype: data["health"]["genotype"] as String?,
+      genotype: Genotype.values.byName(data["health"]["genotype"] as String),
       height: data["health"]["height"] as double?,
       weight: data["health"]["weight"] as double?,
       bmi: data["health"]["bmi"] as double?,
-      bloodType: data["health"]["bloodType"] as String?,
+      bloodGroup: data["health"]["bloodGroup"] as String?,
       allergies: data["health"]["allergies"] as List<String>,
       medicalConditions: data["health"]["medicalConditions"] as List<String>,
       preferences: UserPreferences.fromMap(
           data: data["preferences"] as Map<String, dynamic>),
+    );
+  }
+
+  factory UserProfile.fromFirebaseUser(User user) {
+    return UserProfile(
+      uid: user.uid,
+      photoUrl: user.photoURL,
+      phone: user.phoneNumber,
+      email: user.email,
     );
   }
 
@@ -144,33 +173,24 @@ class SicklerUserInfo extends Equatable {
   }
 
   ///-------------Empty----------///
-
-  static SicklerUserInfo empty = SicklerUserInfo(
-      uid: "",
-      genotype: "",
-      height: 0,
-      weight: 0,
-      bmi: 0,
-      bloodType: "",
-      allergies: const [],
-      medicalConditions: const [],
-      gender: "",
-      fullName: "",
-      age: 0,
-      displayName: "",
-      preferences: UserPreferences.empty);
-
-  bool get isEmpty => this == SicklerUserInfo.empty;
-  bool get isNotEmpty => this != SicklerUserInfo.empty;
+  @ignore
+  static const UserProfile empty = UserProfile();
+  @ignore
+  bool get isEmpty => this == UserProfile.empty || this == const UserProfile();
+  @ignore
+  bool get isNotEmpty => this != UserProfile.empty;
 
   ///Todo:Redo ToString Override
 
   @override
   String toString() {
+    if (this == UserProfile.empty) {
+      return "UserProfile.empty";
+    }
     return """SicklerUserInfo(
       uid: $uid,
       gender: $gender,
-      fullName: $fullName,
+      fullName: $name,
       displayName: $displayName,
       age: $age,
       painSeverity: $painSeverity,
@@ -179,17 +199,18 @@ class SicklerUserInfo extends Equatable {
       height: $height,
       weight: $weight,
       bmi: $bmi,
-      bloodType: $bloodType,
+      bloodType: $bloodGroup,
       allergies: $allergies,
       medicalConditions: $medicalConditions,
       preferences: $preferences
     );""";
   }
 
+  @ignore
   @override
   List<Object?> get props => [
         uid,
-        fullName,
+        name,
         displayName,
         age,
         gender,
@@ -197,7 +218,7 @@ class SicklerUserInfo extends Equatable {
         height,
         weight,
         bmi,
-        bloodType,
+        bloodGroup,
         allergies,
         medicalConditions,
         preferences,

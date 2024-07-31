@@ -5,7 +5,6 @@ class UserPreferencesService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   ///---Get User Preferences
-  ///
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserPreferences(
       String uid) async {

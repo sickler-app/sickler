@@ -46,24 +46,10 @@ class UserPreferencesNotifier extends AsyncNotifier<UserPreferences> {
     });
   }
 
-  Future<void> addUserPreferencesToLocal(
-      UserPreferences userPreferences) async {
+  Future<void> addUserPreferences(UserPreferences userPreferences) async {
     state = const AsyncValue.loading();
-    Either<Failure, void> response = await _userPreferencesRepository
-        .addUserPreferencesToLocal(userPreferences);
-    response.fold((failure) {
-      state = AsyncValue.error(failure, StackTrace.current);
-    }, (empty) async {
-      ///Call get User Preferences again to handle getting the updated preferences; It was also handle updating the state
-      await getUserPreferences(uid: userPreferences.uid);
-    });
-  }
-
-  Future<void> addUserPreferencesToRemote(
-      UserPreferences userPreferences) async {
-    state = const AsyncValue.loading();
-    Either<Failure, void> response = await _userPreferencesRepository
-        .addUserPreferencesToRemote(userPreferences);
+    Either<Failure, void> response =
+        await _userPreferencesRepository.addUserPreferences(userPreferences);
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) async {

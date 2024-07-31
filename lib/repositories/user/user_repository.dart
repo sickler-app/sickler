@@ -9,7 +9,7 @@ class UserRepository {
 
   UserRepository({required this.userService});
 
-  FutureEither<SicklerUserInfo> getUserData(String uid) async {
+  FutureEither<SicklerUser> getUserData(String uid) async {
     return callFutureMethod(() async {
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await userService.getUserData(uid);
@@ -17,7 +17,7 @@ class UserRepository {
       if (documentSnapshot.exists) {
         Map<String, dynamic>? userDataMap = documentSnapshot.data();
 
-        SicklerUserInfo userInfo = SicklerUserInfo.fromMap(userDataMap!);
+        SicklerUser userInfo = SicklerUser.fromMap(data: userDataMap!);
         return userInfo;
       } else {
         //Rather than return and empty class and having to constantly check if
@@ -29,13 +29,13 @@ class UserRepository {
   }
 
   ///------User Health Data---------///
-  FutureEither<void> addUserData(SicklerUserInfo userInfo) async {
+  FutureEither<void> addUserData(SicklerUser userInfo) async {
     return callFutureMethod(() async {
       await userService.addUserData(userInfo);
     });
   }
 
-  FutureEither<void> updateUserData(SicklerUserInfo userInfo) async {
+  FutureEither<void> updateUserData(SicklerUser userInfo) async {
     return callFutureMethod(() async {
       await userService.updateUserData(userInfo);
     });

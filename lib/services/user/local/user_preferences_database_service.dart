@@ -2,7 +2,7 @@ import 'package:isar/isar.dart';
 import 'package:sickler/models/user/user_preferences.dart';
 import 'package:sickler/services/user/local/databse_service.dart';
 
-class UserPreferencesLocalDBService extends LocalDatabaseService {
+class UserPreferencesLocalDBService extends LocalDbService {
   late Future<Isar> db;
 
   UserPreferencesLocalDBService() {

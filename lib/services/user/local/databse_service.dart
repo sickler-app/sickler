@@ -3,7 +3,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../../models/user/user_preferences.dart';
 
-class LocalDatabaseService {
+class LocalDbService {
   ///Pass all collection Schemas here
   Future<Isar> initializeDB() async {
     final directory = await getApplicationDocumentsDirectory();

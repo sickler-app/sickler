@@ -46,21 +46,16 @@ class UserPreferencesRepository {
     });
   }
 
-  FutureEither<void> addUserPreferencesToLocal(
-      UserPreferences userPreferences) async {
+  FutureEither<void> addUserPreferences(UserPreferences userPreferences) async {
     return callFutureMethod(() async {
       //Add to Local
       await _userPreferencesLocalDatabaseService
           .addUserPreferences(userPreferences);
-    });
-  }
 
-  FutureEither<void> addUserPreferencesToRemote(
-      UserPreferences userPreferences) async {
-    return callFutureMethod(() async {
-      //Add to remote
-      await _userPreferencesService.addUserPreferences(
-          preferences: userPreferences, uid: userPreferences.uid);
+      if (userPreferences.uid != null && userPreferences.uid!.isNotEmpty) {
+        await _userPreferencesService.addUserPreferences(
+            preferences: userPreferences, uid: userPreferences.uid!);
+      }
     });
   }
 
@@ -70,9 +65,11 @@ class UserPreferencesRepository {
       //Add to Local
       await _userPreferencesLocalDatabaseService
           .addUserPreferences(userPreferences);
-      //Add to Remote
-      await _userPreferencesService.addUserPreferences(
-          preferences: userPreferences, uid: userPreferences.uid);
+
+      if (userPreferences.uid != null && userPreferences.uid!.isNotEmpty) {
+        await _userPreferencesService.updateUserPreferences(
+            preferences: userPreferences, uid: userPreferences.uid!);
+      }
     });
   }
 
@@ -84,8 +81,10 @@ class UserPreferencesRepository {
           .deleteUserPreferences(userPreferences);
 
       //Delete from Remote
-      await _userPreferencesService.updateUserPreferences(
-          preferences: userPreferences, uid: userPreferences.uid);
+      if (userPreferences.uid != null && userPreferences.uid!.isNotEmpty) {
+        await _userPreferencesService.updateUserPreferences(
+            preferences: UserPreferences.empty, uid: userPreferences.uid!);
+      }
     });
   }
 }

@@ -26,9 +26,8 @@ final authStateChangesStreamProvider =
 final UserService userService = UserService();
 final UserRepository userRepository = UserRepository(userService: userService);
 
-final userInfoProvider =
-    AsyncNotifierProvider<UserInfoNotifier, SicklerUserInfo>(
-        () => UserInfoNotifier(userRepository: userRepository));
+final userProvider = AsyncNotifierProvider<UserNotifier, SicklerUser>(
+    () => UserNotifier(userRepository: userRepository));
 
 /// ----- User Preferences Providers ----///
 

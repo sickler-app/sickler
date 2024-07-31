@@ -28,10 +28,11 @@ enum Units {
   gallons;
 }
 
+@Embedded(inheritance: false)
 @Collection(inheritance: false)
 class UserPreferences extends Equatable {
   const UserPreferences(
-      {required this.uid,
+      {this.uid,
       this.dailyWaterGoal,
       this.waterInputVolume,
       this.volumeUnit,
@@ -46,7 +47,7 @@ class UserPreferences extends Equatable {
   //Water Preferences
   final double? dailyWaterGoal;
   final double? waterInputVolume;
-  final String uid;
+  final String? uid;
 
   @Enumerated(EnumType.name)
   final Units? volumeUnit;
@@ -72,7 +73,6 @@ class UserPreferences extends Equatable {
     final Units? massUnit,
     final bool? isFirstTime,
     final bool? isOnboardingComplete,
-    //  final bool? isOnboarding,
     final ThemeMode? themeMode,
   }) {
     return UserPreferences(
@@ -83,7 +83,6 @@ class UserPreferences extends Equatable {
       massUnit: massUnit ?? this.massUnit,
       lengthUnit: lengthUnit ?? this.lengthUnit,
       isFirstTime: isFirstTime ?? this.isFirstTime,
-      // isOnboarding: isOnboarding ?? this.isOnboarding,
       isOnboardingComplete: isOnboardingComplete ?? this.isOnboardingComplete,
     );
   }
@@ -109,26 +108,16 @@ class UserPreferences extends Equatable {
       uid: data["uid"] as String,
       dailyWaterGoal: data["dailyWaterGoal"] as double?,
       waterInputVolume: data["waterInputVolume"] as double?,
-      volumeUnit: (data["volumeUnit"] as String).convertToUnit(),
-      massUnit: (data["massUnit"] as String).convertToUnit(),
-      lengthUnit: (data["lengthUnit"] as String).convertToUnit(),
+      volumeUnit: Units.values.byName(data["volumeUnit"] as String),
+      massUnit: Units.values.byName(data["massUnit"] as String),
+      lengthUnit: Units.values.byName(data["lengthUnit"] as String),
       isFirstTime: data["isFirstTime"] as bool,
       isOnboardingComplete: data["isOnboardingComplete"] as bool,
-      themeMode: (data["themeMode"] as String).convertToThemeMode(),
+      themeMode: ThemeMode.values.byName(data["themeMode"] as String),
     );
   }
 
-  static UserPreferences empty = const UserPreferences(
-    uid: "",
-    dailyWaterGoal: null,
-    waterInputVolume: null,
-    volumeUnit: null,
-    lengthUnit: null,
-    massUnit: null,
-    isFirstTime: true,
-    isOnboardingComplete: false,
-    themeMode: null,
-  );
+  static UserPreferences empty = const UserPreferences();
 
   @ignore
   bool get isEmpty => this == UserPreferences.empty;

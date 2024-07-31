@@ -5,24 +5,24 @@ import 'package:sickler/repositories/user/user_repository.dart';
 import '../../core/failure.dart';
 import '../../models/models.dart';
 
-class UserInfoNotifier extends AsyncNotifier<SicklerUserInfo> {
+class UserNotifier extends AsyncNotifier<SicklerUser> {
   final UserRepository _userRepository;
-  UserInfoNotifier({required UserRepository userRepository})
+  UserNotifier({required UserRepository userRepository})
       : _userRepository = userRepository;
   @override
-  Future<SicklerUserInfo> build() async {
-    return SicklerUserInfo.empty;
+  Future<SicklerUser> build() async {
+    return SicklerUser.empty;
   }
 
-  void saveDataToState(SicklerUserInfo userInfo) {
-    state = AsyncValue.data(userInfo);
+  void saveDataToState(SicklerUser user) {
+    state = AsyncValue.data(user);
   }
 
   Future<void> getUserData(String uid) async {
     state = const AsyncValue.loading();
     //Get all user data first
     await _userRepository.getUserData(uid).whenComplete(() async {
-      final Either<Failure, SicklerUserInfo> response =
+      final Either<Failure, SicklerUser> response =
           await _userRepository.getUserData(uid);
       response.fold((failure) {
         state = AsyncValue.error(failure, StackTrace.current);
@@ -32,27 +32,27 @@ class UserInfoNotifier extends AsyncNotifier<SicklerUserInfo> {
     });
   }
 
-  Future<void> addUserData(SicklerUserInfo userInfo) async {
+  Future<void> addUserData(SicklerUser user) async {
     state = const AsyncValue.loading();
     final Either<Failure, void> response =
-        await _userRepository.addUserData(userInfo);
+        await _userRepository.addUserData(user);
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
       //Set the state to be equal to the data that was just added
-      state = AsyncValue.data(userInfo);
+      state = AsyncValue.data(user);
     });
   }
 
-  Future<void> updateUserData(SicklerUserInfo userInfo) async {
+  Future<void> updateUserData(SicklerUser user) async {
     state = const AsyncValue.loading();
     final Either<Failure, void> response =
-        await _userRepository.updateUserData(userInfo);
+        await _userRepository.updateUserData(user);
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
       //Set the state to be equal to the data that was just added
-      state = AsyncValue.data(userInfo);
+      state = AsyncValue.data(user);
     });
   }
 
@@ -63,7 +63,7 @@ class UserInfoNotifier extends AsyncNotifier<SicklerUserInfo> {
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
-      state = AsyncValue.data(SicklerUserInfo.empty);
+      state = AsyncValue.data(SicklerUser.empty);
     });
   }
 }

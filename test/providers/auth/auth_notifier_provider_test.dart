@@ -32,26 +32,26 @@ ProviderContainer createContainer({
 
 void main() {
   late AuthRepository mockAuthRepository;
-  late SicklerUser sicklerUser;
+  late SUser sicklerUser;
   late ProviderContainer providerContainer;
-  late AsyncNotifierProvider<AuthNotifier, SicklerUser?> authProvider;
+  late AsyncNotifierProvider<AuthNotifier, SUser?> authProvider;
 
   setUpAll(() {
     mockAuthRepository = MockAuthRepository();
 
-    authProvider = AsyncNotifierProvider<AuthNotifier, SicklerUser?>(
+    authProvider = AsyncNotifierProvider<AuthNotifier, SUser?>(
         () => AuthNotifier(authRepository: mockAuthRepository));
 
-    sicklerUser = const SicklerUser(
-      displayName: "test name",
+    sicklerUser = const SUser(
+      photoUrl: "photo",
       email: "test@email.com",
       uid: "uid",
-      phoneNumber: "000000",
       isAnonymous: false,
       isEmailVerified: false,
+      isPhoneVerified: false,
     );
 
-    registerFallbackValue(AsyncValue<SicklerUser?>.data(sicklerUser));
+    registerFallbackValue(AsyncValue<SUser?>.data(sicklerUser));
   });
 
   setUp(() {
@@ -72,40 +72,40 @@ void main() {
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
 
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
       providerContainer.listen(authProvider, listener.call);
 
       ///Expect the initial state should be loading
       expect(authNotifierProvider.state,
-          equals(const AsyncValue<SicklerUser?>.loading()));
+          equals(const AsyncValue<SUser?>.loading()));
 
       ///Call sign in method
       await authNotifierProvider.signInWithEmailAndPassword(
           email: "test@email.com", password: "12345678");
 
       ///Verify that the listener stream i.e(state) was updated with an instance of sicklerUser
-      verify(() => listener.call(any(), AsyncData<SicklerUser?>(sicklerUser)))
+      verify(() => listener.call(any(), AsyncData<SUser?>(sicklerUser)))
           .called(1);
-      expect(authNotifierProvider.state,
-          equals(AsyncData<SicklerUser?>(sicklerUser)));
+      expect(
+          authNotifierProvider.state, equals(AsyncData<SUser?>(sicklerUser)));
     });
     test(
         "Should set 'state' to 'AsyncError(error)' object on 'signInWithEmailAndPassword' with FirebaseException",
         () async {
-      when(() => mockAuthRepository.signInWithEmailAndPassword(
-              email: "test@email.com", password: "12345678"))
-          .thenAnswer((_) async =>
-              const Left(Failure.firebase(errorMessage: "firebase error")));
+      when(() =>
+          mockAuthRepository.signInWithEmailAndPassword(
+              email: "test@email.com", password: "12345678")).thenAnswer(
+          (_) async => const Left(Failure.firebase(message: "firebase error")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
 
       providerContainer.listen(authProvider, listener.call);
 
       ///Expect the initial state should be loading
       expect(authNotifierProvider.state,
-          equals(const AsyncValue<SicklerUser?>.loading()));
+          equals(const AsyncValue<SUser?>.loading()));
 
       ///Call sign in method
       await authNotifierProvider.signInWithEmailAndPassword(
@@ -118,9 +118,8 @@ void main() {
       final errorState = authNotifierProvider.state as AsyncError;
 
       expect(errorState.error, isA<Failure>());
-      expect(
-          (errorState.error as Failure).errorMessage, equals("firebase error"));
-      expect(errorState.value, equals(SicklerUser.empty));
+      expect((errorState.error as Failure).message, equals("firebase error"));
+      expect(errorState.value, equals(SUser.empty));
     });
   });
 
@@ -135,40 +134,40 @@ void main() {
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
 
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
       providerContainer.listen(authProvider, listener.call);
 
       ///Expect the initial state should be loading
       expect(authNotifierProvider.state,
-          equals(const AsyncValue<SicklerUser?>.loading()));
+          equals(const AsyncValue<SUser?>.loading()));
 
       ///Call register method
       await authNotifierProvider.registerWithEmailAndPassword(
           email: "test@email.com", password: "12345678");
 
       ///Verify that the listener stream i.e(state) was updated with an instance of sicklerUser
-      verify(() => listener.call(any(), AsyncData<SicklerUser?>(sicklerUser)))
+      verify(() => listener.call(any(), AsyncData<SUser?>(sicklerUser)))
           .called(1);
-      expect(authNotifierProvider.state,
-          equals(AsyncData<SicklerUser?>(sicklerUser)));
+      expect(
+          authNotifierProvider.state, equals(AsyncData<SUser?>(sicklerUser)));
     });
     test(
         "Should set 'state' to 'AsyncError(error)' object on 'signInWithEmailAndPassword' with FirebaseException",
         () async {
-      when(() => mockAuthRepository.registerWithEmailAndPassword(
-              email: "test@email.com", password: "12345678"))
-          .thenAnswer((_) async =>
-              const Left(Failure.firebase(errorMessage: "firebase error")));
+      when(() =>
+          mockAuthRepository.registerWithEmailAndPassword(
+              email: "test@email.com", password: "12345678")).thenAnswer(
+          (_) async => const Left(Failure.firebase(message: "firebase error")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
 
       providerContainer.listen(authProvider, listener.call);
 
       ///Expect the initial state should be loading
       expect(authNotifierProvider.state,
-          equals(const AsyncValue<SicklerUser?>.loading()));
+          equals(const AsyncValue<SUser?>.loading()));
 
       ///Call register method
       await authNotifierProvider.registerWithEmailAndPassword(
@@ -181,9 +180,8 @@ void main() {
       final errorState = authNotifierProvider.state as AsyncError;
 
       expect(errorState.error, isA<Failure>());
-      expect(
-          (errorState.error as Failure).errorMessage, equals("firebase error"));
-      expect(errorState.value, equals(SicklerUser.empty));
+      expect((errorState.error as Failure).message, equals("firebase error"));
+      expect(errorState.value, equals(SUser.empty));
     });
   });
 
@@ -199,39 +197,38 @@ void main() {
           providerContainer.read(authProvider.notifier);
 
       ///Initialise a listener to check is states are updated properly
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
       providerContainer.listen(authProvider, listener.call);
 
       ///Expect initial state should be loading
       expect(authNotifierProvider.state,
-          equals(const AsyncValue<SicklerUser?>.loading()));
+          equals(const AsyncValue<SUser?>.loading()));
 
       ///Call sign in with google method
       await authNotifierProvider.singInWithGoogle();
 
       ///Verify the listener was called
-      verify(() => listener.call(any(), AsyncData<SicklerUser?>(sicklerUser)))
+      verify(() => listener.call(any(), AsyncData<SUser?>(sicklerUser)))
           .called(1);
 
       ///Expect new states to be AsyncData(sicklerUser)
-      expect(authNotifierProvider.state,
-          equals(AsyncData<SicklerUser?>(sicklerUser)));
+      expect(
+          authNotifierProvider.state, equals(AsyncData<SUser?>(sicklerUser)));
     });
 
     test(
         "Should set state to AsyncError(failure) on signInWithGoogle with Exception/FirebaseException",
         () async {
       when(() => mockAuthRepository.signInWithGoogle()).thenAnswer(
-          (_) async => const Left(Failure(errorMessage: "error occurred")));
+          (_) async => const Left(Failure(message: "error occurred")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
       providerContainer.listen(authProvider, listener.call);
 
       ///Initial Value should be loading
-      expect(authNotifierProvider.state,
-          equals(const AsyncLoading<SicklerUser?>()));
+      expect(authNotifierProvider.state, equals(const AsyncLoading<SUser?>()));
 
       await authNotifierProvider.singInWithGoogle();
 
@@ -241,9 +238,8 @@ void main() {
       final errorState = authNotifierProvider.state as AsyncError;
 
       expect(errorState.error, isA<Failure>());
-      expect(
-          (errorState.error as Failure).errorMessage, equals("error occurred"));
-      expect(errorState.value, equals(SicklerUser.empty));
+      expect((errorState.error as Failure).message, equals("error occurred"));
+      expect(errorState.value, equals(SUser.empty));
     });
   });
 
@@ -257,16 +253,15 @@ void main() {
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
 
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
       providerContainer.listen(authProvider, listener.call);
 
       expect(authNotifierProvider.state,
-          equals(const AsyncValue<SicklerUser?>.loading()));
+          equals(const AsyncValue<SUser?>.loading()));
 
       await authNotifierProvider.signOut();
 
-      verify(() =>
-              listener.call(any(), AsyncData<SicklerUser?>(SicklerUser.empty)))
+      verify(() => listener.call(any(), AsyncData<SUser?>(SUser.empty)))
           .called(2);
 
       ///We verifiy the listener was called twice because the first time it was
@@ -275,24 +270,23 @@ void main() {
       ///again when the sign out process is complete and the state is
       ///set to AsyncData(SicklerUser.empty);
 
-      expect(authNotifierProvider.state,
-          equals(AsyncData<SicklerUser?>(SicklerUser.empty)));
+      expect(
+          authNotifierProvider.state, equals(AsyncData<SUser?>(SUser.empty)));
     });
 
     test(
         "Should set state to AsyncError(failure) on signOut failure with Exception/FirebaseException",
         () async {
       when(() => mockAuthRepository.signOut()).thenAnswer(
-          (_) async => const Left(Failure(errorMessage: "failed to sign out")));
+          (_) async => const Left(Failure(message: "failed to sign out")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
       providerContainer.listen(authProvider, listener.call);
 
       ///Initial Value should be loading
-      expect(authNotifierProvider.state,
-          equals(const AsyncLoading<SicklerUser?>()));
+      expect(authNotifierProvider.state, equals(const AsyncLoading<SUser?>()));
 
       await authNotifierProvider.signOut();
 
@@ -303,9 +297,9 @@ void main() {
 
       ///If sign out fails, the state should remain the state of the current user
       expect(errorState.error, isA<Failure>());
-      expect((errorState.error as Failure).errorMessage,
-          equals("failed to sign out"));
-      expect(errorState.value, equals(SicklerUser.empty));
+      expect(
+          (errorState.error as Failure).message, equals("failed to sign out"));
+      expect(errorState.value, equals(SUser.empty));
     });
   });
 
@@ -319,17 +313,16 @@ void main() {
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
 
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
       providerContainer.listen(authProvider, listener.call);
 
       expect(authNotifierProvider.state,
-          equals(const AsyncValue<SicklerUser?>.loading()));
+          equals(const AsyncValue<SUser?>.loading()));
 
       await authNotifierProvider.sendPasswordResetEmail(
           email: "test@email.com");
 
-      verify(() =>
-              listener.call(any(), AsyncData<SicklerUser?>(SicklerUser.empty)))
+      verify(() => listener.call(any(), AsyncData<SUser?>(SUser.empty)))
           .called(2);
 
       ///We verify the listener was called twice because the first time it was
@@ -338,26 +331,25 @@ void main() {
       ///again when the sign out process is complete and the state is
       ///set to AsyncData(SicklerUser.empty);
 
-      expect(authNotifierProvider.state,
-          equals(AsyncData<SicklerUser?>(SicklerUser.empty)));
+      expect(
+          authNotifierProvider.state, equals(AsyncData<SUser?>(SUser.empty)));
     });
 
     test(
         "Should set state to AsyncError(failure) on sendPasswordResetEmail failure with Exception/FirebaseException",
         () async {
-      when(() => mockAuthRepository.sendPasswordResetEmail(
-              email: "test@email.com"))
-          .thenAnswer((_) async => const Left(
-              Failure(errorMessage: "failed to send password reset email")));
+      when(() =>
+          mockAuthRepository.sendPasswordResetEmail(
+              email: "test@email.com")).thenAnswer((_) async =>
+          const Left(Failure(message: "failed to send password reset email")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
       providerContainer.listen(authProvider, listener.call);
 
       ///Initial Value should be loading
-      expect(authNotifierProvider.state,
-          equals(const AsyncLoading<SicklerUser?>()));
+      expect(authNotifierProvider.state, equals(const AsyncLoading<SUser?>()));
 
       await authNotifierProvider.sendPasswordResetEmail(
           email: "test@email.com");
@@ -369,9 +361,9 @@ void main() {
 
       ///If sign out fails, the state should remain the state of the current user
       expect(errorState.error, isA<Failure>());
-      expect((errorState.error as Failure).errorMessage,
+      expect((errorState.error as Failure).message,
           equals("failed to send password reset email"));
-      expect(errorState.value, equals(SicklerUser.empty));
+      expect(errorState.value, equals(SUser.empty));
     });
   });
 
@@ -386,17 +378,16 @@ void main() {
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
 
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
       providerContainer.listen(authProvider, listener.call);
 
       expect(authNotifierProvider.state,
-          equals(const AsyncValue<SicklerUser?>.loading()));
+          equals(const AsyncValue<SUser?>.loading()));
 
       await authNotifierProvider.confirmPasswordReset(
           code: "123456", newPassword: "12345678");
 
-      verify(() =>
-              listener.call(any(), AsyncData<SicklerUser?>(SicklerUser.empty)))
+      verify(() => listener.call(any(), AsyncData<SUser?>(SUser.empty)))
           .called(2);
 
       ///We verify the listener was called twice because the first time it was
@@ -405,8 +396,8 @@ void main() {
       ///again when the sign out process is complete and the state is
       ///set to AsyncData(SicklerUser.empty);
 
-      expect(authNotifierProvider.state,
-          equals(AsyncData<SicklerUser?>(SicklerUser.empty)));
+      expect(
+          authNotifierProvider.state, equals(AsyncData<SUser?>(SUser.empty)));
     });
 
     test(
@@ -415,16 +406,15 @@ void main() {
       when(() => mockAuthRepository.confirmPasswordReset(
               code: "123456", newPassword: "12345678"))
           .thenAnswer((_) async =>
-              const Left(Failure(errorMessage: "failed to set new password")));
+              const Left(Failure(message: "failed to set new password")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
-      final listener = Listener<AsyncValue<SicklerUser?>>();
+      final listener = Listener<AsyncValue<SUser?>>();
       providerContainer.listen(authProvider, listener.call);
 
       ///Initial Value should be loading
-      expect(authNotifierProvider.state,
-          equals(const AsyncLoading<SicklerUser?>()));
+      expect(authNotifierProvider.state, equals(const AsyncLoading<SUser?>()));
 
       await authNotifierProvider.confirmPasswordReset(
           code: "123456", newPassword: "12345678");
@@ -436,9 +426,9 @@ void main() {
 
       ///If sign out fails, the state should remain the state of the current user
       expect(errorState.error, isA<Failure>());
-      expect((errorState.error as Failure).errorMessage,
+      expect((errorState.error as Failure).message,
           equals("failed to set new password"));
-      expect(errorState.value, equals(SicklerUser.empty));
+      expect(errorState.value, equals(SUser.empty));
     });
   });
 }

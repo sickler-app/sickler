@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../screens/global_components/snackbar.dart';
-import '../screens/shared/components_global/components.dart';
 import 'core.dart';
 
 class SnackBarNotifier extends ConsumerWidget {
