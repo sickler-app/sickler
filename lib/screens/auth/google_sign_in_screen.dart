@@ -30,7 +30,7 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
 
       ref
           .read(userPreferencesProvider.notifier)
-          .addUserPreferencesToLocal(userPreferences!);
+          .addUserPreferences(userPreferences!);
     });
     super.initState();
   }
@@ -61,8 +61,8 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
                           if (userPreferences.isFirstTime) {
                             ref
                                 .watch(userPreferencesProvider.notifier)
-                                .addUserPreferencesToLocal(userPreferences
-                                    .copyWith(isFirstTime: false));
+                                .addUserPreferences(userPreferences.copyWith(
+                                    isFirstTime: false));
 
                             //mark as not first time
                             context.goNamed(AuthSuccessScreen.id);

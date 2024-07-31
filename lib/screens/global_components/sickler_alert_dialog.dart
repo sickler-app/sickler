@@ -34,16 +34,11 @@ class SicklerAlertDialog extends StatelessWidget {
           : child,
     )
         .animate()
-        .slideY(
-          curve: Curves.easeOut,
-          duration: 200.ms,
-          begin: .1,
-          end: 0,
-        )
+        .moveY(
+            duration: 800.ms, begin: 120, end: 0, curve: Curves.easeInOutQuart)
         .fadeIn(
-          //delay: 300.ms,
-          curve: Curves.easeOut,
-          duration: 150.ms,
+          delay: 300.ms,
+          duration: 500.ms,
         );
   }
 }

@@ -15,7 +15,7 @@ FutureEither<T> callFutureMethod<T>(Future<T> Function() function) async {
     debugPrint("A Firebase exception has occurred");
     debugPrint(e.message);
     debugPrint(e.toString());
-    return Left(Failure.firebase(errorMessage: e.message));
+    return Left(Failure.firebase(message: e.message));
   } catch (e) {
     ///An exception has occurred;
     debugPrint("An exception exception has occurred");
@@ -23,7 +23,7 @@ FutureEither<T> callFutureMethod<T>(Future<T> Function() function) async {
     debugPrintStack(label: "Exception error stacktrace:");
     String errorMessage = e.toString().split(": ").last;
 
-    return Left(Failure.generic(errorMessage: errorMessage));
+    return Left(Failure.generic(message: errorMessage));
   }
 }
 
@@ -35,12 +35,12 @@ Either<Failure, T> callMethod<T>(T Function() function) {
     ///A Firebase Exception has occurred
     debugPrint("A Firebase exception has occurred");
     debugPrint(e.message);
-    return Left(Failure.firebase(errorMessage: e.message));
+    return Left(Failure.firebase(message: e.message));
   } catch (e) {
     ///An exception has occurred;
     debugPrint("An exception has occurred");
     debugPrint(e.toString());
     String errorMessage = e.toString().split(": ").last;
-    return Left(Failure.generic(errorMessage: errorMessage));
+    return Left(Failure.generic(message: errorMessage));
   }
 }

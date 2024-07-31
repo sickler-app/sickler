@@ -103,14 +103,14 @@ class _SuggestedWaterDailyGoalScreenState
                     ////Mark onboarding as complete
                     ref
                         .watch(userPreferencesProvider.notifier)
-                        .addUserPreferencesToLocal(ref
+                        .addUserPreferences(ref
                             .watch(userPreferencesProvider)
                             .value!
                             .copyWith(isOnboardingComplete: true));
 
                     ref
-                        .watch(userInfoProvider.notifier)
-                        .addUserData(ref.watch(userInfoProvider).value!);
+                        .watch(userProvider.notifier)
+                        .addUserData(ref.watch(userProvider).value!);
 
                     context.goNamed(BottomNavBar.id);
                   },

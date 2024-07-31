@@ -8,7 +8,7 @@ import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
-import '../../models/auth/sickler_user_model.dart';
+import '../../models/user/sickler_user.dart';
 
 class AuthSuccessScreen extends ConsumerWidget {
   static const id = "auth_success";
@@ -19,7 +19,8 @@ class AuthSuccessScreen extends ConsumerWidget {
     final ThemeData theme = Theme.of(context);
     final SicklerUser? currentUser =
         ref.watch(authStateChangesStreamProvider).value;
-    final String userName = currentUser!.displayName ?? currentUser.email!;
+    final String userName =
+        currentUser!.profile.displayName ?? currentUser.email;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

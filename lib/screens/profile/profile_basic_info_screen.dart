@@ -49,18 +49,18 @@ class _ProfileBasicInfoScreenState
   @override
   void initState() {
     nameController.text =
-        ref.read(authStateChangesStreamProvider).value!.displayName ?? "";
+        ref.read(authStateChangesStreamProvider).value!.profile.displayName ??
+            "";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userInfoProviderNotifier = ref.watch(userInfoProvider.notifier);
+    final userProviderNotifier = ref.watch(userProvider.notifier);
 
-    final SicklerUser? currentUser =
-        ref.watch(authStateChangesStreamProvider).value;
+    final SicklerUser? currentUser = ref.watch(userProvider).value;
 
-    final userPreferencesProviderNotifier =
+    final userPrefsProviderNotifier =
         ref.watch(userPreferencesProvider.notifier);
     final userPreferencesState = ref.watch(userPreferencesProvider);
 
@@ -99,7 +99,7 @@ class _ProfileBasicInfoScreenState
                       keyboardType: TextInputType.name,
                       decoration:
                           SicklerInputDecoration.inputDecoration(context)
-                              .copyWith(hintText: "Email"),
+                              .copyWith(hintText: "Names"),
                     ),
                     const Gap(24),
                     Text("Age", style: theme.textTheme.bodyMedium),
@@ -159,7 +159,6 @@ class _ProfileBasicInfoScreenState
                     Text("Sex", style: theme.textTheme.bodyMedium),
                     const Gap(8),
 
-                    const Gap(16),
                     Row(
                       children: [
                         Expanded(
@@ -195,14 +194,22 @@ class _ProfileBasicInfoScreenState
                     SicklerButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            final SicklerUserInfo userInfo = SicklerUserInfo(
-                                uid: currentUser!.uid,
-                                age: int.parse(ageController.text.trim()),
-                                gender: selectedRadioValue.toString(),
-                                fullName: nameController.text.trim(),
-                                displayName: currentUser.displayName!);
+                            final UserProfile profile =
+                                ref.watch(userProvider).value!.profile;
+
+                            SicklerUser updatedUser = currentUser!.copyWith(
+                                profile: profile.copyWith(
+                              uid: ref
+                                  .watch(authStateChangesStreamProvider)
+                                  .value
+                                  ?.uid,
+                              name: nameController.text.trim(),
+                              gender: selectedRadioValue,
+                              age: int.tryParse(ageController.text.trim()),
+                            ));
+
                             //Save Data to Set
-                            userInfoProviderNotifier.saveDataToState(userInfo);
+                            userProviderNotifier.saveDataToState(updatedUser);
 
                             //Mark User as Onboarded since the other pages are shippable
                             //and we don't want the user to repeat the whole onboarding
@@ -211,11 +218,10 @@ class _ProfileBasicInfoScreenState
                             final UserPreferences userPreferences =
                                 userPreferencesState.value!;
                             if (!widget.isEditing!) {
-                              await userPreferencesProviderNotifier
-                                  .addUserPreferencesToLocal(
-                                      userPreferences.copyWith(
-                                          uid: currentUser.uid,
-                                          isOnboardingComplete: false));
+                              await userPrefsProviderNotifier
+                                  .addUserPreferences(userPreferences.copyWith(
+                                      uid: currentUser.uid,
+                                      isOnboardingComplete: false));
                             }
 
                             if (context.mounted) {

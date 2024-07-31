@@ -42,8 +42,6 @@ class _ProfileVitalsInfoScreenState
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    final userInfoProviderNotifier = ref.watch(userInfoProvider.notifier);
-    final userInfoState = ref.watch(userInfoProvider);
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
@@ -157,19 +155,27 @@ class _ProfileVitalsInfoScreenState
                         //Todo: Continue
                         if (_formKey.currentState!.validate()) {
                           ///Save Data to State and continue in the next page
+                          ///
 
-                          final SicklerUserInfo updatedUserInfo =
-                              userInfoState.value!.copyWith(
-                            height:
-                                double.tryParse(heightController.text.trim()),
-                            weight:
-                                double.tryParse(weightController.text.trim()),
-                            genotype: selectedGenotype.toString().toUpperCase(),
+                          SicklerUser currentUser =
+                              ref.watch(userProvider).value!;
+
+                          UserProfile updatedProfile = currentUser.profile
+                              .copyWith(
+                                  height: double.tryParse(
+                                      heightController.text.trim()),
+                                  weight: double.tryParse(
+                                      weightController.text.trim()),
+                                  genotype: selectedGenotype);
+                          currentUser = currentUser.copyWith(
+                            profile: updatedProfile,
                           );
 
                           //Save data to state
-                          userInfoProviderNotifier
-                              .saveDataToState(updatedUserInfo);
+                          ref
+                              .watch(userProvider.notifier)
+                              .saveDataToState(currentUser);
+
                           context.pushNamed(ProfileMedicalInfoScreen.id);
                         }
                       },

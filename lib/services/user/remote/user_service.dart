@@ -13,11 +13,11 @@ class UserService {
   }
 
   ///--------Add and Update User Data--------///
-  Future<void> addUserData(SicklerUserInfo userInfo) async {
+  Future<void> addUserData(SicklerUser userInfo) async {
     await firestore.collection('users').doc(userInfo.uid).set(userInfo.toMap());
   }
 
-  Future<void> updateUserData(SicklerUserInfo userInfo) async {
+  Future<void> updateUserData(SicklerUser userInfo) async {
     await firestore
         .collection('users')
         .doc(userInfo.uid)

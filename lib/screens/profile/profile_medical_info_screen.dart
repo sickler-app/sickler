@@ -48,8 +48,7 @@ class _ProfileMedicalInfoScreenState
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final userInfoProviderNotifier = ref.watch(userInfoProvider.notifier);
-    final userInfoState = ref.watch(userInfoProvider);
+    final userProviderNotifier = ref.watch(userProvider.notifier);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -222,48 +221,47 @@ class _ProfileMedicalInfoScreenState
                   SicklerButton(
                       onPressed: () async {
                         ///Todo: add the rest of the health data;
-                        ///
 
                         ref
                             .watch(userPreferencesProvider.notifier)
-                            .getUserPreferences()
-                            .then((_) async {
-                          //Update User Preferences
-                          final UserPreferences finalPrefs = ref
-                              .watch(userPreferencesProvider)
-                              .value!
-                              .copyWith(
-                                isOnboardingComplete: true,
-                              );
-                          //Save updated preferences to local
-                          await ref
-                              .watch(userPreferencesProvider.notifier)
-                              .addUserPreferencesToLocal(finalPrefs);
+                            .getUserPreferences();
 
-                          //Add updated preferences to user data going to firebase
-                          final SicklerUserInfo updatedUserInfo =
-                              userInfoState.value!.copyWith(
-                                  allergies: allergies,
-                                  medicalConditions: medicalConditions,
-                                  bmi: userInfoState.value!.calculateBMI(),
-                                  preferences: finalPrefs);
+                        //Update User Preferences
+                        final UserPreferences prefs =
+                            ref.watch(userPreferencesProvider).value!.copyWith(
+                                  isOnboardingComplete: true,
+                                );
+                        //Save updated preferences
+                        await ref
+                            .watch(userPreferencesProvider.notifier)
+                            .addUserPreferences(prefs);
 
-                          //Send data to firebase
-                          await userInfoProviderNotifier
-                              .addUserData(updatedUserInfo)
-                              .then((_) {
-                            if (userInfoState.hasValue &&
-                                !userInfoState.hasError) {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                      content: Text(
-                                "success",
-                                style: theme.textTheme.bodyMedium!
-                                    .copyWith(color: Colors.green),
-                              )));
-                            }
-                          });
-                        });
+                        //Add updated preferences to user data going to firebase
+
+                        SicklerUser currentUser =
+                            ref.watch(userProvider).value!;
+
+                        UserProfile profile = currentUser.profile.copyWith(
+                            allergies: allergies,
+                            medicalConditions: medicalConditions,
+                            preferences: prefs);
+
+                        currentUser = currentUser.copyWith(
+                          profile:
+                              profile.copyWith(bmi: profile.calculateBMI()),
+                        );
+
+                        //Send data to firebase
+                        await userProviderNotifier.addUserData(currentUser);
+
+                        if (ref.watch(userProvider).hasValue &&
+                            !ref.watch(userProvider).hasError) {
+                          ///Todo: perform proper error and state notification;
+                          ///Todo: navigate to the page for showing recommended water goal
+                          if (context.mounted) {
+                            context.pushNamed(SuggestedWaterDailyGoalScreen.id);
+                          }
+                        }
 
                         // if (userInfoState.hasError) {
                         //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -283,12 +281,6 @@ class _ProfileMedicalInfoScreenState
                         //         .copyWith(color: theme.colorScheme.secondary),
                         //   )));
                         // }
-
-                        ///Todo: perform proper error and state notification;
-                        ///Todo: navigate to the page for showing recommended water goal
-                        if (context.mounted) {
-                          context.pushNamed(SuggestedWaterDailyGoalScreen.id);
-                        }
                       },
                       label: "Continue"),
                   const Gap(64)

@@ -125,7 +125,7 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
+
       bottomNavigationBar: _bottomNavBar(
           selectedIndex: _selectedIndex,
           selectedItemColor: Theme.of(context).brightness == Brightness.dark

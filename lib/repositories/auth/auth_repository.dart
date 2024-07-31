@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sickler/models/auth/sickler_user_model.dart';
+import 'package:sickler/models/user/sickler_user.dart';
 import 'package:sickler/services/auth/auth_service.dart';
 
 import '../../core/core.dart';
