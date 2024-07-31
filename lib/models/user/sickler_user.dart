@@ -4,6 +4,8 @@ import 'package:isar/isar.dart';
 
 import '../models.dart';
 
+part 'sickler_user.g.dart';
+
 @Collection(inheritance: false)
 class SicklerUser extends Equatable {
   final Id id = 1;
@@ -14,6 +16,7 @@ class SicklerUser extends Equatable {
   final bool isEmailVerified;
   final bool isPhoneVerified;
   final UserProfile profile;
+  final UserPreferences preferences;
 
   const SicklerUser({
     required this.email,
@@ -23,6 +26,7 @@ class SicklerUser extends Equatable {
     this.isEmailVerified = false,
     this.isPhoneVerified = false,
     this.profile = UserProfile.empty,
+    this.preferences = UserPreferences.empty,
   });
 
   ///-------copyWith--------///
@@ -34,6 +38,7 @@ class SicklerUser extends Equatable {
     bool? isEmailVerified,
     bool? isPhoneVerified,
     UserProfile? profile,
+    UserPreferences? preferences,
   }) {
     return SicklerUser(
       email: email ?? this.email,
@@ -43,6 +48,7 @@ class SicklerUser extends Equatable {
       isPhoneVerified: isPhoneVerified ?? this.isPhoneVerified,
       isAnonymous: isAnonymous ?? this.isAnonymous,
       profile: profile ?? this.profile,
+      preferences: preferences ?? this.preferences,
     );
   }
 
@@ -57,6 +63,7 @@ class SicklerUser extends Equatable {
       "isEmailVerified": isEmailVerified,
       "isPhoneVerified": isPhoneVerified,
       "profile": profile.toMap(),
+      "preferences": preferences.toMap(),
     };
 
     return data;
@@ -65,6 +72,7 @@ class SicklerUser extends Equatable {
   factory SicklerUser.fromMap({required Map<String, dynamic> data}) {
     return SicklerUser(
         profile: UserProfile.fromMap(data["profile"]),
+        preferences: UserPreferences.fromMap(data: data["preferences"]),
         email: data["email"],
         uid: data["uid"],
         isAnonymous: data["isAnonymous"],
@@ -101,9 +109,7 @@ class SicklerUser extends Equatable {
     if (this == SicklerUser.empty) {
       return "SicklerUser.empty";
     }
-
-    ///Todo: Generate toString with Codium
-    throw UnimplementedError();
+    return "SicklerUser(email: $email, uid: $uid, isAnonymous: $isAnonymous, isEmailVerified: $isEmailVerified, isPhoneVerified: $isPhoneVerified, profile: $profile, photoUrl: $photoUrl)";
   }
 
   @ignore
@@ -115,6 +121,7 @@ class SicklerUser extends Equatable {
         isEmailVerified,
         uid,
         isPhoneVerified,
-        profile
+        profile,
+        preferences,
       ];
 }

@@ -18,17 +18,15 @@ class UserNotifier extends AsyncNotifier<SicklerUser> {
     state = AsyncValue.data(user);
   }
 
-  Future<void> getUserData({String? uid}) async {
+  Future<void> getUserData({String? uid, bool getFromRemote = false}) async {
     state = const AsyncValue.loading();
-    //Get all user data first
-    await _userRepository.getUserData(uid).whenComplete(() async {
-      final Either<Failure, SicklerUser> response =
-          await _userRepository.getUserData(uid);
-      response.fold((failure) {
-        state = AsyncValue.error(failure, StackTrace.current);
-      }, (sicklerUserInfo) {
-        state = AsyncValue.data(sicklerUserInfo);
-      });
+
+    final Either<Failure, SicklerUser> response =
+        await _userRepository.getUserData(uid: uid, getFromRemote: false);
+    response.fold((failure) {
+      state = AsyncValue.error(failure, StackTrace.current);
+    }, (sicklerUserInfo) {
+      state = AsyncValue.data(sicklerUserInfo);
     });
   }
 

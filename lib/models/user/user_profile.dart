@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:isar/isar.dart';
-import 'package:sickler/models/user/user_preferences.dart';
 
 import '../../core/enums.dart';
-import 'user_profile.g.dart';
+
+part 'user_profile.g.dart';
 
 @Embedded(inheritance: false)
 class UserProfile extends Equatable {
@@ -31,9 +31,6 @@ class UserProfile extends Equatable {
   final List<String>? allergies;
   final List<String>? medicalConditions;
 
-  ///Preferences
-  final UserPreferences? preferences;
-
   const UserProfile(
       {
       ///Profile Info
@@ -55,7 +52,6 @@ class UserProfile extends Equatable {
       this.bmi,
       this.bloodGroup,
       this.allergies,
-      this.preferences,
       this.medicalConditions});
 
   //Write a copy with method
@@ -78,27 +74,26 @@ class UserProfile extends Equatable {
     String? bloodGroup,
     List<String>? allergies,
     List<String>? medicalConditions,
-    UserPreferences? preferences,
   }) {
     return UserProfile(
-        uid: uid ?? this.uid,
-        gender: gender ?? this.gender,
-        name: name ?? this.name,
-        displayName: displayName ?? this.displayName,
-        age: age ?? this.age,
-        email: email ?? this.email,
-        phone: phone ?? this.phone,
-        photoUrl: photoUrl ?? this.photoUrl,
-        painSeverity: painSeverity ?? this.painSeverity,
-        crisisFrequency: crisisFrequency ?? this.crisisFrequency,
-        genotype: genotype ?? this.genotype,
-        height: height ?? this.height,
-        weight: weight ?? this.weight,
-        bmi: bmi ?? this.bmi,
-        bloodGroup: bloodGroup ?? this.bloodGroup,
-        allergies: allergies ?? this.allergies,
-        medicalConditions: medicalConditions ?? this.medicalConditions,
-        preferences: preferences ?? this.preferences);
+      uid: uid ?? this.uid,
+      gender: gender ?? this.gender,
+      name: name ?? this.name,
+      displayName: displayName ?? this.displayName,
+      age: age ?? this.age,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      photoUrl: photoUrl ?? this.photoUrl,
+      painSeverity: painSeverity ?? this.painSeverity,
+      crisisFrequency: crisisFrequency ?? this.crisisFrequency,
+      genotype: genotype ?? this.genotype,
+      height: height ?? this.height,
+      weight: weight ?? this.weight,
+      bmi: bmi ?? this.bmi,
+      bloodGroup: bloodGroup ?? this.bloodGroup,
+      allergies: allergies ?? this.allergies,
+      medicalConditions: medicalConditions ?? this.medicalConditions,
+    );
   }
 
   ///-----To and From Map-------///
@@ -128,7 +123,6 @@ class UserProfile extends Equatable {
     Map<String, Map<String, dynamic>> userData = {
       "profile": profileData,
       "health": healthData,
-      "preferences": preferences!.toMap(),
     };
     return userData;
   }
@@ -149,8 +143,6 @@ class UserProfile extends Equatable {
       bloodGroup: data["health"]["bloodGroup"] as String?,
       allergies: data["health"]["allergies"] as List<String>,
       medicalConditions: data["health"]["medicalConditions"] as List<String>,
-      preferences: UserPreferences.fromMap(
-          data: data["preferences"] as Map<String, dynamic>),
     );
   }
 
@@ -187,23 +179,8 @@ class UserProfile extends Equatable {
     if (this == UserProfile.empty) {
       return "UserProfile.empty";
     }
-    return """SicklerUserInfo(
-      uid: $uid,
-      gender: $gender,
-      fullName: $name,
-      displayName: $displayName,
-      age: $age,
-      painSeverity: $painSeverity,
-      crisisFrequency: $crisisFrequency,
-      genotype: $genotype,
-      height: $height,
-      weight: $weight,
-      bmi: $bmi,
-      bloodType: $bloodGroup,
-      allergies: $allergies,
-      medicalConditions: $medicalConditions,
-      preferences: $preferences
-    );""";
+
+    return "UserProfile(uid: $uid, gender: $gender, name: $name, displayName: $displayName, age: $age, painSeverity: $painSeverity, crisisFrequency: $crisisFrequency, genotype: $genotype, height: $height, weight: $weight, bmi: $bmi, bloodType: $bloodGroup, allergies: $allergies, medicalConditions: $medicalConditions)";
   }
 
   @ignore
@@ -221,6 +198,5 @@ class UserProfile extends Equatable {
         bloodGroup,
         allergies,
         medicalConditions,
-        preferences,
       ];
 }
