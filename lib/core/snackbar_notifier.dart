@@ -20,32 +20,26 @@ class SnackBarNotifier extends ConsumerWidget {
       next.when(
         data: (user) {
           ScaffoldMessenger.of(context).clearSnackBars();
-          ScaffoldMessenger.of(context).showSnackBar(
-            customSnackBar(
-              context: context,
-              message: "Success",
-              mode: SnackBarMode.success,
-            ),
+          showCustomSnackBar(
+            context: context,
+            message: "Success",
+            mode: SnackBarMode.success,
           );
         },
         error: (error, stackTrace) {
           ScaffoldMessenger.of(context).clearSnackBars();
-          ScaffoldMessenger.of(context).showSnackBar(
-            customSnackBar(
-              message: (error as Failure).message ?? "Error",
-              mode: SnackBarMode.error,
-              context: context,
-            ),
+          showCustomSnackBar(
+            message: (error as Failure).message ?? "Error",
+            mode: SnackBarMode.error,
+            context: context,
           );
         },
         loading: () {
           ScaffoldMessenger.of(context).clearSnackBars();
-          ScaffoldMessenger.of(context).showSnackBar(
-            customSnackBar(
-              context: context,
-              message: "Loading",
-              mode: SnackBarMode.loading,
-            ),
+          showCustomSnackBar(
+            context: context,
+            message: "Loading",
+            mode: SnackBarMode.loading,
           );
         },
       );

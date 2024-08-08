@@ -8,19 +8,31 @@ import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
-import '../../models/user/sickler_user.dart';
-
-class AuthSuccessScreen extends ConsumerWidget {
+class AuthSuccessScreen extends ConsumerStatefulWidget {
   static const id = "auth_success";
   const AuthSuccessScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AuthSuccessScreen> createState() => _AuthSuccessScreenState();
+}
+
+class _AuthSuccessScreenState extends ConsumerState<AuthSuccessScreen> {
+  late String userName;
+  @override
+  void initState() {
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   await ref.read(userProvider.notifier).getCurrentUserData();
+    // });
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final SicklerUser? currentUser =
-        ref.watch(authStateChangesStreamProvider).value;
-    final String userName =
-        currentUser!.profile.displayName ?? currentUser.email;
+
+    String userName = ref.watch(userProvider).value!.profile.displayName ??
+        ref.watch(userProvider).value!.email;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

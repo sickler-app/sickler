@@ -5,7 +5,7 @@ import '../../../core/core.dart';
 
 enum SnackBarMode { loading, error, success }
 
-SnackBar customSnackBar({
+void showCustomSnackBar({
   required BuildContext context,
   required String message,
   required SnackBarMode mode,
@@ -24,7 +24,7 @@ SnackBar customSnackBar({
       backgroundColor = Theme.of(context).colorScheme.error;
   }
 
-  return SnackBar(
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       elevation: 10,
       //  dismissDirection: DismissDirection.up,
       backgroundColor: backgroundColor,
@@ -58,5 +58,5 @@ SnackBar customSnackBar({
             ),
           ),
         ],
-      ));
+      )));
 }
