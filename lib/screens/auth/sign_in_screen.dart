@@ -37,7 +37,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final authProviderNotifier = ref.watch(authProvider.notifier);
 
     return Scaffold(
       body: SafeArea(
@@ -107,46 +106,53 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
                 ///Buttons
                 SicklerButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        //Register
-                        await authProviderNotifier.signInWithEmailAndPassword(
+                  label: "Sign In",
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final authNotifier = ref.read(authProvider.notifier);
+                      final userNotifier = ref.read(userProvider.notifier);
+
+                      await authNotifier.signInWithEmailAndPassword(
                           email: emailController.text.trim(),
-                          password: passwordController.text.trim(),
-                        );
+                          password: passwordController.text.trim());
 
-                        //Get the user from authProvider after signing up.
-                        await ref.watch(authProvider.notifier).getCurrentUser();
-                        SicklerUser user = ref.watch(authProvider).value!;
-
-                        //Get User Prefs
-                        final UserPreferences prefs =
-                            ref.watch(userProvider).value!.preferences;
-
+                      if (authNotifier.isSuccessful) {
+                        await userNotifier.getCurrentUserData();
+                        SicklerUser user = ref.watch(userProvider).value!;
                         if (context.mounted) {
-                          if (prefs.isFirstTime) {
-                            //Set is first time to false and update db
-                            user = user.copyWith(
-                                preferences:
-                                    prefs.copyWith(isFirstTime: false));
+                          showCustomSnackBar(
+                              context: context,
+                              message: "Signed in successfully",
+                              mode: SnackBarMode.success);
+                          if (user.preferences.isFirstTime) {
+                            ///Set as is Not First Time
+                            await userNotifier.updateUserData(
+                                user: user.copyWith(
+                                    preferences: user.preferences
+                                        .copyWith(isFirstTime: false)));
 
-                            ref
-                                .watch(userProvider.notifier)
-                                .addUserData(user: user);
-
-                            //mark as not first time
-                            context.goNamed(AuthSuccessScreen.id);
+                            if (context.mounted) {
+                              context.goNamed(AuthSuccessScreen.id);
+                            }
                           } else {
-                            if (prefs.isOnboardingComplete) {
+                            if (user.preferences.isOnboardingComplete) {
                               context.goNamed(BottomNavBar.id);
                             } else {
                               context.goNamed(ProfileBasicInfoScreen.id);
                             }
                           }
                         }
+                      } else if (authNotifier.errorMessage != null) {
+                        if (context.mounted) {
+                          showCustomSnackBar(
+                              context: context,
+                              message: authNotifier.errorMessage!,
+                              mode: SnackBarMode.error);
+                        }
                       }
-                    },
-                    label: "Sign In"),
+                    }
+                  },
+                ),
                 const Gap(kPadding16),
                 Align(
                   alignment: Alignment.center,

@@ -25,7 +25,7 @@ class _ProfileBasicInfoScreenState
     extends ConsumerState<ProfileBasicInfoScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
+  // final TextEditingController addressController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Gender selectedRadioValue = Gender.male;
@@ -43,23 +43,28 @@ class _ProfileBasicInfoScreenState
     super.dispose();
     nameController.dispose();
     ageController.dispose();
-    addressController.dispose();
+    //  addressController.dispose();
   }
 
   @override
   void initState() {
-    nameController.text =
-        ref.read(authStateChangesStreamProvider).value!.profile.displayName ??
-            "";
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await ref.watch(userProvider.notifier).getCurrentUserData();
+      SicklerUser user = ref.watch(userProvider).value!;
+      nameController.text = user.profile.displayName ?? "";
+      ageController.text = user.profile.age.toString();
+
+      if (user.profile.gender != null) {
+        setState(() {
+          selectedRadioValue = user.profile.gender!;
+        });
+      }
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userProviderNotifier = ref.watch(userProvider.notifier);
-
-    final SicklerUser? currentUser = ref.watch(userProvider).value;
-
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -190,22 +195,45 @@ class _ProfileBasicInfoScreenState
                     SicklerButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            final UserProfile profile =
-                                ref.watch(userProvider).value!.profile;
+                            final userNotifier =
+                                ref.watch(userProvider.notifier);
+                            SicklerUser user = ref.watch(userProvider).value!;
 
-                            SicklerUser updatedUser = currentUser!.copyWith(
-                                profile: profile.copyWith(
-                              uid: ref
-                                  .watch(authStateChangesStreamProvider)
-                                  .value
-                                  ?.uid,
+                            user = user.copyWith(
+                                profile: user.profile.copyWith(
                               name: nameController.text.trim(),
                               gender: selectedRadioValue,
                               age: int.tryParse(ageController.text.trim()),
                             ));
 
-                            //Save Data to Set
-                            userProviderNotifier.saveDataToState(updatedUser);
+                            if (widget.isEditing!) {
+                              ///Always update remote when the user is editing data.
+                              ///But do not do that when the user is adding data because
+                              ///the user is onboarding for the first time,
+                              ///the data will be gathered and saved at the
+                              ///end of the onboard process
+
+                              await userNotifier.updateUserData(
+                                  user: user, updateRemote: true);
+
+                              ///Also show snack bars when making remote calls
+                              if (context.mounted) {
+                                if (userNotifier.isSuccessful) {
+                                  showCustomSnackBar(
+                                      context: context,
+                                      message: "Profile Updated",
+                                      mode: SnackBarMode.success);
+                                } else {
+                                  showCustomSnackBar(
+                                      context: context,
+                                      message: "Something went wrong",
+                                      mode: SnackBarMode.error);
+                                }
+                              }
+                            } else {
+                              await userNotifier.addUserData(
+                                  user: user, updateRemote: false);
+                            }
 
                             if (context.mounted) {
                               context.pushNamed(ProfileVitalsInfoScreen.id);

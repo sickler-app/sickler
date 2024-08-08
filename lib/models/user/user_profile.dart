@@ -100,7 +100,7 @@ class UserProfile extends Equatable {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> profileData = {
       "uid": uid,
-      "gender": gender,
+      "gender": gender?.name,
       "name": name,
       "displayName": displayName,
       "age": age,
@@ -146,12 +146,13 @@ class UserProfile extends Equatable {
     );
   }
 
-  factory UserProfile.fromFirebaseUser(User user) {
+  factory UserProfile.fromFirebaseUser({User? user}) {
     return UserProfile(
-      uid: user.uid,
-      photoUrl: user.photoURL,
-      phone: user.phoneNumber,
-      email: user.email,
+      uid: user?.uid,
+      photoUrl: user?.photoURL,
+      phone: user?.phoneNumber,
+      email: user?.email,
+      displayName: user?.displayName,
     );
   }
 
@@ -171,8 +172,6 @@ class UserProfile extends Equatable {
   bool get isEmpty => this == UserProfile.empty || this == const UserProfile();
   @ignore
   bool get isNotEmpty => this != UserProfile.empty;
-
-  ///Todo:Redo ToString Override
 
   @override
   String toString() {

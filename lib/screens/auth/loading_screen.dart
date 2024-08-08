@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +8,6 @@ import 'package:sickler/screens/onboarding/onboarding_base_screen.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
 import '../../models/user/sickler_user.dart';
-import '../../models/user/user_preferences.dart';
 import '../../providers/providers.dart';
 import '../global_components/bottom_nav_bar.dart';
 
@@ -44,43 +45,33 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
   }
 
   Future<void> evaluateInitialLocation(BuildContext context) async {
-    // print("EVALUATING INITIAL LOCATION");
-    await ref.watch(authProvider.notifier).getCurrentUser();
+    log("EVALUATING INITIAL LOCATION");
 
-    final SicklerUser user = ref.watch(authProvider).value!;
-    late UserPreferences? preferences;
-    late bool isFirstTime;
-    late bool isOnboardingComplete;
-    await ref.watch(userProvider.notifier).getUserData();
+    final userNotifier = ref.read(userProvider.notifier);
 
-    ///Getting user data
-    preferences = ref.watch(userProvider).value!.preferences;
-    isFirstTime = preferences.isFirstTime;
-    isOnboardingComplete = preferences.isOnboardingComplete;
+    await userNotifier.getCurrentUserData();
+
+    final SicklerUser user =
+        ref.watch(userProvider.select((state) => state.valueOrNull!));
+
+    final bool isFirstTime = user.preferences.isFirstTime;
+    final bool isOnboardingComplete = user.preferences.isOnboardingComplete;
     final bool isLoggedIn = user.isNotEmpty;
     if (context.mounted) {
       if (isLoggedIn) {
         if (!isOnboardingComplete) {
           ///not onboarded
-          //  print("NAVIGATING TO ONBOARDING BEGINNING SCREEN");
           context.goNamed(ProfileBasicInfoScreen.id);
-          // return "/${ProfileScreen.id}/${ProfileBasicInfoScreen.id}";
         } else {
           ///Logged in and onboarded
-          //  print("NAVIGATE HOME");
           context.goNamed(BottomNavBar.id);
-          // return "/";
         }
       } else {
         ///Is not Logged In
         if (isFirstTime) {
-          //   print("NAVIGATING TO ONBOARDING SCREENS");
           context.goNamed(OnboardingBaseScreen.id);
-          //  return "/${OnboardingBaseScreen.id}";
         } else {
-          //   print("NAVIGATING TO GOOGLE SIGN IN SCREEN");
           context.goNamed(GoogleSignInScreen.id);
-          //  return "/auth/${GoogleSignInScreen.id}";
         }
       }
     }

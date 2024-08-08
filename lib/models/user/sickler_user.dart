@@ -89,6 +89,7 @@ class SicklerUser extends Equatable {
         uid: user.uid,
         isEmailVerified: user.emailVerified,
         isAnonymous: user.isAnonymous,
+        photoUrl: user.photoURL,
       );
     }
   }
@@ -97,7 +98,7 @@ class SicklerUser extends Equatable {
 
   @ignore
   static SicklerUser empty =
-      const SicklerUser(email: '', uid: '', isAnonymous: false);
+      const SicklerUser(email: "", isAnonymous: false, uid: "");
   @ignore
   bool get isEmpty => this == SicklerUser.empty;
   @ignore
@@ -109,7 +110,7 @@ class SicklerUser extends Equatable {
     if (this == SicklerUser.empty) {
       return "SicklerUser.empty";
     }
-    return "SicklerUser(email: $email, uid: $uid, isAnonymous: $isAnonymous, isEmailVerified: $isEmailVerified, isPhoneVerified: $isPhoneVerified, profile: $profile, photoUrl: $photoUrl)";
+    return "SicklerUser(email: $email, uid: $uid, isAnonymous: $isAnonymous, isEmailVerified: $isEmailVerified, isPhoneVerified: $isPhoneVerified, profile: $profile, preferences: $preferences, photoUrl: $photoUrl)";
   }
 
   @ignore

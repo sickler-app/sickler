@@ -38,10 +38,17 @@ class UserLocalService extends LocalDbService {
     });
   }
 
-  Future<void> deleteUser(SicklerUser user) async {
+  Future<void> deleteUser({SicklerUser? user}) async {
     final isar = await db;
-    await isar.writeTxn(() async {
-      await isar.sicklerUsers.delete(user.id);
-    });
+
+    if (user == null) {
+      await isar.writeTxn(() async {
+        await isar.sicklerUsers.clear();
+      });
+    } else {
+      await isar.writeTxn(() async {
+        await isar.sicklerUsers.delete(user.id);
+      });
+    }
   }
 }

@@ -28,37 +28,42 @@ const UserPreferencesSchema = Schema(
       name: r'isOnboardingComplete',
       type: IsarType.bool,
     ),
-    r'lengthUnit': PropertySchema(
+    r'lastUpdated': PropertySchema(
       id: 3,
+      name: r'lastUpdated',
+      type: IsarType.dateTime,
+    ),
+    r'lengthUnit': PropertySchema(
+      id: 4,
       name: r'lengthUnit',
       type: IsarType.string,
       enumMap: _UserPreferenceslengthUnitEnumValueMap,
     ),
     r'massUnit': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'massUnit',
       type: IsarType.string,
       enumMap: _UserPreferencesmassUnitEnumValueMap,
     ),
     r'themeMode': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'themeMode',
       type: IsarType.string,
       enumMap: _UserPreferencesthemeModeEnumValueMap,
     ),
     r'uid': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'uid',
       type: IsarType.string,
     ),
     r'volumeUnit': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'volumeUnit',
       type: IsarType.string,
       enumMap: _UserPreferencesvolumeUnitEnumValueMap,
     ),
     r'waterInputVolume': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'waterInputVolume',
       type: IsarType.double,
     )
@@ -117,12 +122,13 @@ void _userPreferencesSerialize(
   writer.writeDouble(offsets[0], object.dailyWaterGoal);
   writer.writeBool(offsets[1], object.isFirstTime);
   writer.writeBool(offsets[2], object.isOnboardingComplete);
-  writer.writeString(offsets[3], object.lengthUnit?.name);
-  writer.writeString(offsets[4], object.massUnit?.name);
-  writer.writeString(offsets[5], object.themeMode?.name);
-  writer.writeString(offsets[6], object.uid);
-  writer.writeString(offsets[7], object.volumeUnit?.name);
-  writer.writeDouble(offsets[8], object.waterInputVolume);
+  writer.writeDateTime(offsets[3], object.lastUpdated);
+  writer.writeString(offsets[4], object.lengthUnit?.name);
+  writer.writeString(offsets[5], object.massUnit?.name);
+  writer.writeString(offsets[6], object.themeMode?.name);
+  writer.writeString(offsets[7], object.uid);
+  writer.writeString(offsets[8], object.volumeUnit?.name);
+  writer.writeDouble(offsets[9], object.waterInputVolume);
 }
 
 UserPreferences _userPreferencesDeserialize(
@@ -135,16 +141,17 @@ UserPreferences _userPreferencesDeserialize(
     dailyWaterGoal: reader.readDoubleOrNull(offsets[0]),
     isFirstTime: reader.readBoolOrNull(offsets[1]) ?? true,
     isOnboardingComplete: reader.readBoolOrNull(offsets[2]) ?? false,
+    lastUpdated: reader.readDateTimeOrNull(offsets[3]),
     lengthUnit: _UserPreferenceslengthUnitValueEnumMap[
-        reader.readStringOrNull(offsets[3])],
-    massUnit: _UserPreferencesmassUnitValueEnumMap[
         reader.readStringOrNull(offsets[4])],
-    themeMode: _UserPreferencesthemeModeValueEnumMap[
+    massUnit: _UserPreferencesmassUnitValueEnumMap[
         reader.readStringOrNull(offsets[5])],
-    uid: reader.readStringOrNull(offsets[6]),
+    themeMode: _UserPreferencesthemeModeValueEnumMap[
+        reader.readStringOrNull(offsets[6])],
+    uid: reader.readStringOrNull(offsets[7]),
     volumeUnit: _UserPreferencesvolumeUnitValueEnumMap[
-        reader.readStringOrNull(offsets[7])],
-    waterInputVolume: reader.readDoubleOrNull(offsets[8]),
+        reader.readStringOrNull(offsets[8])],
+    waterInputVolume: reader.readDoubleOrNull(offsets[9]),
   );
   return object;
 }
@@ -163,20 +170,22 @@ P _userPreferencesDeserializeProp<P>(
     case 2:
       return (reader.readBoolOrNull(offset) ?? false) as P;
     case 3:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 4:
       return (_UserPreferenceslengthUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 4:
+    case 5:
       return (_UserPreferencesmassUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 5:
+    case 6:
       return (_UserPreferencesthemeModeValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 6:
-      return (reader.readStringOrNull(offset)) as P;
     case 7:
+      return (reader.readStringOrNull(offset)) as P;
+    case 8:
       return (_UserPreferencesvolumeUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 8:
+    case 9:
       return (reader.readDoubleOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -404,6 +413,80 @@ extension UserPreferencesQueryFilter
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'isOnboardingComplete',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      lastUpdatedIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'lastUpdated',
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      lastUpdatedIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'lastUpdated',
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      lastUpdatedEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastUpdated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      lastUpdatedGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastUpdated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      lastUpdatedLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastUpdated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
+      lastUpdatedBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastUpdated',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
       ));
     });
   }

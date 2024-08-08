@@ -10,11 +10,13 @@ import 'provider_notifiers.dart';
 
 ///------Auth Related Providers------///
 final AuthService authService = AuthService();
-final AuthRepository authRepository = AuthRepository(authService: authService);
+final AuthRepository authRepository = AuthRepository(
+    authService: authService, userLocalService: userLocalService);
 
 final authProvider = AsyncNotifierProvider<AuthNotifier, SicklerUser?>(
     () => AuthNotifier(authRepository: authRepository));
 
+@Deprecated("Deprecating the authStateChangesStreamProvider")
 final authStateChangesStreamProvider =
     StreamProvider<SicklerUser>((ref) async* {
   yield* ref.watch(authProvider.notifier).authStateChanges();
@@ -24,7 +26,9 @@ final authStateChangesStreamProvider =
 final UserService userService = UserService();
 final UserLocalService userLocalService = UserLocalService();
 final UserRepository userRepository = UserRepository(
-    userService: userService, userLocalService: userLocalService);
+    userService: userService,
+    userLocalService: userLocalService,
+    authService: authService);
 
 final userProvider = AsyncNotifierProvider<UserNotifier, SicklerUser>(
     () => UserNotifier(userRepository: userRepository));

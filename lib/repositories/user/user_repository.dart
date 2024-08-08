@@ -1,72 +1,93 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/services/user/remote/user_service.dart';
 
 import '../../models/models.dart';
+import '../../services/auth/auth_service.dart';
 import '../../services/user/local/user_local_service.dart';
 
 class UserRepository {
   final UserService userService;
   final UserLocalService userLocalService;
+  final AuthService authService;
 
-  UserRepository({required this.userService, required this.userLocalService});
+  UserRepository(
+      {required this.userService,
+      required this.userLocalService,
+      required this.authService});
 
-  FutureEither<SicklerUser> getUserData(
-      {String? uid, bool getFromRemote = false}) async {
-    return callFutureMethod(() async {
-      ///If uid is null, get from local. Else then check if local is empty,
-      ///then get from remote if its empty
+  FutureEither<SicklerUser> getCurrentUserData(
+      {bool forceRefresh = false}) async {
+    return futureHandler(() async {
+      ///First get from Firebase Auth in order to verify if the user is actually signed in before making any calls to remote;
 
-      if (uid != null && getFromRemote) {
-        DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-            await userService.getUserData(uid);
+      User? currentUser = await authService.getCurrentUser();
 
-        if (documentSnapshot.exists) {
-          Map<String, dynamic>? userDataMap = documentSnapshot.data();
+      if (currentUser == null) {
+        ///If user is not signed in, return an empty class
 
-          SicklerUser user = SicklerUser.fromMap(data: userDataMap!);
-          return user;
-        } else {
-          //Rather than return and empty class and having to constantly check if
-          //the document is not empty, just throw and exception so my 'callFutureMethod()'
-          // can catch it and return a failure.
-          throw Exception("The data doesn't exist");
-        }
+        await userLocalService.deleteUser();
+        return SicklerUser.empty;
       }
-      return await userLocalService.getUser();
+
+      if (forceRefresh) {
+        return await _getRemoteUser(currentUser.uid);
+      }
+
+      SicklerUser localUser = await userLocalService.getUser();
+      if (localUser.isNotEmpty) {
+        return localUser;
+      }
+
+      return await _getRemoteUser(currentUser.uid);
     });
   }
 
-  ///------User Health Data---------///
-  FutureEither<void> addUserData(
-      {required SicklerUser user, bool updateRemote = false}) async {
-    return callFutureMethod(() async {
-      await userLocalService.addUser(user);
-      if (updateRemote) {
-        await userService.addUserData(user);
-      }
-    });
+  Future<SicklerUser> _getRemoteUser(String uid) async {
+    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+        await userService.getUserData(uid);
+
+    if (documentSnapshot.exists &&
+        documentSnapshot.data() != null &&
+        documentSnapshot.data()!.isNotEmpty) {
+      SicklerUser remoteUser =
+          SicklerUser.fromMap(data: documentSnapshot.data()!);
+      await userLocalService.addUser(remoteUser);
+      return remoteUser;
+    } else {
+      throw Exception("User data doesn't exist");
+    }
   }
 
   FutureEither<void> updateUserData(
       {required SicklerUser user, bool updateRemote = false}) async {
-    return callFutureMethod(() async {
+    return futureHandler(() async {
       await userLocalService.updateUser(user);
-
       if (updateRemote) {
         await userService.updateUserData(user);
       }
     });
   }
 
+  FutureEither<void> addUserData(
+      {required SicklerUser user, bool updateRemote = false}) async {
+    return futureHandler(() async {
+      await userLocalService.updateUser(user);
+      if (updateRemote) {
+        await userService.addUserData(user);
+      }
+    });
+  }
+
   /// --------- Delete User Data --------///
   FutureEither<void> deleteUserData(
-      {required SicklerUser user, bool updateRemote = false}) async {
-    return callFutureMethod(() async {
-      await userService.deleteUserData(user.uid);
+      {required SicklerUser user, bool deleteRemote = false}) async {
+    return futureHandler(() async {
+      await userLocalService.deleteUser(user: user);
 
-      if (updateRemote) {
-        await userLocalService.deleteUser(user);
+      if (deleteRemote) {
+        await userService.deleteUserData(user.uid);
       }
     });
   }

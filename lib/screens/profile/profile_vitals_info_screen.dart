@@ -32,6 +32,23 @@ class _ProfileVitalsInfoScreenState
   Genotype selectedGenotype = Genotype.na;
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await ref.watch(userProvider.notifier).getCurrentUserData();
+      SicklerUser user = ref.watch(userProvider).value!;
+      heightController.text = user.profile.height.toString();
+      weightController.text = user.profile.weight.toString();
+
+      if (user.profile.genotype != null) {
+        setState(() {
+          selectedGenotype = user.profile.genotype!;
+        });
+      }
+    });
+    super.initState();
+  }
+
+  @override
   void dispose() {
     super.dispose();
     heightController.dispose();
@@ -151,32 +168,53 @@ class _ProfileVitalsInfoScreenState
                       icon: widget.isEditing!
                           ? FluentIcons.checkmark_24_regular
                           : null,
-                      onPressed: () {
+                      onPressed: () async {
                         //Todo: Continue
                         if (_formKey.currentState!.validate()) {
-                          ///Save Data to State and continue in the next page
-                          ///
+                          final userNotifier = ref.watch(userProvider.notifier);
+                          SicklerUser user = ref.watch(userProvider).value!;
 
-                          SicklerUser currentUser =
-                              ref.watch(userProvider).value!;
-
-                          UserProfile updatedProfile = currentUser.profile
-                              .copyWith(
+                          user = user.copyWith(
+                              profile: user.profile.copyWith(
                                   height: double.tryParse(
                                       heightController.text.trim()),
                                   weight: double.tryParse(
                                       weightController.text.trim()),
-                                  genotype: selectedGenotype);
-                          currentUser = currentUser.copyWith(
-                            profile: updatedProfile,
-                          );
+                                  genotype: selectedGenotype));
 
-                          //Save data to state
-                          ref
-                              .watch(userProvider.notifier)
-                              .saveDataToState(currentUser);
+                          if (widget.isEditing!) {
+                            ///Always update remote when the user is editing data.
+                            ///But do not do that when the user is adding data because
+                            ///the user is onboarding for the first time,
+                            ///the data will be gathered and saved at the
+                            ///end of the onboard process
 
-                          context.pushNamed(ProfileMedicalInfoScreen.id);
+                            await userNotifier.updateUserData(
+                                user: user, updateRemote: true);
+
+                            ///Also show snack bars when making remote calls
+                            if (context.mounted) {
+                              if (userNotifier.isSuccessful) {
+                                showCustomSnackBar(
+                                    context: context,
+                                    message: "Profile Updated",
+                                    mode: SnackBarMode.success);
+                              } else {
+                                showCustomSnackBar(
+                                    context: context,
+                                    message: "Something went wrong",
+                                    mode: SnackBarMode.error);
+                              }
+                            }
+                          } else {
+                            await userNotifier.addUserData(
+                                user: user, updateRemote: false);
+                          }
+
+                          if (context.mounted) {
+                            ///Todo: Add parameters for isEditing to know if it is editing or not
+                            context.pushNamed(ProfileMedicalInfoScreen.id);
+                          }
                         }
                       },
                       label: widget.isEditing! ? "Save" : "Continue"),

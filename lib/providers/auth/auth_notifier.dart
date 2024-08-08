@@ -8,9 +8,23 @@ import 'package:sickler/repositories/auth/auth_repository.dart';
 
 class AuthNotifier extends AsyncNotifier<SicklerUser?> {
   final AuthRepository _authRepository;
-  String? errorMessage;
+
   AuthNotifier({required AuthRepository authRepository})
       : _authRepository = authRepository;
+
+  ///Getter to actually know when an operation is successful or not;
+  bool get isSuccessful =>
+      state.whenOrNull(
+        data: (user) => user != null && user.isNotEmpty,
+      ) ??
+      false;
+
+  bool get isLoading => state.whenOrNull(
+    loading: () => true,
+  ) ?? false;
+
+  String? get errorMessage => state.whenOrNull(
+      error: (error, _) => error is Failure ? error.message : error.toString());
 
   @override
   Future<SicklerUser> build() async {
@@ -24,7 +38,6 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
         .signInWithEmailAndPassword(email: email, password: password);
 
     response.fold((failure) {
-      errorMessage = failure.message;
       state = AsyncValue.error(failure, StackTrace.current);
     }, (sicklerUser) {
       state = AsyncValue.data(sicklerUser);
@@ -38,7 +51,6 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
         .registerWithEmailAndPassword(email: email, password: password);
 
     response.fold((failure) {
-      errorMessage = failure.message;
       state = AsyncValue.error(failure, StackTrace.current);
     }, (sicklerUser) {
       state = AsyncValue.data(sicklerUser);
@@ -51,7 +63,6 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
         await _authRepository.signInWithGoogle();
 
     response.fold((failure) {
-      errorMessage = failure.message;
       state = AsyncValue.error(failure, StackTrace.current);
     }, (sicklerUser) {
       state = AsyncValue.data(sicklerUser);
@@ -63,7 +74,6 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
     final Either<Failure, void> response = await _authRepository.signOut();
 
     response.fold((failure) {
-      errorMessage = failure.message;
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
       state = AsyncValue.data(SicklerUser.empty);
@@ -76,23 +86,9 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
         await _authRepository.sendPasswordResetEmail(email: email);
 
     response.fold((failure) {
-      errorMessage = failure.message;
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
       state = AsyncValue.data(SicklerUser.empty);
-    });
-  }
-
-  Future<void> getCurrentUser() async {
-    state = const AsyncValue.loading();
-    final Either<Failure, SicklerUser> response =
-        await _authRepository.getCurrentUser();
-
-    response.fold((failure) {
-      errorMessage = failure.message;
-      state = AsyncValue.error(failure, StackTrace.current);
-    }, (sicklerUser) {
-      state = AsyncValue.data(sicklerUser);
     });
   }
 
@@ -103,7 +99,6 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
         .confirmPasswordReset(code: code, newPassword: newPassword);
 
     response.fold((failure) {
-      errorMessage = failure.message;
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
       state = AsyncValue.data(SicklerUser.empty);

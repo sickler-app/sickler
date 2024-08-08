@@ -4,10 +4,14 @@ import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/models/user/sickler_user.dart';
+import 'package:sickler/providers/providers.dart';
 import 'package:sickler/repositories/repositories.dart';
 import 'package:sickler/services/services.dart';
+import 'package:sickler/services/user/local/user_local_service.dart';
 
 class MockAuthService extends Mock implements AuthService {}
+
+class MockUserLocalService extends Mock implements UserLocalService {}
 
 class MockUserCredential extends Mock implements UserCredential {}
 
@@ -34,6 +38,7 @@ class MockUser extends Mock implements User {
 void main() {
   ///Auth Repository Tests
   late final AuthService mockedAuthService;
+  late final UserLocalService mockedUserLocalService;
   late final AuthRepository authRepository;
   late final SicklerUser sicklerUser;
   late final UserCredential mockUserCredential;
@@ -42,9 +47,11 @@ void main() {
   setUpAll(() {
     ///Test setup
     mockedAuthService = MockAuthService();
+    mockedUserLocalService = MockUserLocalService();
     mockUserCredential = MockUserCredential();
     mockUser = MockUser();
-    authRepository = AuthRepository(authService: mockedAuthService);
+    authRepository = AuthRepository(
+        authService: mockedAuthService, userLocalService: userLocalService);
 
     sicklerUser = const SicklerUser(
       photoUrl: "photo",
