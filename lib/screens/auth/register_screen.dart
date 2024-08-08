@@ -4,10 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/models/models.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
-import '../../models/user/user_preferences.dart';
 import '../../providers/providers.dart';
 import '../global_components/bottom_nav_bar.dart';
 import '../profile/profile_basic_info_screen.dart';
@@ -41,8 +41,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     bool isDarkMode = theme.brightness == Brightness.dark;
-    final authProviderNotifier = ref.watch(authProvider.notifier);
-
     return Scaffold(
       body: SafeArea(
         child: Form(
@@ -160,40 +158,55 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                       ///Buttons
                       SicklerButton(
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              final UserPreferences? userPreferences =
-                                  ref.watch(userPreferencesProvider).value;
+                        label: "Sign Up",
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final authNotifier =
+                                ref.read(authProvider.notifier);
+                            final userNotifier =
+                                ref.read(userProvider.notifier);
 
-                              await authProviderNotifier
-                                  .registerWithEmailAndPassword(
+                            await authNotifier.registerWithEmailAndPassword(
                                 email: emailController.text.trim(),
-                                password: passwordController.text.trim(),
-                              )
-                                  .then((_) {
-                                if (context.mounted) {
-                                  if (userPreferences!.isFirstTime) {
-                                    ref
-                                        .watch(userPreferencesProvider.notifier)
-                                        .addUserPreferencesToLocal(
-                                            userPreferences.copyWith(
-                                                isFirstTime: false));
+                                password: passwordController.text.trim());
 
-                                    //mark as not first time
+                            if (authNotifier.isSuccessful) {
+                              await userNotifier.getCurrentUserData();
+                              SicklerUser user = ref.watch(userProvider).value!;
+                              if (context.mounted) {
+                                showCustomSnackBar(
+                                    context: context,
+                                    message: "Signed Up successfully",
+                                    mode: SnackBarMode.success);
+                                if (user.preferences.isFirstTime) {
+                                  ///Set as is Not First Time
+                                  await userNotifier.updateUserData(
+                                      user: user.copyWith(
+                                          preferences: user.preferences
+                                              .copyWith(isFirstTime: false)));
+
+                                  if (context.mounted) {
                                     context.goNamed(AuthSuccessScreen.id);
+                                  }
+                                } else {
+                                  if (user.preferences.isOnboardingComplete) {
+                                    context.goNamed(BottomNavBar.id);
                                   } else {
-                                    if (userPreferences.isOnboardingComplete) {
-                                      context.goNamed(BottomNavBar.id);
-                                    } else {
-                                      context
-                                          .goNamed(ProfileBasicInfoScreen.id);
-                                    }
+                                    context.goNamed(ProfileBasicInfoScreen.id);
                                   }
                                 }
-                              });
+                              }
+                            } else if (authNotifier.errorMessage != null) {
+                              if (context.mounted) {
+                                showCustomSnackBar(
+                                    context: context,
+                                    message: authNotifier.errorMessage!,
+                                    mode: SnackBarMode.error);
+                              }
                             }
-                          },
-                          label: "Sign Up"),
+                          }
+                        },
+                      ),
                       const Gap(16),
 
                       Align(

@@ -1,48 +1,54 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:isar/isar.dart';
 
-import '../../core/core.dart';
+import '../models.dart';
 
+part 'sickler_user.g.dart';
+
+@Collection(inheritance: false)
 class SicklerUser extends Equatable {
-  final String? displayName;
-  final String? email;
-  final String? photoURL;
-  final String? phoneNumber;
+  final Id id = 1;
+  final String uid;
+  final String email;
+  final String? photoUrl;
   final bool isAnonymous;
   final bool isEmailVerified;
-  final Genotype? genotype;
-  final String uid;
+  final bool isPhoneVerified;
+  final UserProfile profile;
+  final UserPreferences preferences;
 
   const SicklerUser({
-    required this.displayName,
     required this.email,
-    this.genotype,
-    this.photoURL,
-    this.phoneNumber,
     required this.isAnonymous,
-    required this.isEmailVerified,
     required this.uid,
+    this.photoUrl,
+    this.isEmailVerified = false,
+    this.isPhoneVerified = false,
+    this.profile = UserProfile.empty,
+    this.preferences = UserPreferences.empty,
   });
 
   ///-------copyWith--------///
   SicklerUser copyWith({
-    String? displayName,
     String? email,
-    String? photoURL,
-    String? phoneNumber,
     bool? isAnonymous,
-    bool? isEmailVerified,
-    Genotype? genotype,
     String? uid,
+    String? photoUrl,
+    bool? isEmailVerified,
+    bool? isPhoneVerified,
+    UserProfile? profile,
+    UserPreferences? preferences,
   }) {
     return SicklerUser(
-      displayName: displayName ?? this.displayName,
       email: email ?? this.email,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
       uid: uid ?? this.uid,
+      photoUrl: photoUrl ?? this.photoUrl,
       isEmailVerified: isEmailVerified ?? this.isEmailVerified,
+      isPhoneVerified: isPhoneVerified ?? this.isPhoneVerified,
       isAnonymous: isAnonymous ?? this.isAnonymous,
-      genotype: genotype ?? this.genotype,
+      profile: profile ?? this.profile,
+      preferences: preferences ?? this.preferences,
     );
   }
 
@@ -51,12 +57,13 @@ class SicklerUser extends Equatable {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {
       "uid": uid,
-      "displayName": displayName,
       "email": email,
-      "phoneNumber": phoneNumber,
+      "photoUrl": photoUrl,
       "isAnonymous": isAnonymous,
       "isEmailVerified": isEmailVerified,
-      "genotype": genotype.toString(),
+      "isPhoneVerified": isPhoneVerified,
+      "profile": profile.toMap(),
+      "preferences": preferences.toMap(),
     };
 
     return data;
@@ -64,13 +71,13 @@ class SicklerUser extends Equatable {
 
   factory SicklerUser.fromMap({required Map<String, dynamic> data}) {
     return SicklerUser(
-        displayName: data["displayName"],
+        profile: UserProfile.fromMap(data["profile"]),
+        preferences: UserPreferences.fromMap(data: data["preferences"]),
         email: data["email"],
         uid: data["uid"],
-        phoneNumber: data["phoneNumber"],
         isAnonymous: data["isAnonymous"],
         isEmailVerified: data["isEmailVerified"],
-        genotype: data["genotype"]);
+        isPhoneVerified: data["isPhoneVerified"]);
   }
 
   factory SicklerUser.fromUser({required User? user}) {
@@ -78,41 +85,44 @@ class SicklerUser extends Equatable {
       return SicklerUser.empty;
     } else {
       return SicklerUser(
-        displayName: user.displayName,
-        email: user.email,
+        email: user.email!,
         uid: user.uid,
-        phoneNumber: user.phoneNumber,
         isEmailVerified: user.emailVerified,
         isAnonymous: user.isAnonymous,
+        photoUrl: user.photoURL,
       );
     }
   }
 
   ///-------Empty--------///
-  static SicklerUser empty = const SicklerUser(
-      displayName: "",
-      email: "",
-      uid: "",
-      isAnonymous: false,
-      isEmailVerified: true);
+
+  @ignore
+  static SicklerUser empty =
+      const SicklerUser(email: "", isAnonymous: false, uid: "");
+  @ignore
   bool get isEmpty => this == SicklerUser.empty;
+  @ignore
   bool get isNotEmpty => this != SicklerUser.empty;
 
   //override sickler user to string
   @override
   String toString() {
-    return "SicklerUser(displayName: $displayName, email: $email, phoneNumber: $phoneNumber, isAnonymous: $isAnonymous, isEmailVerified: $isEmailVerified, genotype: $genotype, uid: $uid)";
+    if (this == SicklerUser.empty) {
+      return "SicklerUser.empty";
+    }
+    return "SicklerUser(email: $email, uid: $uid, isAnonymous: $isAnonymous, isEmailVerified: $isEmailVerified, isPhoneVerified: $isPhoneVerified, profile: $profile, preferences: $preferences, photoUrl: $photoUrl)";
   }
 
+  @ignore
   @override
   List<Object?> get props => [
-        displayName,
         email,
-        photoURL,
-        phoneNumber,
+        photoUrl,
         isAnonymous,
         isEmailVerified,
-        genotype,
-        uid
+        uid,
+        isPhoneVerified,
+        profile,
+        preferences,
       ];
 }

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/models/models.dart';
 import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
@@ -100,19 +101,20 @@ class _SuggestedWaterDailyGoalScreenState
                 const Gap(16),
                 SicklerButton(
                   onPressed: () async {
-                    ////Mark onboarding as complete
-                    ref
-                        .watch(userPreferencesProvider.notifier)
-                        .addUserPreferencesToLocal(ref
-                            .watch(userPreferencesProvider)
-                            .value!
-                            .copyWith(isOnboardingComplete: true));
+                    //Save suggested water goal
+                    SicklerUser user = ref.watch(userProvider).value!;
 
-                    ref
-                        .watch(userInfoProvider.notifier)
-                        .addUserData(ref.watch(userInfoProvider).value!);
+                    user = user.copyWith(
+                        preferences: user.preferences
+                            .copyWith(dailyWaterGoal: dailyGoal.toDouble()));
 
-                    context.goNamed(BottomNavBar.id);
+                    await ref
+                        .watch(userProvider.notifier)
+                        .updateUserData(user: user, updateRemote: true);
+
+                    if (context.mounted) {
+                      context.goNamed(BottomNavBar.id);
+                    }
                   },
                   label: "Accept Goal & Continue",
                 ),

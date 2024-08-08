@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/models/auth/sickler_user_model.dart';
+import 'package:sickler/models/user/sickler_user.dart';
 import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';
 import 'package:sickler/screens/profile/profile_screen.dart';
@@ -31,8 +31,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final SicklerUser? user = ref.watch(authProvider).value;
 
-    final String displayName = user?.displayName != null
-        ? user!.displayName!.split(" ").first
+    final String displayName = user?.profile.displayName != null
+        ? user!.profile.displayName!.split(" ").first
         : user?.email ?? "User";
 
     return Scaffold(
@@ -72,8 +72,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       context.pushNamed(ProfileScreen.id);
                     },
                     child: CircleAvatar(
-                      backgroundImage: user?.photoURL != null
-                          ? NetworkImage(user!.photoURL!)
+                      backgroundImage: user?.photoUrl != null
+                          ? NetworkImage(user!.photoUrl!)
                           : const AssetImage("assets/images/memoji.png")
                               as ImageProvider,
                       radius: 32,

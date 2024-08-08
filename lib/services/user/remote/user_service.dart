@@ -13,15 +13,12 @@ class UserService {
   }
 
   ///--------Add and Update User Data--------///
-  Future<void> addUserData(SicklerUserInfo userInfo) async {
-    await firestore.collection('users').doc(userInfo.uid).set(userInfo.toMap());
+  Future<void> addUserData(SicklerUser user) async {
+    await firestore.collection('users').doc(user.uid).set(user.toMap());
   }
 
-  Future<void> updateUserData(SicklerUserInfo userInfo) async {
-    await firestore
-        .collection('users')
-        .doc(userInfo.uid)
-        .update(userInfo.toMap());
+  Future<void> updateUserData(SicklerUser user) async {
+    await firestore.collection('users').doc(user.uid).update(user.toMap());
   }
 
   ///-----Delete -----///

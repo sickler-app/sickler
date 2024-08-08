@@ -43,12 +43,12 @@ void main() {
         () => AuthNotifier(authRepository: mockAuthRepository));
 
     sicklerUser = const SicklerUser(
-      displayName: "test name",
+      photoUrl: "photo",
       email: "test@email.com",
       uid: "uid",
-      phoneNumber: "000000",
       isAnonymous: false,
       isEmailVerified: false,
+      isPhoneVerified: false,
     );
 
     registerFallbackValue(AsyncValue<SicklerUser?>.data(sicklerUser));
@@ -92,10 +92,10 @@ void main() {
     test(
         "Should set 'state' to 'AsyncError(error)' object on 'signInWithEmailAndPassword' with FirebaseException",
         () async {
-      when(() => mockAuthRepository.signInWithEmailAndPassword(
-              email: "test@email.com", password: "12345678"))
-          .thenAnswer((_) async =>
-              const Left(Failure.firebase(errorMessage: "firebase error")));
+      when(() =>
+          mockAuthRepository.signInWithEmailAndPassword(
+              email: "test@email.com", password: "12345678")).thenAnswer(
+          (_) async => const Left(Failure.firebase(message: "firebase error")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
@@ -118,8 +118,7 @@ void main() {
       final errorState = authNotifierProvider.state as AsyncError;
 
       expect(errorState.error, isA<Failure>());
-      expect(
-          (errorState.error as Failure).errorMessage, equals("firebase error"));
+      expect((errorState.error as Failure).message, equals("firebase error"));
       expect(errorState.value, equals(SicklerUser.empty));
     });
   });
@@ -155,10 +154,10 @@ void main() {
     test(
         "Should set 'state' to 'AsyncError(error)' object on 'signInWithEmailAndPassword' with FirebaseException",
         () async {
-      when(() => mockAuthRepository.registerWithEmailAndPassword(
-              email: "test@email.com", password: "12345678"))
-          .thenAnswer((_) async =>
-              const Left(Failure.firebase(errorMessage: "firebase error")));
+      when(() =>
+          mockAuthRepository.registerWithEmailAndPassword(
+              email: "test@email.com", password: "12345678")).thenAnswer(
+          (_) async => const Left(Failure.firebase(message: "firebase error")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
@@ -181,8 +180,7 @@ void main() {
       final errorState = authNotifierProvider.state as AsyncError;
 
       expect(errorState.error, isA<Failure>());
-      expect(
-          (errorState.error as Failure).errorMessage, equals("firebase error"));
+      expect((errorState.error as Failure).message, equals("firebase error"));
       expect(errorState.value, equals(SicklerUser.empty));
     });
   });
@@ -222,7 +220,7 @@ void main() {
         "Should set state to AsyncError(failure) on signInWithGoogle with Exception/FirebaseException",
         () async {
       when(() => mockAuthRepository.signInWithGoogle()).thenAnswer(
-          (_) async => const Left(Failure(errorMessage: "error occurred")));
+          (_) async => const Left(Failure(message: "error occurred")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
@@ -241,8 +239,7 @@ void main() {
       final errorState = authNotifierProvider.state as AsyncError;
 
       expect(errorState.error, isA<Failure>());
-      expect(
-          (errorState.error as Failure).errorMessage, equals("error occurred"));
+      expect((errorState.error as Failure).message, equals("error occurred"));
       expect(errorState.value, equals(SicklerUser.empty));
     });
   });
@@ -283,7 +280,7 @@ void main() {
         "Should set state to AsyncError(failure) on signOut failure with Exception/FirebaseException",
         () async {
       when(() => mockAuthRepository.signOut()).thenAnswer(
-          (_) async => const Left(Failure(errorMessage: "failed to sign out")));
+          (_) async => const Left(Failure(message: "failed to sign out")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
@@ -303,8 +300,8 @@ void main() {
 
       ///If sign out fails, the state should remain the state of the current user
       expect(errorState.error, isA<Failure>());
-      expect((errorState.error as Failure).errorMessage,
-          equals("failed to sign out"));
+      expect(
+          (errorState.error as Failure).message, equals("failed to sign out"));
       expect(errorState.value, equals(SicklerUser.empty));
     });
   });
@@ -345,10 +342,10 @@ void main() {
     test(
         "Should set state to AsyncError(failure) on sendPasswordResetEmail failure with Exception/FirebaseException",
         () async {
-      when(() => mockAuthRepository.sendPasswordResetEmail(
-              email: "test@email.com"))
-          .thenAnswer((_) async => const Left(
-              Failure(errorMessage: "failed to send password reset email")));
+      when(() =>
+          mockAuthRepository.sendPasswordResetEmail(
+              email: "test@email.com")).thenAnswer((_) async =>
+          const Left(Failure(message: "failed to send password reset email")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
@@ -369,7 +366,7 @@ void main() {
 
       ///If sign out fails, the state should remain the state of the current user
       expect(errorState.error, isA<Failure>());
-      expect((errorState.error as Failure).errorMessage,
+      expect((errorState.error as Failure).message,
           equals("failed to send password reset email"));
       expect(errorState.value, equals(SicklerUser.empty));
     });
@@ -415,7 +412,7 @@ void main() {
       when(() => mockAuthRepository.confirmPasswordReset(
               code: "123456", newPassword: "12345678"))
           .thenAnswer((_) async =>
-              const Left(Failure(errorMessage: "failed to set new password")));
+              const Left(Failure(message: "failed to set new password")));
 
       final authNotifierProvider =
           providerContainer.read(authProvider.notifier);
@@ -436,7 +433,7 @@ void main() {
 
       ///If sign out fails, the state should remain the state of the current user
       expect(errorState.error, isA<Failure>());
-      expect((errorState.error as Failure).errorMessage,
+      expect((errorState.error as Failure).message,
           equals("failed to set new password"));
       expect(errorState.value, equals(SicklerUser.empty));
     });

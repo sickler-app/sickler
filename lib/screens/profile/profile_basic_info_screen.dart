@@ -25,7 +25,7 @@ class _ProfileBasicInfoScreenState
     extends ConsumerState<ProfileBasicInfoScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
+  // final TextEditingController addressController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Gender selectedRadioValue = Gender.male;
@@ -43,27 +43,28 @@ class _ProfileBasicInfoScreenState
     super.dispose();
     nameController.dispose();
     ageController.dispose();
-    addressController.dispose();
+    //  addressController.dispose();
   }
 
   @override
   void initState() {
-    nameController.text =
-        ref.read(authStateChangesStreamProvider).value!.displayName ?? "";
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await ref.watch(userProvider.notifier).getCurrentUserData();
+      SicklerUser user = ref.watch(userProvider).value!;
+      nameController.text = user.profile.displayName ?? "";
+      ageController.text = user.profile.age.toString();
+
+      if (user.profile.gender != null) {
+        setState(() {
+          selectedRadioValue = user.profile.gender!;
+        });
+      }
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userInfoProviderNotifier = ref.watch(userInfoProvider.notifier);
-
-    final SicklerUser? currentUser =
-        ref.watch(authStateChangesStreamProvider).value;
-
-    final userPreferencesProviderNotifier =
-        ref.watch(userPreferencesProvider.notifier);
-    final userPreferencesState = ref.watch(userPreferencesProvider);
-
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -99,7 +100,7 @@ class _ProfileBasicInfoScreenState
                       keyboardType: TextInputType.name,
                       decoration:
                           SicklerInputDecoration.inputDecoration(context)
-                              .copyWith(hintText: "Email"),
+                              .copyWith(hintText: "Names"),
                     ),
                     const Gap(24),
                     Text("Age", style: theme.textTheme.bodyMedium),
@@ -159,7 +160,6 @@ class _ProfileBasicInfoScreenState
                     Text("Sex", style: theme.textTheme.bodyMedium),
                     const Gap(8),
 
-                    const Gap(16),
                     Row(
                       children: [
                         Expanded(
@@ -195,27 +195,44 @@ class _ProfileBasicInfoScreenState
                     SicklerButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            final SicklerUserInfo userInfo = SicklerUserInfo(
-                                uid: currentUser!.uid,
-                                age: int.parse(ageController.text.trim()),
-                                gender: selectedRadioValue.toString(),
-                                fullName: nameController.text.trim(),
-                                displayName: currentUser.displayName!);
-                            //Save Data to Set
-                            userInfoProviderNotifier.saveDataToState(userInfo);
+                            final userNotifier =
+                                ref.watch(userProvider.notifier);
+                            SicklerUser user = ref.watch(userProvider).value!;
 
-                            //Mark User as Onboarded since the other pages are shippable
-                            //and we don't want the user to repeat the whole onboarding
-                            // process because he skipped it the first time,
-                            //they can always do that later
-                            final UserPreferences userPreferences =
-                                userPreferencesState.value!;
-                            if (!widget.isEditing!) {
-                              await userPreferencesProviderNotifier
-                                  .addUserPreferencesToLocal(
-                                      userPreferences.copyWith(
-                                          uid: currentUser.uid,
-                                          isOnboardingComplete: false));
+                            user = user.copyWith(
+                                profile: user.profile.copyWith(
+                              name: nameController.text.trim(),
+                              gender: selectedRadioValue,
+                              age: int.tryParse(ageController.text.trim()),
+                            ));
+
+                            if (widget.isEditing!) {
+                              ///Always update remote when the user is editing data.
+                              ///But do not do that when the user is adding data because
+                              ///the user is onboarding for the first time,
+                              ///the data will be gathered and saved at the
+                              ///end of the onboard process
+
+                              await userNotifier.updateUserData(
+                                  user: user, updateRemote: true);
+
+                              ///Also show snack bars when making remote calls
+                              if (context.mounted) {
+                                if (userNotifier.isSuccessful) {
+                                  showCustomSnackBar(
+                                      context: context,
+                                      message: "Profile Updated",
+                                      mode: SnackBarMode.success);
+                                } else {
+                                  showCustomSnackBar(
+                                      context: context,
+                                      message: "Something went wrong",
+                                      mode: SnackBarMode.error);
+                                }
+                              }
+                            } else {
+                              await userNotifier.addUserData(
+                                  user: user, updateRemote: false);
                             }
 
                             if (context.mounted) {

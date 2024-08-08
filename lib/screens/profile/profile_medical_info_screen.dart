@@ -12,7 +12,8 @@ import '../water/suggested_water_daily_goal_screen.dart';
 
 class ProfileMedicalInfoScreen extends ConsumerStatefulWidget {
   static const String id = "medical_info";
-  const ProfileMedicalInfoScreen({super.key});
+  final bool? isEditing;
+  const ProfileMedicalInfoScreen({super.key, this.isEditing = false});
 
   @override
   ConsumerState<ProfileMedicalInfoScreen> createState() =>
@@ -28,6 +29,8 @@ class _ProfileMedicalInfoScreenState
   bool labelSelected = false;
   List<String> medicalConditions = [];
   List<String> allergies = [];
+
+  ///Todo: Setup crisis frequency selection
   List<String> crisisFrequency = [];
 
   @override
@@ -44,12 +47,20 @@ class _ProfileMedicalInfoScreenState
   //     ));
   //   });
   // }
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await ref.watch(userProvider.notifier).getCurrentUserData();
+      SicklerUser user = ref.watch(userProvider).value!;
+      medicalConditions = user.profile.medicalConditions ?? [];
+      allergies = user.profile.allergies ?? [];
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final userInfoProviderNotifier = ref.watch(userInfoProvider.notifier);
-    final userInfoState = ref.watch(userInfoProvider);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -222,72 +233,40 @@ class _ProfileMedicalInfoScreenState
                   SicklerButton(
                       onPressed: () async {
                         ///Todo: add the rest of the health data;
-                        ///
+                        final userNotifier = ref.watch(userProvider.notifier);
+                        SicklerUser user = ref.watch(userProvider).value!;
 
-                        ref
-                            .watch(userPreferencesProvider.notifier)
-                            .getUserPreferences()
-                            .then((_) async {
-                          //Update User Preferences
-                          final UserPreferences finalPrefs = ref
-                              .watch(userPreferencesProvider)
-                              .value!
-                              .copyWith(
-                                isOnboardingComplete: true,
-                              );
-                          //Save updated preferences to local
-                          await ref
-                              .watch(userPreferencesProvider.notifier)
-                              .addUserPreferencesToLocal(finalPrefs);
+                        user = user.copyWith(
+                            preferences: user.preferences
+                                .copyWith(isOnboardingComplete: true),
+                            profile: user.profile.copyWith(
+                                allergies: allergies,
+                                medicalConditions: medicalConditions,
+                                bmi: user.profile.calculateBMI()));
 
-                          //Add updated preferences to user data going to firebase
-                          final SicklerUserInfo updatedUserInfo =
-                              userInfoState.value!.copyWith(
-                                  allergies: allergies,
-                                  medicalConditions: medicalConditions,
-                                  bmi: userInfoState.value!.calculateBMI(),
-                                  preferences: finalPrefs);
+                        //Send data to firebase
 
-                          //Send data to firebase
-                          await userInfoProviderNotifier
-                              .addUserData(updatedUserInfo)
-                              .then((_) {
-                            if (userInfoState.hasValue &&
-                                !userInfoState.hasError) {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                      content: Text(
-                                "success",
-                                style: theme.textTheme.bodyMedium!
-                                    .copyWith(color: Colors.green),
-                              )));
-                            }
-                          });
-                        });
+                        if (widget.isEditing!) {
+                          await userNotifier.updateUserData(
+                              user: user, updateRemote: true);
+                        } else {
+                          await userNotifier.addUserData(
+                              user: user, updateRemote: true);
+                        }
 
-                        // if (userInfoState.hasError) {
-                        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //       content: Text(
-                        //     (userInfoState.error as Failure).errorMessage ??
-                        //         "error occurred",
-                        //     style: theme.textTheme.bodyMedium!
-                        //         .copyWith(color: theme.colorScheme.error),
-                        //   )));
-                        // }
-                        //
-                        // if (userInfoState.isLoading) {
-                        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //       content: Text(
-                        //     "loading",
-                        //     style: theme.textTheme.bodyMedium!
-                        //         .copyWith(color: theme.colorScheme.secondary),
-                        //   )));
-                        // }
-
-                        ///Todo: perform proper error and state notification;
-                        ///Todo: navigate to the page for showing recommended water goal
                         if (context.mounted) {
-                          context.pushNamed(SuggestedWaterDailyGoalScreen.id);
+                          if (userNotifier.isSuccessful) {
+                            showCustomSnackBar(
+                                context: context,
+                                message: "Profile Updated",
+                                mode: SnackBarMode.success);
+                            context.pushNamed(SuggestedWaterDailyGoalScreen.id);
+                          } else if (userNotifier.errorMessage != null) {
+                            showCustomSnackBar(
+                                context: context,
+                                message: "Something went wrong",
+                                mode: SnackBarMode.error);
+                          }
                         }
                       },
                       label: "Continue"),

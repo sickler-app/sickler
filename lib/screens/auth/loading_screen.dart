@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,8 +7,7 @@ import 'package:sickler/screens/auth/google_sign_in_screen.dart';
 import 'package:sickler/screens/onboarding/onboarding_base_screen.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
-import '../../models/auth/sickler_user_model.dart';
-import '../../models/user/user_preferences.dart';
+import '../../models/user/sickler_user.dart';
 import '../../providers/providers.dart';
 import '../global_components/bottom_nav_bar.dart';
 
@@ -22,7 +23,7 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await evaluateInitialLocation();
+      await evaluateInitialLocation(context);
     });
     super.initState();
   }
@@ -43,50 +44,36 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
         );
   }
 
-  Future<void> evaluateInitialLocation() async {
-    // print("EVALUATING INITIAL LOCATION");
+  Future<void> evaluateInitialLocation(BuildContext context) async {
+    log("EVALUATING INITIAL LOCATION");
 
-    await ref.watch(authProvider.notifier).getCurrentUser().then((_) async {
-      final SicklerUser user = ref.watch(authProvider).value!;
-      late UserPreferences? preferences;
-      late bool isFirstTime;
-      late bool isOnboardingComplete;
-      await ref
-          .watch(userPreferencesProvider.notifier)
-          .getUserPreferences()
-          .then((_) {
-        ///Getting user data
-        preferences = ref.watch(userPreferencesProvider).value;
-        isFirstTime = preferences!.isFirstTime;
-        isOnboardingComplete = preferences!.isOnboardingComplete;
-        final bool isLoggedIn = user.isNotEmpty;
-        if (context.mounted) {
-          if (isLoggedIn) {
-            if (!isOnboardingComplete) {
-              ///not onboarded
-              //  print("NAVIGATING TO ONBOARDING BEGINNING SCREEN");
-              context.goNamed(ProfileBasicInfoScreen.id);
-              // return "/${ProfileScreen.id}/${ProfileBasicInfoScreen.id}";
-            } else {
-              ///Logged in and onboarded
-              //  print("NAVIGATE HOME");
-              context.goNamed(BottomNavBar.id);
-              // return "/";
-            }
-          } else {
-            ///Is not Logged In
-            if (isFirstTime) {
-              //   print("NAVIGATING TO ONBOARDING SCREENS");
-              context.goNamed(OnboardingBaseScreen.id);
-              //  return "/${OnboardingBaseScreen.id}";
-            } else {
-              //   print("NAVIGATING TO GOOGLE SIGN IN SCREEN");
-              context.goNamed(GoogleSignInScreen.id);
-              //  return "/auth/${GoogleSignInScreen.id}";
-            }
-          }
+    final userNotifier = ref.read(userProvider.notifier);
+
+    await userNotifier.getCurrentUserData();
+
+    final SicklerUser user =
+        ref.watch(userProvider.select((state) => state.valueOrNull!));
+
+    final bool isFirstTime = user.preferences.isFirstTime;
+    final bool isOnboardingComplete = user.preferences.isOnboardingComplete;
+    final bool isLoggedIn = user.isNotEmpty;
+    if (context.mounted) {
+      if (isLoggedIn) {
+        if (!isOnboardingComplete) {
+          ///not onboarded
+          context.goNamed(ProfileBasicInfoScreen.id);
+        } else {
+          ///Logged in and onboarded
+          context.goNamed(BottomNavBar.id);
         }
-      });
-    });
+      } else {
+        ///Is not Logged In
+        if (isFirstTime) {
+          context.goNamed(OnboardingBaseScreen.id);
+        } else {
+          context.goNamed(GoogleSignInScreen.id);
+        }
+      }
+    }
   }
 }

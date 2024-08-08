@@ -8,7 +8,7 @@ import 'package:sickler/screens/auth/register_screen.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
-import '../../models/user/user_preferences.dart';
+import '../../models/models.dart';
 import '../../providers/providers.dart';
 import '../global_components/bottom_nav_bar.dart';
 import 'auth_success.dart';
@@ -37,7 +37,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final authProviderNotifier = ref.watch(authProvider.notifier);
 
     return Scaffold(
       body: SafeArea(
@@ -107,38 +106,53 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
                 ///Buttons
                 SicklerButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        final UserPreferences? userPreferences =
-                            ref.watch(userPreferencesProvider).value;
+                  label: "Sign In",
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final authNotifier = ref.read(authProvider.notifier);
+                      final userNotifier = ref.read(userProvider.notifier);
 
-                        await authProviderNotifier
-                            .signInWithEmailAndPassword(
+                      await authNotifier.signInWithEmailAndPassword(
                           email: emailController.text.trim(),
-                          password: passwordController.text.trim(),
-                        )
-                            .then((_) {
-                          if (context.mounted) {
-                            if (userPreferences!.isFirstTime) {
-                              ref
-                                  .watch(userPreferencesProvider.notifier)
-                                  .addUserPreferencesToLocal(userPreferences
-                                      .copyWith(isFirstTime: false));
+                          password: passwordController.text.trim());
 
-                              //mark as not first time
+                      if (authNotifier.isSuccessful) {
+                        await userNotifier.getCurrentUserData();
+                        SicklerUser user = ref.watch(userProvider).value!;
+                        if (context.mounted) {
+                          showCustomSnackBar(
+                              context: context,
+                              message: "Signed in successfully",
+                              mode: SnackBarMode.success);
+                          if (user.preferences.isFirstTime) {
+                            ///Set as is Not First Time
+                            await userNotifier.updateUserData(
+                                user: user.copyWith(
+                                    preferences: user.preferences
+                                        .copyWith(isFirstTime: false)));
+
+                            if (context.mounted) {
                               context.goNamed(AuthSuccessScreen.id);
+                            }
+                          } else {
+                            if (user.preferences.isOnboardingComplete) {
+                              context.goNamed(BottomNavBar.id);
                             } else {
-                              if (userPreferences.isOnboardingComplete) {
-                                context.goNamed(BottomNavBar.id);
-                              } else {
-                                context.goNamed(ProfileBasicInfoScreen.id);
-                              }
+                              context.goNamed(ProfileBasicInfoScreen.id);
                             }
                           }
-                        });
+                        }
+                      } else if (authNotifier.errorMessage != null) {
+                        if (context.mounted) {
+                          showCustomSnackBar(
+                              context: context,
+                              message: authNotifier.errorMessage!,
+                              mode: SnackBarMode.error);
+                        }
                       }
-                    },
-                    label: "Sign In"),
+                    }
+                  },
+                ),
                 const Gap(kPadding16),
                 Align(
                   alignment: Alignment.center,

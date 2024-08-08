@@ -4,14 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/auth/auth_success.dart';
+import 'package:sickler/models/models.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
-import 'package:sickler/screens/global_components/bottom_nav_bar.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
-import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
-import '../../models/user/user_preferences.dart';
 import '../../providers/providers.dart';
+import '../global_components/bottom_nav_bar.dart';
+import '../profile/profile_basic_info_screen.dart';
+import 'auth_success.dart';
 
 class GoogleSignInScreen extends ConsumerStatefulWidget {
   static const String id = "google_sign_in";
@@ -24,22 +24,12 @@ class GoogleSignInScreen extends ConsumerStatefulWidget {
 class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final UserPreferences? userPreferences =
-          ref.read(userPreferencesProvider).value;
-
-      ref
-          .read(userPreferencesProvider.notifier)
-          .addUserPreferencesToLocal(userPreferences!);
-    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final authProviderNotifier = ref.watch(authProvider.notifier);
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kPadding16),
@@ -53,44 +43,47 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
                     buttonType: SicklerButtonType.secondary,
                     iconPath: "assets/svg/google.svg",
                     onPressed: () async {
-                      final UserPreferences userPreferences =
-                          ref.watch(userPreferencesProvider).value!;
+                      final authNotifier = ref.read(authProvider.notifier);
+                      final userNotifier = ref.read(userProvider.notifier);
 
-                      await authProviderNotifier.singInWithGoogle().then((_) {
+                      await authNotifier.singInWithGoogle();
+
+                      if (authNotifier.isSuccessful) {
+                        await userNotifier.getCurrentUserData();
+                        SicklerUser user = ref.watch(userProvider).value!;
+
                         if (context.mounted) {
-                          if (userPreferences.isFirstTime) {
-                            ref
-                                .watch(userPreferencesProvider.notifier)
-                                .addUserPreferencesToLocal(userPreferences
-                                    .copyWith(isFirstTime: false));
+                          showCustomSnackBar(
+                              context: context,
+                              message: "Signed in successfully",
+                              mode: SnackBarMode.success);
+                          if (user.preferences.isFirstTime) {
+                            ///Set as is Not First Time
 
-                            //mark as not first time
-                            context.goNamed(AuthSuccessScreen.id);
+                            await userNotifier.updateUserData(
+                                user: user.copyWith(
+                                    preferences: user.preferences
+                                        .copyWith(isFirstTime: false)));
+
+                            if (context.mounted) {
+                              context.goNamed(AuthSuccessScreen.id);
+                            }
                           } else {
-                            if (userPreferences.isOnboardingComplete) {
+                            if (user.preferences.isOnboardingComplete) {
                               context.goNamed(BottomNavBar.id);
                             } else {
                               context.goNamed(ProfileBasicInfoScreen.id);
                             }
                           }
                         }
-                      });
-
-                      // if (!user.hasError && user.hasValue) {
-                      //Check if user is onboarded and either go to info screen or home screen
-                      // final UserPreferences? userPreferences =
-                      //     ref.watch(userPreferencesProvider).value;
-                      // print("new user prefs");
-                      // print(userPreferences);
-
-                      // } else {
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     SnackBar(
-                      //       content: Text(
-                      //           "${(user.error as Failure).errorMessage}"),
-                      //     ),
-                      //   );
-                      // }
+                      } else if (authNotifier.errorMessage != null) {
+                        if (context.mounted) {
+                          showCustomSnackBar(
+                              context: context,
+                              message: authNotifier.errorMessage!,
+                              mode: SnackBarMode.error);
+                        }
+                      }
                     },
                     label: "Continue")
                 .animate()

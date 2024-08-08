@@ -28,10 +28,10 @@ enum Units {
   gallons;
 }
 
-@Collection(inheritance: false)
+@Embedded(inheritance: false)
 class UserPreferences extends Equatable {
   const UserPreferences(
-      {required this.uid,
+      {this.uid,
       this.dailyWaterGoal,
       this.waterInputVolume,
       this.volumeUnit,
@@ -39,14 +39,13 @@ class UserPreferences extends Equatable {
       this.massUnit,
       this.isFirstTime = true,
       this.isOnboardingComplete = false,
+      this.lastUpdated,
       this.themeMode});
-
-  final Id id = 1; //Make it fixed so so we have 1 ID to auto increment
 
   //Water Preferences
   final double? dailyWaterGoal;
   final double? waterInputVolume;
-  final String uid;
+  final String? uid;
 
   @Enumerated(EnumType.name)
   final Units? volumeUnit;
@@ -62,30 +61,31 @@ class UserPreferences extends Equatable {
   @Enumerated(EnumType.name)
   final ThemeMode? themeMode;
 
+  final DateTime? lastUpdated;
+
   ///------CopyWith---------///
-  UserPreferences copyWith({
-    final String? uid,
-    final double? dailyWaterGoal,
-    final double? waterInputVolume,
-    final Units? volumeUnit,
-    final Units? lengthUnit,
-    final Units? massUnit,
-    final bool? isFirstTime,
-    final bool? isOnboardingComplete,
-    //  final bool? isOnboarding,
-    final ThemeMode? themeMode,
-  }) {
+  UserPreferences copyWith(
+      {final String? uid,
+      final double? dailyWaterGoal,
+      final double? waterInputVolume,
+      final Units? volumeUnit,
+      final Units? lengthUnit,
+      final Units? massUnit,
+      final bool? isFirstTime,
+      final bool? isOnboardingComplete,
+      final ThemeMode? themeMode,
+      final DateTime? lastUpdated}) {
     return UserPreferences(
-      uid: uid ?? this.uid,
-      dailyWaterGoal: dailyWaterGoal ?? this.dailyWaterGoal,
-      waterInputVolume: waterInputVolume ?? this.waterInputVolume,
-      volumeUnit: volumeUnit ?? this.volumeUnit,
-      massUnit: massUnit ?? this.massUnit,
-      lengthUnit: lengthUnit ?? this.lengthUnit,
-      isFirstTime: isFirstTime ?? this.isFirstTime,
-      // isOnboarding: isOnboarding ?? this.isOnboarding,
-      isOnboardingComplete: isOnboardingComplete ?? this.isOnboardingComplete,
-    );
+        uid: uid ?? this.uid,
+        dailyWaterGoal: dailyWaterGoal ?? this.dailyWaterGoal,
+        waterInputVolume: waterInputVolume ?? this.waterInputVolume,
+        volumeUnit: volumeUnit ?? this.volumeUnit,
+        massUnit: massUnit ?? this.massUnit,
+        lengthUnit: lengthUnit ?? this.lengthUnit,
+        isFirstTime: isFirstTime ?? this.isFirstTime,
+        isOnboardingComplete: isOnboardingComplete ?? this.isOnboardingComplete,
+        themeMode: themeMode ?? this.themeMode,
+        lastUpdated: lastUpdated ?? this.lastUpdated);
   }
 
   Map<String, dynamic> toMap() {
@@ -98,7 +98,8 @@ class UserPreferences extends Equatable {
       "massUnit": massUnit,
       "isFirstTime": isFirstTime,
       "isOnboardingComplete": isOnboardingComplete,
-      "themeMode": themeMode,
+      "themeMode": themeMode?.name,
+      "lastUpdated": lastUpdated,
     };
 
     return data;
@@ -106,29 +107,19 @@ class UserPreferences extends Equatable {
 
   factory UserPreferences.fromMap({required Map<String, dynamic> data}) {
     return UserPreferences(
-      uid: data["uid"] as String,
       dailyWaterGoal: data["dailyWaterGoal"] as double?,
       waterInputVolume: data["waterInputVolume"] as double?,
-      volumeUnit: (data["volumeUnit"] as String).convertToUnit(),
-      massUnit: (data["massUnit"] as String).convertToUnit(),
-      lengthUnit: (data["lengthUnit"] as String).convertToUnit(),
+      volumeUnit: Units.values.byName(data["volumeUnit"] as String),
+      massUnit: Units.values.byName(data["massUnit"] as String),
+      lengthUnit: Units.values.byName(data["lengthUnit"] as String),
       isFirstTime: data["isFirstTime"] as bool,
       isOnboardingComplete: data["isOnboardingComplete"] as bool,
-      themeMode: (data["themeMode"] as String).convertToThemeMode(),
+      themeMode: ThemeMode.values.byName(data["themeMode"] as String),
+      lastUpdated: DateTime.parse(data["lastUpdated"]),
     );
   }
 
-  static UserPreferences empty = const UserPreferences(
-    uid: "",
-    dailyWaterGoal: null,
-    waterInputVolume: null,
-    volumeUnit: null,
-    lengthUnit: null,
-    massUnit: null,
-    isFirstTime: true,
-    isOnboardingComplete: false,
-    themeMode: null,
-  );
+  static const UserPreferences empty = UserPreferences();
 
   @ignore
   bool get isEmpty => this == UserPreferences.empty;
@@ -137,13 +128,16 @@ class UserPreferences extends Equatable {
 
   @override
   String toString() {
+    if (this == UserPreferences.empty) {
+      return "UserPreferences.empty";
+    }
+
     return "UserPreferences(uid: $uid, dailyWaterGoal: $dailyWaterGoal, waterInputVolume: $waterInputVolume, volumeUnit: $volumeUnit, massUnit: $massUnit, lengthUnit: $lengthUnit, isFirstTime: $isFirstTime, isOnboardingComplete: $isOnboardingComplete,)";
   }
 
   @ignore
   @override
   List<Object?> get props => [
-        id,
         dailyWaterGoal,
         waterInputVolume,
         volumeUnit,
@@ -152,6 +146,7 @@ class UserPreferences extends Equatable {
         themeMode,
         isFirstTime,
         isOnboardingComplete,
+        lastUpdated,
       ];
 }
 

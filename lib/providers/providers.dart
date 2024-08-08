@@ -1,22 +1,22 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sickler/repositories/user/user_preferences_repository.dart';
-import 'package:sickler/services/user/local/user_preferences_database_service.dart';
+import 'package:sickler/services/user/local/user_local_service.dart';
 import 'package:sickler/services/user/remote/user_service.dart';
 
 import '../models/models.dart';
 import '../repositories/repositories.dart';
 import '../repositories/user/user_repository.dart';
 import '../services/services.dart';
-import '../services/user/remote/user_preferences_service.dart';
 import 'provider_notifiers.dart';
 
 ///------Auth Related Providers------///
 final AuthService authService = AuthService();
-final AuthRepository authRepository = AuthRepository(authService: authService);
+final AuthRepository authRepository = AuthRepository(
+    authService: authService, userLocalService: userLocalService);
 
 final authProvider = AsyncNotifierProvider<AuthNotifier, SicklerUser?>(
     () => AuthNotifier(authRepository: authRepository));
 
+@Deprecated("Deprecating the authStateChangesStreamProvider")
 final authStateChangesStreamProvider =
     StreamProvider<SicklerUser>((ref) async* {
   yield* ref.watch(authProvider.notifier).authStateChanges();
@@ -24,24 +24,11 @@ final authStateChangesStreamProvider =
 
 /// ------ User and Profile Providers ------ ///
 final UserService userService = UserService();
-final UserRepository userRepository = UserRepository(userService: userService);
+final UserLocalService userLocalService = UserLocalService();
+final UserRepository userRepository = UserRepository(
+    userService: userService,
+    userLocalService: userLocalService,
+    authService: authService);
 
-final userInfoProvider =
-    AsyncNotifierProvider<UserInfoNotifier, SicklerUserInfo>(
-        () => UserInfoNotifier(userRepository: userRepository));
-
-/// ----- User Preferences Providers ----///
-
-final UserPreferencesService userPreferencesService = UserPreferencesService();
-final UserPreferencesLocalDBService userPreferencesLocalDatabaseService =
-    UserPreferencesLocalDBService();
-final UserPreferencesRepository userPreferencesRepository =
-    UserPreferencesRepository(
-        userPreferencesService: userPreferencesService,
-        userPreferencesLocalDatabaseService:
-            userPreferencesLocalDatabaseService);
-
-final userPreferencesProvider =
-    AsyncNotifierProvider<UserPreferencesNotifier, UserPreferences>(() =>
-        UserPreferencesNotifier(
-            userPrefsRepository: userPreferencesRepository));
+final userProvider = AsyncNotifierProvider<UserNotifier, SicklerUser>(
+    () => UserNotifier(userRepository: userRepository));

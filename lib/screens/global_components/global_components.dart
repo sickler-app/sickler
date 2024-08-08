@@ -8,3 +8,4 @@ export 'sickler_date_switcher.dart';
 export 'sickler_editable_avatar.dart';
 export 'sickler_list_wheel_scroll_view_picker.dart';
 export 'sickler_selector_item.dart';
+export 'snackbar.dart';

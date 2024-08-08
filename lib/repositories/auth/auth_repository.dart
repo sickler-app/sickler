@@ -1,123 +1,70 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sickler/models/auth/sickler_user_model.dart';
 import 'package:sickler/services/auth/auth_service.dart';
 
 import '../../core/core.dart';
+import '../../models/models.dart';
+import '../../services/user/local/user_local_service.dart';
 
 class AuthRepository {
   final AuthService authService;
+  final UserLocalService userLocalService;
 
-  AuthRepository({required this.authService});
-  // FutureEither<User?> signInWithEmailAndPassword({
-  //   required String email,
-  //   required String password,
-  // }) async {
-  //   try {
-  //     final UserCredential userCredential = await authService
-  //         .signInWithEmailAndPassword(email: email, password: password);
-  //     return Right(userCredential.user);
-  //   } on FirebaseException catch (e) {
-  //     return Left(Failure(errorMessage: e.message));
-  //   } on Exception catch (e) {
-  //     return Left(Failure(errorMessage: e.toString()));
-  //   }
-  // }
+  AuthRepository({required this.authService, required this.userLocalService});
 
-  /// A Version with calling method
   FutureEither<SicklerUser?> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    return callFutureMethod(() async {
+    return futureHandler(() async {
       final UserCredential userCredential = await authService
           .signInWithEmailAndPassword(email: email, password: password);
 
-      SicklerUser sicklerUser = SicklerUser.fromUser(user: userCredential.user);
-      return sicklerUser;
+      return _handleUserCredential(userCredential);
     });
   }
 
   FutureEither<SicklerUser?> registerWithEmailAndPassword(
       {required String email, required String password}) {
-    return callFutureMethod(() async {
+    return futureHandler(() async {
       final UserCredential userCredential = await authService
           .registerWithEmailAndPassword(email: email, password: password);
-      SicklerUser sicklerUser = SicklerUser.fromUser(user: userCredential.user);
-      return sicklerUser;
+      return _handleUserCredential(userCredential);
     });
   }
 
   FutureEither<SicklerUser> signInWithGoogle() {
-    return callFutureMethod(() async {
+    return futureHandler(() async {
       final UserCredential userCredential =
           await authService.signInWithGoogle();
-
-      SicklerUser sicklerUser = SicklerUser.fromUser(user: userCredential.user);
-      return sicklerUser;
+      return _handleUserCredential(userCredential);
     });
   }
 
   FutureEither<void> signOut() {
-    return callFutureMethod(() async {
+    return futureHandler(() async {
+      await userLocalService.deleteUser();
       await authService.signOut();
     });
   }
 
-  // Either<Failure, Stream<SicklerUser?>> getAuthStateChanges() {
-  //
-  //
-  //   return callMethod(() {
-  //     final StreamController<SicklerUser?> sicklerUserStreamController =
-  //     StreamController();
-  //     authService.getCurrentUser().listen((User? event) {
-  //       ///Listens to the current user stream and outputs another stream of sickler
-  //       ///users on every event;
-  //       sicklerUserStreamController.add(SicklerUser.fromUser(user: event));
-  //     });
-  //
-  //     return sicklerUserStreamController.stream;
-  //   });
-  // }
-
   Stream<SicklerUser> getAuthStateChanges() {
-    final StreamController<SicklerUser> sicklerUserStreamController =
-        StreamController.broadcast();
-
-    final Stream<User?> userStream = authService.authStateChanges();
-
-    userStream.listen((event) {
-      final SicklerUser sicklerUser = SicklerUser.fromUser(user: event);
-
-      sicklerUserStreamController.add(sicklerUser);
-    }, onError: (error) {
-      sicklerUserStreamController.addError(error);
-    }, onDone: () {
-      sicklerUserStreamController.close();
+    return authService.authStateChanges().map((User? user) {
+      if (user == null) {
+        return SicklerUser.empty;
+      }
+      return SicklerUser.fromUser(user: user).copyWith(
+        profile: UserProfile.fromFirebaseUser(user: user),
+      );
     });
-
-    return sicklerUserStreamController.stream;
   }
 
   FutureEither<void> sendPasswordResetEmail({
     required String email,
   }) async {
-    return callFutureMethod(() async {
+    return futureHandler(() async {
       await authService.sendPasswordResetEmail(email: email);
-    });
-  }
-
-  FutureEither<SicklerUser> getCurrentUser() async {
-    return callFutureMethod(() async {
-      if (await authService.getCurrentUser() == null) {
-        return SicklerUser.empty;
-      } else {
-        final SicklerUser user = SicklerUser.fromUser(
-          user: await authService.getCurrentUser(),
-        );
-        return user;
-      }
     });
   }
 
@@ -125,9 +72,19 @@ class AuthRepository {
     required String code,
     required String newPassword,
   }) async {
-    return callFutureMethod(() async {
+    return futureHandler(() async {
       await authService.confirmPasswordReset(
           code: code, newPassword: newPassword);
     });
+  }
+
+  Future<SicklerUser> _handleUserCredential(
+      UserCredential userCredential) async {
+    SicklerUser sicklerUser = SicklerUser.fromUser(user: userCredential.user);
+    sicklerUser = sicklerUser.copyWith(
+        profile: UserProfile.fromFirebaseUser(user: userCredential.user));
+
+    await userLocalService.addUser(sicklerUser);
+    return sicklerUser;
   }
 }
