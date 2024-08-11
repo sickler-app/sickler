@@ -1,10 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
 
-enum Units { millilitres, ounces, cups }
+import '../../core/core.dart';
+
+part 'water_log.g.dart';
 
 @Collection(inheritance: false)
 class WaterLog extends Equatable {
+  final Id id = Isar.autoIncrement;
   final DateTime timestamp;
   final double amount;
   @Enumerated(EnumType.name)
@@ -32,7 +35,7 @@ class WaterLog extends Equatable {
     return {
       'timestamp': timestamp.toIso8601String(),
       'amount': amount,
-      'unit': unit.name,
+      'unit': unit.symbol
     };
   }
 
@@ -61,6 +64,7 @@ class WaterLog extends Equatable {
     return 'WaterLog(timestamp: $timestamp, amount: $amount, unit: $unit)';
   }
 
+  @ignore
   @override
   List<Object?> get props => [timestamp, amount, unit];
 }

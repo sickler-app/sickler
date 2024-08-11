@@ -2,31 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 
+import '../../core/enums.dart';
+
 part 'user_preferences.g.dart';
-
-enum Units {
-  ///Mass Measurement Units
-  pound,
-  ounce,
-  kilogram,
-  gram,
-  milligram,
-
-  /// Length measurement units
-  kilometres,
-  metres,
-  centimetres,
-  millimetres,
-  miles,
-  inches,
-  feet,
-
-  ///Volume measurement units
-  litres,
-  millilitres,
-  centilitres,
-  gallons;
-}
 
 @Embedded(inheritance: false)
 class UserPreferences extends Equatable {
