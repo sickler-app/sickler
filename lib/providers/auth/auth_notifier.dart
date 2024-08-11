@@ -12,19 +12,16 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
   AuthNotifier({required AuthRepository authRepository})
       : _authRepository = authRepository;
 
-  ///Getter to actually know when an operation is successful or not;
+  ///Getters to actually know when an operation is successful or not;
   bool get isSuccessful =>
-      state.whenOrNull(
-        data: (user) => user != null && user.isNotEmpty,
-      ) ??
-      false;
+      state.hasValue &&
+      state.value != null &&
+      state.value!.isNotEmpty &&
+      !state.hasError;
 
-  bool get isLoading => state.whenOrNull(
-    loading: () => true,
-  ) ?? false;
-
-  String? get errorMessage => state.whenOrNull(
-      error: (error, _) => error is Failure ? error.message : error.toString());
+  String? get errorMessage => state.error is Failure
+      ? (state.error as Failure).message
+      : state.error.toString();
 
   @override
   Future<SicklerUser> build() async {

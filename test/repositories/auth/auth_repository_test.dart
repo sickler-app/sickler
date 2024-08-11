@@ -7,7 +7,6 @@ import 'package:sickler/models/user/sickler_user.dart';
 import 'package:sickler/providers/providers.dart';
 import 'package:sickler/repositories/repositories.dart';
 import 'package:sickler/services/services.dart';
-import 'package:sickler/services/user/local/user_local_service.dart';
 
 class MockAuthService extends Mock implements AuthService {}
 

@@ -41,6 +41,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     bool isDarkMode = theme.brightness == Brightness.dark;
+    final authNotifier = ref.read(authProvider.notifier);
+    final userNotifier = ref.read(userProvider.notifier);
+
     return Scaffold(
       body: SafeArea(
         child: Form(
@@ -158,14 +161,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                       ///Buttons
                       SicklerButton(
+                        isLoading: ref.watch(authProvider).isLoading,
                         label: "Sign Up",
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            final authNotifier =
-                                ref.read(authProvider.notifier);
-                            final userNotifier =
-                                ref.read(userProvider.notifier);
-
                             await authNotifier.registerWithEmailAndPassword(
                                 email: emailController.text.trim(),
                                 password: passwordController.text.trim());

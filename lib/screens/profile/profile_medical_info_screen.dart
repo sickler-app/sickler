@@ -61,6 +61,7 @@ class _ProfileMedicalInfoScreenState
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final userNotifier = ref.watch(userProvider.notifier);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -233,9 +234,7 @@ class _ProfileMedicalInfoScreenState
                   SicklerButton(
                       onPressed: () async {
                         ///Todo: add the rest of the health data;
-                        final userNotifier = ref.watch(userProvider.notifier);
                         SicklerUser user = ref.watch(userProvider).value!;
-
                         user = user.copyWith(
                             preferences: user.preferences
                                 .copyWith(isOnboardingComplete: true),
