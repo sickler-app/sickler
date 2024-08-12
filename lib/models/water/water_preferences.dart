@@ -41,6 +41,14 @@ class WaterPreferences extends Equatable {
     };
   }
 
+  factory WaterPreferences.fromMap(Map<String, dynamic> data) {
+    return WaterPreferences(
+      dailyGoal: data["dailyGoal"],
+      unit: Units.values.byName(data["unit"]),
+      logAmount: data["logAmount"],
+    );
+  }
+
   static const empty = WaterPreferences();
   @ignore
   bool get isEmpty => this == WaterPreferences.empty;
