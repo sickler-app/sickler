@@ -1,6 +1,8 @@
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sickler/models/models.dart';
+import 'package:sickler/models/water/water_log.dart';
+import 'package:sickler/models/water/water_preferences.dart';
 
 import '../../models/user/sickler_user.dart';
 
@@ -10,7 +12,8 @@ class LocalDbService {
     final directory = await getApplicationDocumentsDirectory();
 
     if (Isar.instanceNames.isEmpty) {
-      return await Isar.open([SicklerUserSchema],
+      return await Isar.open(
+          [SicklerUserSchema, WaterPreferencesSchema, WaterLogSchema],
           inspector: true, directory: directory.path);
     }
     return Future.value(Isar.getInstance());

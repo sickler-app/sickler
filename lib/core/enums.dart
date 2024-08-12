@@ -33,6 +33,67 @@ enum MedicationType {
   custom
 }
 
+enum Units {
+  ///Mass Measurement Units
+  pound,
+  ounce,
+  kilogram,
+  gram,
+  milligram,
+
+  /// Length measurement units
+  kilometres,
+  metres,
+  centimetres,
+  millimetres,
+  miles,
+  inches,
+  feet,
+
+  ///Volume measurement units
+  litres,
+  millilitres,
+  centilitres,
+  gallons;
+
+  String get symbol {
+    switch (this) {
+      case Units.pound:
+        return 'lb';
+      case Units.ounce:
+        return 'oz';
+      case Units.kilogram:
+        return 'kg';
+      case Units.gram:
+        return 'g';
+      case Units.milligram:
+        return 'mg';
+      case Units.kilometres:
+        return 'km';
+      case Units.metres:
+        return 'm';
+      case Units.centimetres:
+        return 'cm';
+      case Units.millimetres:
+        return 'mm';
+      case Units.miles:
+        return 'mi';
+      case Units.inches:
+        return 'in';
+      case Units.feet:
+        return 'ft';
+      case Units.litres:
+        return 'L';
+      case Units.millilitres:
+        return 'mL';
+      case Units.centilitres:
+        return 'cL';
+      case Units.gallons:
+        return 'gal';
+    }
+  }
+}
+
 enum MedsScheduleEndingState {
   ///An Enum to define the states of the Medication repeat ending format.
   never,

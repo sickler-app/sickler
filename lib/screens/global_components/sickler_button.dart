@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import '../../core/core.dart';
 
 class SicklerButton extends StatelessWidget {
-  const SicklerButton({
-    super.key,
-    required this.onPressed,
-    required this.label,
-    this.color,
-    this.backgroundColor,
-    this.iconPath,
-    this.icon,
-    this.overrideIconColor = true,
-    this.buttonType = SicklerButtonType.primary,
-    this.isChipButton = false,
-  });
+  const SicklerButton(
+      {super.key,
+      required this.onPressed,
+      required this.label,
+      this.color,
+      this.backgroundColor,
+      this.iconPath,
+      this.icon,
+      this.overrideIconColor = true,
+      this.buttonType = SicklerButtonType.primary,
+      this.isChipButton = false,
+      this.isLoading = false});
   final VoidCallback onPressed;
   final String label;
   final SicklerButtonType buttonType;
@@ -26,6 +27,7 @@ class SicklerButton extends StatelessWidget {
   final Color? backgroundColor;
   final bool? overrideIconColor;
   final bool? isChipButton;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -104,30 +106,36 @@ class SicklerButton extends StatelessWidget {
       onPressed: onPressed,
       style: style,
       child: Center(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Visibility(
-              visible: icon != null || iconPath != null,
-              child: Row(
+        child: isLoading!
+            ? SpinKitThreeBounce(
+                size: kPadding24,
+                color: theme.scaffoldBackgroundColor,
+              )
+            : Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  icon != null
-                      ? Icon(icon)
-                      : SvgPicture.asset(iconPath ?? "",
-                          colorFilter: overrideIconColor!
-                              ? ColorFilter.mode(labelColor, BlendMode.srcIn)
-                              : null),
-                  const Gap(8)
+                  Visibility(
+                    visible: icon != null || iconPath != null,
+                    child: Row(
+                      children: [
+                        icon != null
+                            ? Icon(icon)
+                            : SvgPicture.asset(iconPath ?? "",
+                                colorFilter: overrideIconColor!
+                                    ? ColorFilter.mode(
+                                        labelColor, BlendMode.srcIn)
+                                    : null),
+                        const Gap(8)
+                      ],
+                    ),
+                  ),
+                  Text(label,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: labelColor)),
                 ],
               ),
-            ),
-            Text(label,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(color: labelColor)),
-          ],
-        ),
       ),
     );
   }
