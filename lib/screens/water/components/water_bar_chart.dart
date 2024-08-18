@@ -8,7 +8,6 @@ class WaterBarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     return AspectRatio(
       aspectRatio: 1.6,
       child: BarChart(

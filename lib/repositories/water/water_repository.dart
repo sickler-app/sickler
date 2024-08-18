@@ -57,10 +57,10 @@ class WaterRepository {
         return WaterLog.fromMap(e);
       }).toList();
 
-      List<WaterLog> logs =
-          List<WaterLog>.from(documentSnapshot.data()!["entries"]);
+      // List<WaterLog> logs =
+      //     List<WaterLog>.from(documentSnapshot.data()!["entries"]);
 
-      return logs;
+      return otherLogs;
     } else {
       log("Log data doesn't exist from Remote");
       return [];

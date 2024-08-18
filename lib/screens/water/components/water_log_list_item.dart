@@ -44,7 +44,7 @@ class WaterLogListItem extends StatelessWidget {
                   colorFilter: const ColorFilter.mode(
                       SicklerColours.neutral50, BlendMode.srcIn),
                 ),
-                Gap(kPadding8),
+                const Gap(kPadding8),
                 RichText(
                     text: TextSpan(children: [
                   TextSpan(

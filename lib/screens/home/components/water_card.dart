@@ -68,7 +68,7 @@ class WaterCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Gap(kPadding16),
+                      const Gap(kPadding16),
                       Text(
                         "Today's Total",
                         style: theme.textTheme.bodySmall!
@@ -79,7 +79,7 @@ class WaterCard extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               color: theme.colorScheme.tertiary,
                               height: 1)),
-                      Gap(kPadding16),
+                      const Gap(kPadding16),
                       Text(
                         "Remaining",
                         style: theme.textTheme.bodySmall!
@@ -109,7 +109,9 @@ class WaterCard extends StatelessWidget {
                   backgroundColor: isDarkMode
                       ? SicklerColours.neutral30
                       : SicklerColours.blue90,
-                  progress: percentageCompleted / 100,
+                  progress: (percentageCompleted / 100) > 1
+                      ? 1
+                      : (percentageCompleted / 100),
                   shouldAnimate: true,
                   isSmall: true,
                   value: "${percentageCompleted.toInt()}", unit: unit,

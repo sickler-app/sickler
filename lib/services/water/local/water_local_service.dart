@@ -32,7 +32,6 @@ class WaterLocalService extends LocalDbService {
     final isar = await db;
     await isar.writeTxn(() async {
       await isar.waterLogs.put(log);
-      print("Added log with ID: ${log.id}");
     });
   }
 
@@ -57,7 +56,6 @@ class WaterLocalService extends LocalDbService {
 
   Future<void> deleteWaterLog(WaterLog log) async {
     final isar = await db;
-    bool isDeleted;
     await isar.writeTxn(() async {
       bool isDeleted = await isar.waterLogs.delete(log.id);
       print("Deletion result: $isDeleted");

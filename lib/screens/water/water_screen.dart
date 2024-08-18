@@ -31,7 +31,6 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
   @override
   Widget build(BuildContext context) {
     final waterNotifier = ref.watch(waterProvider.notifier);
-    final userNotifier = ref.watch(userProvider.notifier);
     final SicklerUser user = ref.watch(userProvider).value!;
 
     List<WaterLog> totalLogsToday = ref.watch(waterProvider).value!;
@@ -41,10 +40,6 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
     int dailyGoal = waterNotifier.preferences.dailyGoal!;
     double percentComplete = ((totalToday / dailyGoal) * 100);
     int remaining = dailyGoal - totalToday.toInt();
-
-    print(totalToday);
-    print(totalLogsToday);
-
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       body: SnackBarNotifier(
@@ -133,8 +128,6 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
                         return WaterLogListItem(
                           log: ref.watch(waterProvider).value![index],
                           onDeletePressed: () async {
-                            print("log to delete");
-                            print(ref.watch(waterProvider).value![index]);
                             await waterNotifier.deleteWaterLog(
                                 entry: ref.watch(waterProvider).value![index],
                                 user: user,
