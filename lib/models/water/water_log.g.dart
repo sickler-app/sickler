@@ -77,6 +77,7 @@ WaterLog _waterLogDeserialize(
 ) {
   final object = WaterLog(
     amount: reader.readDouble(offsets[0]),
+    id: id,
     timestamp: reader.readDateTime(offsets[1]),
     unit: _WaterLogunitValueEnumMap[reader.readStringOrNull(offsets[2])] ??
         Units.millilitres,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sickler/core/core.dart';
@@ -29,18 +31,24 @@ class UserRepository {
 
       if (currentUser == null) {
         ///If user is not signed in, return an empty class
-
+        log("User is not signed in");
         await _userLocalService.deleteUser();
         return SicklerUser.empty;
       }
 
       if (forceRefresh) {
+        log("Force refresh from remote");
         return await _getRemoteUser(currentUser.uid);
       }
 
       SicklerUser localUser = await _userLocalService.getUser();
       if (localUser.isNotEmpty) {
+        log("Local User Found");
         return localUser;
+      } else {
+        log("Local user is empty");
+        await _userLocalService.deleteUser();
+        return SicklerUser.empty;
       }
 
       return await _getRemoteUser(currentUser.uid);

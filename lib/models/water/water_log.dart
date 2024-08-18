@@ -7,13 +7,14 @@ part 'water_log.g.dart';
 
 @Collection(inheritance: false)
 class WaterLog extends Equatable {
-  final Id id = Isar.autoIncrement;
+  final Id id;
   final DateTime timestamp;
   final double amount;
   @Enumerated(EnumType.name)
   final Units unit;
 
   const WaterLog({
+    this.id = Isar.autoIncrement,
     required this.timestamp,
     required this.amount,
     this.unit = Units.millilitres,
@@ -61,10 +62,14 @@ class WaterLog extends Equatable {
     if (this == WaterLog.empty) {
       return 'WaterLog.empty';
     }
-    return 'WaterLog(timestamp: $timestamp, amount: $amount, unit: $unit)';
+    return super.toString();
   }
 
   @ignore
   @override
-  List<Object?> get props => [timestamp, amount, unit];
+  bool? get stringify => true;
+
+  @ignore
+  @override
+  List<Object?> get props => [timestamp, amount, unit, id];
 }

@@ -2,11 +2,19 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:sickler/models/water/water_log.dart';
 
 import '../../../core/core.dart';
 
 class WaterLogListItem extends StatelessWidget {
-  const WaterLogListItem({super.key});
+  final WaterLog log;
+  final Function(WaterLog log) onEditPressed;
+  final VoidCallback onDeletePressed;
+  const WaterLogListItem(
+      {super.key,
+      required this.log,
+      required this.onEditPressed,
+      required this.onDeletePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -25,33 +33,29 @@ class WaterLogListItem extends StatelessWidget {
           //     : SicklerColours.neutral95,
           borderRadius: BorderRadius.circular(16)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding:
+            const EdgeInsets.symmetric(vertical: 8, horizontal: kPadding16),
         child: Row(
           children: [
             Row(
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    "assets/svg/droplet-alt.svg",
-                    colorFilter: const ColorFilter.mode(
-                        SicklerColours.neutral50, BlendMode.srcIn),
-                  ),
+                SvgPicture.asset(
+                  "assets/svg/droplet-alt.svg",
+                  colorFilter: const ColorFilter.mode(
+                      SicklerColours.neutral50, BlendMode.srcIn),
                 ),
-                const Gap(
-                  4,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("150 ml",
-                        style: theme.textTheme.bodyLarge!
-                            .copyWith(fontWeight: FontWeight.w800)),
-                    Text("2:13 pm ",
-                        style: theme.textTheme.bodySmall!
-                            .copyWith(color: SicklerColours.neutral50)),
-                  ],
-                ),
+                Gap(kPadding8),
+                RichText(
+                    text: TextSpan(children: [
+                  TextSpan(
+                      text: "${log.amount} ${log.unit.symbol}  ",
+                      style: theme.textTheme.titleMedium),
+                  TextSpan(
+                      text:
+                          TimeOfDay.fromDateTime(log.timestamp).format(context),
+                      style: theme.textTheme.bodySmall!
+                          .copyWith(color: SicklerColours.neutral50))
+                ])),
               ],
             ),
             const Spacer(),
@@ -59,15 +63,14 @@ class WaterLogListItem extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: () {
-                      //Todo: Implement Edit
+                      //Todo: Show a popup to edit the log, then update the log;
+                      onEditPressed.call(log);
                     },
                     icon: const Icon(
                       FluentIcons.edit_24_regular,
                     )),
                 IconButton(
-                  onPressed: () {
-                    //Todo: Implement Edit
-                  },
+                  onPressed: onDeletePressed,
                   icon: SvgPicture.asset(
                     "assets/svg/delete.svg",
                     colorFilter: ColorFilter.mode(

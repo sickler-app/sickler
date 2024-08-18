@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:isar/isar.dart';
 import 'package:sickler/models/water/water_log.dart';
 import 'package:sickler/models/water/water_preferences.dart';
@@ -13,15 +15,14 @@ class WaterLocalService extends LocalDbService {
   Future<List<WaterLog>> getWaterLogs({DateTime? start, DateTime? end}) async {
     final isar = await db;
     List<WaterLog> waterLogs = [];
-    if (start == null && end == null) {
-      waterLogs = await isar.waterLogs
-          .filter()
-          .timestampBetween(start!, end!)
-          .findAll();
+    if (start != null && end != null) {
+      waterLogs =
+          await isar.waterLogs.filter().timestampBetween(start, end).findAll();
     }
     waterLogs = await isar.waterLogs.where().findAll();
     if (waterLogs.isEmpty) {
-      throw Exception("No water logs found");
+      log("No water logs found");
+      return [];
     }
 
     return waterLogs;
@@ -31,6 +32,7 @@ class WaterLocalService extends LocalDbService {
     final isar = await db;
     await isar.writeTxn(() async {
       await isar.waterLogs.put(log);
+      print("Added log with ID: ${log.id}");
     });
   }
 
@@ -55,9 +57,14 @@ class WaterLocalService extends LocalDbService {
 
   Future<void> deleteWaterLog(WaterLog log) async {
     final isar = await db;
-
+    bool isDeleted;
     await isar.writeTxn(() async {
-      await isar.waterLogs.delete(log.id);
+      bool isDeleted = await isar.waterLogs.delete(log.id);
+      print("Deletion result: $isDeleted");
+
+      if (!isDeleted) {
+        throw Exception("Failed to delete log");
+      }
     });
   }
 
@@ -82,7 +89,8 @@ class WaterLocalService extends LocalDbService {
     WaterPreferences? preferences =
         await isar.waterPreferences.where().findFirst();
     if (preferences == null) {
-      throw Exception("No water Preferences found");
+      log("No Water Preferences found");
+      return const WaterPreferences.initial();
     }
     return preferences;
   }

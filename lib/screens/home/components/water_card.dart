@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 import '../../../core/core.dart';
+import '../../global_components/global_components.dart';
 
 class WaterCard extends StatelessWidget {
   final VoidCallback onPressed;
-  const WaterCard({super.key, required this.onPressed});
+  final int totalToday;
+  final String unit;
+  final int remaining;
+  final double percentageCompleted;
+  const WaterCard(
+      {super.key,
+      required this.onPressed,
+      required this.totalToday,
+      required this.unit,
+      required this.remaining,
+      required this.percentageCompleted});
 
   @override
   Widget build(BuildContext context) {
@@ -17,39 +27,21 @@ class WaterCard extends StatelessWidget {
       onTap: onPressed,
       borderRadius: BorderRadius.circular(24),
       splashFactory: InkSparkle.splashFactory,
-      splashColor: SicklerColours.blueSeed.withOpacity(.2),
+      splashColor: theme.colorScheme.tertiary.withOpacity(.2),
       child: Ink(
-        padding: const EdgeInsets.only(
-          right: 16,
-          left: 16,
-          top: 8,
-          bottom: 16,
-        ),
+        padding: const EdgeInsets.all(kPadding16),
         decoration: BoxDecoration(
-          color: isDarkMode ? theme.cardColor : SicklerColours.blue95,
+          // color: isDarkMode
+          //     ? theme.cardColor
+          //     : theme.colorScheme.tertiaryContainer,
           borderRadius: BorderRadius.circular(24),
-          //  border: Border.all(color: SicklerColours.neutral90),
+          border: Border.all(
+              color: isDarkMode
+                  ? SicklerColours.neutral20
+                  : SicklerColours.neutral95),
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SvgPicture.asset(
-                  "assets/svg/droplet-alt-filled.svg",
-                  colorFilter: const ColorFilter.mode(
-                      SicklerColours.blueSeed, BlendMode.srcIn),
-                ),
-                const Gap(4),
-                Text(
-                  "Water",
-                  style: theme.textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.w800,
-                      color: SicklerColours.blueSeed),
-                ),
-              ],
-            ),
-            const Gap(8),
             Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,61 +50,69 @@ class WaterCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("160 ml",
-                              style: theme.textTheme.headlineSmall!.copyWith(
-                                  fontWeight: FontWeight.w800,
-                                  color: SicklerColours.blueSeed,
-                                  height: 1)),
-                        ],
-                      ),
-                      const Gap(8),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Remaining",
-                            style: theme.textTheme.bodyMedium!
-                                .copyWith(color: SicklerColours.neutral50),
+                          SvgPicture.asset(
+                            "assets/svg/droplet-alt-filled.svg",
+                            colorFilter: ColorFilter.mode(
+                                theme.colorScheme.tertiary, BlendMode.srcIn),
                           ),
-                          //  Gap(4),
-                          Text("200 ml",
-                              style: theme.textTheme.bodyLarge!.copyWith(
-                                  fontWeight: FontWeight.w800, height: 1)),
-                        ],
-                      ),
-                      const Gap(8),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                          const Gap(4),
                           Text(
-                            "Completion",
-                            style: theme.textTheme.bodyMedium!
-                                .copyWith(color: SicklerColours.neutral50),
+                            "Water",
+                            style: theme.textTheme.bodyLarge!
+                                .copyWith(color: theme.colorScheme.tertiary),
                           ),
-                          Text("37%",
-                              style: theme.textTheme.bodyLarge!.copyWith(
-                                  fontWeight: FontWeight.w800, height: 1)),
                         ],
                       ),
+                      Gap(kPadding16),
+                      Text(
+                        "Today's Total",
+                        style: theme.textTheme.bodySmall!
+                            .copyWith(color: SicklerColours.neutral50),
+                      ),
+                      Text("$totalToday $unit",
+                          style: theme.textTheme.headlineSmall!.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: theme.colorScheme.tertiary,
+                              height: 1)),
+                      Gap(kPadding16),
+                      Text(
+                        "Remaining",
+                        style: theme.textTheme.bodySmall!
+                            .copyWith(color: SicklerColours.neutral50),
+                      ),
+
+                      Text("$remaining $unit",
+                          style: theme.textTheme.titleMedium),
+
+                      // Text(
+                      //   "Completion",
+                      //   style: theme.textTheme.bodySmall!
+                      //       .copyWith(color: SicklerColours.neutral50),
+                      // ),
+                      // Text("$percentageCompleted %",
+                      //     style: theme.textTheme.titleMedium),
                     ],
                   ),
                 ),
-                const Gap(16),
-                CircularPercentIndicator(
-                  animateFromLastPercent: true,
-                  animation: true,
-                  circularStrokeCap: CircularStrokeCap.round,
+                SicklerCircularPercentIndicator(
+                  // animateFromLastPercent: true,
+                  // animation: true,
+                  // circularStrokeCap: CircularStrokeCap.round,
                   radius: 64,
-                  progressColor: SicklerColours.blueSeed,
-                  lineWidth: 24,
+                  // progressColor: theme.colorScheme.tertiary,
+                  // lineWidth: 24,
                   backgroundColor: isDarkMode
                       ? SicklerColours.neutral30
-                      : SicklerColours.white,
-                  percent: .37,
+                      : SicklerColours.blue90,
+                  progress: percentageCompleted / 100,
+                  shouldAnimate: true,
+                  isSmall: true,
+                  value: "${percentageCompleted.toInt()}", unit: unit,
                 ),
               ],
             ),

@@ -51,8 +51,7 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen> {
 
     await userNotifier.getCurrentUserData();
 
-    final SicklerUser user =
-        ref.watch(userProvider.select((state) => state.valueOrNull!));
+    final SicklerUser user = ref.watch(userProvider).value!;
 
     final bool isFirstTime = user.preferences.isFirstTime;
     final bool isOnboardingComplete = user.preferences.isOnboardingComplete;

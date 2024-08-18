@@ -1,141 +1,163 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/constants.dart';
-import 'package:sickler/core/enums.dart';
+import 'package:sickler/core/snackbar_notifier.dart';
+import 'package:sickler/models/water/water_log.dart';
+import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/water/components/water_volume_selector.dart';
 
+import '../../models/models.dart';
 import 'components/components.dart';
 
-class WaterScreen extends StatefulWidget {
+class WaterScreen extends ConsumerStatefulWidget {
   static const String id = "water";
   const WaterScreen({super.key});
 
   @override
-  State<WaterScreen> createState() => _WaterScreenState();
+  ConsumerState<WaterScreen> createState() => _WaterScreenState();
 }
 
-int dailyGoal = 2000;
+class _WaterScreenState extends ConsumerState<WaterScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(waterProvider.notifier).getWaterLogs();
+    });
+    super.initState();
+  }
 
-class _WaterScreenState extends State<WaterScreen> {
   @override
   Widget build(BuildContext context) {
+    final waterNotifier = ref.watch(waterProvider.notifier);
+    final userNotifier = ref.watch(userProvider.notifier);
+    final SicklerUser user = ref.watch(userProvider).value!;
+
+    List<WaterLog> totalLogsToday = ref.watch(waterProvider).value!;
+    double totalToday =
+        waterNotifier.calculateTotalFromLogs(logs: totalLogsToday);
+
+    int dailyGoal = waterNotifier.preferences.dailyGoal!;
+    double percentComplete = ((totalToday / dailyGoal) * 100);
+    int remaining = dailyGoal - totalToday.toInt();
+
+    print(totalToday);
+    print(totalLogsToday);
+
     final ThemeData theme = Theme.of(context);
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SicklerAppBar(pageTitle: "Water Intake"),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Column(
-                    children: [
-                      SicklerCircularPercentIndicator(
-                        value: 37.toString(),
-                        shouldAnimate: true,
-                        unit: "%",
-                        progress: 0.37,
-                      ),
-                      const Gap(16),
-                      Text("$dailyGoal ml",
-                          style: theme.textTheme.displaySmall!
-                              .copyWith(fontWeight: FontWeight.w800)),
-                      const Gap(16),
-                      Text("remaining $dailyGoal ml",
-                          style: theme.textTheme.bodyMedium),
-                      const Gap(24),
-                      Text(
-                          "Looking great! Log your water intake and hit that water goal ",
-                          textAlign: TextAlign.center,
-                          style: theme.textTheme.bodyMedium),
-                    ],
-                  ),
-                  const Gap(16),
-                  WaterVolumeSelector(selectedVolume: (double? selectedVolume) {
-                    ///Todo: Add selected Medication to state
-                  }),
-                  Text("Statistics", style: theme.textTheme.headlineSmall),
-                  const Gap(16),
-                  Wrap(
-                    direction: Axis.horizontal,
-                    spacing: 8,
-                    runSpacing: 4,
-                    children: [
-                      SicklerChip(
-                        selectedBackgroundColor: SicklerColours.blueSeed,
-                        onSelected: (value) {},
-                        chipType: SicklerChipType.filter,
-                        label: "Daily",
-                      ),
-                      SicklerChip(
-                        selectedBackgroundColor: SicklerColours.blueSeed,
-                        onSelected: (value) {},
-                        chipType: SicklerChipType.filter,
-                        label: "Weekly",
-                      ),
-                      SicklerChip(
-                        selectedBackgroundColor: SicklerColours.blueSeed,
-                        onSelected: (value) {},
-                        chipType: SicklerChipType.filter,
-                        label: "Monthly",
-                      ),
-                      SicklerChip(
-                        selectedBackgroundColor: SicklerColours.blueSeed,
-                        onSelected: (value) {},
-                        chipType: SicklerChipType.filter,
-                        label: "Yearly",
-                      ),
-                      SicklerChip(
-                        selectedBackgroundColor: SicklerColours.blueSeed,
-                        onSelected: (value) async {
-                          /// Select Dose Bottom Sheet
-                          await showModalBottomSheet(
-                            context: context,
-                            builder: (context) => SicklerBottomSheet(
-                              title: "Select Dose",
-                              onPressed: () {
-                                ///Todo: pop and add dose to state
-                              },
-                              child: SicklerListWheelScrollViewPicker(
-                                primaryInitialValue: 50,
-                                primaryFinalValue: 1000,
-                                primaryValueInterval: 50,
-                                primaryUnitLabels: const ["mg"],
-                                scrollViewToLabelPadding: 24,
-                                onSelectedItemChanged: (selectedValue) {
-                                  ///Todo: update selected value
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                        chipType: SicklerChipType.filter,
-                        label: "Custom",
-                      ),
-                    ],
-                  ),
-                  const Gap(24),
-                  Text(" Weekly Average ", style: theme.textTheme.bodyMedium),
-                  const Gap(16),
-                  Text("$dailyGoal ml",
-                      style: theme.textTheme.displaySmall!
-                          .copyWith(fontWeight: FontWeight.w800)),
-                  const Gap(24),
-                  const WaterStatistics(),
-                  const Gap(24),
-                  Text("Today's Logs", style: theme.textTheme.titleLarge),
-                  const Gap(16),
-                  const TodaysLog(),
-                  const Gap(64)
-                ],
-              ),
-            )
-          ],
+      body: SnackBarNotifier(
+        provider: waterProvider,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SicklerAppBar(pageTitle: "Water Intake"),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: SicklerCircularPercentIndicator(
+                            value: percentComplete.toInt().toString(),
+                            shouldAnimate: true,
+                            unit: "%",
+                            progress: percentComplete > 100
+                                ? 1
+                                : percentComplete / 100,
+                          ),
+                        ),
+                        const Gap(16),
+                        Text("${totalToday.toInt()} ml",
+                            style: theme.textTheme.displaySmall!
+                                .copyWith(fontWeight: FontWeight.w800)),
+                        const Gap(16),
+                        Text(
+                            remaining == 0
+                                ? "Goal Completed!"
+                                : "remaining $remaining ml",
+                            style: theme.textTheme.bodyMedium),
+                        // const Gap(24),
+                        // Text(
+                        //     "Looking great! Log your water intake and hit that water goal ",
+                        //     textAlign: TextAlign.center,
+                        //     style: theme.textTheme.bodyMedium),
+                      ],
+                    ),
+                    const Gap(16),
+                    WaterVolumeSelector(
+                        selectedVolume: (double? selectedVolume) async {
+                      WaterLog waterLog = WaterLog(
+                          timestamp: DateTime.now(),
+                          amount: selectedVolume ??
+                              waterNotifier.preferences.logAmount!.toDouble());
+
+                      await waterNotifier.addWaterLog(
+                          entry: waterLog, user: user, updateRemote: true);
+                      if (!waterNotifier.isSuccessful &&
+                          waterNotifier.errorMessage != null) {
+                        if (context.mounted) {
+                          showCustomSnackBar(
+                              context: context,
+                              message: "Failed to add entry",
+                              mode: SnackBarMode.error);
+                        }
+                      }
+                    }),
+                    Text("Statistics", style: theme.textTheme.headlineSmall),
+                    const Gap(kPadding16),
+                    Text("Weekly Average", style: theme.textTheme.bodyMedium),
+                    const Gap(kPadding4),
+                    Text("$dailyGoal ml",
+                        style: theme.textTheme.headlineSmall!.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: theme.colorScheme.tertiary)),
+                    const Gap(24),
+                    const WaterStatistics(),
+                    const Gap(24),
+                    Text("Today's Logs", style: theme.textTheme.titleLarge),
+                    const Gap(16),
+                    ListView.separated(
+                      separatorBuilder: (context, index) => const Gap(8),
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      itemCount: ref.watch(waterProvider).value!.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return WaterLogListItem(
+                          log: ref.watch(waterProvider).value![index],
+                          onDeletePressed: () async {
+                            print("log to delete");
+                            print(ref.watch(waterProvider).value![index]);
+                            await waterNotifier.deleteWaterLog(
+                                entry: ref.watch(waterProvider).value![index],
+                                user: user,
+                                updateRemote:
+                                    false); // Todo: change to true or setup periodic syncing
+                          },
+                          onEditPressed: (newLog) async {
+                            await waterNotifier.updateWaterLog(
+                                entry: newLog,
+                                user: user,
+                                updateRemote:
+                                    false); // Todo: change to true or setup periodic syncing
+                            setState(() {});
+                          },
+                        );
+                      },
+                    ),
+                    const Gap(64)
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

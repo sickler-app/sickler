@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:sickler/core/constants.dart';
 import 'package:sickler/core/core.dart';
 
 class WaterBarChart extends StatelessWidget {
@@ -7,6 +8,7 @@ class WaterBarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return AspectRatio(
       aspectRatio: 1.6,
       child: BarChart(

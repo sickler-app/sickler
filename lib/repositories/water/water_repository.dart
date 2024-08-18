@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/models/models.dart';
@@ -33,15 +35,13 @@ class WaterRepository {
           //If Not empty, return, else get from local
           return logs;
         } else {
-          throw Exception("No Logs found");
+          log("No Logs found from Remote");
+          return [];
         }
       }
 
       logs = await _waterLocalService.getWaterLogs(start: start, end: end);
 
-      if (logs.isEmpty) {
-        throw Exception("No Logs found");
-      }
       return logs;
     });
   }
@@ -57,14 +57,14 @@ class WaterRepository {
         return WaterLog.fromMap(e);
       }).toList();
 
-      print(otherLogs);
       List<WaterLog> logs =
           List<WaterLog>.from(documentSnapshot.data()!["entries"]);
-      print(logs);
 
       return logs;
     } else {
-      throw Exception("User data doesn't exist");
+      log("Log data doesn't exist from Remote");
+      return [];
+      // throw Exception("Log data doesn't exist");
     }
   }
 

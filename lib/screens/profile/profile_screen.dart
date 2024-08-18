@@ -207,17 +207,17 @@ class ProfileScreen extends ConsumerWidget {
                             value: "1200",
                             unit: " ml",
                             backgroundColor: isDarkMode
-                                ? SicklerColours.blueSeed
+                                ? theme.colorScheme.tertiary
                                 : SicklerColours.blue95,
                             color: isDarkMode
                                 ? Colors.white
-                                : SicklerColours.blueSeed,
+                                : theme.colorScheme.tertiary,
                             icon: SvgPicture.asset(
                               "assets/svg/droplet-alt.svg",
                               colorFilter: ColorFilter.mode(
                                   isDarkMode
                                       ? Colors.white
-                                      : SicklerColours.blueSeed,
+                                      : theme.colorScheme.tertiary,
                                   BlendMode.srcIn),
                             ),
                           ),

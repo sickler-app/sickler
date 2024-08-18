@@ -85,9 +85,9 @@ enum Units {
       case Units.litres:
         return 'L';
       case Units.millilitres:
-        return 'mL';
+        return 'ml';
       case Units.centilitres:
-        return 'cL';
+        return 'cl';
       case Units.gallons:
         return 'gal';
     }

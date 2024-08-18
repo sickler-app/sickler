@@ -18,31 +18,33 @@ class SnackBarNotifier extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(provider, (previous, next) {
       next.when(
-        data: (user) {
-          ScaffoldMessenger.of(context).clearSnackBars();
-          showCustomSnackBar(
-            context: context,
-            message: "Success",
-            mode: SnackBarMode.success,
+          data: (data) {},
+          // data: (user) {
+          //   ScaffoldMessenger.of(context).clearSnackBars();
+          //   showCustomSnackBar(
+          //     context: context,
+          //     message: "Success",
+          //     mode: SnackBarMode.success,
+          //   );
+          // },
+          error: (error, stackTrace) {
+            ScaffoldMessenger.of(context).clearSnackBars();
+            showCustomSnackBar(
+              message: (error as Failure).message ?? "Error",
+              mode: SnackBarMode.error,
+              context: context,
+            );
+          },
+          loading: () {}
+          // loading: () {
+          //   ScaffoldMessenger.of(context).clearSnackBars();
+          //   showCustomSnackBar(
+          //     context: context,
+          //     message: "Loading",
+          //     mode: SnackBarMode.loading,
+          //   );
+          // },
           );
-        },
-        error: (error, stackTrace) {
-          ScaffoldMessenger.of(context).clearSnackBars();
-          showCustomSnackBar(
-            message: (error as Failure).message ?? "Error",
-            mode: SnackBarMode.error,
-            context: context,
-          );
-        },
-        loading: () {
-          ScaffoldMessenger.of(context).clearSnackBars();
-          showCustomSnackBar(
-            context: context,
-            message: "Loading",
-            mode: SnackBarMode.loading,
-          );
-        },
-      );
     });
 
     return child;

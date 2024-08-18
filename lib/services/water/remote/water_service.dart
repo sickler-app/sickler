@@ -22,7 +22,7 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection("logs")
+        .collection('logs')
         .doc("water")
         .set(
       {
