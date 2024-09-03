@@ -6,6 +6,9 @@ import 'package:sickler/core/snackbar_notifier.dart';
 import 'package:sickler/models/water/water_log.dart';
 import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/water/charts/chart_data_transformer.dart';
+import 'package:sickler/screens/water/charts/line_chart_widget.dart';
+import 'package:sickler/screens/water/charts/test_chart_screen.dart';
 import 'package:sickler/screens/water/components/water_volume_selector.dart';
 
 import '../../models/models.dart';
@@ -107,13 +110,36 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
                     }),
                     Text("Statistics", style: theme.textTheme.headlineSmall),
                     const Gap(kPadding16),
-                    Text("Weekly Average", style: theme.textTheme.bodyMedium),
-                    const Gap(kPadding4),
-                    Text("$dailyGoal ml",
-                        style: theme.textTheme.headlineSmall!.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: theme.colorScheme.tertiary)),
+                    // Text("Weekly Average", style: theme.textTheme.bodyMedium),
+                    // const Gap(kPadding4),
+                    //  Text("$dailyGoal ml",
+                    //      style: theme.textTheme.headlineSmall!.copyWith(
+                    //          fontWeight: FontWeight.w700,
+                    //          color: theme.colorScheme.tertiary)),
                     const Gap(24),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: SicklerColours.neutral10,
+                        borderRadius: BorderRadius.circular(kPadding24),
+                      ),
+                      child: AspectRatio(
+                          aspectRatio: 2,
+                          child: LineChartWidget(
+                            //s  xUnit: "H",
+                            yUnit: "L",
+                            timeScale: ChartTimeScale.month,
+                            spots: ChartDataTransformer
+                                .transformForCumulativeDailyTrend(
+                                    generateSampleWaterLogs()
+                                        .where((log) =>
+                                            log.timestamp.isAfter(DateTime(
+                                                2024, 08, 19, 0, 0, 0)) &&
+                                            log.timestamp.isBefore(DateTime(
+                                                2024, 08, 20, 0, 0, 0, 0)))
+                                        .toList()),
+                          )),
+                    ),
                     const WaterStatistics(),
                     const Gap(24),
                     Text("Today's Logs", style: theme.textTheme.titleLarge),

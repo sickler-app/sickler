@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/water/suggested_water_daily_goal_screen.dart';
 
 import '../../../core/core.dart';
 import '../../../models/water/water_log.dart';
@@ -63,7 +64,9 @@ class WaterLineChart extends StatelessWidget {
           totalAmount / 1000));
     }
 
-    final maxY = totalAmount / 1000;
+    final double maxY = (totalAmount < dailyGoal)
+        ? (dailyGoal / 1000).toDouble()
+        : totalAmount * 1.2;
 
     print(logs);
     final ThemeData theme = Theme.of(context);
@@ -168,7 +171,7 @@ class WaterLineChart extends StatelessWidget {
             },
             getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
               return touchedBarSpots.map((barSpot) {
-                return LineTooltipItem("${barSpot.y.toStringAsFixed(1)} L",
+                return LineTooltipItem("${barSpot.y.toStringAsFixed(2)} L",
                     theme.textTheme.bodySmall!.copyWith(color: Colors.white));
               }).toList();
             },

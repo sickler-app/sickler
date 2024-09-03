@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sickler/core/routes.dart';
 import 'package:sickler/core/theme.dart';
 import 'package:sickler/firebase_options.dart';
+import 'package:sickler/screens/water/water_screen.dart';
 
 import 'core/core.dart';
 
@@ -40,7 +41,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               .copyWith(statusBarColor: Colors.transparent)
           : SystemUiOverlayStyle.light
               .copyWith(statusBarColor: Colors.transparent),
-      child: MaterialApp.router(
+      child: MaterialApp(
         title: 'Sickler',
         debugShowCheckedModeBanner: false,
         theme: SicklerThemeData.lightTheme,
@@ -50,7 +51,9 @@ class _MyAppState extends ConsumerState<MyApp> {
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 300),
         ),
-        routerConfig: router,
+        home: WaterScreen(),
+
+        //  routerConfig: router,
         //  home: const OnboardingBaseScreen(),
       ),
     );
