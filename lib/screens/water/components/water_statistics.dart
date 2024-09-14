@@ -2,12 +2,12 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:sickler/providers/water/water_providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/water/suggested_water_daily_goal_screen.dart';
 
 import '../../../core/core.dart';
 import '../../../models/water/water_log.dart';
-import '../../../providers/providers.dart';
 
 class WaterStatistics extends ConsumerWidget {
   const WaterStatistics({super.key});
@@ -32,8 +32,8 @@ class WaterStatistics extends ConsumerWidget {
               onNextPressed: () {},
               onPreviousPressed: () {},
               label: "Today"),
-          Gap(kPadding16),
-          WaterLineChart(logs: ref.watch(waterProvider).value!),
+          const Gap(kPadding16),
+          WaterLineChart(logs: ref.watch(waterLogProvider).value!),
         ],
       ),
     );
@@ -54,7 +54,7 @@ class WaterLineChart extends StatelessWidget {
     logs.sort((a, b) => a.timestamp.compareTo(b.timestamp));
 
     // Define Spots
-    final List<FlSpot> spots = [FlSpot(6, 0)];
+    final List<FlSpot> spots = [const FlSpot(6, 0)];
     double totalAmount = 0;
     for (WaterLog entry in logs) {
       totalAmount += entry.amount;
@@ -73,7 +73,7 @@ class WaterLineChart extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 1.5,
       child: LineChart(LineChartData(
-        gridData: FlGridData(show: false),
+        gridData: const FlGridData(show: false),
         titlesData: FlTitlesData(
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
@@ -84,7 +84,7 @@ class WaterLineChart extends StatelessWidget {
                     final displayHour = value > 12 ? value - 12 : value;
 
                     return Padding(
-                      padding: EdgeInsets.only(top: 8),
+                      padding: const EdgeInsets.only(top: 8),
                       child: Text(
                         "$displayHour$period",
                         style: theme.textTheme.bodySmall!.copyWith(
@@ -106,8 +106,8 @@ class WaterLineChart extends StatelessWidget {
                     );
                   }),
             ),
-            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false))),
+            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false))),
         borderData: FlBorderData(show: false),
         minX: 6,
         maxX: 24,
@@ -151,7 +151,7 @@ class WaterLineChart extends StatelessWidget {
               (LineChartBarData barData, List<int> spotIndexes) {
             return spotIndexes.map((spotIndex) {
               return TouchedSpotIndicatorData(
-                  FlLine(color: Colors.transparent),
+                  const FlLine(color: Colors.transparent),
                   FlDotData(
                       show: true,
                       getDotPainter: (spot, percent, barData, index) {

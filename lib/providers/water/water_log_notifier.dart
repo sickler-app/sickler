@@ -9,9 +9,9 @@ import 'package:sickler/repositories/water/water_repository.dart';
 import '../../core/core.dart';
 import '../../models/user/sickler_user.dart';
 
-class WaterNotifier extends AsyncNotifier<List<WaterLog>> {
+class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
   final WaterRepository _waterRepository;
-  WaterNotifier({required WaterRepository waterRepository})
+  WaterLogNotifier({required WaterRepository waterRepository})
       : _waterRepository = waterRepository;
 
   ///Getters to actually know when an operation is successful or not;
@@ -24,16 +24,14 @@ class WaterNotifier extends AsyncNotifier<List<WaterLog>> {
   String? get errorMessage => state.error is Failure
       ? (state.error as Failure).message
       : state.error.toString();
+  WaterPreferences _preferences = const WaterPreferences.initial();
+  WaterPreferences get preferences => _preferences;
 
   @override
   Future<List<WaterLog>> build() async {
     return [];
   }
 
-  WaterPreferences _preferences = const WaterPreferences.initial();
-  WaterPreferences get preferences => _preferences;
-
-  int totalDrunkToday = 0;
 
   /// --- Logs ----///
   Future<void> getWaterLogs(
