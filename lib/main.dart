@@ -51,7 +51,7 @@ class _MyAppState extends ConsumerState<MyApp> {
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 300),
         ),
-        home: WaterScreen(),
+        home: const WaterScreen(),
 
         //  routerConfig: router,
         //  home: const OnboardingBaseScreen(),

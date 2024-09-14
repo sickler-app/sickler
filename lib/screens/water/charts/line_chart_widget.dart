@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +27,14 @@ class LineChartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isDarkMode = theme.brightness == Brightness.dark;
+    DateTime now = DateTime.now();
+    int daysInCurrentMonth = DateTime(now.year, now.month + 1, 0).day;
     int maxX;
     int minX;
+    int intervalX;
+    double maxY = spots.map((spot)=> spot.y).toList().reduce(max); // select the spots with the highest Y value
+   
+    double intervalY = maxY/2;
     switch (timeScale) {
       case ChartTimeScale.day:
         maxX = 24;
@@ -37,7 +45,7 @@ class LineChartWidget extends StatelessWidget {
         minX = 1;
         break;
       case ChartTimeScale.month:
-        maxX = 30;
+        maxX = daysInCurrentMonth;
         minX = 1;
         break;
       case ChartTimeScale.threeMonths:
@@ -62,12 +70,14 @@ class LineChartWidget extends StatelessWidget {
     return LineChart(
       curve: Curves.easeInOutQuart,
       LineChartData(
-        gridData: FlGridData(show: false),
-        titlesData: _getTitlesData(context, isDarkMode),
+        gridData: const FlGridData(show: false),
+        titlesData: _getTitlesData(context, intervalY),
         borderData: _getBorderData(isDarkMode),
         minX: minX.toDouble(),
         maxX: maxX.toDouble(),
         minY: 0,
+        maxY: maxY,
+
         lineBarsData: [
           _getLineChartBarData(context, color, spots),
         ],
@@ -76,36 +86,37 @@ class LineChartWidget extends StatelessWidget {
     );
   }
 
-  FlTitlesData _getTitlesData(BuildContext context, bool isDarkMode) {
+  FlTitlesData _getTitlesData(BuildContext context, double intervalY) {
     final theme = Theme.of(context);
-    int interval = 1;
+    int intervalX = 1;
     String Function(double) getXTitleText;
+
 
     switch (timeScale) {
       case ChartTimeScale.day:
-        interval = 6;
-        getXTitleText = (value) => "${value.toStringAsFixed(0)} ${xUnit ?? ''}";
+        intervalX = 6;
+        getXTitleText = (value) => TimeOfDay(hour: value.toInt(), minute: 0,).format(context).split(":").first;
         break;
       case ChartTimeScale.week:
-        interval = 1;
+        intervalX = 1;
         getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
       case ChartTimeScale.month:
-        interval = 10;
+        intervalX = 10;
         getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
       case ChartTimeScale.threeMonths:
-        interval = 30;
+        intervalX = 30;
         getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
       case ChartTimeScale.sixMonths:
-        interval = 1;
+        intervalX = 1;
         getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
       case ChartTimeScale.year:
-        interval = 1;
+        intervalX = 1;
         getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
       case ChartTimeScale.ytd:
-        interval = 1;
+        intervalX = 1;
         getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
     }
@@ -114,7 +125,7 @@ class LineChartWidget extends StatelessWidget {
       bottomTitles: AxisTitles(
         sideTitles: SideTitles(
           showTitles: true,
-          interval: interval.toDouble(),
+          interval: intervalX.toDouble(),
           getTitlesWidget: (value, meta) {
             return Padding(
               padding: const EdgeInsets.only(top: 8),
@@ -131,12 +142,12 @@ class LineChartWidget extends StatelessWidget {
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
-          reservedSize: 30,
-          interval: 5,
+          reservedSize: 25,
+          interval: intervalY,
           showTitles: true,
           getTitlesWidget: (value, meta) {
             return Text(
-              "${value.toStringAsFixed(0)} ${yUnit ?? ''}",
+              "${value.toStringAsFixed(1)} ${yUnit ?? ''}",
               style: theme.textTheme.bodySmall!.copyWith(
                 fontSize: 9,
                 color: SicklerColours.neutral50,
@@ -145,10 +156,10 @@ class LineChartWidget extends StatelessWidget {
           },
         ),
       ),
-      rightTitles: AxisTitles(
+      rightTitles: const AxisTitles(
         sideTitles: SideTitles(showTitles: false),
       ),
-      topTitles: AxisTitles(
+      topTitles: const AxisTitles(
         sideTitles: SideTitles(showTitles: false),
       ),
     );
@@ -215,7 +226,7 @@ class LineChartWidget extends StatelessWidget {
           (LineChartBarData barData, List<int> spotIndexes) {
         return spotIndexes.map((spotIndex) {
           return TouchedSpotIndicatorData(
-            FlLine(color: Colors.transparent),
+            const FlLine(color: Colors.transparent),
             FlDotData(
               show: true,
               getDotPainter: (spot, percent, barData, index) {

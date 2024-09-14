@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sickler/models/user/sickler_user.dart';
 import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/providers/providers.dart';
+import 'package:sickler/providers/water/water_providers.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';
 import 'package:sickler/screens/profile/profile_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
@@ -27,8 +28,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     //Todo: Initialize all data here
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.watch(userProvider.notifier).getCurrentUserData();
-      await ref.watch(waterProvider.notifier).getWaterLogs();
-      await ref.watch(waterProvider.notifier).getWaterPreferences();
+      await ref.watch(waterLogProvider.notifier).getWaterLogs();
+      await ref.watch(waterLogProvider.notifier).getWaterPreferences();
     });
     super.initState();
   }
@@ -43,11 +44,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ? user!.profile.displayName!.split(" ").first
         : user?.email ?? "User";
 
-    final waterNotifier = ref.watch(waterProvider.notifier);
-    List<WaterLog> totalLogsToday = ref.watch(waterProvider).value!;
+    final waterLogNotifier = ref.watch(waterLogProvider.notifier);
+    List<WaterLog> totalLogsToday = ref.watch(waterLogProvider).value!;
     double totalToday =
-        waterNotifier.calculateTotalFromLogs(logs: totalLogsToday);
-    WaterPreferences waterPrefs = waterNotifier.preferences;
+        waterLogNotifier.calculateTotalFromLogs(logs: totalLogsToday);
+    WaterPreferences waterPrefs = waterLogNotifier.preferences;
     double percentComplete = ((totalToday / waterPrefs.dailyGoal!) * 100);
     int remaining = waterPrefs.dailyGoal! - totalToday.toInt();
 

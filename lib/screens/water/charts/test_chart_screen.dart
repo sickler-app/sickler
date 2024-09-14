@@ -17,7 +17,7 @@ List<WaterLog> generateSampleWaterLogs() {
 
   for (DateTime date = startDate;
       date.isBefore(endDate);
-      date = date.add(Duration(days: 1))) {
+      date = date.add(const Duration(days: 1))) {
     int logsPerDay = random.nextInt(5) + 3; // 3 to 8 logs
 
     for (int i = 0; i < logsPerDay; i++) {
@@ -51,13 +51,13 @@ class TestWaterChartScreen extends StatelessWidget {
     print("Generated ${sampleLogs.length} sample water logs");
 
     return Scaffold(
-      appBar: AppBar(title: Text('Water Intake Charts')),
+      appBar: AppBar(title: const Text('Water Intake Charts')),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              Gap(kPadding32),
+              const Gap(kPadding32),
               AspectRatio(
                 aspectRatio: 2,
                 child: ChartFactory.createChart(
@@ -69,7 +69,7 @@ class TestWaterChartScreen extends StatelessWidget {
                       .toList(),
                 ),
               ),
-              Gap(kPadding32),
+              const Gap(kPadding32),
               AspectRatio(
                 aspectRatio: 2,
                 child: ChartFactory.createChart(
@@ -81,7 +81,7 @@ class TestWaterChartScreen extends StatelessWidget {
                       .toList(),
                 ),
               ),
-              Gap(kPadding32),
+              const Gap(kPadding32),
               AspectRatio(
                 aspectRatio: 2,
                 child: ChartFactory.createChart(
@@ -89,7 +89,7 @@ class TestWaterChartScreen extends StatelessWidget {
                   data: sampleLogs,
                 ),
               ),
-              Gap(kPadding32),
+              const Gap(kPadding32),
             ],
           ),
         ),

@@ -51,7 +51,6 @@ class UserRepository {
         return SicklerUser.empty;
       }
 
-      return await _getRemoteUser(currentUser.uid);
     });
   }
 

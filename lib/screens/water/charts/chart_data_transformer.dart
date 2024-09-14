@@ -20,19 +20,6 @@ class ChartDataTransformer {
       ..sort((a, b) => a.x.compareTo(b.x));
 
     return spots;
-    // // Apply moving average smoothing
-    // List<FlSpot> smoothedSpots = [];
-    // for (int i = 0; i < spots.length; i++) {
-    //   double sum = 0;
-    //   int count = 0;
-    //   for (int j = max(0, i - windowSize + 1); j <= i; j++) {
-    //     sum += spots[j].y;
-    //     count++;
-    //   }
-    //   smoothedSpots.add(FlSpot(spots[i].x, sum / count));
-    // }
-    //
-    // return smoothedSpots;
   }
 
   static List<FlSpot> transformForCumulativeDailyTrend(List<WaterLog> logs) {
@@ -54,14 +41,28 @@ class ChartDataTransformer {
 
   static List<BarChartGroupData> transformForWeeklyTotals(
       {required List<WaterLog> logs, Color? barColor, double? barWidth}) {
+
+    ///Pad the logs to fill up the week
+    DateTime now = DateTime.now();
+    int daysInCurrentWeek = 7;
+
     //Group logs by day and sum amounts
     final Map<int, double> dailyTotals = {};
 
     ///Todo:Convert into Litres
     for (WaterLog log in logs) {
       final int day = log.timestamp.weekday;
-      dailyTotals[day] = (dailyTotals[day] ?? 0) + log.amount;
+      dailyTotals[day] = (dailyTotals[day] ?? 0) + log.amount/1000;
     }
+
+
+    ///Pad the list of dailyTotals to fill up the month
+    for (int i = 0; i < daysInCurrentWeek; i++) {
+      //Fill the missing days of the month with empty logs.
+      dailyTotals.putIfAbsent(i, ()=>0);
+    }
+
+
     //Convert to BarChartGroupData List
     return dailyTotals.entries
         .map((e) => BarChartGroupData(x: e.key, barRods: [
@@ -76,17 +77,23 @@ class ChartDataTransformer {
 
   static List<BarChartGroupData> transformForMonthlyTotals(
       {required List<WaterLog> logs, Color? barColor, double? barWidth}) {
+    ///Pad the logs to fill up the month
+    DateTime now = DateTime.now();
+    int daysInCurrentMonth = DateTime(now.year, now.month + 1, 0)
+        .day; //The first day of the next month is auto adjusted to the last day of the previous month, which the month we are interested in.
+
     //Group logs by day and sum amounts
     final Map<int, double> dailyTotals = {};
 
-    ///Todo:Convert into Litres
     for (WaterLog log in logs) {
       final int day = log.timestamp.day;
-      dailyTotals[day] = (dailyTotals[day] ?? 0) + log.amount;
+      dailyTotals[day] = (dailyTotals[day] ?? 0) + log.amount / 1000;
     }
 
-    for (int i = 0; i < 30; i++) {
-      ///Calculate totals for each day
+    ///Pad the list of dailyTotals to fill up the month
+    for (int i = 0; i < daysInCurrentMonth; i++) {
+      //Fill the missing days of the month with empty logs.
+      dailyTotals.putIfAbsent(i, ()=>0);
     }
 
     //Convert to BarChartGroupData List
@@ -95,24 +102,11 @@ class ChartDataTransformer {
               BarChartRodData(
                   toY: e.value,
                   color: barColor ?? SicklerColours.blueSeed,
-                  width: barWidth ?? 16)
+                  width: barWidth ?? 5)
             ]))
         .toList()
       ..sort((a, b) => a.x.compareTo(b.x));
   }
 
   //Add more transformers
-}
-
-double _calculateTotal(List<WaterLog> logs) {
-  double total = 0;
-  for (WaterLog log in logs) {
-    total += log.amount;
-  }
-  return total;
-}
-
-double calculateAverage(List<WaterLog> logs) {
-  double total = _calculateTotal(logs);
-  return total / logs.length;
 }
