@@ -1,3 +1,6 @@
+export 'app_icon.dart';
+export 'generic_selector.dart';
+export 'selectable_chip.dart';
 export 'sickler_alert_dialog.dart';
 export 'sickler_app_bar.dart';
 export 'sickler_bottom_sheet.dart';

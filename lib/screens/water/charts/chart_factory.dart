@@ -31,7 +31,7 @@ class ChartFactory {
 
       case ChartType.bar:
         final barGroups = ChartDataTransformer.transformForWeeklyTotals(
-            logs: data, barColor: barColor, barWidth: barWidth);
+            logList: data, barColor: barColor, barWidth: barWidth);
         return BarChartWidget(
           timeScale: ChartTimeScale.week,
           barGroups: barGroups,

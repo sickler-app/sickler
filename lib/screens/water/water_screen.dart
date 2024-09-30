@@ -1,8 +1,10 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/constants.dart';
+import 'package:sickler/core/core.dart';
 import 'package:sickler/core/snackbar_notifier.dart';
 import 'package:sickler/models/water/water_log.dart';
 import 'package:sickler/providers/providers.dart';
@@ -26,6 +28,8 @@ class WaterScreen extends ConsumerStatefulWidget {
 }
 
 class _WaterScreenState extends ConsumerState<WaterScreen> {
+  bool showFullDay = false;
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -39,8 +43,11 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
     final WaterLogNotifier waterLogNotifier =
         ref.watch(waterLogProvider.notifier);
     final SicklerUser user = ref.watch(userProvider).value!;
-
     final WaterStats waterStats = ref.watch(waterStatsProvider);
+
+    List<WaterLog> todayLogs = waterStats.logsToday;
+    List<WaterLog>? thisWeekLogs = waterStats.logsThisWeek;
+    List<WaterLog>? thisMonthLogs = waterStats.logsThisMonth;
 
     final ThemeData theme = Theme.of(context);
     return Scaffold(
@@ -50,7 +57,7 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SicklerAppBar(pageTitle: "Water Intake"),
+              const SicklerAppBar(pageTitle: "Water"),
               Align(
                 alignment: Alignment.center,
                 child: SicklerCircularPercentIndicator(
@@ -116,30 +123,28 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
                   children: [
                     const Gap(kPadding16),
                     WaterStatsCard(
-                      title: "Today so far",
-                      value:
-                          "${(waterStats.totalToday / 1000).toStringAsFixed(1)} L",
-                      child: waterStats.logsToday.isNotEmpty
-                          ? LineChartWidget(
-                              yUnit: "L",
-                              timeScale: ChartTimeScale.day,
-                              spots: ChartDataTransformer
-                                  .transformForCumulativeDailyTrend(
-                                      waterStats.logsToday),
-                            )
-                          : Center(
-                              child: Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: kPadding24),
-                              child: Text(
-                                "You haven't drunk any water yet",
-                                style: theme.textTheme.bodyMedium,
-                              ),
-                            )),
-                    ),
+                        dateRange: "Today",
+                        title: "Today so far",
+                        visible: todayLogs.isNotEmpty,
+                        onActionPressed: () {
+                          setState(() {
+                            showFullDay = !showFullDay;
+                          });
+                        },
+                        value:
+                            "${(waterStats.totalToday / 1000).toStringAsFixed(1)} L",
+                        child: LineChartWidget(
+                          yUnit: "L",
+                          timeScale: ChartTimeScale.day,
+                          showFullDay: showFullDay,
+                          spots: ChartDataTransformer
+                              .transformForCumulativeDailyTrend(todayLogs),
+                        )),
                     const Gap(kPadding16),
                     WaterStatsCard(
+                      dateRange: "This Week",
                       title: "This week's average",
+                      visible: thisWeekLogs!.isNotEmpty,
                       value:
                           "${(waterStats.averageThisWeek ?? 0).toStringAsFixed(2)} L",
 
@@ -149,11 +154,13 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
                         timeScale: ChartTimeScale.week,
                         barGroups:
                             ChartDataTransformer.transformForWeeklyTotals(
-                                logs: waterStats.logsThisWeek ?? []),
+                                logList: thisWeekLogs),
                       ),
                     ),
                     const Gap(kPadding16),
                     WaterStatsCard(
+                      visible: thisMonthLogs!.isNotEmpty,
+                      dateRange: "This Month",
                       title: "This month's average",
                       value:
                           "${(waterStats.averageThisMonth ?? 0).toStringAsFixed(2)} L",
@@ -162,7 +169,7 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
                           yUnit: "L",
                           barGroups:
                               ChartDataTransformer.transformForMonthlyTotals(
-                                  logs: waterStats.logsThisMonth ?? [])),
+                                  logList: thisMonthLogs)),
                     ),
                     const Gap(kPadding16),
                   ],
@@ -218,13 +225,22 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
 
 class WaterStatsCard extends StatelessWidget {
   final String title;
+  final String dateRange;
   final String value;
   final Widget child;
-  const WaterStatsCard(
-      {super.key,
-      required this.title,
-      required this.value,
-      required this.child});
+  final VoidCallback? onActionPressed;
+  final IconData? actionIconData;
+  final bool visible;
+  const WaterStatsCard({
+    super.key,
+    required this.title,
+    required this.value,
+    required this.child,
+    required this.dateRange,
+    this.onActionPressed,
+    this.actionIconData,
+    this.visible = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -236,36 +252,109 @@ class WaterStatsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color:
             isDarkMode ? theme.cardColor : theme.colorScheme.tertiaryContainer,
-        borderRadius: BorderRadius.circular(kPadding24),
+        //  color: theme.colorScheme.tertiary,
+        borderRadius: BorderRadius.circular(kPadding32),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: theme.textTheme.bodyMedium),
-          const Gap(kPadding4),
-          Row(
-            children: [
-              SizedBox(
-                height: 20,
-                width: 20,
-                child: SvgPicture.asset(
-                  "assets/svg/droplet-alt-filled.svg",
-                  colorFilter: ColorFilter.mode(
-                      theme.colorScheme.tertiary, BlendMode.srcIn),
+      child: Visibility(
+        visible: visible,
+        replacement: AspectRatio(
+          aspectRatio: 1.45,
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  "assets/svg/illustrations/emojis/smiling-face-with-tear.svg",
+                  height: 48,
                 ),
+                Gap(kPadding12),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Text(
+                    "No data to show, try adding some logs to see your stats here.",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Row(children: [
+            //   Chip(
+            //     label: Text(
+            //       dateRange,
+            //       style: theme.textTheme.bodyMedium!
+            //           .copyWith(color: theme.colorScheme.onTertiaryContainer),
+            //     ),
+            //     backgroundColor: SicklerColours.blue90,
+            //     padding: EdgeInsets.symmetric(
+            //         horizontal: kPadding12, vertical: kPadding12),
+            //   ),
+            //  Spacer(),
+
+            // ],),
+
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title,
+                        style: theme.textTheme.bodyMedium!.copyWith(
+
+                            //color: Colors.white,
+
+                            color: theme.colorScheme.onTertiary)),
+                    const Gap(kPadding4),
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: SvgPicture.asset(
+                            "assets/svg/droplet-alt-filled.svg",
+                            colorFilter: ColorFilter.mode(
+                                theme.colorScheme.tertiary, BlendMode.srcIn),
+                          ),
+                        ),
+                        const Gap(kPadding4),
+                        Text(value,
+                            style: theme.textTheme.titleMedium!
+                                .copyWith(color: theme.colorScheme.tertiary)),
+                      ],
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Visibility(
+                  visible: onActionPressed != null,
+                  child: IconButton.filled(
+                    onPressed: onActionPressed,
+                    icon: Icon(
+                        actionIconData ?? FluentIcons.arrow_maximize_20_regular,
+                        color: theme.colorScheme.onTertiary),
+                    style: IconButton.styleFrom(
+                        backgroundColor: isDarkMode
+                            ? SicklerColours.neutral20
+                            : SicklerColours.blue90),
+                  ),
+                ),
+              ],
+            ),
+
+            const Gap(kPadding32),
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: AspectRatio(
+                aspectRatio: 2,
+                child: child,
               ),
-              const Gap(kPadding4),
-              Text(value,
-                  style: theme.textTheme.titleMedium!
-                      .copyWith(color: theme.colorScheme.tertiary)),
-            ],
-          ),
-          const Gap(kPadding24),
-          AspectRatio(
-            aspectRatio: 2,
-            child: child,
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

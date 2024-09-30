@@ -29,48 +29,92 @@ class BarChartWidget extends StatelessWidget {
     DateTime now = DateTime.now();
     int daysInCurrentMonth = DateTime(now.year, now.month + 1, 0).day;
 
-
     double maxX;
-    double minX;
+    // double minX;
     double intervalX;
-    double maxY = barGroups.map((barGroups) => barGroups.barRods[0].toY).toList().reduce(max);
-    double intervalY = maxY/2;
+    double maxY = barGroups
+        .map((barGroups) => barGroups.barRods[0].toY)
+        .toList()
+        .reduce(max);
+    double intervalY = (maxY / 2) == 0 ? 1 : maxY / 2;
+
+    String Function(double) getXTitleText;
 
     switch (timeScale) {
       case ChartTimeScale.day:
         maxX = 24;
-        intervalX = 0;
+        intervalX = 1;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
       case ChartTimeScale.week:
         maxX = 7;
         intervalX = 1;
+        getXTitleText = (value) {
+          switch ((value.toInt() + 1)) {
+            case 1:
+              return 'M';
+
+            case 2:
+              return 'T';
+
+            case 3:
+              return 'W';
+
+            case 4:
+              return 'T';
+
+            case 5:
+              return 'F';
+
+            case 6:
+              return 'S';
+
+            case 7:
+              return 'S';
+
+            default:
+              return 'S';
+          }
+        };
+
         break;
       case ChartTimeScale.month:
+        intervalX = 1;
+        // minX = 1;
         maxX = daysInCurrentMonth.toDouble();
-        intervalX = 10;
-        break;
+        getXTitleText = (value) {
+          if (value == 1 || value == 10 || value == 20 || value == maxX) {
+            return value.toInt().toString();
+          }
+          return '';
+        };
+
       case ChartTimeScale.threeMonths:
         maxX = 3;
         intervalX = 1;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
       case ChartTimeScale.year:
         maxX = 12;
         intervalX = 1;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
       case ChartTimeScale.ytd:
         maxX = now.month.toDouble();
         intervalX = 1;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
       case ChartTimeScale.sixMonths:
         maxX = 6;
         intervalX = 1;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
       default:
         maxX = 24;
-        intervalX = 0;
+        intervalX = 1;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
     }
     return BarChart(
-      //Todo: Customise the bar chart
       swapAnimationCurve: Curves.easeInOutQuart,
       BarChartData(
           barGroups: barGroups,
@@ -89,49 +133,12 @@ class BarChartWidget extends StatelessWidget {
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                   showTitles: true,
-                //  interval: intervalX,
+                  interval: intervalX,
                   getTitlesWidget: (value, meta) {
-                    String horizontalLabel = (value.toInt() + 1).toString();
-
-                    if (timeScale == ChartTimeScale.month) {
-                      if (value % 9 != 0) {
-                        return const SizedBox();
-                      }
-                    }
-
-                    if (timeScale == ChartTimeScale.week) {
-                      switch ((value.toInt() + 1)) {
-                        case 1:
-                          horizontalLabel = 'M';
-                          break;
-                        case 2:
-                          horizontalLabel = 'T';
-                          break;
-                        case 3:
-                          horizontalLabel = 'W';
-                          break;
-                        case 4:
-                          horizontalLabel = 'T';
-                          break;
-                        case 5:
-                          horizontalLabel = 'F';
-                          break;
-                        case 6:
-                          horizontalLabel = 'S';
-                          break;
-                        case 7:
-                          horizontalLabel = 'S';
-                          break;
-                        default:
-                          horizontalLabel = 'S';
-                          break;
-                      }
-                    }
-
                     return Padding(
                       padding: const EdgeInsets.only(top: 8),
                       child: Text(
-                        horizontalLabel,
+                        getXTitleText(value),
                         style: theme.textTheme.bodySmall!.copyWith(
                             fontSize: 10, color: SicklerColours.neutral50),
                       ),
@@ -140,7 +147,7 @@ class BarChartWidget extends StatelessWidget {
             ),
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
-                interval: intervalY,
+                  interval: intervalY,
                   reservedSize: 25,
                   showTitles: true,
                   getTitlesWidget: (value, meta) {
@@ -165,7 +172,7 @@ class BarChartWidget extends StatelessWidget {
               },
               getTooltipItem: (groupData, index, rodData, indexx) {
                 return BarTooltipItem(
-                    '${(rodData.toY / 1000).toStringAsFixed(3)} ${yUnit ?? ''}',
+                    '${(rodData.toY).toStringAsFixed(2)} ${yUnit ?? 'L'}',
                     theme.textTheme.bodySmall!.copyWith(color: Colors.white));
               },
             ),

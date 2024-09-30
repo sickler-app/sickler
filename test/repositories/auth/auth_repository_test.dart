@@ -37,7 +37,7 @@ class MockUser extends Mock implements User {
 void main() {
   ///Auth Repository Tests
   late final AuthService mockedAuthService;
-  late final UserLocalService mockedUserLocalService;
+  // late final UserLocalService mockedUserLocalService;
   late final AuthRepository authRepository;
   late final SicklerUser sicklerUser;
   late final UserCredential mockUserCredential;
@@ -46,7 +46,7 @@ void main() {
   setUpAll(() {
     ///Test setup
     mockedAuthService = MockAuthService();
-    mockedUserLocalService = MockUserLocalService();
+    //  mockedUserLocalService = MockUserLocalService();
     mockUserCredential = MockUserCredential();
     mockUser = MockUser();
     authRepository = AuthRepository(

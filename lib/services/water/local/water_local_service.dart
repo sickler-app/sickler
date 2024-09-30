@@ -58,7 +58,6 @@ class WaterLocalService extends LocalDbService {
     final isar = await db;
     await isar.writeTxn(() async {
       bool isDeleted = await isar.waterLogs.delete(log.id);
-      print("Deletion result: $isDeleted");
 
       if (!isDeleted) {
         throw Exception("Failed to delete log");

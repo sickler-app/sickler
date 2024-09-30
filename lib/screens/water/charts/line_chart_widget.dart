@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/core.dart';
 
@@ -13,6 +14,7 @@ class LineChartWidget extends StatelessWidget {
   final String? yUnit;
   final Color? color;
   final ChartTimeScale timeScale;
+  final bool showFullDay;
 
   const LineChartWidget({
     super.key,
@@ -21,6 +23,7 @@ class LineChartWidget extends StatelessWidget {
     this.xUnit,
     this.yUnit,
     this.timeScale = ChartTimeScale.day,
+    this.showFullDay = false,
   });
 
   @override
@@ -29,41 +32,128 @@ class LineChartWidget extends StatelessWidget {
     final bool isDarkMode = theme.brightness == Brightness.dark;
     DateTime now = DateTime.now();
     int daysInCurrentMonth = DateTime(now.year, now.month + 1, 0).day;
-    int maxX;
-    int minX;
-    int intervalX;
-    double maxY = spots.map((spot)=> spot.y).toList().reduce(max); // select the spots with the highest Y value
-   
-    double intervalY = maxY/2;
+    double maxX;
+    double minX;
+    int intervalX = 1;
+    double maxY = 0;
+
+    if (spots.isNotEmpty) {
+      maxY = spots.map((spot) => spot.y).toList().reduce(max);
+    }
+
+    // select the spots with the highest Y value
+    double intervalY = (maxY / 2) == 0 ? 1 : maxY / 2;
+    String Function(double) getXTitleText;
+
     switch (timeScale) {
       case ChartTimeScale.day:
-        maxX = 24;
-        minX = 0;
+        // intervalX = 6;
+        // final timeFormat = DateFormat("h a"); // "6AM" format
+        // getXTitleText = (value) {
+        //   final time = DateTime(2022, 1, 1, value.toInt(), 0);
+        //   return timeFormat.format(time);
+        // };
+        //
+        // //Used to change the timescale of the widget
+        // if (showFullDay) {
+        //   minX = 0;
+        //   maxX = 24;
+        // } else {
+        //   final sortedSpots = List<FlSpot>.from(spots)
+        //     ..sort((a, b) => a.x.compareTo(b.x));
+        //   if (sortedSpots.isNotEmpty) {
+        //     final firstSpotHour = sortedSpots.first.x;
+        //     final lastSpotHour = sortedSpots.last.x;
+        //     minX = (firstSpotHour - 1).clamp(0, 23);
+        //     maxX = (lastSpotHour + 1).clamp(0, 24);
+        //     intervalX = ((maxX - minX) / 2).toInt();
+        //   } else {
+        //     minX = 0;
+        //     maxX = 24;
+        //   }
+        // }
+        final timeFormat = DateFormat("h a");
+
+        if (showFullDay) {
+          minX = 0;
+          maxX = 24;
+          intervalX = 6;
+          getXTitleText = (value) {
+            final time = DateTime(2022, 1, 1, value.toInt(), 0);
+            return timeFormat.format(time);
+          };
+        } else {
+          final sortedSpots = List<FlSpot>.from(spots)
+            ..sort((a, b) => a.x.compareTo(b.x));
+          if (sortedSpots.isNotEmpty) {
+            minX = (sortedSpots.first.x - 1).clamp(0, 23);
+            maxX = (sortedSpots.last.x + 1).clamp(0, 24);
+
+            // Always show 3 labels
+            final range = maxX - minX;
+            intervalX = (range / 2).ceil();
+
+            getXTitleText = (value) {
+              if (value == minX ||
+                  value == maxX ||
+                  value == (minX + maxX) / 2) {
+                final time = DateTime(2022, 1, 1, value.toInt(), 0);
+                return timeFormat.format(time);
+              }
+              return '';
+            };
+          } else {
+            minX = 0;
+            maxX = 24;
+            intervalX = 6;
+            getXTitleText = (value) {
+              final time = DateTime(2022, 1, 1, value.toInt(), 0);
+              return timeFormat.format(time);
+            };
+          }
+        }
         break;
       case ChartTimeScale.week:
         maxX = 7;
         minX = 1;
+        intervalX = 1;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
       case ChartTimeScale.month:
-        maxX = daysInCurrentMonth;
+        intervalX = 1;
         minX = 1;
+        maxX = daysInCurrentMonth.toDouble();
+        getXTitleText = (value) {
+          if (value == 1 || value == 10 || value == 20 || value == maxX) {
+            return value.toInt().toString();
+          }
+          return '';
+        };
         break;
       case ChartTimeScale.threeMonths:
         maxX = 90;
         minX = 1;
+        intervalX = 30;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
 
-      case ChartTimeScale.year:
-        maxX = DateTime.monthsPerYear;
-        minX = 1;
-
-      case ChartTimeScale.ytd:
-        maxX = DateTime.now().month;
-        minX = 1;
-        break;
       case ChartTimeScale.sixMonths:
         maxX = 180;
         minX = 1;
+        intervalX = 1;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
+        break;
+      case ChartTimeScale.year:
+        maxX = DateTime.monthsPerYear.toDouble();
+        minX = 1;
+        intervalX = 1;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
+
+      case ChartTimeScale.ytd:
+        maxX = DateTime.now().month.toDouble();
+        minX = 1;
+        intervalX = 1;
+        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
     }
 
@@ -71,96 +161,60 @@ class LineChartWidget extends StatelessWidget {
       curve: Curves.easeInOutQuart,
       LineChartData(
         gridData: const FlGridData(show: false),
-        titlesData: _getTitlesData(context, intervalY),
         borderData: _getBorderData(isDarkMode),
-        minX: minX.toDouble(),
-        maxX: maxX.toDouble(),
+        minX: minX,
+        maxX: maxX,
         minY: 0,
         maxY: maxY,
-
         lineBarsData: [
           _getLineChartBarData(context, color, spots),
         ],
         lineTouchData: _getLineTouchData(context, color),
-      ),
-    );
-  }
-
-  FlTitlesData _getTitlesData(BuildContext context, double intervalY) {
-    final theme = Theme.of(context);
-    int intervalX = 1;
-    String Function(double) getXTitleText;
-
-
-    switch (timeScale) {
-      case ChartTimeScale.day:
-        intervalX = 6;
-        getXTitleText = (value) => TimeOfDay(hour: value.toInt(), minute: 0,).format(context).split(":").first;
-        break;
-      case ChartTimeScale.week:
-        intervalX = 1;
-        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
-        break;
-      case ChartTimeScale.month:
-        intervalX = 10;
-        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
-        break;
-      case ChartTimeScale.threeMonths:
-        intervalX = 30;
-        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
-        break;
-      case ChartTimeScale.sixMonths:
-        intervalX = 1;
-        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
-      case ChartTimeScale.year:
-        intervalX = 1;
-        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
-      case ChartTimeScale.ytd:
-        intervalX = 1;
-        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
-        break;
-    }
-
-    return FlTitlesData(
-      bottomTitles: AxisTitles(
-        sideTitles: SideTitles(
-          showTitles: true,
-          interval: intervalX.toDouble(),
-          getTitlesWidget: (value, meta) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Text(
-                getXTitleText(value),
-                style: theme.textTheme.bodySmall!.copyWith(
-                  fontSize: 10,
-                  color: SicklerColours.neutral50,
-                ),
-              ),
-            );
-          },
+        titlesData: FlTitlesData(
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              interval: intervalX.toDouble(),
+              getTitlesWidget: (value, meta) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    getXTitleText(value),
+                    style: theme.textTheme.bodySmall!.copyWith(
+                      fontSize: 10,
+                      //   color: Colors.white,
+                      color: SicklerColours.neutral50,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+              reservedSize: 25,
+              interval: intervalY,
+              showTitles: true,
+              getTitlesWidget: (value, meta) {
+                return Text(
+                  "${value.toStringAsFixed(1)} ${yUnit ?? ''}",
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    fontSize: 9,
+                    //     color: Colors.white,
+                    //color: theme.colorScheme.onTertiaryContainer,
+                    color: SicklerColours.neutral50,
+                  ),
+                );
+              },
+            ),
+          ),
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
         ),
-      ),
-      leftTitles: AxisTitles(
-        sideTitles: SideTitles(
-          reservedSize: 25,
-          interval: intervalY,
-          showTitles: true,
-          getTitlesWidget: (value, meta) {
-            return Text(
-              "${value.toStringAsFixed(1)} ${yUnit ?? ''}",
-              style: theme.textTheme.bodySmall!.copyWith(
-                fontSize: 9,
-                color: SicklerColours.neutral50,
-              ),
-            );
-          },
-        ),
-      ),
-      rightTitles: const AxisTitles(
-        sideTitles: SideTitles(showTitles: false),
-      ),
-      topTitles: const AxisTitles(
-        sideTitles: SideTitles(showTitles: false),
       ),
     );
   }
@@ -185,11 +239,13 @@ class LineChartWidget extends StatelessWidget {
   ) {
     final theme = Theme.of(context);
     return LineChartBarData(
-      curveSmoothness: 0.4,
+      curveSmoothness: .32,
       preventCurveOverShooting: true,
-      spots: spots.first.x != 0 ? [FlSpot.nullSpot, ...spots] : spots,
       isCurved: true,
+      spots: [FlSpot(spots.first.x.floorToDouble(), 0), ...spots],
+      //  spots: spots, // Adds a zero spot to the earliest hour
       color: color ?? theme.colorScheme.tertiary,
+      //  color: color ?? Colors.white,
       barWidth: 2,
       isStrokeCapRound: true,
       dotData: FlDotData(
@@ -211,6 +267,11 @@ class LineChartWidget extends StatelessWidget {
                 theme.colorScheme.tertiary.withOpacity(0.4),
             color?.withOpacity(0) ?? theme.colorScheme.tertiary.withOpacity(0),
           ],
+          //
+          // colors: [
+          //   Colors.white.withOpacity(0.4),
+          //   Colors.white.withOpacity(0),
+          // ],
         ),
       ),
     );

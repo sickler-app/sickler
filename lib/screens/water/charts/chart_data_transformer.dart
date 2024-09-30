@@ -5,8 +5,10 @@ import 'package:sickler/core/constants.dart';
 import '../../../models/water/water_log.dart';
 
 class ChartDataTransformer {
-  static List<FlSpot> transformForDailyTrend(List<WaterLog> logs,
+  static List<FlSpot> transformForDailyTrend(List<WaterLog> logList,
       {int windowSize = 3}) {
+    List<WaterLog> logs = List.from(logList);
+
     //Group logs by hour and sum amounts
     final Map<int, double> hourlyTotals = {};
     for (WaterLog log in logs) {
@@ -22,28 +24,80 @@ class ChartDataTransformer {
     return spots;
   }
 
-  static List<FlSpot> transformForCumulativeDailyTrend(List<WaterLog> logs) {
+  // static List<FlSpot> transformForCumulativeDailyTrend(List<WaterLog> logs) {
+  //   // Sort waterLogs by timestamp
+  //   logs.sort((a, b) => a.timestamp.compareTo(b.timestamp));
+  //
+  //   // Define Spots
+  //   final List<FlSpot> spots = [];
+  //   double totalAmount = 0;
+  //   for (WaterLog entry in logs) {
+  //     totalAmount += (entry.amount / 1000);
+  //
+  //     spots.add(FlSpot(
+  //         entry.timestamp.hour.toDouble() + (entry.timestamp.minute / 60),
+  //         totalAmount));
+  //   }
+  //   return spots;
+  // }
+
+  static List<FlSpot> transformForCumulativeDailyTrend(List<WaterLog> logList) {
+    List<WaterLog> logs = List.from(logList);
+
     // Sort waterLogs by timestamp
     logs.sort((a, b) => a.timestamp.compareTo(b.timestamp));
 
     // Define Spots
     final List<FlSpot> spots = [];
     double totalAmount = 0;
-    for (WaterLog entry in logs) {
+    DateTime? lastTimestamp;
+    double accumulatedAmount = 0;
+    int count = 0;
+
+    for (int i = 0; i < logs.length; i++) {
+      WaterLog entry = logs[i];
       totalAmount += (entry.amount / 1000);
 
-      spots.add(FlSpot(
-          entry.timestamp.hour.toDouble() + (entry.timestamp.minute / 60),
-          totalAmount));
+      if (lastTimestamp == null ||
+          entry.timestamp.difference(lastTimestamp).inMinutes > 5) {
+        // If it's the first entry or more than 5 minutes have passed, create a new spot
+        if (count > 0) {
+          // Add the previous accumulated spot
+          spots.add(FlSpot(
+            lastTimestamp!.hour.toDouble() + (lastTimestamp.minute / 60),
+            totalAmount - (accumulatedAmount / 1000),
+          ));
+        }
+        lastTimestamp = entry.timestamp;
+        accumulatedAmount = entry.amount.toDouble();
+        count = 1;
+      } else {
+        // Combine with the previous entry
+        accumulatedAmount += entry.amount;
+        count++;
+        // Update lastTimestamp to the average time
+        Duration timeDifference = entry.timestamp.difference(lastTimestamp);
+        lastTimestamp = lastTimestamp.add(timeDifference ~/ count);
+      }
+
+      // If it's the last entry, add the final spot
+      if (i == logs.length - 1) {
+        spots.add(FlSpot(
+          lastTimestamp.hour.toDouble() + (lastTimestamp.minute / 60),
+          totalAmount,
+        ));
+      }
     }
+
     return spots;
   }
 
   static List<BarChartGroupData> transformForWeeklyTotals(
-      {required List<WaterLog> logs, Color? barColor, double? barWidth}) {
+      {required List<WaterLog> logList, Color? barColor, double? barWidth}) {
+    List<WaterLog> logs = List.from(logList);
 
     ///Pad the logs to fill up the week
-    DateTime now = DateTime.now();
+    //DateTime now = DateTime.now();
     int daysInCurrentWeek = 7;
 
     //Group logs by day and sum amounts
@@ -52,16 +106,14 @@ class ChartDataTransformer {
     ///Todo:Convert into Litres
     for (WaterLog log in logs) {
       final int day = log.timestamp.weekday;
-      dailyTotals[day] = (dailyTotals[day] ?? 0) + log.amount/1000;
+      dailyTotals[day] = (dailyTotals[day] ?? 0) + log.amount / 1000;
     }
-
 
     ///Pad the list of dailyTotals to fill up the month
     for (int i = 0; i < daysInCurrentWeek; i++) {
       //Fill the missing days of the month with empty logs.
-      dailyTotals.putIfAbsent(i, ()=>0);
+      dailyTotals.putIfAbsent(i, () => 0);
     }
-
 
     //Convert to BarChartGroupData List
     return dailyTotals.entries
@@ -76,7 +128,9 @@ class ChartDataTransformer {
   }
 
   static List<BarChartGroupData> transformForMonthlyTotals(
-      {required List<WaterLog> logs, Color? barColor, double? barWidth}) {
+      {required List<WaterLog> logList, Color? barColor, double? barWidth}) {
+    List<WaterLog> logs = List.from(logList);
+
     ///Pad the logs to fill up the month
     DateTime now = DateTime.now();
     int daysInCurrentMonth = DateTime(now.year, now.month + 1, 0)
@@ -93,7 +147,7 @@ class ChartDataTransformer {
     ///Pad the list of dailyTotals to fill up the month
     for (int i = 0; i < daysInCurrentMonth; i++) {
       //Fill the missing days of the month with empty logs.
-      dailyTotals.putIfAbsent(i, ()=>0);
+      dailyTotals.putIfAbsent(i, () => 0);
     }
 
     //Convert to BarChartGroupData List

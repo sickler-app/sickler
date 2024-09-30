@@ -48,8 +48,6 @@ class TestWaterChartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Generated ${sampleLogs.length} sample water logs");
-
     return Scaffold(
       appBar: AppBar(title: const Text('Water Intake Charts')),
       body: SingleChildScrollView(

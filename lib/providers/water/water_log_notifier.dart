@@ -32,7 +32,6 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
     return [];
   }
 
-
   /// --- Logs ----///
   Future<void> getWaterLogs(
       {SicklerUser? user,
@@ -95,7 +94,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
       {required WaterLog entry,
       required SicklerUser user,
       bool updateRemote = false}) async {
-    print("Adding log");
+    //print("Adding log");
     Stopwatch stopwatch = Stopwatch()..start();
     state = const AsyncValue.loading();
     final Either<Failure, void> response = await _waterRepository.addWaterLog(
@@ -106,7 +105,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
     }, (empty) async {
       log("RETURNED SUCCESS");
       await getWaterLogs();
-      print("Added stopwatch and got updated logs");
+      //  print("Added stopwatch and got updated logs");
       stopwatch.stop();
       log("Add water log took ${stopwatch.elapsedMilliseconds} ms");
     });

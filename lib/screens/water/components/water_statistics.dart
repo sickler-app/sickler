@@ -68,7 +68,6 @@ class WaterLineChart extends StatelessWidget {
         ? (dailyGoal / 1000).toDouble()
         : totalAmount * 1.2;
 
-    print(logs);
     final ThemeData theme = Theme.of(context);
     return AspectRatio(
       aspectRatio: 1.5,
@@ -106,8 +105,10 @@ class WaterLineChart extends StatelessWidget {
                     );
                   }),
             ),
-            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false))),
+            rightTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            topTitles:
+                const AxisTitles(sideTitles: SideTitles(showTitles: false))),
         borderData: FlBorderData(show: false),
         minX: 6,
         maxX: 24,
