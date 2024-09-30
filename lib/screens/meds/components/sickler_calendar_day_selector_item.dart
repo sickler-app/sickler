@@ -19,10 +19,12 @@ class SicklerCalendarDaySelectorItem extends StatefulWidget {
   final Color? color;
 
   @override
-  State<SicklerCalendarDaySelectorItem> createState() => _SicklerCalendarDaySelectorItemState();
+  State<SicklerCalendarDaySelectorItem> createState() =>
+      _SicklerCalendarDaySelectorItemState();
 }
 
-class _SicklerCalendarDaySelectorItemState extends State<SicklerCalendarDaySelectorItem>
+class _SicklerCalendarDaySelectorItemState
+    extends State<SicklerCalendarDaySelectorItem>
     with TickerProviderStateMixin {
   final Color _color = SicklerColours.purple40;
 
@@ -102,7 +104,7 @@ class _SicklerCalendarDaySelectorItemState extends State<SicklerCalendarDaySelec
                               ? SicklerColours.white
                               : SicklerColours.neutral50),
                       fontWeight: widget.isSelected
-                          ? FontWeight.w800
+                          ? FontWeight.w700
                           : FontWeight.normal)),
             ),
           ),

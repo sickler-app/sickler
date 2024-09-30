@@ -55,7 +55,7 @@ class _SuggestedWaterDailyGoalScreenState
           const Gap(64),
           Text("$dailyGoal ml",
               style: theme.textTheme.displaySmall!
-                  .copyWith(fontWeight: FontWeight.w800)),
+                  .copyWith(fontWeight: FontWeight.w700)),
           const Gap(24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),

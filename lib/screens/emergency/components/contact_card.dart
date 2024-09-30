@@ -131,7 +131,7 @@ class ContactCard extends StatelessWidget {
                 Text(
                   "6 77 77 77 77",
                   style: theme.textTheme.bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w800),
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
               ],
             ),

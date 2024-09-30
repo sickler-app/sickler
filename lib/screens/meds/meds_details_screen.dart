@@ -58,19 +58,16 @@ class MedsDetailsScreen extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children: [
-                SicklerChip(
-                    chipType: SicklerChipType.info, label: "Daily"),
-                SicklerChip(
-                    chipType: SicklerChipType.info, label: "8:00 AM"),
-                SicklerChip(
-                    chipType: SicklerChipType.info, label: "3:00 PM"),
+                SicklerChip(chipType: SicklerChipType.info, label: "Daily"),
+                SicklerChip(chipType: SicklerChipType.info, label: "8:00 AM"),
+                SicklerChip(chipType: SicklerChipType.info, label: "3:00 PM"),
               ],
             ),
             const Gap(24),
             Text(
               "Medication History",
               style: theme.textTheme.bodyLarge!
-                  .copyWith(fontWeight: FontWeight.w800),
+                  .copyWith(fontWeight: FontWeight.w700),
             ),
             const Gap(12),
             const SicklerCalendar(),

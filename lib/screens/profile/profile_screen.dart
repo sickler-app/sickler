@@ -47,7 +47,7 @@ class ProfileScreen extends ConsumerWidget {
                             TextSpan(
                               text: "Amelia",
                               style: theme.textTheme.bodyMedium!
-                                  .copyWith(fontWeight: FontWeight.w800),
+                                  .copyWith(fontWeight: FontWeight.w700),
                             ),
                             TextSpan(
                                 text: " Robertson",
@@ -253,7 +253,7 @@ class ProfileScreen extends ConsumerWidget {
                         Text(
                           "Allergies",
                           style: theme.textTheme.titleMedium!
-                              .copyWith(fontWeight: FontWeight.w800),
+                              .copyWith(fontWeight: FontWeight.w700),
                         ),
                         const Spacer(),
                         IconButton(
@@ -294,7 +294,7 @@ class ProfileScreen extends ConsumerWidget {
                         Text(
                           "Medical Conditions",
                           style: theme.textTheme.titleMedium!
-                              .copyWith(fontWeight: FontWeight.w800),
+                              .copyWith(fontWeight: FontWeight.w700),
                         ),
                         const Spacer(),
                         IconButton(

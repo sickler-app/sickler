@@ -74,7 +74,7 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
                 alignment: Alignment.center,
                 child: Text("${waterStats.totalToday.toInt()} ml",
                     style: theme.textTheme.displaySmall!
-                        .copyWith(fontWeight: FontWeight.w800)),
+                        .copyWith(fontWeight: FontWeight.w700)),
               ),
               const Gap(kPadding12),
               Align(

@@ -29,7 +29,7 @@ class MyMedsCard extends StatelessWidget {
                 Text(
                   "Hydroxyl Urea",
                   style: theme.textTheme.bodyLarge!
-                      .copyWith(fontWeight: FontWeight.w800),
+                      .copyWith(fontWeight: FontWeight.w700),
                 ),
                 const Gap(8),
                 Row(

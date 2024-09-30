@@ -56,7 +56,7 @@ class VitalsItemCard extends StatelessWidget {
                   TextSpan(
                     text: value,
                     style: theme.textTheme.titleLarge!
-                        .copyWith(fontWeight: FontWeight.w800),
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                   TextSpan(
                       text: unit ?? "",

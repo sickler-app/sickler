@@ -90,7 +90,7 @@ class _ProfileMedicalInfoScreenState
                   Text(
                     "Crises frequency",
                     style: theme.textTheme.bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w800),
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                   const Gap(16),
                   Text(
@@ -132,7 +132,7 @@ class _ProfileMedicalInfoScreenState
                   Text(
                     "Allergies",
                     style: theme.textTheme.bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w800),
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                   const Gap(12),
 
@@ -182,7 +182,7 @@ class _ProfileMedicalInfoScreenState
                   Text(
                     "Medical Conditions",
                     style: theme.textTheme.bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w800),
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                   const Gap(12),
 

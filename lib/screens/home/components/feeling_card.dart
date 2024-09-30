@@ -33,7 +33,7 @@ class _FeelingCardState extends State<FeelingCard> {
               Text(
                 "How are you\nfeeling today?",
                 style: theme.textTheme.headlineSmall!
-                    .copyWith(fontWeight: FontWeight.w800),
+                    .copyWith(fontWeight: FontWeight.w700),
               ),
               const Spacer(),
               RichText(
@@ -43,7 +43,7 @@ class _FeelingCardState extends State<FeelingCard> {
                       text: "${sliderValue.toInt()}",
                       style: theme.textTheme.displaySmall!.copyWith(
                           fontFamily: "Plus Jakarta Sans",
-                          fontWeight: FontWeight.w800),
+                          fontWeight: FontWeight.w700),
                     ),
                     TextSpan(text: "/10", style: theme.textTheme.bodyMedium),
                   ],
