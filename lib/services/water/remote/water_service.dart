@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:sickler/models/water/water_preferences.dart';
 
 import '../../../models/water/water_log.dart';
@@ -6,14 +7,17 @@ import '../../../models/water/water_log.dart';
 class WaterService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  String month = DateFormat('MMMM').format(DateTime.now());
+  String year = DateTime.now().year.toString();
+
   ///----Water Logs Section----///
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getLogs(String uid) async {
     DocumentSnapshot<Map<String, dynamic>> snapshot = await firestore
-        .collection('users')
+        .collection('logs')
         .doc(uid)
-        .collection("logs")
-        .doc("water")
+        .collection('water')
+        .doc("${month}_$year")
         .get();
     return snapshot;
   }
@@ -22,8 +26,8 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection('logs')
-        .doc("water")
+        .collection('water_logs')
+        .doc("${month}_$year")
         .set(
       {
         "entries": FieldValue.arrayUnion([waterLog.toMap()])
@@ -38,8 +42,8 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection("logs")
-        .doc('water')
+        .collection('water_logs')
+        .doc("${month}_$year")
         .update({
       "entries": FieldValue.arrayUnion([waterLog.toMap()])
     });
@@ -51,8 +55,8 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection("logs")
-        .doc("water")
+        .collection('water_logs')
+        .doc("${month}_$year")
         .update({
       "entries": FieldValue.arrayRemove([waterLog.toMap()])
     });
@@ -63,8 +67,8 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection("logs")
-        .doc("water")
+        .collection('water_logs')
+        .doc("${month}_$year")
         .delete();
   }
 
@@ -75,8 +79,8 @@ class WaterService {
     DocumentSnapshot<Map<String, dynamic>> snapshot = await firestore
         .collection('users')
         .doc(uid)
-        .collection("logs")
-        .doc("water")
+        .collection('water_logs')
+        .doc('preferences')
         .get();
     return snapshot;
   }
@@ -86,8 +90,8 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection("logs")
-        .doc("water")
+        .collection('water_logs')
+        .doc('preferences')
         .set(preferences.toMap(), SetOptions(merge: true));
   }
 
@@ -96,8 +100,8 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection("logs")
-        .doc("water")
+        .collection('water_logs')
+        .doc('preferences')
         .update(preferences.toMap());
   }
 
@@ -108,8 +112,8 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection("logs")
-        .doc("water")
+        .collection('water_logs')
+        .doc('preferences')
         .update(const WaterPreferences.initial().toMap());
   }
 }
