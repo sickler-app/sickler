@@ -134,7 +134,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                               context.goNamed(AuthSuccessScreen.id);
                             }
                           } else {
-                            if (user.preferences.isOnboardingComplete) {
+                            if (user.preferences.isOnboarded) {
                               context.goNamed(BottomNavBar.id);
                             } else {
                               context.goNamed(ProfileBasicInfoScreen.id);

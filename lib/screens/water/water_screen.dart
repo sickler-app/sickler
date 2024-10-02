@@ -110,13 +110,6 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
                 child: Text("Statistics", style: theme.textTheme.titleMedium),
               ),
               const Gap(kPadding16),
-              // Text("Weekly Average", style: theme.textTheme.bodyMedium),
-              // const Gap(kPadding4),
-              //  Text("$dailyGoal ml",
-              //      style: theme.textTheme.headlineSmall!.copyWith(
-              //          fontWeight: FontWeight.w700,
-              //          color: theme.colorScheme.tertiary)),
-
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(

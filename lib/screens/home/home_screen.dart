@@ -29,7 +29,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.watch(userProvider.notifier).getCurrentUserData();
       await ref.watch(waterLogProvider.notifier).getWaterLogs();
-      await ref.watch(waterLogProvider.notifier).getWaterPreferences();
+      await ref.watch(waterPreferencesProvider.notifier).getWaterPreferences();
     });
     super.initState();
   }

@@ -236,8 +236,8 @@ class _ProfileMedicalInfoScreenState
                         ///Todo: add the rest of the health data;
                         SicklerUser user = ref.watch(userProvider).value!;
                         user = user.copyWith(
-                            preferences: user.preferences
-                                .copyWith(isOnboardingComplete: true),
+                            preferences:
+                                user.preferences.copyWith(isOnboarded: true),
                             profile: user.profile.copyWith(
                                 allergies: allergies,
                                 medicalConditions: medicalConditions,

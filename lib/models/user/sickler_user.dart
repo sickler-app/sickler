@@ -104,14 +104,18 @@ class SicklerUser extends Equatable {
   @ignore
   bool get isNotEmpty => this != SicklerUser.empty;
 
-  //override sickler user to string
   @override
   String toString() {
     if (this == SicklerUser.empty) {
       return "SicklerUser.empty";
     }
-    return "SicklerUser(email: $email, uid: $uid, isAnonymous: $isAnonymous, isEmailVerified: $isEmailVerified, isPhoneVerified: $isPhoneVerified, profile: $profile, preferences: $preferences, photoUrl: $photoUrl)";
+
+    return super.toString();
   }
+
+  @ignore
+  @override
+  bool? get stringify => true;
 
   @ignore
   @override
