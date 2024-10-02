@@ -5,9 +5,12 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/models/models.dart';
+import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/providers/providers.dart';
+import 'package:sickler/providers/water/water_providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 
+import '../../providers/water/water_prefs_notifier.dart';
 import '../global_components/bottom_nav_bar.dart';
 
 class SuggestedWaterDailyGoalScreen extends ConsumerStatefulWidget {
@@ -26,6 +29,12 @@ class _SuggestedWaterDailyGoalScreenState
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+
+    WaterPrefsNotifier waterPrefsNotifier =
+        ref.watch(waterPreferencesProvider.notifier);
+    WaterPreferences preferences = ref.watch(waterPreferencesProvider).value!;
+    SicklerUser user = ref.watch(userProvider).value!;
+
     return Scaffold(
       body: Column(
         children: [
@@ -35,7 +44,9 @@ class _SuggestedWaterDailyGoalScreenState
             actions: [
               SicklerButton(
                   isChipButton: true,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.goNamed(BottomNavBar.id);
+                  },
                   label: "Skip",
                   buttonType: SicklerButtonType.text),
             ],
@@ -84,8 +95,6 @@ class _SuggestedWaterDailyGoalScreenState
                           primaryValueInterval: 100,
                           primaryUnitLabels: const ["ml"],
                           onSelectedItemChanged: (selectedValue) {
-                            /// Todo: change daily goal to selected volume
-
                             setState(() {
                               dailyGoal = selectedValue;
                             });
@@ -100,19 +109,26 @@ class _SuggestedWaterDailyGoalScreenState
                 ),
                 const Gap(16),
                 SicklerButton(
+                  isLoading: ref.watch(waterPreferencesProvider).isLoading,
                   onPressed: () async {
-                    //Save suggested water goal
-                    SicklerUser user = ref.watch(userProvider).value!;
+                    preferences = preferences.copyWith(
+                      dailyGoal: dailyGoal,
+                    );
 
-                    user = user.copyWith(
-                        preferences: user.preferences
-                            .copyWith(dailyWaterGoal: dailyGoal.toDouble()));
-
-                    await ref
-                        .watch(userProvider.notifier)
-                        .updateUserData(user: user, updateRemote: true);
-
+                    await waterPrefsNotifier.addWaterPreferences(
+                        preferences: preferences, user: user);
                     if (context.mounted) {
+                      if (waterPrefsNotifier.isSuccessful) {
+                        showCustomSnackBar(
+                            context: context,
+                            message: "Preferences Updated",
+                            mode: SnackBarMode.success);
+                      } else {
+                        showCustomSnackBar(
+                            context: context,
+                            message: "Failed to add data",
+                            mode: SnackBarMode.error);
+                      }
                       context.goNamed(BottomNavBar.id);
                     }
                   },

@@ -24,9 +24,9 @@ class WaterService {
 
   Future<void> addLog({required WaterLog waterLog, required String uid}) async {
     await firestore
-        .collection('users')
+        .collection('logs')
         .doc(uid)
-        .collection('water_logs')
+        .collection('water')
         .doc("${month}_$year")
         .set(
       {
@@ -40,9 +40,9 @@ class WaterService {
   Future<void> updateLog(
       {required WaterLog waterLog, required String uid}) async {
     await firestore
-        .collection('users')
+        .collection('logs')
         .doc(uid)
-        .collection('water_logs')
+        .collection('water')
         .doc("${month}_$year")
         .update({
       "entries": FieldValue.arrayUnion([waterLog.toMap()])
@@ -53,9 +53,9 @@ class WaterService {
   Future<void> deleteLog(
       {required WaterLog waterLog, required String uid}) async {
     await firestore
-        .collection('users')
+        .collection('logs')
         .doc(uid)
-        .collection('water_logs')
+        .collection('water')
         .doc("${month}_$year")
         .update({
       "entries": FieldValue.arrayRemove([waterLog.toMap()])
@@ -65,9 +65,9 @@ class WaterService {
   ///----delete Water Log----///
   Future<void> clear({required String uid}) async {
     await firestore
-        .collection('users')
+        .collection('logs')
         .doc(uid)
-        .collection('water_logs')
+        .collection('water')
         .doc("${month}_$year")
         .delete();
   }
@@ -79,8 +79,8 @@ class WaterService {
     DocumentSnapshot<Map<String, dynamic>> snapshot = await firestore
         .collection('users')
         .doc(uid)
-        .collection('water_logs')
-        .doc('preferences')
+        .collection('preferences')
+        .doc('water')
         .get();
     return snapshot;
   }
@@ -90,8 +90,8 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection('water_logs')
-        .doc('preferences')
+        .collection('preferences')
+        .doc('water')
         .set(preferences.toMap(), SetOptions(merge: true));
   }
 
@@ -100,8 +100,8 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection('water_logs')
-        .doc('preferences')
+        .collection('preferences')
+        .doc('water')
         .update(preferences.toMap());
   }
 
@@ -112,8 +112,8 @@ class WaterService {
     await firestore
         .collection('users')
         .doc(uid)
-        .collection('water_logs')
-        .doc('preferences')
+        .collection('preferences')
+        .doc('water')
         .update(const WaterPreferences.initial().toMap());
   }
 }

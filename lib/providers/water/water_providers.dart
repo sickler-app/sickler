@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/providers/water/water_log_notifier.dart';
+import 'package:sickler/providers/water/water_prefs_notifier.dart';
 
 import '../../models/water/water_log.dart';
 import '../../models/water/water_stats.dart';
@@ -7,6 +9,8 @@ import '../../repositories/repositories.dart';
 import '../../services/services.dart';
 
 /// ------ Water Related Providers ------ ///
+///
+///
 
 final WaterService waterService = WaterService();
 final WaterLocalService waterLocalService = WaterLocalService();
@@ -16,6 +20,10 @@ final WaterRepository waterRepository = WaterRepository(
 final waterLogProvider =
     AsyncNotifierProvider<WaterLogNotifier, List<WaterLog>>(
         () => WaterLogNotifier(waterRepository: waterRepository));
+
+final waterPreferencesProvider =
+    AsyncNotifierProvider<WaterPrefsNotifier, WaterPreferences>(
+        () => WaterPrefsNotifier(waterRepository: waterRepository));
 
 final waterStatsProvider = Provider<WaterStats>((ref) {
   final AsyncValue<List<WaterLog>> waterLogsAsync = ref.watch(waterLogProvider);

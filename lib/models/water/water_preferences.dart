@@ -57,8 +57,16 @@ class WaterPreferences extends Equatable {
 
   @override
   String toString() {
-    return 'WaterPreferences(dailyGoal: $dailyGoal ${unit?.symbol}, unit: $unit, defaultLogSize: $logAmount ${unit?.symbol})';
+    if (this == WaterPreferences.empty) {
+      return "WaterPreferences.empty";
+    }
+
+    return super.toString();
   }
+
+  @ignore
+  @override
+  bool? get stringify => true;
 
   @ignore
   @override
