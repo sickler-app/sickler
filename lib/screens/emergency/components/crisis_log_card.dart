@@ -45,7 +45,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
               Text(
                 "Crises Event",
                 style: theme.textTheme.bodyMedium!
-                    .copyWith(fontWeight: FontWeight.w800),
+                    .copyWith(fontWeight: FontWeight.w700),
               ),
               const Spacer(),
               IconButton(
@@ -64,7 +64,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
               Text(
                 "7",
                 style: theme.textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w700,
                     color: theme.colorScheme.primary),
               ),
               Text(

@@ -48,7 +48,7 @@ class EmergencyContactRadio extends StatelessWidget {
               Text(
                 name,
                 style: theme.textTheme.bodyMedium!
-                    .copyWith(fontWeight: FontWeight.w800),
+                    .copyWith(fontWeight: FontWeight.w700),
               ),
               const Gap(8),
 

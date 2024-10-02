@@ -1,10 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sickler/services/user/local/user_local_service.dart';
-import 'package:sickler/services/user/remote/user_service.dart';
 
 import '../models/models.dart';
 import '../repositories/repositories.dart';
-import '../repositories/user/user_repository.dart';
 import '../services/services.dart';
 import 'provider_notifiers.dart';
 
@@ -32,3 +29,4 @@ final UserRepository userRepository = UserRepository(
 
 final userProvider = AsyncNotifierProvider<UserNotifier, SicklerUser>(
     () => UserNotifier(userRepository: userRepository));
+

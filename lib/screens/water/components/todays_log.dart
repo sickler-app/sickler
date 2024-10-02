@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import 'components.dart';
-
 class TodaysLog extends StatelessWidget {
   const TodaysLog({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +13,8 @@ class TodaysLog extends StatelessWidget {
       itemCount: 5,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
-        return const WaterLogListItem();
+        return Container();
       },
     );
   }
 }
-

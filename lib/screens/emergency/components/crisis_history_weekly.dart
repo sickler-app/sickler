@@ -16,7 +16,7 @@ class CrisisHistoryWeekly extends StatelessWidget {
         Text(
           "Weekly",
           style:
-              theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w800),
+              theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
         ),
         const Gap(16),
         RichText(
@@ -25,7 +25,7 @@ class CrisisHistoryWeekly extends StatelessWidget {
               TextSpan(
                 text: "3",
                 style: theme.textTheme.headlineMedium!
-                    .copyWith(fontWeight: FontWeight.w800),
+                    .copyWith(fontWeight: FontWeight.w700),
               ),
               TextSpan(
                   text: " Crises events this week ",

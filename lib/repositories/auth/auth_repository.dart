@@ -8,17 +8,21 @@ import '../../models/models.dart';
 import '../../services/user/local/user_local_service.dart';
 
 class AuthRepository {
-  final AuthService authService;
-  final UserLocalService userLocalService;
+  final AuthService _authService;
+  final UserLocalService _userLocalService;
 
-  AuthRepository({required this.authService, required this.userLocalService});
+  AuthRepository(
+      {required AuthService authService,
+      required UserLocalService userLocalService})
+      : _userLocalService = userLocalService,
+        _authService = authService;
 
   FutureEither<SicklerUser?> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
     return futureHandler(() async {
-      final UserCredential userCredential = await authService
+      final UserCredential userCredential = await _authService
           .signInWithEmailAndPassword(email: email, password: password);
 
       return _handleUserCredential(userCredential);
@@ -28,7 +32,7 @@ class AuthRepository {
   FutureEither<SicklerUser?> registerWithEmailAndPassword(
       {required String email, required String password}) {
     return futureHandler(() async {
-      final UserCredential userCredential = await authService
+      final UserCredential userCredential = await _authService
           .registerWithEmailAndPassword(email: email, password: password);
       return _handleUserCredential(userCredential);
     });
@@ -37,20 +41,20 @@ class AuthRepository {
   FutureEither<SicklerUser> signInWithGoogle() {
     return futureHandler(() async {
       final UserCredential userCredential =
-          await authService.signInWithGoogle();
+          await _authService.signInWithGoogle();
       return _handleUserCredential(userCredential);
     });
   }
 
   FutureEither<void> signOut() {
     return futureHandler(() async {
-      await userLocalService.deleteUser();
-      await authService.signOut();
+      await _userLocalService.deleteUser();
+      await _authService.signOut();
     });
   }
 
   Stream<SicklerUser> getAuthStateChanges() {
-    return authService.authStateChanges().map((User? user) {
+    return _authService.authStateChanges().map((User? user) {
       if (user == null) {
         return SicklerUser.empty;
       }
@@ -64,7 +68,7 @@ class AuthRepository {
     required String email,
   }) async {
     return futureHandler(() async {
-      await authService.sendPasswordResetEmail(email: email);
+      await _authService.sendPasswordResetEmail(email: email);
     });
   }
 
@@ -73,7 +77,7 @@ class AuthRepository {
     required String newPassword,
   }) async {
     return futureHandler(() async {
-      await authService.confirmPasswordReset(
+      await _authService.confirmPasswordReset(
           code: code, newPassword: newPassword);
     });
   }
@@ -84,7 +88,7 @@ class AuthRepository {
     sicklerUser = sicklerUser.copyWith(
         profile: UserProfile.fromFirebaseUser(user: userCredential.user));
 
-    await userLocalService.addUser(sicklerUser);
+    await _userLocalService.addUser(sicklerUser);
     return sicklerUser;
   }
 }

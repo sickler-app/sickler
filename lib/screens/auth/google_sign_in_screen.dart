@@ -30,6 +30,9 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final authNotifier = ref.read(authProvider.notifier);
+    final userNotifier = ref.read(userProvider.notifier);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kPadding16),
@@ -38,14 +41,12 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
           children: [
             const Spacer(),
             SicklerButton(
+                    isLoading: ref.watch(authProvider).isLoading,
                     color: theme.colorScheme.primary,
                     overrideIconColor: false,
                     buttonType: SicklerButtonType.secondary,
                     iconPath: "assets/svg/google.svg",
                     onPressed: () async {
-                      final authNotifier = ref.read(authProvider.notifier);
-                      final userNotifier = ref.read(userProvider.notifier);
-
                       await authNotifier.singInWithGoogle();
 
                       if (authNotifier.isSuccessful) {
@@ -69,7 +70,7 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
                               context.goNamed(AuthSuccessScreen.id);
                             }
                           } else {
-                            if (user.preferences.isOnboardingComplete) {
+                            if (user.preferences.isOnboarded) {
                               context.goNamed(BottomNavBar.id);
                             } else {
                               context.goNamed(ProfileBasicInfoScreen.id);

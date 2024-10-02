@@ -178,9 +178,12 @@ class UserProfile extends Equatable {
     if (this == UserProfile.empty) {
       return "UserProfile.empty";
     }
-
-    return "UserProfile(uid: $uid, gender: $gender, name: $name, displayName: $displayName, age: $age, painSeverity: $painSeverity, crisisFrequency: $crisisFrequency, genotype: $genotype, height: $height, weight: $weight, bmi: $bmi, bloodType: $bloodGroup, allergies: $allergies, medicalConditions: $medicalConditions)";
+    return super.toString();
   }
+
+  @ignore
+  @override
+  bool? get stringify => true;
 
   @ignore
   @override

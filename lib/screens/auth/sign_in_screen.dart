@@ -37,6 +37,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final authNotifier = ref.read(authProvider.notifier);
+    final userNotifier = ref.read(userProvider.notifier);
 
     return Scaffold(
       body: SafeArea(
@@ -109,9 +111,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   label: "Sign In",
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      final authNotifier = ref.read(authProvider.notifier);
-                      final userNotifier = ref.read(userProvider.notifier);
-
                       await authNotifier.signInWithEmailAndPassword(
                           email: emailController.text.trim(),
                           password: passwordController.text.trim());
@@ -135,7 +134,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                               context.goNamed(AuthSuccessScreen.id);
                             }
                           } else {
-                            if (user.preferences.isOnboardingComplete) {
+                            if (user.preferences.isOnboarded) {
                               context.goNamed(BottomNavBar.id);
                             } else {
                               context.goNamed(ProfileBasicInfoScreen.id);
@@ -166,6 +165,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     alignment: Alignment.center,
                     child: FittedBox(
                       child: SicklerButton(
+                        isLoading: ref.watch(authProvider).isLoading,
                         isChipButton: true,
                         buttonType: SicklerButtonType.text,
                         onPressed: () {

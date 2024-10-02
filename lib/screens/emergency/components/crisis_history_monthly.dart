@@ -15,7 +15,7 @@ class CrisisHistoryMonthly extends StatelessWidget {
         Text(
           "Monthly",
           style:
-              theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w800),
+              theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700),
         ),
 
         RichText(
@@ -24,7 +24,7 @@ class CrisisHistoryMonthly extends StatelessWidget {
               TextSpan(
                 text: "13",
                 style: theme.textTheme.headlineMedium!
-                    .copyWith(fontWeight: FontWeight.w800),
+                    .copyWith(fontWeight: FontWeight.w700),
               ),
               TextSpan(
                 text: " Crises events this month",

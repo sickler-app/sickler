@@ -13,59 +13,49 @@ const UserPreferencesSchema = Schema(
   name: r'UserPreferences',
   id: -7545901164102504045,
   properties: {
-    r'dailyWaterGoal': PropertySchema(
-      id: 0,
-      name: r'dailyWaterGoal',
-      type: IsarType.double,
-    ),
     r'isFirstTime': PropertySchema(
-      id: 1,
+      id: 0,
       name: r'isFirstTime',
       type: IsarType.bool,
     ),
-    r'isOnboardingComplete': PropertySchema(
-      id: 2,
-      name: r'isOnboardingComplete',
+    r'isOnboarded': PropertySchema(
+      id: 1,
+      name: r'isOnboarded',
       type: IsarType.bool,
     ),
     r'lastUpdated': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'lastUpdated',
       type: IsarType.dateTime,
     ),
     r'lengthUnit': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'lengthUnit',
       type: IsarType.string,
       enumMap: _UserPreferenceslengthUnitEnumValueMap,
     ),
     r'massUnit': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'massUnit',
       type: IsarType.string,
       enumMap: _UserPreferencesmassUnitEnumValueMap,
     ),
     r'themeMode': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'themeMode',
       type: IsarType.string,
       enumMap: _UserPreferencesthemeModeEnumValueMap,
     ),
     r'uid': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'uid',
       type: IsarType.string,
     ),
     r'volumeUnit': PropertySchema(
-      id: 8,
+      id: 7,
       name: r'volumeUnit',
       type: IsarType.string,
       enumMap: _UserPreferencesvolumeUnitEnumValueMap,
-    ),
-    r'waterInputVolume': PropertySchema(
-      id: 9,
-      name: r'waterInputVolume',
-      type: IsarType.double,
     )
   },
   estimateSize: _userPreferencesEstimateSize,
@@ -119,16 +109,14 @@ void _userPreferencesSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeDouble(offsets[0], object.dailyWaterGoal);
-  writer.writeBool(offsets[1], object.isFirstTime);
-  writer.writeBool(offsets[2], object.isOnboardingComplete);
-  writer.writeDateTime(offsets[3], object.lastUpdated);
-  writer.writeString(offsets[4], object.lengthUnit?.name);
-  writer.writeString(offsets[5], object.massUnit?.name);
-  writer.writeString(offsets[6], object.themeMode?.name);
-  writer.writeString(offsets[7], object.uid);
-  writer.writeString(offsets[8], object.volumeUnit?.name);
-  writer.writeDouble(offsets[9], object.waterInputVolume);
+  writer.writeBool(offsets[0], object.isFirstTime);
+  writer.writeBool(offsets[1], object.isOnboarded);
+  writer.writeDateTime(offsets[2], object.lastUpdated);
+  writer.writeString(offsets[3], object.lengthUnit?.name);
+  writer.writeString(offsets[4], object.massUnit?.name);
+  writer.writeString(offsets[5], object.themeMode?.name);
+  writer.writeString(offsets[6], object.uid);
+  writer.writeString(offsets[7], object.volumeUnit?.name);
 }
 
 UserPreferences _userPreferencesDeserialize(
@@ -138,20 +126,18 @@ UserPreferences _userPreferencesDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = UserPreferences(
-    dailyWaterGoal: reader.readDoubleOrNull(offsets[0]),
-    isFirstTime: reader.readBoolOrNull(offsets[1]) ?? true,
-    isOnboardingComplete: reader.readBoolOrNull(offsets[2]) ?? false,
-    lastUpdated: reader.readDateTimeOrNull(offsets[3]),
+    isFirstTime: reader.readBoolOrNull(offsets[0]) ?? true,
+    isOnboarded: reader.readBoolOrNull(offsets[1]) ?? false,
+    lastUpdated: reader.readDateTimeOrNull(offsets[2]),
     lengthUnit: _UserPreferenceslengthUnitValueEnumMap[
-        reader.readStringOrNull(offsets[4])],
+        reader.readStringOrNull(offsets[3])],
     massUnit: _UserPreferencesmassUnitValueEnumMap[
-        reader.readStringOrNull(offsets[5])],
+        reader.readStringOrNull(offsets[4])],
     themeMode: _UserPreferencesthemeModeValueEnumMap[
-        reader.readStringOrNull(offsets[6])],
-    uid: reader.readStringOrNull(offsets[7]),
+        reader.readStringOrNull(offsets[5])],
+    uid: reader.readStringOrNull(offsets[6]),
     volumeUnit: _UserPreferencesvolumeUnitValueEnumMap[
-        reader.readStringOrNull(offsets[8])],
-    waterInputVolume: reader.readDoubleOrNull(offsets[9]),
+        reader.readStringOrNull(offsets[7])],
   );
   return object;
 }
@@ -164,29 +150,25 @@ P _userPreferencesDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readDoubleOrNull(offset)) as P;
-    case 1:
       return (reader.readBoolOrNull(offset) ?? true) as P;
-    case 2:
+    case 1:
       return (reader.readBoolOrNull(offset) ?? false) as P;
-    case 3:
+    case 2:
       return (reader.readDateTimeOrNull(offset)) as P;
-    case 4:
+    case 3:
       return (_UserPreferenceslengthUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 5:
+    case 4:
       return (_UserPreferencesmassUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 6:
+    case 5:
       return (_UserPreferencesthemeModeValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 7:
+    case 6:
       return (reader.readStringOrNull(offset)) as P;
-    case 8:
+    case 7:
       return (_UserPreferencesvolumeUnitValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
-    case 9:
-      return (reader.readDoubleOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -314,90 +296,6 @@ const _UserPreferencesvolumeUnitValueEnumMap = {
 extension UserPreferencesQueryFilter
     on QueryBuilder<UserPreferences, UserPreferences, QFilterCondition> {
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      dailyWaterGoalIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'dailyWaterGoal',
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      dailyWaterGoalIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'dailyWaterGoal',
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      dailyWaterGoalEqualTo(
-    double? value, {
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'dailyWaterGoal',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      dailyWaterGoalGreaterThan(
-    double? value, {
-    bool include = false,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'dailyWaterGoal',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      dailyWaterGoalLessThan(
-    double? value, {
-    bool include = false,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'dailyWaterGoal',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      dailyWaterGoalBetween(
-    double? lower,
-    double? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'dailyWaterGoal',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
       isFirstTimeEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -408,10 +306,10 @@ extension UserPreferencesQueryFilter
   }
 
   QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      isOnboardingCompleteEqualTo(bool value) {
+      isOnboardedEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'isOnboardingComplete',
+        property: r'isOnboarded',
         value: value,
       ));
     });
@@ -1257,90 +1155,6 @@ extension UserPreferencesQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'volumeUnit',
         value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      waterInputVolumeIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'waterInputVolume',
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      waterInputVolumeIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'waterInputVolume',
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      waterInputVolumeEqualTo(
-    double? value, {
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'waterInputVolume',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      waterInputVolumeGreaterThan(
-    double? value, {
-    bool include = false,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'waterInputVolume',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      waterInputVolumeLessThan(
-    double? value, {
-    bool include = false,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'waterInputVolume',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<UserPreferences, UserPreferences, QAfterFilterCondition>
-      waterInputVolumeBetween(
-    double? lower,
-    double? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'waterInputVolume',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        epsilon: epsilon,
       ));
     });
   }

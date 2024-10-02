@@ -101,7 +101,7 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
               RepaintBoundary(
                 child: Text("8:00 pm",
                         style: theme.textTheme.titleMedium!
-                            .copyWith(fontWeight: FontWeight.w800))
+                            .copyWith(fontWeight: FontWeight.w700))
                     .animate(delay: 500.ms)
                     .fadeIn(
                         delay: 200.ms, curve: Curves.easeOut, duration: 500.ms)

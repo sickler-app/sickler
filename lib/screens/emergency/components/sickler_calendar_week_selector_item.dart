@@ -96,9 +96,9 @@ class _SicklerCalendarWeekSelectorItemState
                   Text(
                     widget.label,
                     style: theme.textTheme.bodyMedium!.copyWith(
-                        color: widget.isSelected
-                            ? theme.scaffoldBackgroundColor
-                            : SicklerColours.neutral50,
+                      color: widget.isSelected
+                          ? theme.scaffoldBackgroundColor
+                          : SicklerColours.neutral50,
                     ),
                   ),
                   const Gap(8),
@@ -112,7 +112,7 @@ class _SicklerCalendarWeekSelectorItemState
                       child: Center(
                         child: Text(
                           widget.date,
-                        //  "27",
+                          //  "27",
                           style: theme.textTheme.bodyMedium!.copyWith(
                               color: widget.isSelected || widget.isEmphasized
                                   ? theme.colorScheme.primary
@@ -120,7 +120,7 @@ class _SicklerCalendarWeekSelectorItemState
                                       ? SicklerColours.white
                                       : SicklerColours.neutral50),
                               fontWeight: widget.isSelected
-                                  ? FontWeight.w800
+                                  ? FontWeight.w700
                                   : FontWeight.normal),
                         ),
                       ),

@@ -23,7 +23,7 @@ class MedsReminderItem extends StatelessWidget {
           Text(
             "Hydroxyl Urea",
             style: theme.textTheme.bodyMedium!
-                .copyWith(fontWeight: FontWeight.w800),
+                .copyWith(fontWeight: FontWeight.w700),
           ),
           const Gap(8),
           Align(

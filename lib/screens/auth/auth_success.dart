@@ -56,7 +56,7 @@ class _AuthSuccessScreenState extends ConsumerState<AuthSuccessScreen> {
             Text(
               userName.split(" ").first,
               style: theme.textTheme.displayLarge!.copyWith(
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w700,
                   color: theme.colorScheme.primary),
             )
                 .animate(delay: 1000.ms)
@@ -91,7 +91,7 @@ class _AuthSuccessScreenState extends ConsumerState<AuthSuccessScreen> {
             //         .fadeIn(duration: 800.ms, delay: 600.ms),
             //     Text("Sickler",
             //             style: theme.textTheme.headlineLarge!.copyWith(
-            //                 fontWeight: FontWeight.w800,
+            //                 fontWeight: FontWeight.w700,
             //                 color: theme.colorScheme.primary))
             //         .animate(delay: 3500.ms)
             //         .moveY(

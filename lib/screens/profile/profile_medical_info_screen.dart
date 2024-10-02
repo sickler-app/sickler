@@ -61,6 +61,7 @@ class _ProfileMedicalInfoScreenState
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final userNotifier = ref.watch(userProvider.notifier);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -89,7 +90,7 @@ class _ProfileMedicalInfoScreenState
                   Text(
                     "Crises frequency",
                     style: theme.textTheme.bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w800),
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                   const Gap(16),
                   Text(
@@ -131,7 +132,7 @@ class _ProfileMedicalInfoScreenState
                   Text(
                     "Allergies",
                     style: theme.textTheme.bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w800),
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                   const Gap(12),
 
@@ -181,7 +182,7 @@ class _ProfileMedicalInfoScreenState
                   Text(
                     "Medical Conditions",
                     style: theme.textTheme.bodyLarge!
-                        .copyWith(fontWeight: FontWeight.w800),
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                   const Gap(12),
 
@@ -233,12 +234,10 @@ class _ProfileMedicalInfoScreenState
                   SicklerButton(
                       onPressed: () async {
                         ///Todo: add the rest of the health data;
-                        final userNotifier = ref.watch(userProvider.notifier);
                         SicklerUser user = ref.watch(userProvider).value!;
-
                         user = user.copyWith(
-                            preferences: user.preferences
-                                .copyWith(isOnboardingComplete: true),
+                            preferences:
+                                user.preferences.copyWith(isOnboarded: true),
                             profile: user.profile.copyWith(
                                 allergies: allergies,
                                 medicalConditions: medicalConditions,

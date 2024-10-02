@@ -13,8 +13,9 @@ class EmergencyLocationSharingCard extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(28),
-          color: theme.colorScheme.error,),
+        borderRadius: BorderRadius.circular(28),
+        color: theme.colorScheme.error,
+      ),
       padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -46,17 +47,17 @@ class EmergencyLocationSharingCard extends StatelessWidget {
                     style: theme.textTheme.bodyMedium!
                         .copyWith(color: SicklerColours.white),
                   ),
-
                   Text(
                     "2h 43m 15s",
                     style: theme.textTheme.bodyLarge!.copyWith(
                         color: SicklerColours.white,
-                        fontWeight: FontWeight.w800),
+                        fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
               const Spacer(),
-               SicklerButton( isChipButton:true,
+              SicklerButton(
+                isChipButton: true,
                 onPressed: () {},
                 label: 'Stop Sharing',
                 iconPath: "assets/svg/location-off.svg",
@@ -65,7 +66,6 @@ class EmergencyLocationSharingCard extends StatelessWidget {
               )
             ],
           )
-
         ],
       ),
     );

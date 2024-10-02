@@ -66,6 +66,8 @@ class _ProfileBasicInfoScreenState
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final userNotifier =
+    ref.watch(userProvider.notifier);
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -195,8 +197,7 @@ class _ProfileBasicInfoScreenState
                     SicklerButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            final userNotifier =
-                                ref.watch(userProvider.notifier);
+
                             SicklerUser user = ref.watch(userProvider).value!;
 
                             user = user.copyWith(
@@ -233,11 +234,12 @@ class _ProfileBasicInfoScreenState
                             } else {
                               await userNotifier.addUserData(
                                   user: user, updateRemote: false);
+                              if (context.mounted) {
+                                context.pushNamed(ProfileVitalsInfoScreen.id);
+                              }
                             }
 
-                            if (context.mounted) {
-                              context.pushNamed(ProfileVitalsInfoScreen.id);
-                            }
+
                           }
                         },
                         label: "Continue"),

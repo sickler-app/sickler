@@ -3,12 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/models/user/sickler_user.dart';
+import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/providers/providers.dart';
+import 'package:sickler/providers/water/water_providers.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';
 import 'package:sickler/screens/profile/profile_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
 
 import '../../core/core.dart';
+import '../../models/water/water_log.dart';
 import 'components/components.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -22,6 +25,12 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
+    //Todo: Initialize all data here
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await ref.watch(userProvider.notifier).getCurrentUserData();
+      await ref.watch(waterLogProvider.notifier).getWaterLogs();
+      await ref.watch(waterPreferencesProvider.notifier).getWaterPreferences();
+    });
     super.initState();
   }
 
@@ -29,11 +38,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    final SicklerUser? user = ref.watch(authProvider).value;
+    final SicklerUser? user = ref.watch(userProvider).value;
 
     final String displayName = user?.profile.displayName != null
         ? user!.profile.displayName!.split(" ").first
         : user?.email ?? "User";
+
+    final waterLogNotifier = ref.watch(waterLogProvider.notifier);
+    List<WaterLog> totalLogsToday = ref.watch(waterLogProvider).value!;
+    double totalToday =
+        waterLogNotifier.calculateTotalFromLogs(logs: totalLogsToday);
+    WaterPreferences waterPrefs = ref.watch(waterPreferencesProvider).value!;
+    double percentComplete = ((totalToday / waterPrefs.dailyGoal!) * 100);
+    int remaining = waterPrefs.dailyGoal! - totalToday.toInt();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -54,13 +71,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           children: [
                             TextSpan(
                                 text: "Welcome,",
-                                style: theme.textTheme.titleMedium),
+                                style: theme.textTheme.bodyLarge!
+                                    .copyWith(color: SicklerColours.neutral50)),
                           ],
                         ),
                       ),
                       Text(displayName,
-                          style: theme.textTheme.headlineSmall!
-                              .copyWith(fontWeight: FontWeight.w800)),
+                          style: theme.textTheme.headlineLarge!
+                              .copyWith(fontWeight: FontWeight.w700)),
                     ],
                   ),
                   const Spacer(),
@@ -86,18 +104,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               const FeelingCard(),
               const Gap(kPadding16),
               WaterCard(
-                onPressed: () {
-                  context.pushNamed(WaterScreen.id);
-                },
-              ),
+                  remaining: remaining,
+                  percentageCompleted: percentComplete,
+                  totalToday: totalToday.toInt(),
+                  onPressed: () {
+                    context.pushNamed(WaterScreen.id);
+                  },
+                  unit: waterPrefs.unit!.symbol),
               const Gap(kPadding32),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  "Your Health Info",
-                  style: theme.textTheme.titleMedium!
-                      .copyWith(fontWeight: FontWeight.w800),
-                ),
+                child: Text("Your Health Info",
+                    style: theme.textTheme.titleMedium),
               ),
               // const Gap(kPadding16),
               // GestureDetector(

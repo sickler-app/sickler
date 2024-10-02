@@ -30,7 +30,7 @@ class FeelingCheckupCard extends StatelessWidget {
                 TextSpan(
                     text: "7",
                     style: theme.textTheme.displaySmall!
-                        .copyWith(fontWeight: FontWeight.w800)),
+                        .copyWith(fontWeight: FontWeight.w700)),
                 TextSpan(text: "/10", style: theme.textTheme.bodyMedium),
               ]))
             ],

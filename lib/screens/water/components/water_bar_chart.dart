@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:sickler/core/constants.dart';
 import 'package:sickler/core/core.dart';
 
 class WaterBarChart extends StatelessWidget {
@@ -38,7 +39,7 @@ class WaterBarChart extends StatelessWidget {
               rod.toY.round().toString(),
               const TextStyle(
                 color: Colors.transparent,
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w700,
               ),
             );
           },

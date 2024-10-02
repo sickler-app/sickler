@@ -7,7 +7,6 @@ import 'package:sickler/models/user/sickler_user.dart';
 import 'package:sickler/providers/providers.dart';
 import 'package:sickler/repositories/repositories.dart';
 import 'package:sickler/services/services.dart';
-import 'package:sickler/services/user/local/user_local_service.dart';
 
 class MockAuthService extends Mock implements AuthService {}
 
@@ -38,7 +37,7 @@ class MockUser extends Mock implements User {
 void main() {
   ///Auth Repository Tests
   late final AuthService mockedAuthService;
-  late final UserLocalService mockedUserLocalService;
+  // late final UserLocalService mockedUserLocalService;
   late final AuthRepository authRepository;
   late final SicklerUser sicklerUser;
   late final UserCredential mockUserCredential;
@@ -47,7 +46,7 @@ void main() {
   setUpAll(() {
     ///Test setup
     mockedAuthService = MockAuthService();
-    mockedUserLocalService = MockUserLocalService();
+    //  mockedUserLocalService = MockUserLocalService();
     mockUserCredential = MockUserCredential();
     mockUser = MockUser();
     authRepository = AuthRepository(

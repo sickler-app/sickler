@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../../../core/core.dart';
-
 class VitalsItemCard extends StatelessWidget {
   final String label;
   final String value;
@@ -58,12 +56,12 @@ class VitalsItemCard extends StatelessWidget {
                   TextSpan(
                     text: value,
                     style: theme.textTheme.titleLarge!
-                        .copyWith(fontWeight: FontWeight.w800),
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                   TextSpan(
                       text: unit ?? "",
                       style: theme.textTheme.bodyMedium!
-                          .copyWith(color: color ?? SicklerColours.blueSeed))
+                          .copyWith(color: color ?? theme.colorScheme.tertiary))
                 ],
               ),
             ),

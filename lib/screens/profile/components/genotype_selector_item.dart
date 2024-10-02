@@ -86,7 +86,7 @@ class _GenotypeSelectorItemState extends State<GenotypeSelectorItem> {
               widget.label ?? _label,
               style: widget.isSelected
                   ? theme.textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w700,
                       color: widget.color ?? _color)
                   : theme.textTheme.bodyLarge,
             ),

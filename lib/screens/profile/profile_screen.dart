@@ -47,7 +47,7 @@ class ProfileScreen extends ConsumerWidget {
                             TextSpan(
                               text: "Amelia",
                               style: theme.textTheme.bodyMedium!
-                                  .copyWith(fontWeight: FontWeight.w800),
+                                  .copyWith(fontWeight: FontWeight.w700),
                             ),
                             TextSpan(
                                 text: " Robertson",
@@ -207,17 +207,17 @@ class ProfileScreen extends ConsumerWidget {
                             value: "1200",
                             unit: " ml",
                             backgroundColor: isDarkMode
-                                ? SicklerColours.blueSeed
+                                ? theme.colorScheme.tertiary
                                 : SicklerColours.blue95,
                             color: isDarkMode
                                 ? Colors.white
-                                : SicklerColours.blueSeed,
+                                : theme.colorScheme.tertiary,
                             icon: SvgPicture.asset(
                               "assets/svg/droplet-alt.svg",
                               colorFilter: ColorFilter.mode(
                                   isDarkMode
                                       ? Colors.white
-                                      : SicklerColours.blueSeed,
+                                      : theme.colorScheme.tertiary,
                                   BlendMode.srcIn),
                             ),
                           ),
@@ -253,7 +253,7 @@ class ProfileScreen extends ConsumerWidget {
                         Text(
                           "Allergies",
                           style: theme.textTheme.titleMedium!
-                              .copyWith(fontWeight: FontWeight.w800),
+                              .copyWith(fontWeight: FontWeight.w700),
                         ),
                         const Spacer(),
                         IconButton(
@@ -294,7 +294,7 @@ class ProfileScreen extends ConsumerWidget {
                         Text(
                           "Medical Conditions",
                           style: theme.textTheme.titleMedium!
-                              .copyWith(fontWeight: FontWeight.w800),
+                              .copyWith(fontWeight: FontWeight.w700),
                         ),
                         const Spacer(),
                         IconButton(

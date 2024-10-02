@@ -2,10 +2,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../core/core.dart';
 import '../../global_components/sickler_selector_item.dart';
-
-
 
 class WaterVolumeSelector extends StatefulWidget {
   const WaterVolumeSelector({super.key, required this.selectedVolume});
@@ -19,12 +16,12 @@ class _WaterVolumeSelectorState extends State<WaterVolumeSelector> {
   Map<int, bool> isVolumeSelected = {};
   List<String> volumes = ["250", "500", "1000", "custom"];
 
- Map<String, IconData> volumesData = {
-   "250": FluentIcons.drink_coffee_24_regular,
-   "500": FluentIcons.drink_bottle_32_regular,
-   "100": FluentIcons.drink_bottle_32_regular,
-   "custom": FluentIcons.add_24_regular,
- };
+  Map<String, IconData> volumesData = {
+    "250": FluentIcons.drink_coffee_24_regular,
+    "500": FluentIcons.drink_bottle_32_regular,
+    "100": FluentIcons.drink_bottle_32_regular,
+    "custom": FluentIcons.add_24_regular,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +40,17 @@ class _WaterVolumeSelectorState extends State<WaterVolumeSelector> {
       itemBuilder: (BuildContext context, int index) {
         isVolumeSelected.putIfAbsent(index, () => false);
         return SicklerSelectorItem(
-          color: SicklerColours.blueSeed,
-            backgroundColor: isDarkMode? theme.cardColor: SicklerColours.blue95,
+            color: theme.colorScheme.tertiary,
+            backgroundColor: isDarkMode
+                ? theme.cardColor
+                : theme.colorScheme.tertiaryContainer,
             icon: volumesData.values.toList()[index],
             label: volumesData.keys.toList()[index],
             unit: "ml",
-
             onPressed: () {
               HapticFeedback.mediumImpact();
               Feedback.forTap(context);
+
               ///Does the logic to select what was pressed on,
               ///by deselecting everything else, then selecting what was chosen
               isVolumeSelected.updateAll((key, value) => false);

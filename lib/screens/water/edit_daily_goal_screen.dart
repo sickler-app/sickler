@@ -119,7 +119,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                         ),
                         const Gap(24),
                         Text(
-                            "We will send you reminder every ${timeIntervalController.text} hour to help you achieve this goal",
+                            "We will send you reminder every ${timeIntervalController.text} hours to help you achieve this goal",
                             style: theme.textTheme.bodyMedium),
 
                         const Spacer(),

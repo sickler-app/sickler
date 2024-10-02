@@ -60,8 +60,7 @@ class SicklerAppBar extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(pageTitle,
-                style: theme.textTheme.headlineMedium!
-                    .copyWith(fontWeight: FontWeight.w800)),
+                style: theme.textTheme.headlineMedium),
           ),
         ),
         const Gap(48),

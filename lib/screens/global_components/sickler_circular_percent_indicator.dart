@@ -38,7 +38,7 @@ class SicklerCircularPercentIndicator extends StatelessWidget {
       animation: shouldAnimate!,
       circularStrokeCap: CircularStrokeCap.round,
       radius: radius ?? screenSize.width * .22,
-      progressColor: progressColour ?? SicklerColours.blueSeed,
+      progressColor: progressColour ?? theme.colorScheme.tertiary,
       lineWidth: 24,
       backgroundColor: backgroundColor ??
           (isDarkMode ? theme.cardColor : SicklerColours.blue90),
@@ -47,12 +47,12 @@ class SicklerCircularPercentIndicator extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-                text: "39",
+                text: value,
                 style: isSmall!
-                    ? theme.textTheme.headlineSmall!
-                        .copyWith(fontWeight: FontWeight.w800)
-                    : theme.textTheme.displayMedium!
-                        .copyWith(fontWeight: FontWeight.w800)),
+                    ? theme.textTheme.titleMedium!
+                        .copyWith(fontWeight: FontWeight.w700)
+                    : theme.textTheme.displaySmall!
+                        .copyWith(fontWeight: FontWeight.w700)),
             TextSpan(text: " %", style: theme.textTheme.bodyMedium)
           ],
         ),
