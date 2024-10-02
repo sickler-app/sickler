@@ -7,6 +7,7 @@ import 'package:sickler/core/constants.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/core/snackbar_notifier.dart';
 import 'package:sickler/models/water/water_log.dart';
+import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/providers/providers.dart';
 import 'package:sickler/screens/global_components/global_components.dart';
 import 'package:sickler/screens/water/charts/chart_data_transformer.dart';
@@ -42,8 +43,10 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
   Widget build(BuildContext context) {
     final WaterLogNotifier waterLogNotifier =
         ref.watch(waterLogProvider.notifier);
-    final SicklerUser user = ref.watch(userProvider).value!;
-    final WaterStats waterStats = ref.watch(waterStatsProvider);
+    SicklerUser user = ref.watch(userProvider).value!;
+    WaterStats waterStats = ref.watch(waterStatsProvider);
+    WaterPreferences waterPreferences =
+        ref.watch(waterPreferencesProvider).value!;
 
     List<WaterLog> todayLogs = waterStats.logsToday;
     List<WaterLog>? thisWeekLogs = waterStats.logsThisWeek;
@@ -91,7 +94,7 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
                 WaterLog waterLog = WaterLog(
                     timestamp: DateTime.now(),
                     amount: selectedVolume ??
-                        waterLogNotifier.preferences.logAmount!.toDouble());
+                        waterPreferences.logAmount!.toDouble());
 
                 await waterLogNotifier.addWaterLog(
                     entry: waterLog, user: user, updateRemote: false);

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:sickler/models/water/water_log.dart';
-import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/repositories/water/water_repository.dart';
 
 import '../../core/core.dart';
@@ -24,8 +23,6 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
   String? get errorMessage => state.error is Failure
       ? (state.error as Failure).message
       : state.error.toString();
-  WaterPreferences _preferences = const WaterPreferences.initial();
-  WaterPreferences get preferences => _preferences;
 
   @override
   Future<List<WaterLog>> build() async {

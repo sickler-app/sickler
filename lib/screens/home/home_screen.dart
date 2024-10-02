@@ -48,7 +48,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     List<WaterLog> totalLogsToday = ref.watch(waterLogProvider).value!;
     double totalToday =
         waterLogNotifier.calculateTotalFromLogs(logs: totalLogsToday);
-    WaterPreferences waterPrefs = waterLogNotifier.preferences;
+    WaterPreferences waterPrefs = ref.watch(waterPreferencesProvider).value!;
     double percentComplete = ((totalToday / waterPrefs.dailyGoal!) * 100);
     int remaining = waterPrefs.dailyGoal! - totalToday.toInt();
 

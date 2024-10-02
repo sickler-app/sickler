@@ -67,12 +67,8 @@ final waterStatsProvider = Provider<WaterStats>((ref) {
             log.timestamp.isBefore(tomorrow))
         .toList();
 
-    double dailyGoal = ref
-            .watch(waterLogProvider.notifier)
-            .preferences
-            .dailyGoal
-            ?.toDouble() ??
-        2000;
+    double dailyGoal =
+        ref.watch(waterPreferencesProvider).value!.dailyGoal!.toDouble();
 
     return WaterStats(
         logsToday: logsToday,
