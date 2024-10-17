@@ -4,7 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
+import '../../../../components/bottom_nav_bar.dart';
 import '../../../../components/components.dart';
+import '../../../profile/profile.dart';
 import '../../auth.dart';
 import 'auth_success.dart';
 

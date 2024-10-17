@@ -79,7 +79,7 @@ class _AppSelectorItemState extends State<AppSelectorItem>
                 animationController.reverse(from: 1.0);
               },
               onTap: widget.onPressed,
-              splashColor: widget.color?.withOpacity(.2) ??
+              splashColor: widget.color?.withValues(alpha: 0.2) ??
                   theme.colorScheme.primary.withOpacity(.2),
               //splashColor: Colors.transparent,
               splashFactory: InkSparkle.splashFactory,

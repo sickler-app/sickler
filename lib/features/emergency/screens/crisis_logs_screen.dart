@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sickler/screens/emergency/components/crisis_history_monthly.dart';
-import 'package:sickler/screens/global_components/components.dart';
+
+import '../../../components/components.dart';
+import 'components/crisis_history_monthly.dart';
 
 class CrisisLogsScreen extends StatelessWidget {
   static const String id = "crisis_logs";

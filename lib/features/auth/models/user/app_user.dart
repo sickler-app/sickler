@@ -2,7 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:isar/isar.dart';
 
-part '../app_user.g.dart';
+import '../../auth.dart';
+
+part 'app_user.g.dart';
 
 @Collection(inheritance: false)
 class AppUser extends Equatable {

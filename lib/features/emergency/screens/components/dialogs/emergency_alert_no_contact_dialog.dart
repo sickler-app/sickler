@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
-import 'package:sickler/screens/global_components/components.dart';
+
+import '../../../../../components/components.dart';
+import '../../../emergency.dart';
 
 class EmergencyAlertNoContactDialog extends StatelessWidget {
   const EmergencyAlertNoContactDialog({super.key});

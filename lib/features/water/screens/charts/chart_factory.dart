@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../water.dart';
+import 'bar_chart_widget.dart';
 import 'chart_data_transformer.dart';
 import 'line_chart_widget.dart';
 

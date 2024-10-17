@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sickler/core/core.dart';
+import 'package:sickler/features/auth/auth.dart';
 import 'package:sickler/features/auth/models/user/app_user.dart';
 import 'package:sickler/features/auth/services/auth/remote/auth_service.dart';
 import 'package:sickler/features/auth/services/user/local/user_local_service.dart';

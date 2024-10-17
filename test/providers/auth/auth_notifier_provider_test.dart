@@ -4,9 +4,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/features/auth/auth.dart';
-import 'package:sickler/models/models.dart';
-import 'package:sickler/features/auth/providers/auth/auth_notifier.dart';
-import 'package:sickler/features/auth/repositories/auth/auth_repository.dart';
+
 
 class MockAuthRepository extends Mock implements AuthRepository {}
 

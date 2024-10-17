@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../components/components.dart';
+import '../../../../core/core.dart';
+
 class FeelingCheckupCard extends StatelessWidget {
   const FeelingCheckupCard({super.key});
 

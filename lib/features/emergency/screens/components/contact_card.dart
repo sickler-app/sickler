@@ -4,10 +4,9 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
-import 'package:sickler/screens/global_components/components.dart';
-
-import '../../../core/core.dart';
+import '../../../../components/components.dart';
+import '../../../../core/core.dart';
+import '../../emergency.dart';
 
 class ContactCard extends StatelessWidget {
   final bool showAddContactButton;

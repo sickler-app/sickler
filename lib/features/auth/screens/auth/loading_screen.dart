@@ -3,7 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
+import '../../../../components/bottom_nav_bar.dart';
+import '../../../profile/profile.dart';
 import '../../auth.dart';
 
 class LoadingScreen extends ConsumerStatefulWidget {

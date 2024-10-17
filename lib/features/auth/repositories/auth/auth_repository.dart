@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sickler/services/auth/auth_service.dart';
 
 import '../../../../../core/core.dart';
-import '../../../../models/models.dart';
-import '../../../../services/user/local/user_local_service.dart';
+
 import '../../auth.dart';
+import '../../services/auth/remote/auth_service.dart';
+import '../../services/user/local/user_local_service.dart';
 
 class AuthRepository {
   final AuthService _authService;

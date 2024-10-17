@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 
+import '../../../components/components.dart';
 import '../../meds/meds.dart';
 
 class AddEmergencyContactScreen extends StatefulWidget {

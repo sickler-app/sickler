@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../../../core/core.dart';
+import '../../../../core/core.dart';
 
 class EmergencyContactRadio extends StatelessWidget {
   final bool isSelected;

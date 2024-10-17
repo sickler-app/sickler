@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
 
+import '../../../components/components.dart';
+
 class WaterEmptyScreen extends StatefulWidget {
   static const String id = "water_goal_empty";
   const WaterEmptyScreen({super.key});

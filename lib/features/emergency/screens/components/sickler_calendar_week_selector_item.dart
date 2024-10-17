@@ -3,7 +3,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../core/core.dart';
-import '../../../core/core.dart';
 
 class SicklerCalendarWeekSelectorItem extends StatefulWidget {
   const SicklerCalendarWeekSelectorItem({

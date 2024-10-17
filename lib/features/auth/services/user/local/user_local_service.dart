@@ -11,12 +11,12 @@ class UserLocalService extends LocalDbService {
 
   Stream<List<AppUser>> listenUserPreferences() async* {
     final isar = await db;
-    yield* isar.sicklerUsers.where().watch();
+    yield* isar.appUsers.where().watch();
   }
 
   Future<AppUser> getUser() async {
     final isar = await db;
-    List<AppUser> userList = await isar.sicklerUsers.where().findAll();
+    List<AppUser> userList = await isar.appUsers.where().findAll();
     if (userList.isEmpty) {
       return AppUser.empty;
     } else {
@@ -27,14 +27,14 @@ class UserLocalService extends LocalDbService {
   Future<void> addUser(AppUser user) async {
     final isar = await db;
     await isar.writeTxn(() async {
-      await isar.sicklerUsers.put(user);
+      await isar.appUsers.put(user);
     });
   }
 
   Future<void> updateUser(AppUser user) async {
     final isar = await db;
     await isar.writeTxn(() async {
-      await isar.sicklerUsers.put(user);
+      await isar.appUsers.put(user);
     });
   }
 
@@ -43,11 +43,11 @@ class UserLocalService extends LocalDbService {
 
     if (user == null) {
       await isar.writeTxn(() async {
-        await isar.sicklerUsers.clear();
+        await isar.appUsers.clear();
       });
     } else {
       await isar.writeTxn(() async {
-        await isar.sicklerUsers.delete(user.id);
+        await isar.appUsers.delete(user.id);
       });
     }
   }

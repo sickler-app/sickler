@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/emergency/components/sickler_calendar_week_selector_item.dart';
 import 'dart:math';
+
+import 'components.dart';
 
 class SicklerCalendarWeekSelector extends StatefulWidget {
   const SicklerCalendarWeekSelector({

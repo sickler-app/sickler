@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:sickler/models/water/water_log.dart';
 
-import '../../core/core.dart';
+import '../../../core/core.dart';
 import '../water.dart';
 
 class WaterStats extends Equatable {

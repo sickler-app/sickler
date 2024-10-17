@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/global_components/components.dart';
 
-import '../../core/core.dart';
+import '../../../components/components.dart';
+import '../../../core/core.dart';
 
 class EditDailyGoalScreen extends StatefulWidget {
   static const String id = "edit_daily_goal";

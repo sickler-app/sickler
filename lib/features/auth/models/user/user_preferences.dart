@@ -1,10 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
-
 import '../../../../core/core.dart';
-import '../../../core/enums.dart';
-
 part 'user_preferences.g.dart';
 
 @Embedded(inheritance: false)

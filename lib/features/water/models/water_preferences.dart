@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
 
 import '../../../core/core.dart';
-import '../../core/enums.dart';
 
 part 'water_preferences.g.dart';
 

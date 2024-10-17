@@ -2,12 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:sickler/repositories/user/user_repository.dart';
-
 import '../../../../core/core.dart';
 import '../../auth.dart';
-import '../../core/failure.dart';
-import '../../models/models.dart';
+
 
 class UserNotifier extends AsyncNotifier<AppUser> {
   final UserRepository _userRepository;
