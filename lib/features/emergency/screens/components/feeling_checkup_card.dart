@@ -53,7 +53,7 @@ class FeelingCheckupCard extends StatelessWidget {
           const Gap(24),
           TextFormField(
             maxLines: 4,
-            decoration: SicklerInputDecoration.inputDecoration(context)
+            decoration: AppInputDecoration.inputDecoration(context)
                 .copyWith(hintText: "Description"),
           ),
           const Gap(16),

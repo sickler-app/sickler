@@ -18,7 +18,7 @@ class MyMedsCard extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: isDarkMode ? theme.cardColor : SicklerColours.neutral95),
+          color: isDarkMode ? theme.cardColor : AppColours.neutral95),
       child: Row(
         ///The Compressed Mode
         children: [
@@ -44,7 +44,7 @@ class MyMedsCard extends StatelessWidget {
                     Text(
                       "Tablet",
                       style: theme.textTheme.bodyMedium!
-                          .copyWith(color: SicklerColours.neutral50),
+                          .copyWith(color: AppColours.neutral50),
                     ),
                   ],
                 )

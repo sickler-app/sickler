@@ -68,7 +68,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                     TextFormField(
                       controller: nameController,
                       decoration:
-                          SicklerInputDecoration.inputDecoration(context)
+                          AppInputDecoration.inputDecoration(context)
                               .copyWith(
                         hintText: "Hydroxyl Urea",
                       ),
@@ -90,7 +90,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                       maxLines: 3,
                       controller: descriptionController,
                       decoration:
-                          SicklerInputDecoration.inputDecoration(context)
+                          AppInputDecoration.inputDecoration(context)
                               .copyWith(
                         hintText: "Description",
                       ),

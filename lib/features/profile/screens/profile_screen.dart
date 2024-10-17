@@ -75,7 +75,7 @@ class ProfileScreen extends ConsumerWidget {
                           icon: FluentIcons.person_20_regular,
                           color: isDarkMode
                               ? Colors.white
-                              : SicklerColours.orange60,
+                              : AppColours.orange60,
                           backgroundColor: isDarkMode
                               ? theme.colorScheme.secondary
                               : theme.colorScheme.secondaryContainer,
@@ -86,10 +86,10 @@ class ProfileScreen extends ConsumerWidget {
                           iconPath: "assets/svg/dna.svg",
                           color: isDarkMode
                               ? Colors.white
-                              : SicklerColours.green30,
+                              : AppColours.green30,
                           backgroundColor: isDarkMode
-                              ? SicklerColours.green60
-                              : SicklerColours.green95,
+                              ? AppColours.green60
+                              : AppColours.green95,
                         ),
                       ],
                     ),
@@ -113,8 +113,8 @@ class ProfileScreen extends ConsumerWidget {
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: isDarkMode
-                                    ? SicklerColours.neutral30
-                                    : SicklerColours.orange90),
+                                    ? AppColours.neutral30
+                                    : AppColours.orange90),
                           ),
                         ],
                       ),
@@ -207,7 +207,7 @@ class ProfileScreen extends ConsumerWidget {
                             unit: " ml",
                             backgroundColor: isDarkMode
                                 ? theme.colorScheme.tertiary
-                                : SicklerColours.blue95,
+                                : AppColours.blue95,
                             color: isDarkMode
                                 ? Colors.white
                                 : theme.colorScheme.tertiary,

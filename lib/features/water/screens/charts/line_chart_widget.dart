@@ -183,7 +183,7 @@ class LineChartWidget extends StatelessWidget {
                     style: theme.textTheme.bodySmall!.copyWith(
                       fontSize: 10,
                       //   color: Colors.white,
-                      color: SicklerColours.neutral50,
+                      color: AppColours.neutral50,
                     ),
                   ),
                 );
@@ -202,7 +202,7 @@ class LineChartWidget extends StatelessWidget {
                     fontSize: 9,
                     //     color: Colors.white,
                     //color: theme.colorScheme.onTertiaryContainer,
-                    color: SicklerColours.neutral50,
+                    color: AppColours.neutral50,
                   ),
                 );
               },
@@ -226,7 +226,7 @@ class LineChartWidget extends StatelessWidget {
         bottom: BorderSide(
           width: 1,
           color:
-              isDarkMode ? SicklerColours.neutral20 : SicklerColours.neutral95,
+              isDarkMode ? AppColours.neutral20 : AppColours.neutral95,
         ),
       ),
     );

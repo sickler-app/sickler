@@ -70,7 +70,7 @@ class _CrisisEventLogCardState extends State<CrisisLogCard> {
               Text(
                 " - Extreme pain",
                 style: theme.textTheme.bodySmall!
-                    .copyWith(color: SicklerColours.neutral50),
+                    .copyWith(color: AppColours.neutral50),
               ),
               const Spacer(),
               Text(

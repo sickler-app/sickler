@@ -31,8 +31,8 @@ class EmergencyContactRadio extends StatelessWidget {
               : Border.all(
                   width: 1,
                   color: isDarkMode
-                      ? SicklerColours.neutral20
-                      : SicklerColours.neutral90)),
+                      ? AppColours.neutral20
+                      : AppColours.neutral90)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

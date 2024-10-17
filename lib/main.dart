@@ -44,8 +44,8 @@ class _MyAppState extends ConsumerState<MyApp> {
       child: MaterialApp(
         title: 'Sickler',
         debugShowCheckedModeBanner: false,
-        theme: SicklerThemeData.lightTheme,
-        darkTheme: SicklerThemeData.darkTheme,
+        theme: AppThemeData.lightTheme,
+        darkTheme: AppThemeData.darkTheme,
         themeMode: ThemeMode.system,
         themeAnimationStyle: AnimationStyle(
           curve: Curves.easeInOut,

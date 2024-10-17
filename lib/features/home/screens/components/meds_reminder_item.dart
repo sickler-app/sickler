@@ -17,7 +17,7 @@ class MedsReminderItem extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: SicklerColours.neutral90,
+        color: AppColours.neutral90,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

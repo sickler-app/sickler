@@ -27,14 +27,14 @@ class MedsHistoryItem extends StatelessWidget {
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: isDarkMode
-                    ? SicklerColours.neutral20
-                    : SicklerColours.neutral95),
+                    ? AppColours.neutral20
+                    : AppColours.neutral95),
             child: Center(
               child: SvgPicture.asset(
                 "assets/svg/medication.svg",
                 height: 20,
                 colorFilter:
-                    const ColorFilter.mode(SicklerColours.neutral50, BlendMode.srcIn),
+                    const ColorFilter.mode(AppColours.neutral50, BlendMode.srcIn),
               ),
             ),
           ),
@@ -89,7 +89,7 @@ class MedsHistoryItem extends StatelessWidget {
                     border: Border.all(
                       color: isDarkMode
                           ? theme.cardColor
-                          : SicklerColours.neutral90,
+                          : AppColours.neutral90,
                     ),
                     shape: BoxShape.circle,
                     // color: theme.colorScheme.primary,

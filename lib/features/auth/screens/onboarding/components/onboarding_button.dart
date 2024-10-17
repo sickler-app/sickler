@@ -24,7 +24,7 @@ class OnboardingButton extends StatelessWidget {
         child: SvgPicture.asset(
           "assets/svg/arrow-right.svg",
           colorFilter:
-              ColorFilter.mode(colour ?? SicklerColours.white, BlendMode.srcIn),
+              ColorFilter.mode(colour ?? AppColours.white, BlendMode.srcIn),
         ),
       ),
     );

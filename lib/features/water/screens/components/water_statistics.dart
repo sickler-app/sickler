@@ -20,14 +20,14 @@ class WaterStatistics extends ConsumerWidget {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(left: 8, top: 16, bottom: 8, right: 16),
       decoration: BoxDecoration(
-          color: isDarkMode ? theme.cardColor : SicklerColours.blue95,
+          color: isDarkMode ? theme.cardColor : AppColours.blue95,
           borderRadius: BorderRadius.circular(24)),
       child: Column(
         children: [
           DateSwitcher(
-              color: isDarkMode ? theme.iconTheme.color : SicklerColours.blue20,
+              color: isDarkMode ? theme.iconTheme.color : AppColours.blue20,
               backgroundColor:
-                  isDarkMode ? SicklerColours.neutral30 : SicklerColours.blue90,
+                  isDarkMode ? AppColours.neutral30 : AppColours.blue90,
               onNextPressed: () {},
               onPreviousPressed: () {},
               label: "Today"),
@@ -86,7 +86,7 @@ class WaterLineChart extends StatelessWidget {
                       child: Text(
                         "$displayHour$period",
                         style: theme.textTheme.bodySmall!.copyWith(
-                            fontSize: 10, color: SicklerColours.neutral50),
+                            fontSize: 10, color: AppColours.neutral50),
                       ),
                     );
                   }),
@@ -100,7 +100,7 @@ class WaterLineChart extends StatelessWidget {
                     return Text(
                       "${value.toStringAsFixed(1)} L",
                       style: theme.textTheme.bodySmall!.copyWith(
-                          fontSize: 9, color: SicklerColours.neutral50),
+                          fontSize: 9, color: AppColours.neutral50),
                     );
                   }),
             ),

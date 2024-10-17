@@ -37,8 +37,8 @@ class WaterCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
               color: isDarkMode
-                  ? SicklerColours.neutral20
-                  : SicklerColours.neutral95),
+                  ? AppColours.neutral20
+                  : AppColours.neutral95),
         ),
         child: Column(
           children: [
@@ -72,7 +72,7 @@ class WaterCard extends StatelessWidget {
                       Text(
                         "Today's Total",
                         style: theme.textTheme.bodySmall!
-                            .copyWith(color: SicklerColours.neutral50),
+                            .copyWith(color: AppColours.neutral50),
                       ),
                       Text("$totalToday $unit",
                           style: theme.textTheme.headlineSmall!.copyWith(
@@ -83,7 +83,7 @@ class WaterCard extends StatelessWidget {
                       Text(
                         "Remaining",
                         style: theme.textTheme.bodySmall!
-                            .copyWith(color: SicklerColours.neutral50),
+                            .copyWith(color: AppColours.neutral50),
                       ),
 
                       Text("$remaining $unit",
@@ -107,8 +107,8 @@ class WaterCard extends StatelessWidget {
                   // progressColor: theme.colorScheme.tertiary,
                   // lineWidth: 24,
                   backgroundColor: isDarkMode
-                      ? SicklerColours.neutral30
-                      : SicklerColours.blue90,
+                      ? AppColours.neutral30
+                      : AppColours.blue90,
                   progress: (percentageCompleted / 100) > 1
                       ? 1
                       : (percentageCompleted / 100),

@@ -32,7 +32,7 @@ class _WaterEmptyScreenState extends State<WaterEmptyScreen> {
             height: 200,
             width: 200,
             decoration: BoxDecoration(
-                color: SicklerColours.blue80,
+                color: AppColours.blue80,
                 borderRadius: BorderRadius.circular(100)),
           ),
           const Gap(16),

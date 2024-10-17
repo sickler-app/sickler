@@ -64,7 +64,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                                 textAlign: TextAlign.center,
                                 controller: repeatCountController,
                                 decoration:
-                                    SicklerInputDecoration.inputDecoration(
+                                    AppInputDecoration.inputDecoration(
                                             context)
                                         .copyWith(hintText: "1")),
                           ),
@@ -73,7 +73,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                             child: TextFormField(
                               controller: repeatIntervalController,
                               decoration:
-                                  SicklerInputDecoration.inputDecoration(
+                                  AppInputDecoration.inputDecoration(
                                           context)
                                       .copyWith(
                                           hintText: "Week",
@@ -138,7 +138,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                               keyboardType: TextInputType.number,
                               controller: endDateController,
                               decoration:
-                                  SicklerInputDecoration.inputDecoration(
+                                  AppInputDecoration.inputDecoration(
                                           context)
                                       .copyWith(
                                 hintText: "Today",
@@ -177,7 +177,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                               keyboardType: TextInputType.number,
                               controller: afterNumberOfOccurrencesController,
                               decoration:
-                                  SicklerInputDecoration.inputDecoration(
+                                  AppInputDecoration.inputDecoration(
                                           context)
                                       .copyWith(
                                 hintText: "1 Occurrence(s)",

@@ -67,7 +67,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             TextSpan(
                                 text: "Welcome,",
                                 style: theme.textTheme.bodyLarge!
-                                    .copyWith(color: SicklerColours.neutral50)),
+                                    .copyWith(color: AppColours.neutral50)),
                           ],
                         ),
                       ),
@@ -90,7 +90,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           : const AssetImage("assets/images/memoji.png")
                               as ImageProvider,
                       radius: 32,
-                      backgroundColor: SicklerColours.neutral90,
+                      backgroundColor: AppColours.neutral90,
                     ),
                   ),
                 ],

@@ -26,9 +26,9 @@ class GenotypeSelectorItem extends StatefulWidget {
 }
 
 class _GenotypeSelectorItemState extends State<GenotypeSelectorItem> {
-  Color _backgroundColor = SicklerColours.purple95;
+  Color _backgroundColor = AppColours.purple95;
 
-  Color _color = SicklerColours.purple40;
+  Color _color = AppColours.purple40;
   String _label = "AA";
 
   @override
@@ -40,27 +40,27 @@ class _GenotypeSelectorItemState extends State<GenotypeSelectorItem> {
     switch (widget.genotype) {
       case Genotype.aa:
         _backgroundColor =
-            !isDarkMode ? SicklerColours.green95 : SicklerColours.green20;
-        _color = !isDarkMode ? SicklerColours.green60 : SicklerColours.green80;
+            !isDarkMode ? AppColours.green95 : AppColours.green20;
+        _color = !isDarkMode ? AppColours.green60 : AppColours.green80;
         _label = "AA";
         break;
       case Genotype.as:
         _backgroundColor =
-            !isDarkMode ? SicklerColours.blue95 : SicklerColours.blue20;
-        _color = !isDarkMode ? SicklerColours.blue60 : SicklerColours.blue80;
+            !isDarkMode ? AppColours.blue95 : AppColours.blue20;
+        _color = !isDarkMode ? AppColours.blue60 : AppColours.blue80;
         _label = "AS";
         break;
       case Genotype.ss:
         _backgroundColor =
-            !isDarkMode ? SicklerColours.red95 : SicklerColours.red10;
-        _color = !isDarkMode ? SicklerColours.red50 : SicklerColours.red80;
+            !isDarkMode ? AppColours.red95 : AppColours.red10;
+        _color = !isDarkMode ? AppColours.red50 : AppColours.red80;
         _label = "SS";
         break;
       case Genotype.na:
         _backgroundColor =
-            !isDarkMode ? SicklerColours.neutral95 : SicklerColours.neutral20;
+            !isDarkMode ? AppColours.neutral95 : AppColours.neutral20;
         _color =
-            !isDarkMode ? SicklerColours.neutral50 : SicklerColours.neutral50;
+            !isDarkMode ? AppColours.neutral50 : AppColours.neutral50;
         _label = "N/A";
         break;
     }

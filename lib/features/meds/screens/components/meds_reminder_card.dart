@@ -65,19 +65,19 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
                   Text(
                     "Up Next",
                     style: theme.textTheme.bodyMedium!
-                        .copyWith(color: SicklerColours.neutral50),
+                        .copyWith(color: AppColours.neutral50),
                   ),
                   const Spacer(),
                   SvgPicture.asset(
                     "assets/svg/tablet.svg",
                     colorFilter: const ColorFilter.mode(
-                        SicklerColours.neutral50, BlendMode.srcIn),
+                        AppColours.neutral50, BlendMode.srcIn),
                   ),
                   const Gap(8),
                   Text(
                     "Tablet",
                     style: theme.textTheme.bodyMedium!
-                        .copyWith(color: SicklerColours.neutral50),
+                        .copyWith(color: AppColours.neutral50),
                   ),
                   const Gap(8),
                 ],

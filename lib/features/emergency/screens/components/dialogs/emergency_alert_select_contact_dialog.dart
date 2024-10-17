@@ -41,7 +41,7 @@ class EmergencyAlertSelectContactDialog extends StatelessWidget {
             onPressed: () {},
             label: "Send Alert",
             buttonType: SicklerButtonType.primary,
-            color: SicklerColours.white,
+            color: AppColours.white,
             backgroundColor: theme.colorScheme.error,
             iconPath: "assets/svg/emergency-alt.svg",
           ),

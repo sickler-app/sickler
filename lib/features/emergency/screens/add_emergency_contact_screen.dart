@@ -71,7 +71,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                     TextFormField(
                       controller: nameController,
                       decoration:
-                          SicklerInputDecoration.inputDecoration(context)
+                          AppInputDecoration.inputDecoration(context)
                               .copyWith(hintText: "Name"),
                     ),
                     const Gap(
@@ -95,7 +95,7 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                     TextFormField(
                       controller: phoneController,
                       decoration:
-                          SicklerInputDecoration.inputDecoration(context)
+                          AppInputDecoration.inputDecoration(context)
                               .copyWith(
                         hintText: "Phone Number",
                         suffixIcon: IconButton(

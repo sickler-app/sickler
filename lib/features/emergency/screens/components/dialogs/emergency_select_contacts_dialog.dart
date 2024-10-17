@@ -29,7 +29,7 @@ class EmergencySelectContactsDialog extends StatelessWidget {
             onPressed: () {},
             label: "Send to all contacts",
             buttonType: SicklerButtonType.primary,
-            color: SicklerColours.white,
+            color: AppColours.white,
             backgroundColor: theme.colorScheme.error,
             iconPath: "assets/svg/emergency-alt.svg",
           ),

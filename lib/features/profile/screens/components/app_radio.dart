@@ -38,9 +38,9 @@ class AppRadio<T> extends StatelessWidget {
       overlayColor:
           WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.selected)) {
-          return SicklerColours.purple90;
+          return AppColours.purple90;
         } else if (states.contains(WidgetState.disabled)) {
-          return SicklerColours.neutral90;
+          return AppColours.neutral90;
         }
         return null;
       }),
@@ -49,7 +49,7 @@ class AppRadio<T> extends StatelessWidget {
         if (states.contains(WidgetState.selected)) {
           return fillColor ?? theme.colorScheme.primary;
         } else if (states.contains(WidgetState.disabled)) {
-          return SicklerColours.neutral50;
+          return AppColours.neutral50;
         }
         return null;
       }),

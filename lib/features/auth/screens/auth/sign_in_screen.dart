@@ -54,7 +54,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 TextFormField(
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: SicklerInputDecoration.inputDecoration(context)
+                  decoration: AppInputDecoration.inputDecoration(context)
                       .copyWith(hintText: "Email"),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -72,7 +72,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: _obscureText,
                   decoration:
-                      SicklerInputDecoration.inputDecoration(context).copyWith(
+                      AppInputDecoration.inputDecoration(context).copyWith(
                     hintText: "Password",
                     suffixIcon: IconButton(
                         onPressed: () {
@@ -154,7 +154,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   child: Text(
                     "or",
                     style: theme.textTheme.bodyMedium!
-                        .copyWith(color: SicklerColours.neutral50),
+                        .copyWith(color: AppColours.neutral50),
                   ),
                 ),
                 Align(

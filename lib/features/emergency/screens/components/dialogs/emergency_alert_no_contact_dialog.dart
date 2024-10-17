@@ -41,7 +41,7 @@ class EmergencyAlertNoContactDialog extends StatelessWidget {
             },
             label: "Add a Contact",
             buttonType: SicklerButtonType.primary,
-            color: SicklerColours.white,
+            color: AppColours.white,
             backgroundColor: theme.colorScheme.error,
             icon: FluentIcons.add_24_regular,
           ),

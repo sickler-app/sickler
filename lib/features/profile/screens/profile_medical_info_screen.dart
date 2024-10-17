@@ -143,7 +143,7 @@ class _ProfileMedicalInfoScreenState
                         allergiesController.clear();
                       });
                     },
-                    decoration: SicklerInputDecoration.inputDecoration(context)
+                    decoration: AppInputDecoration.inputDecoration(context)
                         .copyWith(
                       hintText: "e.g. Peanuts",
                       suffixIcon: IconButton(
@@ -194,7 +194,7 @@ class _ProfileMedicalInfoScreenState
                         medicalConditionsController.clear();
                       });
                     },
-                    decoration: SicklerInputDecoration.inputDecoration(context)
+                    decoration: AppInputDecoration.inputDecoration(context)
                         .copyWith(
                       hintText: "e.g. Acute Chest Syndrome",
                       suffixIcon: IconButton(

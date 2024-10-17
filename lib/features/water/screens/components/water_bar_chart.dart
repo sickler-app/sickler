@@ -105,7 +105,7 @@ class WaterBarChart extends StatelessWidget {
       );
 
   LinearGradient get _barsGradient => const LinearGradient(
-        colors: [SicklerColours.blueSeed, SicklerColours.blueSeed],
+        colors: [AppColours.blueSeed, AppColours.blueSeed],
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
       );

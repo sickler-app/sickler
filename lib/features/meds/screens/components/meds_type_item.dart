@@ -34,8 +34,8 @@ class MedsTypeItem extends StatefulWidget {
 
 class _MedsTypeItemState extends State<MedsTypeItem>
     with SingleTickerProviderStateMixin {
-  Color _backgroundColor = SicklerColours.purple95;
-  Color _color = SicklerColours.purple40;
+  Color _backgroundColor = AppColours.purple95;
+  Color _color = AppColours.purple40;
   String _iconPath = "assets/svg/tablet.svg";
   String _label = "Tablets";
 
@@ -68,11 +68,11 @@ class _MedsTypeItemState extends State<MedsTypeItem>
       case MedicationType.tabletsPills:
         _backgroundColor = !isDarkMode
             ? (widget.isSelected
-                ? SicklerColours.purple90
-                : SicklerColours.purple95)
-            : SicklerColours.purple20;
+                ? AppColours.purple90
+                : AppColours.purple95)
+            : AppColours.purple20;
         _color =
-            !isDarkMode ? theme.colorScheme.primary : SicklerColours.purple90;
+            !isDarkMode ? theme.colorScheme.primary : AppColours.purple90;
         _iconPath = "assets/svg/tablet.svg";
         _label = "Tablets";
         break;
@@ -80,10 +80,10 @@ class _MedsTypeItemState extends State<MedsTypeItem>
       case MedicationType.capsules:
         _backgroundColor = !isDarkMode
             ? (widget.isSelected
-                ? SicklerColours.green90
-                : SicklerColours.green95)
-            : SicklerColours.green20;
-        _color = !isDarkMode ? SicklerColours.green60 : SicklerColours.green90;
+                ? AppColours.green90
+                : AppColours.green95)
+            : AppColours.green20;
+        _color = !isDarkMode ? AppColours.green60 : AppColours.green90;
         _iconPath = "assets/svg/medication.svg";
         _label = "Capsules";
 
@@ -91,39 +91,39 @@ class _MedsTypeItemState extends State<MedsTypeItem>
       case MedicationType.droplets:
         _backgroundColor = !isDarkMode
             ? (widget.isSelected
-                ? SicklerColours.blue90
-                : SicklerColours.blue95)
-            : SicklerColours.blue20;
-        _color = !isDarkMode ? SicklerColours.blue60 : SicklerColours.blue90;
+                ? AppColours.blue90
+                : AppColours.blue95)
+            : AppColours.blue20;
+        _color = !isDarkMode ? AppColours.blue60 : AppColours.blue90;
         _iconPath = "assets/svg/droplet-alt.svg";
         _label = "Droplets";
 
       case MedicationType.injections:
         _backgroundColor = !isDarkMode
-            ? (widget.isSelected ? SicklerColours.red90 : SicklerColours.red95)
-            : SicklerColours.red10;
-        _color = !isDarkMode ? SicklerColours.red50 : SicklerColours.red90;
+            ? (widget.isSelected ? AppColours.red90 : AppColours.red95)
+            : AppColours.red10;
+        _color = !isDarkMode ? AppColours.red50 : AppColours.red90;
         _iconPath = "assets/svg/syringe.svg";
         _label = "Injections (IV/IM)";
         break;
       case MedicationType.liquids:
         _backgroundColor = !isDarkMode
             ? (widget.isSelected
-                ? SicklerColours.purple90
-                : SicklerColours.purple95)
-            : SicklerColours.purple20;
+                ? AppColours.purple90
+                : AppColours.purple95)
+            : AppColours.purple20;
         _color =
-            !isDarkMode ? theme.colorScheme.primary : SicklerColours.purple90;
+            !isDarkMode ? theme.colorScheme.primary : AppColours.purple90;
         _iconPath = "assets/svg/bottle.svg";
         _label = "Liquids & Syrups";
         break;
       case MedicationType.inhaler:
         _backgroundColor = !isDarkMode
             ? (widget.isSelected
-                ? SicklerColours.green90
-                : SicklerColours.green95)
-            : SicklerColours.green20;
-        _color = !isDarkMode ? SicklerColours.green60 : SicklerColours.green90;
+                ? AppColours.green90
+                : AppColours.green95)
+            : AppColours.green20;
+        _color = !isDarkMode ? AppColours.green60 : AppColours.green90;
         _iconPath = "assets/svg/medication.svg";
         _label = "Inhaler";
         break;
@@ -131,11 +131,11 @@ class _MedsTypeItemState extends State<MedsTypeItem>
       case MedicationType.creamsOrGels:
         _backgroundColor = !isDarkMode
             ? (widget.isSelected
-                ? SicklerColours.orange90
-                : SicklerColours.orange95)
-            : SicklerColours.orange20;
+                ? AppColours.orange90
+                : AppColours.orange95)
+            : AppColours.orange20;
         _color =
-            !isDarkMode ? SicklerColours.orange60 : SicklerColours.orange90;
+            !isDarkMode ? AppColours.orange60 : AppColours.orange90;
         _iconPath = "assets/svg/stream.svg";
         _label = "Creams & Gels";
         break;
@@ -143,11 +143,11 @@ class _MedsTypeItemState extends State<MedsTypeItem>
       case MedicationType.custom:
         _backgroundColor = !isDarkMode
             ? (widget.isSelected
-                ? SicklerColours.purple90
-                : SicklerColours.purple95)
-            : SicklerColours.purple20;
+                ? AppColours.purple90
+                : AppColours.purple95)
+            : AppColours.purple20;
         _color =
-            !isDarkMode ? theme.colorScheme.primary : SicklerColours.purple90;
+            !isDarkMode ? theme.colorScheme.primary : AppColours.purple90;
         _iconPath = "assets/svg/plus.svg";
         _label = "Custom";
         break;
@@ -197,8 +197,8 @@ class _MedsTypeItemState extends State<MedsTypeItem>
           textAlign: TextAlign.center,
           style: theme.textTheme.bodySmall!.copyWith(
               color: !isDarkMode
-                  ? SicklerColours.neutral50
-                  : SicklerColours.neutral70),
+                  ? AppColours.neutral50
+                  : AppColours.neutral70),
         )
       ],
     );

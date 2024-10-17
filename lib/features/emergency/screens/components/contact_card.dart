@@ -25,7 +25,7 @@ class ContactCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isDarkMode ? theme.cardColor : SicklerColours.neutral90,
+          color: isDarkMode ? theme.cardColor : AppColours.neutral90,
         ),
       ),
       child: showAddContactButton

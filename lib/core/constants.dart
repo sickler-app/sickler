@@ -13,11 +13,11 @@ const double kPadding48 = 48.0;
 const double kPadding64 = 64.0;
 
 ///------Input Decorations-------///
-class SicklerInputDecoration {
+class AppInputDecoration {
   static InputDecoration inputDecoration(BuildContext context) {
     return InputDecoration(
         contentPadding: const EdgeInsets.all(12),
-        errorStyle: SicklerTextStyles.bodyMedium
+        errorStyle: AppTextStyles.bodyMedium
             .copyWith(color: Theme.of(context).colorScheme.error),
         errorBorder: OutlineInputBorder(
           gapPadding: 4,
@@ -43,21 +43,21 @@ class SicklerInputDecoration {
         focusedBorder: OutlineInputBorder(
           gapPadding: 0,
           borderSide:
-              const BorderSide(width: 1, color: SicklerColours.purple60),
+              const BorderSide(width: 1, color: AppColours.purple60),
           borderRadius: BorderRadius.circular(12),
         ),
         filled: true,
         isDense: true,
         fillColor: Theme.of(context).cardColor,
-        hintStyle: SicklerTextStyles.bodyMedium
-            .copyWith(color: SicklerColours.neutral50),
+        hintStyle: AppTextStyles.bodyMedium
+            .copyWith(color: AppColours.neutral50),
         labelStyle:
-            SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.black));
+            AppTextStyles.bodyMedium.copyWith(color: AppColours.black));
   }
 }
 
 ///------Colours-------///
-class SicklerColours {
+class AppColours {
   // static const Color black = Color(0xFF1C1A22);
   static const Color black = Color(0xFF0E0D11);
   // static const Color white = Color(0xFFFFFBFF);
@@ -148,7 +148,7 @@ class SicklerColours {
 }
 
 ///------Text Styles-------///
-class SicklerTextStyles {
+class AppTextStyles {
   ///---Display---//
 
   static TextStyle displayLarge = const TextStyle(

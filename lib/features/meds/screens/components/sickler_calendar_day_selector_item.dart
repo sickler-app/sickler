@@ -26,7 +26,7 @@ class SicklerCalendarDaySelectorItem extends StatefulWidget {
 class _SicklerCalendarDaySelectorItemState
     extends State<SicklerCalendarDaySelectorItem>
     with TickerProviderStateMixin {
-  final Color _color = SicklerColours.purple40;
+  final Color _color = AppColours.purple40;
 
   late final AnimationController animationController;
   late final AnimationController colorAnimationController;
@@ -98,11 +98,11 @@ class _SicklerCalendarDaySelectorItemState
                   style: theme.textTheme.bodyMedium!.copyWith(
                       color: widget.isSelected
                           ? (isDarkMode
-                              ? SicklerColours.purple10
-                              : SicklerColours.white)
+                              ? AppColours.purple10
+                              : AppColours.white)
                           : (isDarkMode
-                              ? SicklerColours.white
-                              : SicklerColours.neutral50),
+                              ? AppColours.white
+                              : AppColours.neutral50),
                       fontWeight: widget.isSelected
                           ? FontWeight.w700
                           : FontWeight.normal)),

@@ -67,7 +67,7 @@ class _FeelingCardState extends State<FeelingCard> {
           const Gap(12),
           Slider(
               activeColor: theme.colorScheme.primary,
-              inactiveColor: SicklerColours.neutral90,
+              inactiveColor: AppColours.neutral90,
               min: 0,
               max: 10,
               value: sliderValue,

@@ -119,7 +119,7 @@ class ChartDataTransformer {
         .map((e) => BarChartGroupData(x: e.key, barRods: [
               BarChartRodData(
                   toY: e.value,
-                  color: barColor ?? SicklerColours.blueSeed,
+                  color: barColor ?? AppColours.blueSeed,
                   width: barWidth ?? 16)
             ]))
         .toList()
@@ -154,7 +154,7 @@ class ChartDataTransformer {
         .map((e) => BarChartGroupData(x: e.key, barRods: [
               BarChartRodData(
                   toY: e.value,
-                  color: barColor ?? SicklerColours.blueSeed,
+                  color: barColor ?? AppColours.blueSeed,
                   width: barWidth ?? 5)
             ]))
         .toList()

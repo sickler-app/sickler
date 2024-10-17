@@ -107,7 +107,7 @@ class _ProfileVitalsInfoScreenState
                         controller: heightController,
                         keyboardType: TextInputType.number,
                         decoration:
-                            SicklerInputDecoration.inputDecoration(context)
+                            AppInputDecoration.inputDecoration(context)
                                 .copyWith(hintText: "Height"),
                       ),
                       const Gap(24),
@@ -128,7 +128,7 @@ class _ProfileVitalsInfoScreenState
                         controller: weightController,
                         keyboardType: TextInputType.number,
                         decoration:
-                            SicklerInputDecoration.inputDecoration(context)
+                            AppInputDecoration.inputDecoration(context)
                                 .copyWith(
                           hintText: "Weight",
                         ),

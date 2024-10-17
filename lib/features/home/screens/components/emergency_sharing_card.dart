@@ -22,7 +22,7 @@ class EmergencySharingCard extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
-          color: isDarkMode ? theme.cardColor : SicklerColours.red95,
+          color: isDarkMode ? theme.cardColor : AppColours.red95,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -32,13 +32,13 @@ class EmergencySharingCard extends StatelessWidget {
                 Text(
                   "Emergency",
                   style: theme.textTheme.bodyMedium!
-                      .copyWith(color: SicklerColours.red50),
+                      .copyWith(color: AppColours.red50),
                 ),
                 const Spacer(),
                 SvgPicture.asset(
                   "assets/svg/emergency-alt.svg",
                   colorFilter: const ColorFilter.mode(
-                      SicklerColours.red50, BlendMode.srcIn),
+                      AppColours.red50, BlendMode.srcIn),
                 )
               ],
             ),
@@ -48,14 +48,14 @@ class EmergencySharingCard extends StatelessWidget {
               width: 114,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: isDarkMode ? SicklerColours.red10 : SicklerColours.red90,
+                color: isDarkMode ? AppColours.red10 : AppColours.red90,
               ),
               child: Center(
                 child: SvgPicture.asset(
                   "assets/svg/emergency-alt.svg",
                   height: 48,
                   colorFilter: const ColorFilter.mode(
-                      SicklerColours.red50, BlendMode.srcIn),
+                      AppColours.red50, BlendMode.srcIn),
                 ),
               ),
             ),

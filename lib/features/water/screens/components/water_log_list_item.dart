@@ -26,8 +26,8 @@ class WaterLogListItem extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(
             color: isDarkMode
-                ? SicklerColours.neutral20
-                : SicklerColours.neutral90,
+                ? AppColours.neutral20
+                : AppColours.neutral90,
           ),
           // color: isDarkMode
           //     ? SicklerColours.neutral20
@@ -43,7 +43,7 @@ class WaterLogListItem extends StatelessWidget {
                 SvgPicture.asset(
                   "assets/svg/droplet-alt.svg",
                   colorFilter: const ColorFilter.mode(
-                      SicklerColours.neutral50, BlendMode.srcIn),
+                      AppColours.neutral50, BlendMode.srcIn),
                 ),
                 const Gap(kPadding8),
                 RichText(
@@ -55,7 +55,7 @@ class WaterLogListItem extends StatelessWidget {
                       text:
                           TimeOfDay.fromDateTime(log.timestamp).format(context),
                       style: theme.textTheme.bodySmall!
-                          .copyWith(color: SicklerColours.neutral50))
+                          .copyWith(color: AppColours.neutral50))
                 ])),
               ],
             ),

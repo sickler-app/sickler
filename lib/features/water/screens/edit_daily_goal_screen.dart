@@ -61,7 +61,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                           controller: volumeController,
                           keyboardType: TextInputType.name,
                           decoration:
-                              SicklerInputDecoration.inputDecoration(context)
+                              AppInputDecoration.inputDecoration(context)
                                   .copyWith(hintText: "1000ml"),
                         ),
                         const Gap(24),
@@ -112,7 +112,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                                     ));
                           },
                           decoration:
-                              SicklerInputDecoration.inputDecoration(context)
+                              AppInputDecoration.inputDecoration(context)
                                   .copyWith(
                             hintText: "Notification Interval",
                           ),

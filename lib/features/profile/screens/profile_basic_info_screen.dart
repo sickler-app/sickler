@@ -99,7 +99,7 @@ class _ProfileBasicInfoScreenState
                       controller: nameController,
                       keyboardType: TextInputType.name,
                       decoration:
-                          SicklerInputDecoration.inputDecoration(context)
+                          AppInputDecoration.inputDecoration(context)
                               .copyWith(hintText: "Names"),
                     ),
                     const Gap(24),
@@ -111,7 +111,7 @@ class _ProfileBasicInfoScreenState
                       controller: ageController,
                       keyboardType: TextInputType.number,
                       decoration:
-                          SicklerInputDecoration.inputDecoration(context)
+                          AppInputDecoration.inputDecoration(context)
                               .copyWith(
                         hintText: "Age",
                       ),

@@ -41,7 +41,7 @@ class CustomCircularPercentIndicator extends StatelessWidget {
       progressColor: progressColour ?? theme.colorScheme.tertiary,
       lineWidth: 24,
       backgroundColor: backgroundColor ??
-          (isDarkMode ? theme.cardColor : SicklerColours.blue90),
+          (isDarkMode ? theme.cardColor : AppColours.blue90),
       percent: progress,
       center: RichText(
         text: TextSpan(

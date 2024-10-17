@@ -15,7 +15,7 @@ class BarChartWidget extends StatelessWidget {
   const BarChartWidget(
       {super.key,
       required this.barGroups,
-      this.color = SicklerColours.blueSeed,
+      this.color = AppColours.blueSeed,
       required this.timeScale,
       this.xUnit,
       this.yUnit});
@@ -121,8 +121,8 @@ class BarChartWidget extends StatelessWidget {
                   bottom: BorderSide(
                       width: 1,
                       color: isDarkMode
-                          ? SicklerColours.neutral20
-                          : SicklerColours.neutral95))),
+                          ? AppColours.neutral20
+                          : AppColours.neutral95))),
           gridData: const FlGridData(show: false),
           titlesData: FlTitlesData(
             bottomTitles: AxisTitles(
@@ -135,7 +135,7 @@ class BarChartWidget extends StatelessWidget {
                       child: Text(
                         getXTitleText(value),
                         style: theme.textTheme.bodySmall!.copyWith(
-                            fontSize: 10, color: SicklerColours.neutral50),
+                            fontSize: 10, color: AppColours.neutral50),
                       ),
                     );
                   }),
@@ -149,7 +149,7 @@ class BarChartWidget extends StatelessWidget {
                     return Text(
                       "${(value).toStringAsFixed(1)} ${yUnit ?? ''}",
                       style: theme.textTheme.bodySmall!.copyWith(
-                          fontSize: 9, color: SicklerColours.neutral50),
+                          fontSize: 9, color: AppColours.neutral50),
                     );
                   }),
             ),

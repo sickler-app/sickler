@@ -47,8 +47,8 @@ class _AppChipState extends State<AppChip> {
               : BorderSide(
                   width: 1,
                   color: isDarkMode
-                      ? SicklerColours.neutral20
-                      : SicklerColours.neutral90),
+                      ? AppColours.neutral20
+                      : AppColours.neutral90),
           backgroundColor: theme.scaffoldBackgroundColor,
           selectedColor:
               widget.selectedBackgroundColor ?? theme.colorScheme.primary,
@@ -79,8 +79,8 @@ class _AppChipState extends State<AppChip> {
         side: BorderSide(
             width: 1,
             color: isDarkMode
-                ? SicklerColours.neutral20
-                : SicklerColours.neutral90),
+                ? AppColours.neutral20
+                : AppColours.neutral90),
         label: Text(
           widget.label,
           style: theme.textTheme.bodyMedium!.copyWith(

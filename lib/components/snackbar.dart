@@ -17,9 +17,9 @@ void showCustomSnackBar({
       backgroundColor = Theme.of(context).colorScheme.surfaceContainerHighest;
       labelColor = Theme.of(context).brightness == Brightness.dark
           ? Colors.white
-          : SicklerColours.black;
+          : AppColours.black;
     case SnackBarMode.success:
-      backgroundColor = SicklerColours.green60;
+      backgroundColor = AppColours.green60;
     case SnackBarMode.error:
       backgroundColor = Theme.of(context).colorScheme.error;
   }

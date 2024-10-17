@@ -14,7 +14,7 @@ class MedsReminderCard extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: SicklerColours.neutral95,
+        color: AppColours.neutral95,
       ),
       child: Column(
         children: [

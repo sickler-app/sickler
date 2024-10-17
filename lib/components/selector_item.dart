@@ -119,8 +119,8 @@ class _AppSelectorItemState extends State<AppSelectorItem>
           textAlign: TextAlign.center,
           style: theme.textTheme.bodySmall!.copyWith(
               color: !isDarkMode
-                  ? SicklerColours.neutral50
-                  : SicklerColours.neutral70),
+                  ? AppColours.neutral50
+                  : AppColours.neutral70),
         )
       ],
     );

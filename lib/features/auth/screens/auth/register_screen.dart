@@ -65,7 +65,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration:
-                            SicklerInputDecoration.inputDecoration(context)
+                            AppInputDecoration.inputDecoration(context)
                                 .copyWith(hintText: "Email"),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -83,7 +83,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: _obscureText,
                         decoration:
-                            SicklerInputDecoration.inputDecoration(context)
+                            AppInputDecoration.inputDecoration(context)
                                 .copyWith(
                           hintText: "Password",
                           suffixIcon: IconButton(
@@ -122,7 +122,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: _obscureText,
                         decoration:
-                            SicklerInputDecoration.inputDecoration(context)
+                            AppInputDecoration.inputDecoration(context)
                                 .copyWith(
                           hintText: "Confirm Password",
                           suffixIcon: IconButton(
@@ -211,7 +211,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         child: Text(
                           "or",
                           style: theme.textTheme.bodyMedium!
-                              .copyWith(color: SicklerColours.neutral50),
+                              .copyWith(color: AppColours.neutral50),
                         ),
                       ),
                       Align(

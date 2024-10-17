@@ -26,7 +26,7 @@ class EmergencyLocationSharingCard extends StatelessWidget {
               Text(
                 "Emergency Sharing\nIn Progress",
                 style: theme.textTheme.headlineSmall!
-                    .copyWith(color: SicklerColours.white),
+                    .copyWith(color: AppColours.white),
               ),
               const Spacer(),
               SvgPicture.asset(
@@ -46,12 +46,12 @@ class EmergencyLocationSharingCard extends StatelessWidget {
                   Text(
                     "Sharing ends in",
                     style: theme.textTheme.bodyMedium!
-                        .copyWith(color: SicklerColours.white),
+                        .copyWith(color: AppColours.white),
                   ),
                   Text(
                     "2h 43m 15s",
                     style: theme.textTheme.bodyLarge!.copyWith(
-                        color: SicklerColours.white,
+                        color: AppColours.white,
                         fontWeight: FontWeight.w700),
                   ),
                 ],
@@ -62,7 +62,7 @@ class EmergencyLocationSharingCard extends StatelessWidget {
                 onPressed: () {},
                 label: 'Stop Sharing',
                 iconPath: "assets/svg/location-off.svg",
-                backgroundColor: SicklerColours.white,
+                backgroundColor: AppColours.white,
                 color: theme.colorScheme.error,
               )
             ],
