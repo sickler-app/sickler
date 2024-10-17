@@ -1,9 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:isar/isar.dart';
-import 'package:sickler/features/auth/models/user_preferences.dart';
-
-import '../../../../models/models.dart';
 
 part '../app_user.g.dart';
 

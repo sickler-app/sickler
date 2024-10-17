@@ -4,9 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/global_components/components.dart';
-import 'package:sickler/features/meds/screens/add_edit_meds_screen.dart';
-import 'package:sickler/screens/meds/components/components.dart';
+
+import '../../../components/components.dart';
+import '../meds.dart';
+
 
 class MedsScreen extends StatelessWidget {
   static const String id = "meds";

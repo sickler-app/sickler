@@ -5,6 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../features/emergency/emergency.dart';
+import '../features/home/home.dart';
+import '../features/meds/meds.dart';
+import '../features/profile/profile.dart';
+import '../features/water/water.dart';
+
 class BottomNavBar extends ConsumerStatefulWidget {
   static const String id = "nav_bar";
   const BottomNavBar({super.key});

@@ -2,9 +2,10 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/models/water/water_log.dart';
 
-import '../../../core/core.dart';
+import '../../../../core/core.dart';
+import '../../water.dart';
+
 
 class WaterLogListItem extends StatelessWidget {
   final WaterLog log;

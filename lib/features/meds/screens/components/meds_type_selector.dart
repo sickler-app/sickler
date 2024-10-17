@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../core/core.dart';
+import '../../../../../core/core.dart';
 import 'components.dart';
 
 class MedicationTypeSelector extends StatefulWidget {

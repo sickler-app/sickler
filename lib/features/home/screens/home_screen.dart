@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/features/auth/models/user/app_user.dart';
-import 'package:sickler/models/water/water_preferences.dart';
-import 'package:sickler/features/auth/providers/auth_providers.dart';
-import 'package:sickler/providers/water/water_providers.dart';
-import 'package:sickler/screens/emergency/emergency_screen.dart';
-import 'package:sickler/screens/profile/profile_screen.dart';
-import 'package:sickler/screens/water/water_screen.dart';
-
 import '../../../core/core.dart';
-import '../../../models/water/water_log.dart';
-import '../components/components.dart';
+import '../../auth/auth.dart';
+import '../../emergency/emergency.dart';
+import '../../profile/profile.dart';
+import '../../water/water.dart';
+import '../home.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   static const String id = "home";

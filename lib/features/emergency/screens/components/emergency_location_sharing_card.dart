@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../core/core.dart';
 import '../../../core/core.dart';
 import '../../global_components/components.dart';
 

@@ -2,9 +2,8 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:sickler/screens/water/charts/line_chart_widget.dart';
-
-import '../../../core/core.dart';
+import '../../../../core/core.dart';
+import 'line_chart_widget.dart';
 
 class BarChartWidget extends StatelessWidget {
   final List<BarChartGroupData> barGroups;

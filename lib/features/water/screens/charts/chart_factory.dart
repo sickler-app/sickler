@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sickler/screens/water/charts/bar_chart_widget.dart';
-import 'package:sickler/screens/water/charts/chart_data_transformer.dart';
-import 'package:sickler/screens/water/charts/line_chart_widget.dart';
 
-import '../../../models/water/water_log.dart';
+import '../../water.dart';
+import 'chart_data_transformer.dart';
+import 'line_chart_widget.dart';
 
 enum ChartType { line, bar, cumulativeLine }
 

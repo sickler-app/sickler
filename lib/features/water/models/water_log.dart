@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
 
+import '../../../core/core.dart';
 import '../../core/core.dart';
 
 part 'water_log.g.dart';

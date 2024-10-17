@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/global_components/components.dart';
-import 'package:sickler/screens/meds/components/sickler_calendar_day_selector.dart';
-import 'package:sickler/screens/profile/components/app_radio.dart';
 
+import '../../../components/components.dart';
 import '../../../core/core.dart';
+import '../../profile/profile.dart';
+import '../meds.dart';
 
 class MedsScheduleScreen extends StatefulWidget {
   static const String id = "meds_schedule";
@@ -97,7 +97,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                       const Gap(24),
                       const Text("Ends on"),
                       const Gap(24),
-                      SicklerRadio<MedsScheduleEndingState>(
+                      AppRadio<MedsScheduleEndingState>(
                         showBorder: false,
                         unselectedBackgroundColor: Colors.transparent,
                         selectedBackgroundColor: Colors.transparent,
@@ -115,7 +115,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                         children: [
                           Expanded(
                             flex: 2,
-                            child: SicklerRadio<MedsScheduleEndingState>(
+                            child: AppRadio<MedsScheduleEndingState>(
                               showBorder: false,
                               unselectedBackgroundColor: Colors.transparent,
                               selectedBackgroundColor: Colors.transparent,
@@ -153,7 +153,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                         children: [
                           Expanded(
                             flex: 2,
-                            child: SicklerRadio<MedsScheduleEndingState>(
+                            child: AppRadio<MedsScheduleEndingState>(
                               showBorder: false,
                               unselectedBackgroundColor: Colors.transparent,
                               selectedBackgroundColor: Colors.transparent,

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/emergency/components/dialogs/emergency_alert_no_contact_dialog.dart';
-
-import '../../../core/core.dart';
-import '../../global_components/components.dart';
 
 class FeelingCheckupCard extends StatelessWidget {
   const FeelingCheckupCard({super.key});

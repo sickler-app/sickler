@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/meds/meds_details_screen.dart';
 
-import '../../../core/core.dart';
-import '../../global_components/components.dart';
+import '../../../../components/components.dart';
+import '../../../../../core/core.dart';
+import '../../meds.dart';
+
 
 class MyMedsCard extends StatelessWidget {
   const MyMedsCard({super.key});

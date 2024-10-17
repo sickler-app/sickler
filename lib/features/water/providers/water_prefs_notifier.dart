@@ -2,11 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:sickler/models/water/water_preferences.dart';
-import 'package:sickler/repositories/water/water_repository.dart';
-
-import '../../core/core.dart';
-import '../../features/auth/models/app_user.dart';
+import '../../../core/core.dart';
+import '../../auth/auth.dart';
+import '../water.dart';
 
 class WaterPrefsNotifier extends AsyncNotifier<WaterPreferences> {
   final WaterRepository _waterRepository;

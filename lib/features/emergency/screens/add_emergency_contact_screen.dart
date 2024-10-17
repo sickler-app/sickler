@@ -2,10 +2,8 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/meds/components/components.dart';
-import 'package:sickler/screens/meds/components/meds_type_item.dart';
 
-import '../global_components/components.dart';
+import '../../meds/meds.dart';
 
 class AddEmergencyContactScreen extends StatefulWidget {
   static const String id = "add_emergency_contact";

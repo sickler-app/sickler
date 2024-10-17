@@ -3,10 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/water/charts/chart_factory.dart';
-
-import '../../../core/core.dart';
-import '../../../models/water/water_log.dart';
+import '../../water.dart';
+import 'chart_factory.dart';
 
 List<WaterLog> generateSampleWaterLogs() {
   final Random random = Random();

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/services/user/remote/user_service.dart';
 
+import '../../auth.dart';
 import '../../models/models.dart';
 import '../../services/auth/remote/auth_service.dart';
 import '../../services/user/local/user_local_service.dart';

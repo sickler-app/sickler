@@ -1,8 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sickler/core/constants.dart';
-
-import '../../../models/water/water_log.dart';
+import '../../water.dart';
 
 class ChartDataTransformer {
   static List<FlSpot> transformForDailyTrend(List<WaterLog> logList,

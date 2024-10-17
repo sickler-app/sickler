@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:sickler/models/water/water_preferences.dart';
 
 import '../../../models/water/water_log.dart';
+import '../../water.dart';
 
 class WaterService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;

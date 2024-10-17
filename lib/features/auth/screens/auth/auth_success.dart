@@ -5,6 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/constants.dart';
 
+import '../../auth.dart';
+
 
 class AuthSuccessScreen extends ConsumerStatefulWidget {
   static const id = "auth_success";

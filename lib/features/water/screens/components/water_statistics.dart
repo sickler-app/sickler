@@ -2,12 +2,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/providers/water/water_providers.dart';
-import 'package:sickler/screens/global_components/components.dart';
-import 'package:sickler/screens/water/suggested_water_daily_goal_screen.dart';
 
-import '../../../core/core.dart';
-import '../../../models/water/water_log.dart';
+import '../../../../components/components.dart';
+import '../../../../core/core.dart';
+import '../../water.dart';
+
 
 class WaterStatistics extends ConsumerWidget {
   const WaterStatistics({super.key});

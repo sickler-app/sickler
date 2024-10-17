@@ -3,7 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
-import '../../../core/core.dart';
+import '../../../../../core/core.dart';
+
 
 ///Todo: Refactor this widget into a more generic form so it can be used elsewhere
 class MedsTypeItem extends StatefulWidget {

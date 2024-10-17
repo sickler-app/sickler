@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:isar/isar.dart';
-import 'package:sickler/models/water/water_log.dart';
-import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/databse_service.dart';
+
+import '../../water.dart';
 
 class WaterLocalService extends LocalDbService {
   late Future<Isar> db;

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/meds/components/sickler_calendar_day_selector_item.dart';
+
+import '../../meds.dart';
 
 class SicklerCalendarDaySelector extends StatefulWidget {
   const SicklerCalendarDaySelector({super.key, required this.selectedDays});

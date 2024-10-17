@@ -2,11 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:sickler/models/water/water_log.dart';
-import 'package:sickler/repositories/water/water_repository.dart';
 
 import '../../../core/core.dart';
 import '../../auth/models/user/app_user.dart';
+import '../water.dart';
 
 class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
   final WaterRepository _waterRepository;

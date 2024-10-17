@@ -1,9 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../models/models.dart';
-import '../../../repositories/repositories.dart';
-import '../../../services/services.dart';
-import '../../../providers/provider_notifiers.dart';
+import '../../auth.dart';
+import '../../services/auth/remote/auth_service.dart';
+
+
+
 
 ///------Auth Related Providers------///
 final AuthService authService = AuthService();

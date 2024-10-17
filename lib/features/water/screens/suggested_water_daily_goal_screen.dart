@@ -4,14 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/models/models.dart';
-import 'package:sickler/models/water/water_preferences.dart';
-import 'package:sickler/features/auth/providers/auth_providers.dart';
-import 'package:sickler/providers/water/water_providers.dart';
-import 'package:sickler/screens/global_components/components.dart';
 
-import '../../providers/water/water_prefs_notifier.dart';
-import '../global_components/bottom_nav_bar.dart';
+import '../../../components/bottom_nav_bar.dart';
+import '../../../components/components.dart';
+import '../../auth/auth.dart';
+import '../water.dart';
+
 
 class SuggestedWaterDailyGoalScreen extends ConsumerStatefulWidget {
   static const String id = "suggested_daily_goal";

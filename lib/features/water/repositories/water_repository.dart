@@ -2,12 +2,10 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/models/models.dart';
-import 'package:sickler/models/water/water_log.dart';
-import 'package:sickler/models/water/water_preferences.dart';
-import 'package:sickler/services/water/remote/water_service.dart';
 
-import '../../services/water/local/water_local_service.dart';
+import '../../auth/auth.dart';
+import '../water.dart';
+
 
 class WaterRepository {
   final WaterService _waterService;
