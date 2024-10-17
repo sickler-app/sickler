@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/models/models.dart';
-import 'package:sickler/providers/providers.dart';
+import 'package:sickler/features/auth/providers/auth_providers.dart';
 import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/profile/profile_medical_info_screen.dart';
 

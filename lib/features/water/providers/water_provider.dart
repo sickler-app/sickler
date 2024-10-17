@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sickler/models/water/water_preferences.dart';
-import 'package:sickler/providers/water/water_log_notifier.dart';
+import 'package:sickler/features/water/providers/water_log_notifier.dart';
 import 'package:sickler/providers/water/water_prefs_notifier.dart';
 
-import '../../models/water/water_log.dart';
-import '../../models/water/water_stats.dart';
-import '../../repositories/repositories.dart';
-import '../../services/services.dart';
+import '../../../models/water/water_log.dart';
+import '../../../models/water/water_stats.dart';
+import '../../../repositories/repositories.dart';
+import '../../../services/services.dart';
 
 /// ------ Water Related Providers ------ ///
 ///

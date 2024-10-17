@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sickler/models/models.dart';
 
 import '../../core/core.dart';
-import '../../providers/providers.dart';
+import '../../features/auth/providers/auth_providers.dart';
 import '../global_components/components.dart';
 import '../water/suggested_water_daily_goal_screen.dart';
 

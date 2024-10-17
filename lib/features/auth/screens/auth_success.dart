@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/constants.dart';
-import 'package:sickler/providers/providers.dart';
+import 'package:sickler/features/auth/providers/auth_providers.dart';
 import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 

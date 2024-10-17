@@ -8,14 +8,14 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/core/snackbar_notifier.dart';
 import 'package:sickler/models/water/water_log.dart';
 import 'package:sickler/models/water/water_preferences.dart';
-import 'package:sickler/providers/providers.dart';
+import 'package:sickler/features/auth/providers/auth_providers.dart';
 import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/water/charts/chart_data_transformer.dart';
 import 'package:sickler/screens/water/charts/line_chart_widget.dart';
 import 'package:sickler/screens/water/components/water_volume_selector.dart';
 
 import '../../models/models.dart';
-import '../../providers/water/water_log_notifier.dart';
+import '../../features/water/providers/water_log_notifier.dart';
 import '../../providers/water/water_providers.dart';
 import 'charts/bar_chart_widget.dart';
 import 'components/components.dart';

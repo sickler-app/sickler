@@ -8,7 +8,7 @@ import 'package:sickler/screens/onboarding/onboarding_base_screen.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
 import '../models/app_user.dart';
-import '../../../providers/providers.dart';
+import '../providers/auth_providers.dart';
 import '../../../screens/global_components/bottom_nav_bar.dart';
 
 class LoadingScreen extends ConsumerStatefulWidget {

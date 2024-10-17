@@ -9,7 +9,7 @@ import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
 import '../../../models/models.dart';
-import '../../../providers/providers.dart';
+import '../providers/auth_providers.dart';
 import '../../../screens/global_components/bottom_nav_bar.dart';
 import 'auth_success.dart';
 
