@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:sickler/screens/emergency/components/dialogs/emergency_alert_no_contact_dialog.dart';
 
 import '../../../core/core.dart';
-import '../../global_components/global_components.dart';
+import '../../global_components/components.dart';
 
 class FeelingCheckupCard extends StatelessWidget {
   const FeelingCheckupCard({super.key});
@@ -57,7 +57,7 @@ class FeelingCheckupCard extends StatelessWidget {
                 .copyWith(hintText: "Description"),
           ),
           const Gap(16),
-          SicklerButton(
+          AppButton(
             onPressed: () {
               showDialog(
                 context: context,

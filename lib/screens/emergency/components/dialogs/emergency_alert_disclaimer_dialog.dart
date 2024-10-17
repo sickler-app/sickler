@@ -2,7 +2,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 class EmergencyAlertDisclaimerDialog extends StatelessWidget {
   const EmergencyAlertDisclaimerDialog({super.key});
@@ -13,7 +13,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
     final bool isDarkMode = theme.colorScheme.brightness == Brightness.dark;
 
     ///TODO: Wrap with BackButton Listener
-    return SicklerAlertDialog(
+    return AppAlertDialog(
       title: "Emergency Alert",
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -70,7 +70,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: SicklerButton(
+                child: AppButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -82,7 +82,7 @@ class EmergencyAlertDisclaimerDialog extends StatelessWidget {
               ),
               const Gap(8),
               Expanded(
-                child: SicklerButton(
+                child: AppButton(
                   onPressed: () {},
                   label: "Continue",
                   buttonType: SicklerButtonType.primary,

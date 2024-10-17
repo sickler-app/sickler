@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:sickler/screens/meds/meds_details_screen.dart';
 
 import '../../../core/core.dart';
-import '../../global_components/global_components.dart';
+import '../../global_components/components.dart';
 
 class MyMedsCard extends StatelessWidget {
   const MyMedsCard({super.key});
@@ -64,7 +64,7 @@ class MyMedsCard extends StatelessWidget {
             ),
           ),
           const Gap(8),
-          SicklerButton(
+          AppButton(
               isChipButton: true,
               iconPath: "assets/svg/check.svg",
               buttonType: SicklerButtonType.primary,

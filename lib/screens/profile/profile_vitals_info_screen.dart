@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/models/models.dart';
 import 'package:sickler/providers/providers.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/profile/profile_medical_info_screen.dart';
 
 import '../../core/core.dart';
@@ -35,7 +35,7 @@ class _ProfileVitalsInfoScreenState
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.watch(userProvider.notifier).getCurrentUserData();
-      SicklerUser user = ref.watch(userProvider).value!;
+      CircleUser user = ref.watch(userProvider).value!;
       heightController.text = user.profile.height.toString();
       weightController.text = user.profile.weight.toString();
 
@@ -67,12 +67,12 @@ class _ProfileVitalsInfoScreenState
             key: _formKey,
             child: Column(
               children: [
-                SicklerAppBar(
+                CustomAppBar(
                   pageTitle:
                       widget.isEditing! ? "Edit Vitals" : "Personal\nInfo",
                   actions: !widget.isEditing!
                       ? [
-                          SicklerButton(
+                          AppButton(
                             isChipButton: true,
                             onPressed: () {
                               //Todo: Skip Page
@@ -164,7 +164,7 @@ class _ProfileVitalsInfoScreenState
                 ///Buttons
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: SicklerButton(
+                  child: AppButton(
                       icon: widget.isEditing!
                           ? FluentIcons.checkmark_24_regular
                           : null,
@@ -172,7 +172,7 @@ class _ProfileVitalsInfoScreenState
                         //Todo: Continue
                         if (_formKey.currentState!.validate()) {
                           final userNotifier = ref.watch(userProvider.notifier);
-                          SicklerUser user = ref.watch(userProvider).value!;
+                          CircleUser user = ref.watch(userProvider).value!;
 
                           user = user.copyWith(
                               profile: user.profile.copyWith(

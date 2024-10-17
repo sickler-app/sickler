@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:sickler/screens/meds/meds_details_screen.dart';
 
 import '../../../core/core.dart';
-import '../../global_components/global_components.dart';
+import '../../global_components/components.dart';
 
 class MedsScreenReminderCard extends StatefulWidget {
   const MedsScreenReminderCard({
@@ -114,7 +114,7 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
               Align(
                 alignment: Alignment.centerRight,
                 child: FittedBox(
-                  child: SicklerButton(
+                  child: AppButton(
                       isChipButton: true,
                       icon: FluentIcons.checkmark_20_regular,
                       buttonType: SicklerButtonType.primary,

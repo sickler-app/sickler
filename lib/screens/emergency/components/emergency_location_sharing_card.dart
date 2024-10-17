@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
-import '../../global_components/global_components.dart';
+import '../../global_components/components.dart';
 
 class EmergencyLocationSharingCard extends StatelessWidget {
   const EmergencyLocationSharingCard({super.key});
@@ -56,7 +56,7 @@ class EmergencyLocationSharingCard extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              SicklerButton(
+              AppButton(
                 isChipButton: true,
                 onPressed: () {},
                 label: 'Stop Sharing',

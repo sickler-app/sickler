@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class SicklerAlertDialog extends StatelessWidget {
-  const SicklerAlertDialog(
+class AppAlertDialog extends StatelessWidget {
+  const AppAlertDialog(
       {super.key, this.actions, required this.title, this.message, this.child});
   final List<Widget>? actions;
   final String title;

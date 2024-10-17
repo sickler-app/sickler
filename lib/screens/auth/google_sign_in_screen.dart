@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/models/models.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 import '../../providers/providers.dart';
 import '../global_components/bottom_nav_bar.dart';
@@ -40,7 +40,7 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Spacer(),
-            SicklerButton(
+            AppButton(
                     isLoading: ref.watch(authProvider).isLoading,
                     color: theme.colorScheme.primary,
                     overrideIconColor: false,
@@ -51,7 +51,7 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
 
                       if (authNotifier.isSuccessful) {
                         await userNotifier.getCurrentUserData();
-                        SicklerUser user = ref.watch(userProvider).value!;
+                        CircleUser user = ref.watch(userProvider).value!;
 
                         if (context.mounted) {
                           showCustomSnackBar(
@@ -98,7 +98,7 @@ class _SignInScreenState extends ConsumerState<GoogleSignInScreen> {
             const Gap(kPadding16),
             const Text("Or").animate().fade(delay: 600.ms, duration: 200.ms),
             FittedBox(
-              child: SicklerButton(
+              child: AppButton(
                       buttonType: SicklerButtonType.text,
                       onPressed: () {
                         context.pushNamed(SignInScreen.id);

@@ -22,7 +22,7 @@ class UserRepository {
         _userLocalService = userLocalService,
         _userService = userService;
 
-  FutureEither<SicklerUser> getCurrentUserData(
+  FutureEither<CircleUser> getCurrentUserData(
       {bool forceRefresh = false}) async {
     return futureHandler(() async {
       ///First get from Firebase Auth in order to verify if the user is actually signed in before making any calls to remote;
@@ -33,7 +33,7 @@ class UserRepository {
         ///If user is not signed in, return an empty class
         log("User is not signed in");
         await _userLocalService.deleteUser();
-        return SicklerUser.empty;
+        return CircleUser.empty;
       }
 
       if (forceRefresh) {
@@ -41,28 +41,28 @@ class UserRepository {
         return await _getRemoteUser(currentUser.uid);
       }
 
-      SicklerUser localUser = await _userLocalService.getUser();
+      CircleUser localUser = await _userLocalService.getUser();
       if (localUser.isNotEmpty) {
         log("Local User Found");
         return localUser;
       } else {
         log("Local user is empty");
         await _userLocalService.deleteUser();
-        return SicklerUser.empty;
+        return CircleUser.empty;
       }
 
     });
   }
 
-  Future<SicklerUser> _getRemoteUser(String uid) async {
+  Future<CircleUser> _getRemoteUser(String uid) async {
     DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
         await _userService.getUserData(uid);
 
     if (documentSnapshot.exists &&
         documentSnapshot.data() != null &&
         documentSnapshot.data()!.isNotEmpty) {
-      SicklerUser remoteUser =
-          SicklerUser.fromMap(data: documentSnapshot.data()!);
+      CircleUser remoteUser =
+          CircleUser.fromMap(data: documentSnapshot.data()!);
       await _userLocalService.addUser(remoteUser);
       return remoteUser;
     } else {
@@ -71,7 +71,7 @@ class UserRepository {
   }
 
   FutureEither<void> updateUserData(
-      {required SicklerUser user, bool updateRemote = false}) async {
+      {required CircleUser user, bool updateRemote = false}) async {
     return futureHandler(() async {
       await _userLocalService.updateUser(user);
       if (updateRemote) {
@@ -81,7 +81,7 @@ class UserRepository {
   }
 
   FutureEither<void> addUserData(
-      {required SicklerUser user, bool updateRemote = false}) async {
+      {required CircleUser user, bool updateRemote = false}) async {
     return futureHandler(() async {
       await _userLocalService.updateUser(user);
       if (updateRemote) {
@@ -92,7 +92,7 @@ class UserRepository {
 
   /// --------- Delete User Data --------///
   FutureEither<void> deleteUserData(
-      {required SicklerUser user, bool deleteRemote = false}) async {
+      {required CircleUser user, bool deleteRemote = false}) async {
     return futureHandler(() async {
       await _userLocalService.deleteUser(user: user);
 

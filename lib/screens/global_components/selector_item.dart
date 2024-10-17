@@ -6,8 +6,8 @@ import 'package:gap/gap.dart';
 import '../../../core/core.dart';
 
 ///Todo: Refactor this widget into a more generic form so it can be used elsewhere
-class SicklerSelectorItem extends StatefulWidget {
-  const SicklerSelectorItem({
+class AppSelectorItem extends StatefulWidget {
+  const AppSelectorItem({
     super.key,
     this.iconPath,
     this.color,
@@ -28,10 +28,10 @@ class SicklerSelectorItem extends StatefulWidget {
   final VoidCallback onPressed;
 
   @override
-  State<SicklerSelectorItem> createState() => _SicklerSelectorItemState();
+  State<AppSelectorItem> createState() => _AppSelectorItemState();
 }
 
-class _SicklerSelectorItemState extends State<SicklerSelectorItem>
+class _AppSelectorItemState extends State<AppSelectorItem>
     with SingleTickerProviderStateMixin {
   late final AnimationController animationController;
   late final Animation<double> _radiusAnimation;

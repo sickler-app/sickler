@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:sickler/core/constants.dart';
 
-class SicklerCircularPercentIndicator extends StatelessWidget {
+class CustomCircularPercentIndicator extends StatelessWidget {
   final String? value;
   final Color? progressColour;
   final Color? backgroundColor;
@@ -14,7 +14,7 @@ class SicklerCircularPercentIndicator extends StatelessWidget {
 
   /// Between 0 and 1
 
-  const SicklerCircularPercentIndicator({
+  const CustomCircularPercentIndicator({
     super.key,
     required this.value,
     this.progressColour,

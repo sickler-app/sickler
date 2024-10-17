@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/meds/add_edit_meds_screen.dart';
 import 'package:sickler/screens/meds/components/components.dart';
 
@@ -19,7 +19,7 @@ class MedsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SicklerAppBar(pageTitle: "Medication"),
+            const CustomAppBar(pageTitle: "Medication"),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -45,7 +45,7 @@ class MedsScreen extends StatelessWidget {
                   const SizedBox(
                     height: 32,
                   ),
-                  SicklerButton(
+                  AppButton(
                     icon: FluentIcons.add_24_regular,
                     onPressed: () {
                       context.pushNamed(AddMedsScreen.id);
@@ -110,7 +110,7 @@ class MedsScreen extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  SicklerDateSwitcher(
+                  DateSwitcher(
                       onNextPressed: () {},
                       onPreviousPressed: () {},
                       label: "Today"),

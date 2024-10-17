@@ -17,7 +17,7 @@ class AuthRepository {
       : _userLocalService = userLocalService,
         _authService = authService;
 
-  FutureEither<SicklerUser?> signInWithEmailAndPassword({
+  FutureEither<CircleUser?> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -29,7 +29,7 @@ class AuthRepository {
     });
   }
 
-  FutureEither<SicklerUser?> registerWithEmailAndPassword(
+  FutureEither<CircleUser?> registerWithEmailAndPassword(
       {required String email, required String password}) {
     return futureHandler(() async {
       final UserCredential userCredential = await _authService
@@ -38,7 +38,7 @@ class AuthRepository {
     });
   }
 
-  FutureEither<SicklerUser> signInWithGoogle() {
+  FutureEither<CircleUser> signInWithGoogle() {
     return futureHandler(() async {
       final UserCredential userCredential =
           await _authService.signInWithGoogle();
@@ -53,12 +53,12 @@ class AuthRepository {
     });
   }
 
-  Stream<SicklerUser> getAuthStateChanges() {
+  Stream<CircleUser> getAuthStateChanges() {
     return _authService.authStateChanges().map((User? user) {
       if (user == null) {
-        return SicklerUser.empty;
+        return CircleUser.empty;
       }
-      return SicklerUser.fromUser(user: user).copyWith(
+      return CircleUser.fromUser(user: user).copyWith(
         profile: UserProfile.fromFirebaseUser(user: user),
       );
     });
@@ -82,9 +82,9 @@ class AuthRepository {
     });
   }
 
-  Future<SicklerUser> _handleUserCredential(
+  Future<CircleUser> _handleUserCredential(
       UserCredential userCredential) async {
-    SicklerUser sicklerUser = SicklerUser.fromUser(user: userCredential.user);
+    CircleUser sicklerUser = CircleUser.fromUser(user: userCredential.user);
     sicklerUser = sicklerUser.copyWith(
         profile: UserProfile.fromFirebaseUser(user: userCredential.user));
 

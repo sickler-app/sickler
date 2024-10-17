@@ -10,7 +10,7 @@ part of 'sickler_user.dart';
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
 extension GetSicklerUserCollection on Isar {
-  IsarCollection<SicklerUser> get sicklerUsers => this.collection();
+  IsarCollection<CircleUser> get sicklerUsers => this.collection();
 }
 
 const SicklerUserSchema = CollectionSchema(
@@ -78,7 +78,7 @@ const SicklerUserSchema = CollectionSchema(
 );
 
 int _sicklerUserEstimateSize(
-  SicklerUser object,
+  CircleUser object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -101,7 +101,7 @@ int _sicklerUserEstimateSize(
 }
 
 void _sicklerUserSerialize(
-  SicklerUser object,
+  CircleUser object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
@@ -126,13 +126,13 @@ void _sicklerUserSerialize(
   writer.writeString(offsets[7], object.uid);
 }
 
-SicklerUser _sicklerUserDeserialize(
+CircleUser _sicklerUserDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = SicklerUser(
+  final object = CircleUser(
     email: reader.readString(offsets[0]),
     isAnonymous: reader.readBool(offsets[1]),
     isEmailVerified: reader.readBoolOrNull(offsets[2]) ?? false,
@@ -193,20 +193,20 @@ P _sicklerUserDeserializeProp<P>(
   }
 }
 
-Id _sicklerUserGetId(SicklerUser object) {
+Id _sicklerUserGetId(CircleUser object) {
   return object.id;
 }
 
-List<IsarLinkBase<dynamic>> _sicklerUserGetLinks(SicklerUser object) {
+List<IsarLinkBase<dynamic>> _sicklerUserGetLinks(CircleUser object) {
   return [];
 }
 
 void _sicklerUserAttach(
-    IsarCollection<dynamic> col, Id id, SicklerUser object) {}
+    IsarCollection<dynamic> col, Id id, CircleUser object) {}
 
 extension SicklerUserQueryWhereSort
-    on QueryBuilder<SicklerUser, SicklerUser, QWhere> {
-  QueryBuilder<SicklerUser, SicklerUser, QAfterWhere> anyId() {
+    on QueryBuilder<CircleUser, CircleUser, QWhere> {
+  QueryBuilder<CircleUser, CircleUser, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
@@ -214,8 +214,8 @@ extension SicklerUserQueryWhereSort
 }
 
 extension SicklerUserQueryWhere
-    on QueryBuilder<SicklerUser, SicklerUser, QWhereClause> {
-  QueryBuilder<SicklerUser, SicklerUser, QAfterWhereClause> idEqualTo(Id id) {
+    on QueryBuilder<CircleUser, CircleUser, QWhereClause> {
+  QueryBuilder<CircleUser, CircleUser, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -224,7 +224,7 @@ extension SicklerUserQueryWhere
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterWhereClause> idNotEqualTo(
+  QueryBuilder<CircleUser, CircleUser, QAfterWhereClause> idNotEqualTo(
       Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -247,7 +247,7 @@ extension SicklerUserQueryWhere
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterWhereClause> idGreaterThan(Id id,
+  QueryBuilder<CircleUser, CircleUser, QAfterWhereClause> idGreaterThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -256,7 +256,7 @@ extension SicklerUserQueryWhere
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterWhereClause> idLessThan(Id id,
+  QueryBuilder<CircleUser, CircleUser, QAfterWhereClause> idLessThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -265,7 +265,7 @@ extension SicklerUserQueryWhere
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterWhereClause> idBetween(
+  QueryBuilder<CircleUser, CircleUser, QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -283,8 +283,8 @@ extension SicklerUserQueryWhere
 }
 
 extension SicklerUserQueryFilter
-    on QueryBuilder<SicklerUser, SicklerUser, QFilterCondition> {
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> emailEqualTo(
+    on QueryBuilder<CircleUser, CircleUser, QFilterCondition> {
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> emailEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -297,7 +297,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       emailGreaterThan(
     String value, {
     bool include = false,
@@ -313,7 +313,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> emailLessThan(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> emailLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -328,7 +328,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> emailBetween(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> emailBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -347,7 +347,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> emailStartsWith(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> emailStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -360,7 +360,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> emailEndsWith(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> emailEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -373,7 +373,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> emailContains(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> emailContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -385,7 +385,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> emailMatches(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> emailMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -397,7 +397,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> emailIsEmpty() {
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> emailIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'email',
@@ -406,7 +406,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       emailIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -416,7 +416,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> idEqualTo(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> idEqualTo(
       Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -426,7 +426,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> idGreaterThan(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> idGreaterThan(
     Id value, {
     bool include = false,
   }) {
@@ -439,7 +439,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> idLessThan(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> idLessThan(
     Id value, {
     bool include = false,
   }) {
@@ -452,7 +452,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> idBetween(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> idBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
@@ -469,7 +469,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       isAnonymousEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -479,7 +479,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       isEmailVerifiedEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -489,7 +489,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       isPhoneVerifiedEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -499,7 +499,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       photoUrlIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -508,7 +508,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       photoUrlIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -517,7 +517,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> photoUrlEqualTo(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> photoUrlEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -530,7 +530,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       photoUrlGreaterThan(
     String? value, {
     bool include = false,
@@ -546,7 +546,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       photoUrlLessThan(
     String? value, {
     bool include = false,
@@ -562,7 +562,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> photoUrlBetween(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> photoUrlBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -581,7 +581,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       photoUrlStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -595,7 +595,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       photoUrlEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -609,7 +609,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       photoUrlContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -620,7 +620,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> photoUrlMatches(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> photoUrlMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -632,7 +632,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       photoUrlIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -642,7 +642,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       photoUrlIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -652,7 +652,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> uidEqualTo(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> uidEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -665,7 +665,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> uidGreaterThan(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> uidGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -680,7 +680,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> uidLessThan(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> uidLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -695,7 +695,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> uidBetween(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> uidBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -714,7 +714,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> uidStartsWith(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> uidStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -727,7 +727,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> uidEndsWith(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> uidEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -740,7 +740,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> uidContains(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> uidContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -752,7 +752,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> uidMatches(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> uidMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -764,7 +764,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> uidIsEmpty() {
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> uidIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'uid',
@@ -773,7 +773,7 @@ extension SicklerUserQueryFilter
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition>
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition>
       uidIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -785,15 +785,15 @@ extension SicklerUserQueryFilter
 }
 
 extension SicklerUserQueryObject
-    on QueryBuilder<SicklerUser, SicklerUser, QFilterCondition> {
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> preferences(
+    on QueryBuilder<CircleUser, CircleUser, QFilterCondition> {
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> preferences(
       FilterQuery<UserPreferences> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'preferences');
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterFilterCondition> profile(
+  QueryBuilder<CircleUser, CircleUser, QAfterFilterCondition> profile(
       FilterQuery<UserProfile> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'profile');
@@ -802,79 +802,79 @@ extension SicklerUserQueryObject
 }
 
 extension SicklerUserQueryLinks
-    on QueryBuilder<SicklerUser, SicklerUser, QFilterCondition> {}
+    on QueryBuilder<CircleUser, CircleUser, QFilterCondition> {}
 
 extension SicklerUserQuerySortBy
-    on QueryBuilder<SicklerUser, SicklerUser, QSortBy> {
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> sortByEmail() {
+    on QueryBuilder<CircleUser, CircleUser, QSortBy> {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> sortByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> sortByEmailDesc() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> sortByEmailDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> sortByIsAnonymous() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> sortByIsAnonymous() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isAnonymous', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> sortByIsAnonymousDesc() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> sortByIsAnonymousDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isAnonymous', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> sortByIsEmailVerified() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> sortByIsEmailVerified() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isEmailVerified', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy>
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy>
       sortByIsEmailVerifiedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isEmailVerified', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> sortByIsPhoneVerified() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> sortByIsPhoneVerified() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isPhoneVerified', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy>
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy>
       sortByIsPhoneVerifiedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isPhoneVerified', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> sortByPhotoUrl() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> sortByPhotoUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'photoUrl', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> sortByPhotoUrlDesc() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> sortByPhotoUrlDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'photoUrl', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> sortByUid() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> sortByUid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uid', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> sortByUidDesc() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> sortByUidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uid', Sort.desc);
     });
@@ -882,88 +882,88 @@ extension SicklerUserQuerySortBy
 }
 
 extension SicklerUserQuerySortThenBy
-    on QueryBuilder<SicklerUser, SicklerUser, QSortThenBy> {
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByEmail() {
+    on QueryBuilder<CircleUser, CircleUser, QSortThenBy> {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByEmailDesc() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByEmailDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenById() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByIsAnonymous() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByIsAnonymous() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isAnonymous', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByIsAnonymousDesc() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByIsAnonymousDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isAnonymous', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByIsEmailVerified() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByIsEmailVerified() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isEmailVerified', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy>
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy>
       thenByIsEmailVerifiedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isEmailVerified', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByIsPhoneVerified() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByIsPhoneVerified() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isPhoneVerified', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy>
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy>
       thenByIsPhoneVerifiedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isPhoneVerified', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByPhotoUrl() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByPhotoUrl() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'photoUrl', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByPhotoUrlDesc() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByPhotoUrlDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'photoUrl', Sort.desc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByUid() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByUid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uid', Sort.asc);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QAfterSortBy> thenByUidDesc() {
+  QueryBuilder<CircleUser, CircleUser, QAfterSortBy> thenByUidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uid', Sort.desc);
     });
@@ -971,42 +971,42 @@ extension SicklerUserQuerySortThenBy
 }
 
 extension SicklerUserQueryWhereDistinct
-    on QueryBuilder<SicklerUser, SicklerUser, QDistinct> {
-  QueryBuilder<SicklerUser, SicklerUser, QDistinct> distinctByEmail(
+    on QueryBuilder<CircleUser, CircleUser, QDistinct> {
+  QueryBuilder<CircleUser, CircleUser, QDistinct> distinctByEmail(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'email', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QDistinct> distinctByIsAnonymous() {
+  QueryBuilder<CircleUser, CircleUser, QDistinct> distinctByIsAnonymous() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isAnonymous');
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QDistinct>
+  QueryBuilder<CircleUser, CircleUser, QDistinct>
       distinctByIsEmailVerified() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isEmailVerified');
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QDistinct>
+  QueryBuilder<CircleUser, CircleUser, QDistinct>
       distinctByIsPhoneVerified() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isPhoneVerified');
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QDistinct> distinctByPhotoUrl(
+  QueryBuilder<CircleUser, CircleUser, QDistinct> distinctByPhotoUrl(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'photoUrl', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<SicklerUser, SicklerUser, QDistinct> distinctByUid(
+  QueryBuilder<CircleUser, CircleUser, QDistinct> distinctByUid(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'uid', caseSensitive: caseSensitive);
@@ -1015,57 +1015,57 @@ extension SicklerUserQueryWhereDistinct
 }
 
 extension SicklerUserQueryProperty
-    on QueryBuilder<SicklerUser, SicklerUser, QQueryProperty> {
-  QueryBuilder<SicklerUser, int, QQueryOperations> idProperty() {
+    on QueryBuilder<CircleUser, CircleUser, QQueryProperty> {
+  QueryBuilder<CircleUser, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<SicklerUser, String, QQueryOperations> emailProperty() {
+  QueryBuilder<CircleUser, String, QQueryOperations> emailProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'email');
     });
   }
 
-  QueryBuilder<SicklerUser, bool, QQueryOperations> isAnonymousProperty() {
+  QueryBuilder<CircleUser, bool, QQueryOperations> isAnonymousProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isAnonymous');
     });
   }
 
-  QueryBuilder<SicklerUser, bool, QQueryOperations> isEmailVerifiedProperty() {
+  QueryBuilder<CircleUser, bool, QQueryOperations> isEmailVerifiedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isEmailVerified');
     });
   }
 
-  QueryBuilder<SicklerUser, bool, QQueryOperations> isPhoneVerifiedProperty() {
+  QueryBuilder<CircleUser, bool, QQueryOperations> isPhoneVerifiedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isPhoneVerified');
     });
   }
 
-  QueryBuilder<SicklerUser, String?, QQueryOperations> photoUrlProperty() {
+  QueryBuilder<CircleUser, String?, QQueryOperations> photoUrlProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'photoUrl');
     });
   }
 
-  QueryBuilder<SicklerUser, UserPreferences, QQueryOperations>
+  QueryBuilder<CircleUser, UserPreferences, QQueryOperations>
       preferencesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'preferences');
     });
   }
 
-  QueryBuilder<SicklerUser, UserProfile, QQueryOperations> profileProperty() {
+  QueryBuilder<CircleUser, UserProfile, QQueryOperations> profileProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'profile');
     });
   }
 
-  QueryBuilder<SicklerUser, String, QQueryOperations> uidProperty() {
+  QueryBuilder<CircleUser, String, QQueryOperations> uidProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'uid');
     });

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../core/core.dart';
 
-class SicklerChip extends StatefulWidget {
-  const SicklerChip({
+class AppChip extends StatefulWidget {
+  const AppChip({
     super.key,
     this.onSelected,
     this.onDeleted,
@@ -21,10 +21,10 @@ class SicklerChip extends StatefulWidget {
   final Color? selectedBackgroundColor;
 
   @override
-  State<SicklerChip> createState() => _SicklerChipState();
+  State<AppChip> createState() => _AppChipState();
 }
 
-class _SicklerChipState extends State<SicklerChip> {
+class _AppChipState extends State<AppChip> {
   bool isSelected = false;
 
   @override

@@ -21,7 +21,7 @@ class WaterRepository {
 
   ///------Water Log Section----///
   FutureEither<List<WaterLog>> getWaterLogs(
-      {SicklerUser? user,
+      {CircleUser? user,
       bool? getFromRemote,
       DateTime? start,
       DateTime? end}) async {
@@ -70,7 +70,7 @@ class WaterRepository {
 
   FutureEither<void> addWaterLog({
     required WaterLog log,
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     return futureHandler(() async {
@@ -83,7 +83,7 @@ class WaterRepository {
 
   FutureEither<void> updateWaterLog({
     required WaterLog log,
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     return futureHandler(() async {
@@ -96,7 +96,7 @@ class WaterRepository {
 
   FutureEither<void> deleteLog({
     required WaterLog log,
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     return futureHandler(() async {
@@ -108,7 +108,7 @@ class WaterRepository {
   }
 
   FutureEither<void> clear({
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     return futureHandler(() async {
@@ -120,7 +120,7 @@ class WaterRepository {
   }
 
   FutureEither<int> count({
-    required SicklerUser user,
+    required CircleUser user,
   }) async {
     return futureHandler(() async {
       return await _waterLocalService.count();
@@ -130,7 +130,7 @@ class WaterRepository {
   ///------Water Preferences Section----///
 
   FutureEither<WaterPreferences> getWaterPreferences(
-      {SicklerUser? user,
+      {CircleUser? user,
       bool? getFromRemote,
       DateTime? start,
       DateTime? end}) async {
@@ -175,7 +175,7 @@ class WaterRepository {
 
   FutureEither<void> addPreferences({
     required WaterPreferences preferences,
-    required SicklerUser? user,
+    required CircleUser? user,
     bool? updateRemote = false,
   }) async {
     return futureHandler(() async {
@@ -189,7 +189,7 @@ class WaterRepository {
 
   FutureEither<void> updatePreferences({
     required WaterPreferences preferences,
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     return futureHandler(() async {
@@ -202,7 +202,7 @@ class WaterRepository {
   }
 
   FutureEither<void> deletePreferences({
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     return futureHandler(() async {

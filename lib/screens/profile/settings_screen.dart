@@ -1,7 +1,7 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 import 'components/components.dart';
 
@@ -17,7 +17,7 @@ class SettingsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SicklerAppBar(pageTitle: "Settings"),
+            const CustomAppBar(pageTitle: "Settings"),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

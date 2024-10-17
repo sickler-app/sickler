@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 import '../../../core/core.dart';
 
@@ -65,7 +65,7 @@ class ContactCard extends StatelessWidget {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (context) => SicklerAlertDialog(
+                          builder: (context) => AppAlertDialog(
                             title: "Delete Contact",
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -79,7 +79,7 @@ class ContactCard extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    SicklerButton(
+                                    AppButton(
                                       isChipButton: true,
                                       onPressed: () {
                                         context.pop();
@@ -87,7 +87,7 @@ class ContactCard extends StatelessWidget {
                                       label: "Cancel",
                                       buttonType: SicklerButtonType.text,
                                     ),
-                                    SicklerButton(
+                                    AppButton(
                                       isChipButton: true,
                                       onPressed: () {
                                         ///Todo:Delete contact

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 import 'components.dart';
 
@@ -36,7 +36,7 @@ class CrisisHistoryWeekly extends StatelessWidget {
         const Gap(32),
         SicklerCalendarWeekSelector(selectedDay: (selectedDay) {}),
         const Gap(24),
-        SicklerDateSwitcher(
+        DateSwitcher(
             onNextPressed: () {},
             onPreviousPressed: () {},
             label: "Wednesday 03, Nov"),

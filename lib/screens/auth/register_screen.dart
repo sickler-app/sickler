@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/models/models.dart';
 import 'package:sickler/screens/auth/sign_in_screen.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 import '../../providers/providers.dart';
 import '../global_components/bottom_nav_bar.dart';
@@ -50,7 +50,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           key: _formKey,
           child: Column(
             children: [
-              const SicklerAppBar(
+              const CustomAppBar(
                 pageTitle: "Register",
                 showBackButton: false,
               ),
@@ -160,7 +160,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       const Spacer(),
 
                       ///Buttons
-                      SicklerButton(
+                      AppButton(
                         isLoading: ref.watch(authProvider).isLoading,
                         label: "Sign Up",
                         onPressed: () async {
@@ -171,7 +171,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                             if (authNotifier.isSuccessful) {
                               await userNotifier.getCurrentUserData();
-                              SicklerUser user = ref.watch(userProvider).value!;
+                              CircleUser user = ref.watch(userProvider).value!;
                               if (context.mounted) {
                                 showCustomSnackBar(
                                     context: context,
@@ -219,7 +219,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       Align(
                           alignment: Alignment.center,
                           child: FittedBox(
-                            child: SicklerButton(
+                            child: AppButton(
                               isChipButton: true,
                               buttonType: SicklerButtonType.text,
                               onPressed: () {

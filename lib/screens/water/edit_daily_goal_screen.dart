@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 import '../../core/core.dart';
 
@@ -48,7 +48,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SicklerAppBar(pageTitle: "Set your\ndaily goal"),
+                const CustomAppBar(pageTitle: "Set your\ndaily goal"),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -92,12 +92,12 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                             await showModalBottomSheet(
                                 context: context,
                                 isScrollControlled: true,
-                                builder: (context) => SicklerBottomSheet(
+                                builder: (context) => AppBottomSheet(
                                       title: "Time",
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: SicklerListWheelScrollViewPicker(
+                                      child: ListWheelScrollViewPicker(
                                         itemExtent: 48,
                                         onSelectedItemChanged: (selectedValue) {
                                           setState(() {
@@ -125,7 +125,7 @@ class _EditDailyGoalScreenState extends State<EditDailyGoalScreen> {
                         const Spacer(),
 
                         ///Buttons
-                        SicklerButton(
+                        AppButton(
                             onPressed: () async {
                               //Todo: Perform sign in action
                             },

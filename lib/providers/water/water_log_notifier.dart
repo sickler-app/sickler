@@ -31,7 +31,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
 
   /// --- Logs ----///
   Future<void> getWaterLogs(
-      {SicklerUser? user,
+      {CircleUser? user,
       bool? getFromRemote,
       DateTime? start,
       DateTime? end}) async {
@@ -89,7 +89,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
 
   Future<void> addWaterLog(
       {required WaterLog entry,
-      required SicklerUser user,
+      required CircleUser user,
       bool updateRemote = false}) async {
     //print("Adding log");
     Stopwatch stopwatch = Stopwatch()..start();
@@ -110,7 +110,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
 
   Future<void> updateWaterLog({
     required WaterLog entry,
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     state = const AsyncValue.loading();
@@ -127,7 +127,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
 
   Future<void> deleteWaterLog({
     required WaterLog entry,
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     state = const AsyncValue.loading();
@@ -143,7 +143,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
   }
 
   Future<void> clear({
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     state = const AsyncValue.loading();

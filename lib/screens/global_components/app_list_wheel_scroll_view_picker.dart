@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 
 import '../../core/core.dart';
 
-class SicklerListWheelScrollViewPicker extends StatefulWidget {
+class ListWheelScrollViewPicker extends StatefulWidget {
   ///
   /// Constructs an versatile and customisable ListWheelScrollView Picker.
   ///
-  /// [mode] is one of the modes listed in [SicklerListWheelScrollViewPickerMode] and
-  /// defaults to [SicklerListWheelScrollViewPickerMode.integer].
+  /// [mode] is one of the modes listed in [AppListWheelScrollViewPickerMode] and
+  /// defaults to [AppListWheelScrollViewPickerMode.integer].
   /// Several picker mode exists, which include;
   ///
-  /// [SicklerListWheelScrollViewPickerMode.integer] for a simple single
+  /// [AppListWheelScrollViewPickerMode.integer] for a simple single
   /// column picker with integers can be useful for selecting discrete values like ages
-  /// [SicklerListWheelScrollViewPickerMode.decimal] for a simple decimal picker
+  /// [AppListWheelScrollViewPickerMode.decimal] for a simple decimal picker
   /// with two columns, useful for selecting continuous values like weights
-  /// [SicklerListWheelScrollViewPickerMode.duration] for selecting a duration,
+  /// [AppListWheelScrollViewPickerMode.duration] for selecting a duration,
   /// this mode requires no parameters and all nullable parameters must be kept null;
-  /// [SicklerListWheelScrollViewPickerMode.time] for selecting a time.
+  /// [AppListWheelScrollViewPickerMode.time] for selecting a time.
   /// this mode requires no parameters and all nullable parameters must be kept null;
-  /// [SicklerListWheelScrollViewPickerMode.text] for selecting string values.
+  /// [AppListWheelScrollViewPickerMode.text] for selecting string values.
   /// This mode requires [textDataValuesList] (which is a list of text
   /// values to choose from), and must not be null. All other nullable parameters
   /// must be kept null;
@@ -28,7 +28,7 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
   /// both above and below the selected value
   ///
   /// [textDataValuesList] A list of text stings for the user to choose from.
-  /// It is required only when [mode] is set to [SicklerListWheelScrollViewPickerMode.text]
+  /// It is required only when [mode] is set to [AppListWheelScrollViewPickerMode.text]
   ///
   /// [selectedItemUnderlayDecoration] A Decoration to be provided to
   /// the [Container] underlying the selected Item to indicate
@@ -45,11 +45,11 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
   /// [primaryUnitLabels] The labels for the Primary scroll column.
   /// A List of strings, which is itself, a [ListWheelScrollView].
   /// For Instance, can be used to pick between [AM] and [PM] in
-  /// the [SicklerListWheelScrollViewPickerMode.time] mode.
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
+  /// the [AppListWheelScrollViewPickerMode.time] mode.
+  /// For the [AppListWheelScrollViewPickerMode.duration] mode,
   /// A Text representing the [hour] is used instead.
   ///
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
+  /// For the [AppListWheelScrollViewPickerMode.duration] mode,
   /// the [primaryInitialValue] and [primaryFinalValue] corresponds the [hours] of the picker.
   ///
   ///
@@ -61,13 +61,13 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
   /// It Defaults to 1, and must be a positive integer.
   /// [secondaryUnitLabels] The labels for the Secondary scroll column.
   /// A List of strings, which is itself, a [ListWheelScrollView].
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
+  /// For the [AppListWheelScrollViewPickerMode.duration] mode,
   /// a Text representing the [minutes] is used instead.
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
+  /// For the [AppListWheelScrollViewPickerMode.duration] mode,
   /// the [secondaryInitialValue] and [secondaryFinalValue]
   /// corresponds the the [minutes] of the picker.
   ///
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] mode,
+  /// For the [AppListWheelScrollViewPickerMode.duration] mode,
   /// the [secondaryValueInterval] must be a positive integer factor of 60
   ///
   /// [diameterRatio] Documentation Can be found in the [ListWheelScrollView] widget
@@ -78,11 +78,11 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
   /// [onSelectedItemChanged] A Void Callback which is run when the selected
   /// item index is changed, ie. when a user selects a new item.
   /// Depending on the different modes, the [selectedValue] has different types.
-  /// For the [SicklerListWheelScrollViewPickerMode.text] the [selectedValue] is a [String]
-  /// For the [SicklerListWheelScrollViewPickerMode.integer] the [selectedValue] is an [int]
-  /// For the [SicklerListWheelScrollViewPickerMode.decimal] the [selectedValue] is a [double]
-  /// For the [SicklerListWheelScrollViewPickerMode.duration] the [selectedValue] is a [Duration]
-  /// For the [SicklerListWheelScrollViewPickerMode.time] the [selectedValue] is a [TimeOfDay]
+  /// For the [AppListWheelScrollViewPickerMode.text] the [selectedValue] is a [String]
+  /// For the [AppListWheelScrollViewPickerMode.integer] the [selectedValue] is an [int]
+  /// For the [AppListWheelScrollViewPickerMode.decimal] the [selectedValue] is a [double]
+  /// For the [AppListWheelScrollViewPickerMode.duration] the [selectedValue] is a [Duration]
+  /// For the [AppListWheelScrollViewPickerMode.time] the [selectedValue] is a [TimeOfDay]
   ///
   /// [scrollViewToLabelPadding] Determines the spacing between the Scrollable area,
   /// and the label, and has a default value of 8 px
@@ -94,7 +94,7 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
   final double magnification;
   final List<String>? textDataValuesList;
   final BoxDecoration? selectedItemUnderlayDecoration;
-  final SicklerListWheelScrollViewPickerMode mode;
+  final AppListWheelScrollViewPickerMode mode;
   final int? primaryValueInterval;
   final int? secondaryValueInterval;
   final int? primaryInitialValue;
@@ -107,14 +107,14 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
 
   final void Function(dynamic selectedValue) onSelectedItemChanged;
 
-  const SicklerListWheelScrollViewPicker({
+  const ListWheelScrollViewPicker({
     super.key,
     this.height = 200,
     this.itemExtent = 48,
     this.diameterRatio = 2,
     this.useMagnifier = false,
     this.magnification = 1.1,
-    this.mode = SicklerListWheelScrollViewPickerMode.integer,
+    this.mode = AppListWheelScrollViewPickerMode.integer,
     required this.onSelectedItemChanged,
     this.textDataValuesList,
     this.selectedItemUnderlayDecoration,
@@ -138,12 +138,12 @@ class SicklerListWheelScrollViewPicker extends StatefulWidget {
   // (secondaryValueInterval! > 0 && 60 % secondaryValueInterval == 0)),
 
   @override
-  State<SicklerListWheelScrollViewPicker> createState() =>
-      _SicklerListWheelScrollViewPickerState();
+  State<ListWheelScrollViewPicker> createState() =>
+      _ListWheelScrollViewPickerState();
 }
 
-class _SicklerListWheelScrollViewPickerState
-    extends State<SicklerListWheelScrollViewPicker> {
+class _ListWheelScrollViewPickerState
+    extends State<ListWheelScrollViewPicker> {
   List<int> generateDataList({
     required int initialValue,
     required int finalValue,
@@ -159,8 +159,8 @@ class _SicklerListWheelScrollViewPickerState
 
     for (int i = initialValue; i < finalValue; i += interval) {
       currentValue += interval;
-      if ((widget.mode == SicklerListWheelScrollViewPickerMode.duration ||
-              widget.mode == SicklerListWheelScrollViewPickerMode.time) &&
+      if ((widget.mode == AppListWheelScrollViewPickerMode.duration ||
+              widget.mode == AppListWheelScrollViewPickerMode.time) &&
           currentValue > 59) {
         break;
       }
@@ -184,7 +184,7 @@ class _SicklerListWheelScrollViewPickerState
   void initState() {
     super.initState();
     switch (widget.mode) {
-      case SicklerListWheelScrollViewPickerMode.time:
+      case AppListWheelScrollViewPickerMode.time:
         _primaryGeneratedList = generateDataList(
           initialValue: 0,
           finalValue: 12,
@@ -197,7 +197,7 @@ class _SicklerListWheelScrollViewPickerState
         );
         break;
 
-      case SicklerListWheelScrollViewPickerMode.duration:
+      case AppListWheelScrollViewPickerMode.duration:
         _primaryGeneratedList = generateDataList(
           initialValue: 0,
           finalValue: 24,
@@ -210,7 +210,7 @@ class _SicklerListWheelScrollViewPickerState
         );
         break;
 
-      case SicklerListWheelScrollViewPickerMode.decimal:
+      case AppListWheelScrollViewPickerMode.decimal:
         _primaryGeneratedList = generateDataList(
           initialValue: widget.primaryInitialValue ?? 0,
           finalValue: widget.primaryFinalValue ?? 10,
@@ -251,12 +251,12 @@ class _SicklerListWheelScrollViewPickerState
     ///and return thr appropriate object to pass into onselectedItemchanged
 
     switch (widget.mode) {
-      case SicklerListWheelScrollViewPickerMode.integer:
+      case AppListWheelScrollViewPickerMode.integer:
         selectedPrimaryValue = values[index] as int;
         widget.onSelectedItemChanged.call(selectedPrimaryValue);
         break;
 
-      case SicklerListWheelScrollViewPickerMode.decimal:
+      case AppListWheelScrollViewPickerMode.decimal:
         if (isSecondaryValue != null && isSecondaryValue) {
           selectedSecondaryValue = values[index] as int;
         } else {
@@ -268,7 +268,7 @@ class _SicklerListWheelScrollViewPickerState
 
         widget.onSelectedItemChanged.call(selectedDecimal);
         break;
-      case SicklerListWheelScrollViewPickerMode.duration:
+      case AppListWheelScrollViewPickerMode.duration:
         if (isSecondaryValue != null && isSecondaryValue) {
           selectedSecondaryValue = values[index] as int;
         } else {
@@ -279,7 +279,7 @@ class _SicklerListWheelScrollViewPickerState
 
         widget.onSelectedItemChanged.call(selectedDuration);
         break;
-      case SicklerListWheelScrollViewPickerMode.time:
+      case AppListWheelScrollViewPickerMode.time:
         if (isSecondaryValue == null) {
         } else if (isSecondaryValue) {
           selectedSecondaryValue = values[index] as int;
@@ -295,7 +295,7 @@ class _SicklerListWheelScrollViewPickerState
 
         widget.onSelectedItemChanged.call(selectedTimeOfDay);
         break;
-      case SicklerListWheelScrollViewPickerMode.text:
+      case AppListWheelScrollViewPickerMode.text:
         widget.onSelectedItemChanged.call(selectedText);
         break;
     }
@@ -395,7 +395,7 @@ class _SicklerListWheelScrollViewPickerState
 
   Widget pickerMode() {
     switch (widget.mode) {
-      case SicklerListWheelScrollViewPickerMode.integer:
+      case AppListWheelScrollViewPickerMode.integer:
         if (widget.textDataValuesList != null) {
           throw ErrorHint(
               "For a Integer Mode, the textDataValuesList must be null");
@@ -449,7 +449,7 @@ class _SicklerListWheelScrollViewPickerState
           },
         );
 
-      case SicklerListWheelScrollViewPickerMode.duration:
+      case AppListWheelScrollViewPickerMode.duration:
         if (widget.textDataValuesList != null ||
             widget.primaryUnitLabels != null ||
             widget.secondaryUnitLabels != null ||
@@ -540,7 +540,7 @@ class _SicklerListWheelScrollViewPickerState
           ],
         );
 
-      case SicklerListWheelScrollViewPickerMode.time:
+      case AppListWheelScrollViewPickerMode.time:
         if (widget.textDataValuesList != null ||
             widget.primaryUnitLabels != null ||
             widget.secondaryUnitLabels != null ||
@@ -629,7 +629,7 @@ class _SicklerListWheelScrollViewPickerState
           ],
         );
 
-      case SicklerListWheelScrollViewPickerMode.decimal:
+      case AppListWheelScrollViewPickerMode.decimal:
         if (widget.textDataValuesList != null) {
           throw ErrorHint(
               "For a Decimal Mode,  the textDataValuesList must be null");
@@ -718,7 +718,7 @@ class _SicklerListWheelScrollViewPickerState
           ],
         );
 
-      case SicklerListWheelScrollViewPickerMode.text:
+      case AppListWheelScrollViewPickerMode.text:
         if (widget.textDataValuesList == null) {
           throw ErrorHint(
               "For a Text Mode,  the textDataValuesList must not be null, Consider providing all the text values to choose from in a list");

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 class CrisisHistoryMonthly extends StatelessWidget {
   const CrisisHistoryMonthly({super.key});
@@ -34,7 +34,7 @@ class CrisisHistoryMonthly extends StatelessWidget {
           ),
         ),
         const Gap(24),
-        SicklerDateSwitcher(
+        DateSwitcher(
             onNextPressed: () {},
             onPreviousPressed: () {},
             label: "November, 2023"),

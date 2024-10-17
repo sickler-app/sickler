@@ -6,7 +6,7 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/models/user/sickler_user.dart';
 import 'package:sickler/repositories/auth/auth_repository.dart';
 
-class AuthNotifier extends AsyncNotifier<SicklerUser?> {
+class AuthNotifier extends AsyncNotifier<CircleUser?> {
   final AuthRepository _authRepository;
 
   AuthNotifier({required AuthRepository authRepository})
@@ -24,14 +24,14 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
       : state.error.toString();
 
   @override
-  Future<SicklerUser> build() async {
-    return SicklerUser.empty;
+  Future<CircleUser> build() async {
+    return CircleUser.empty;
   }
 
   Future<void> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     state = const AsyncValue.loading();
-    final Either<Failure, SicklerUser?> response = await _authRepository
+    final Either<Failure, CircleUser?> response = await _authRepository
         .signInWithEmailAndPassword(email: email, password: password);
 
     response.fold((failure) {
@@ -44,7 +44,7 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
   Future<void> registerWithEmailAndPassword(
       {required String email, required String password}) async {
     state = const AsyncValue.loading();
-    final Either<Failure, SicklerUser?> response = await _authRepository
+    final Either<Failure, CircleUser?> response = await _authRepository
         .registerWithEmailAndPassword(email: email, password: password);
 
     response.fold((failure) {
@@ -56,7 +56,7 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
 
   Future<void> singInWithGoogle() async {
     state = const AsyncValue.loading();
-    final Either<Failure, SicklerUser?> response =
+    final Either<Failure, CircleUser?> response =
         await _authRepository.signInWithGoogle();
 
     response.fold((failure) {
@@ -73,7 +73,7 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
-      state = AsyncValue.data(SicklerUser.empty);
+      state = AsyncValue.data(CircleUser.empty);
     });
   }
 
@@ -85,7 +85,7 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
-      state = AsyncValue.data(SicklerUser.empty);
+      state = AsyncValue.data(CircleUser.empty);
     });
   }
 
@@ -98,12 +98,12 @@ class AuthNotifier extends AsyncNotifier<SicklerUser?> {
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
-      state = AsyncValue.data(SicklerUser.empty);
+      state = AsyncValue.data(CircleUser.empty);
     });
   }
 
-  Stream<SicklerUser> authStateChanges() {
-    final Stream<SicklerUser> userStream =
+  Stream<CircleUser> authStateChanges() {
+    final Stream<CircleUser> userStream =
         _authRepository.getAuthStateChanges();
 
     userStream.listen((event) {

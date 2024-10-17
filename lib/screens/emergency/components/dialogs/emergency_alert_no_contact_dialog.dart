@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 class EmergencyAlertNoContactDialog extends StatelessWidget {
   const EmergencyAlertNoContactDialog({super.key});
@@ -14,7 +14,7 @@ class EmergencyAlertNoContactDialog extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     ///TODO: Wrap with BackButton Listener
-    return SicklerAlertDialog(
+    return AppAlertDialog(
       title: "Emergency Alert",
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -34,7 +34,7 @@ class EmergencyAlertNoContactDialog extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const Gap(16),
-          SicklerButton(
+          AppButton(
             onPressed: () {
               context.pushNamed(AddEmergencyContactScreen.id);
             },

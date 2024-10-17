@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/core.dart';
-import '../global_components/global_components.dart';
+import '../global_components/components.dart';
 import 'components/components.dart';
 
 class AddMedsScreen extends StatefulWidget {
@@ -40,11 +40,11 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              SicklerAppBar(
+              CustomAppBar(
                 pageTitle:
                     widget.isEditing ? "Edit\nMedication" : "Add\nMedication",
                 actions: [
-                  SicklerButton(
+                  AppButton(
                     isChipButton: true,
                     onPressed: () {
                       //Todo: Skip Page
@@ -111,37 +111,37 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                       spacing: 12,
                       runSpacing: 4,
                       children: [
-                        SicklerChip(
+                        AppChip(
                           onSelected: (value) {},
                           chipType: SicklerChipType.filter,
                           label: "50mg",
                         ),
-                        SicklerChip(
+                        AppChip(
                           onSelected: (value) {},
                           chipType: SicklerChipType.filter,
                           label: "100mg",
                         ),
-                        SicklerChip(
+                        AppChip(
                           onSelected: (value) {},
                           chipType: SicklerChipType.filter,
                           label: "250mg",
                         ),
-                        SicklerChip(
+                        AppChip(
                           onSelected: (value) {},
                           chipType: SicklerChipType.filter,
                           label: "500mg",
                         ),
-                        SicklerChip(
+                        AppChip(
                           onSelected: (value) async {
                             /// Select Dose Bottom Sheet
                             await showModalBottomSheet(
                               context: context,
-                              builder: (context) => SicklerBottomSheet(
+                              builder: (context) => AppBottomSheet(
                                 title: "Select Dose",
                                 onPressed: () {
                                   ///Todo: pop and add dose to state
                                 },
-                                child: SicklerListWheelScrollViewPicker(
+                                child: ListWheelScrollViewPicker(
                                   primaryInitialValue: 50,
                                   primaryFinalValue: 1000,
                                   primaryValueInterval: 50,
@@ -168,22 +168,22 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                       spacing: 12,
                       runSpacing: 4,
                       children: [
-                        SicklerChip(
+                        AppChip(
                           onSelected: (value) {},
                           chipType: SicklerChipType.filter,
                           label: "Once",
                         ),
-                        SicklerChip(
+                        AppChip(
                           onSelected: (value) {},
                           chipType: SicklerChipType.filter,
                           label: "Twice",
                         ),
-                        SicklerChip(
+                        AppChip(
                           onSelected: (value) {},
                           chipType: SicklerChipType.filter,
                           label: "3 Times",
                         ),
-                        SicklerChip(
+                        AppChip(
                           onSelected: (value) {},
                           chipType: SicklerChipType.filter,
                           label: "Custom Occurrence",
@@ -200,11 +200,11 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                       spacing: 12,
                       runSpacing: 4,
                       children: [
-                        const SicklerChip(
+                        const AppChip(
                           chipType: SicklerChipType.info,
                           label: "8:00 AM",
                         ),
-                        const SicklerChip(
+                        const AppChip(
                           chipType: SicklerChipType.info,
                           label: "3:00 PM",
                         ),
@@ -221,15 +221,15 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                             onPressed: () async {
                               await showModalBottomSheet(
                                   context: context,
-                                  builder: (context) => SicklerBottomSheet(
+                                  builder: (context) => AppBottomSheet(
                                         title: "Select Time",
                                         onPressed: () {
                                           ///Todo: Add to the list of times
                                         },
-                                        child: SicklerListWheelScrollViewPicker(
+                                        child: ListWheelScrollViewPicker(
                                           scrollViewToLabelPadding: 12,
                                           mode:
-                                              SicklerListWheelScrollViewPickerMode
+                                              AppListWheelScrollViewPickerMode
                                                   .time,
                                           itemExtent: 48,
                                           onSelectedItemChanged:
@@ -313,7 +313,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                                   style: theme.textTheme.bodyMedium)
                               : const SizedBox(),
                           widget.isEditing ? const Spacer() : const SizedBox(),
-                          SicklerButton(
+                          AppButton(
                             isChipButton: true,
                             buttonType: SicklerButtonType.secondary,
                             onPressed: () {},
@@ -326,7 +326,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                       ),
                     ),
                     const Gap(32),
-                    SicklerButton(
+                    AppButton(
                         onPressed: () {},
                         label: widget.isEditing
                             ? "Save Medication"
@@ -336,7 +336,7 @@ class _AddMedsScreenState extends State<AddMedsScreen> {
                         visible: !widget.isEditing, child: const Gap(16)),
                     Visibility(
                       visible: !widget.isEditing,
-                      child: SicklerButton(
+                      child: AppButton(
                           onPressed: () {
                             context.pop();
                           },

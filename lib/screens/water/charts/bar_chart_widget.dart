@@ -109,10 +109,6 @@ class BarChartWidget extends StatelessWidget {
         intervalX = 1;
         getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
         break;
-      default:
-        maxX = 24;
-        intervalX = 1;
-        getXTitleText = (value) => "${value.toInt()} ${xUnit ?? ''}";
     }
     return BarChart(
       swapAnimationCurve: Curves.easeInOutQuart,

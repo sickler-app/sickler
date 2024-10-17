@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sickler/screens/emergency/components/crisis_history_monthly.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 class CrisisLogsScreen extends StatelessWidget {
   static const String id = "crisis_logs";
@@ -13,7 +13,7 @@ class CrisisLogsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SicklerAppBar(pageTitle: "Crises History"),
+            CustomAppBar(pageTitle: "Crises History"),
             // Padding(
             //   padding: EdgeInsets.symmetric(horizontal: 16),
             //   child: CrisisHistoryWeekly(),

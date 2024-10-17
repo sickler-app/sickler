@@ -5,8 +5,8 @@ import 'package:gap/gap.dart';
 
 import '../../core/core.dart';
 
-class SicklerButton extends StatelessWidget {
-  const SicklerButton(
+class AppButton extends StatelessWidget {
+  const AppButton(
       {super.key,
       required this.onPressed,
       required this.label,
@@ -92,14 +92,6 @@ class SicklerButton extends StatelessWidget {
         labelColor = color ?? theme.colorScheme.primary;
         break;
 
-      default:
-        style = ElevatedButton.styleFrom(
-          fixedSize: isChipButton! ? const Size.fromHeight(36) : null,
-          backgroundColor: backgroundColor ?? theme.colorScheme.primary,
-          foregroundColor: color ?? Colors.white,
-        );
-        labelColor = color ?? theme.colorScheme.primary;
-        break;
     }
 
     return ElevatedButton(

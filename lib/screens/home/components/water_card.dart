@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import '../../../core/core.dart';
-import '../../global_components/global_components.dart';
+import '../../global_components/components.dart';
 
 class WaterCard extends StatelessWidget {
   final VoidCallback onPressed;
@@ -99,7 +99,7 @@ class WaterCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                SicklerCircularPercentIndicator(
+                CustomCircularPercentIndicator(
                   // animateFromLastPercent: true,
                   // animation: true,
                   // circularStrokeCap: CircularStrokeCap.round,

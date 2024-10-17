@@ -1,11 +1,11 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
-class SicklerEditableAvatar extends StatelessWidget {
+class EditableAvatar extends StatelessWidget {
   final VoidCallback onEditPressed;
   final String imagePath;
   final double? radius;
-  const SicklerEditableAvatar(
+  const EditableAvatar(
       {super.key,
       required this.onEditPressed,
       required this.imagePath,

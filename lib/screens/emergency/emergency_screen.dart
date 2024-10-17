@@ -5,7 +5,7 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
 import 'package:sickler/screens/emergency/components/components.dart';
 
-import '../global_components/global_components.dart';
+import '../global_components/components.dart';
 
 class EmergencyScreen extends StatelessWidget {
   static const String id = "emergency";
@@ -20,7 +20,7 @@ class EmergencyScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SicklerAppBar(pageTitle: "Emergency"),
+            const CustomAppBar(pageTitle: "Emergency"),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -40,7 +40,7 @@ class EmergencyScreen extends StatelessWidget {
                             style: theme.textTheme.headlineSmall,
                           ),
                           const Spacer(),
-                          SicklerButton(
+                          AppButton(
                             isChipButton: true,
                             onPressed: () {},
                             label: "Add Contact",

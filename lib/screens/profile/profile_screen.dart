@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 import 'package:sickler/screens/profile/profile_vitals_info_screen.dart';
 import 'package:sickler/screens/water/water_screen.dart';
@@ -26,8 +26,8 @@ class ProfileScreen extends ConsumerWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const SicklerAppBar(pageTitle: "Profile"),
-              SicklerEditableAvatar(
+              const CustomAppBar(pageTitle: "Profile"),
+              EditableAvatar(
                   onEditPressed: () {
                     context.pushNamed(ProfileBasicInfoScreen.id);
                   },
@@ -273,18 +273,18 @@ class ProfileScreen extends ConsumerWidget {
                       spacing: 8,
                       runSpacing: -4,
                       children: [
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info, label: "Mango"),
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info, label: "Peanuts"),
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info,
                             label: "Groundnuts"),
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info, label: "Mango"),
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info, label: "Mango"),
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info, label: "Mango"),
                       ],
                     ),
@@ -314,18 +314,18 @@ class ProfileScreen extends ConsumerWidget {
                       spacing: 8,
                       runSpacing: -4,
                       children: [
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info, label: "Mango"),
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info, label: "Peanuts"),
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info,
                             label: "Groundnuts"),
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info, label: "Mango"),
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info, label: "Mango"),
-                        SicklerChip(
+                        AppChip(
                             chipType: SicklerChipType.info, label: "Mango"),
                       ],
                     ),

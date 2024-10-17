@@ -2,7 +2,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../global_components/sickler_selector_item.dart';
+import '../../global_components/selector_item.dart';
 
 class WaterVolumeSelector extends StatefulWidget {
   const WaterVolumeSelector({super.key, required this.selectedVolume});
@@ -39,7 +39,7 @@ class _WaterVolumeSelectorState extends State<WaterVolumeSelector> {
       ),
       itemBuilder: (BuildContext context, int index) {
         isVolumeSelected.putIfAbsent(index, () => false);
-        return SicklerSelectorItem(
+        return AppSelectorItem(
             color: theme.colorScheme.tertiary,
             backgroundColor: isDarkMode
                 ? theme.cardColor

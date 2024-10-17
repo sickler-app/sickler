@@ -7,7 +7,7 @@ import '../models.dart';
 part 'sickler_user.g.dart';
 
 @Collection(inheritance: false)
-class SicklerUser extends Equatable {
+class CircleUser extends Equatable {
   final Id id = 1;
   final String uid;
   final String email;
@@ -18,7 +18,7 @@ class SicklerUser extends Equatable {
   final UserProfile profile;
   final UserPreferences preferences;
 
-  const SicklerUser({
+  const CircleUser({
     required this.email,
     required this.isAnonymous,
     required this.uid,
@@ -30,7 +30,7 @@ class SicklerUser extends Equatable {
   });
 
   ///-------copyWith--------///
-  SicklerUser copyWith({
+  CircleUser copyWith({
     String? email,
     bool? isAnonymous,
     String? uid,
@@ -40,7 +40,7 @@ class SicklerUser extends Equatable {
     UserProfile? profile,
     UserPreferences? preferences,
   }) {
-    return SicklerUser(
+    return CircleUser(
       email: email ?? this.email,
       uid: uid ?? this.uid,
       photoUrl: photoUrl ?? this.photoUrl,
@@ -69,8 +69,8 @@ class SicklerUser extends Equatable {
     return data;
   }
 
-  factory SicklerUser.fromMap({required Map<String, dynamic> data}) {
-    return SicklerUser(
+  factory CircleUser.fromMap({required Map<String, dynamic> data}) {
+    return CircleUser(
         profile: UserProfile.fromMap(data["profile"]),
         preferences: UserPreferences.fromMap(data: data["preferences"]),
         email: data["email"],
@@ -80,11 +80,11 @@ class SicklerUser extends Equatable {
         isPhoneVerified: data["isPhoneVerified"]);
   }
 
-  factory SicklerUser.fromUser({required User? user}) {
+  factory CircleUser.fromUser({required User? user}) {
     if (user == null) {
-      return SicklerUser.empty;
+      return CircleUser.empty;
     } else {
-      return SicklerUser(
+      return CircleUser(
         email: user.email!,
         uid: user.uid,
         isEmailVerified: user.emailVerified,
@@ -97,16 +97,16 @@ class SicklerUser extends Equatable {
   ///-------Empty--------///
 
   @ignore
-  static SicklerUser empty =
-      const SicklerUser(email: "", isAnonymous: false, uid: "");
+  static CircleUser empty =
+      const CircleUser(email: "", isAnonymous: false, uid: "");
   @ignore
-  bool get isEmpty => this == SicklerUser.empty;
+  bool get isEmpty => this == CircleUser.empty;
   @ignore
-  bool get isNotEmpty => this != SicklerUser.empty;
+  bool get isNotEmpty => this != CircleUser.empty;
 
   @override
   String toString() {
-    if (this == SicklerUser.empty) {
+    if (this == CircleUser.empty) {
       return "SicklerUser.empty";
     }
 

@@ -4,13 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-class SicklerAppBar extends StatelessWidget {
+class CustomAppBar extends StatelessWidget {
   final String pageTitle;
   final List<Widget>? actions;
   final bool? showTitle;
   final bool? showBackButton;
 
-  const SicklerAppBar(
+  const CustomAppBar(
       {super.key,
       required this.pageTitle,
       this.actions,

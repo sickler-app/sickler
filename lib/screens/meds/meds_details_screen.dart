@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/meds/add_edit_meds_screen.dart';
 
 class MedsDetailsScreen extends StatelessWidget {
@@ -58,9 +58,9 @@ class MedsDetailsScreen extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children: [
-                SicklerChip(chipType: SicklerChipType.info, label: "Daily"),
-                SicklerChip(chipType: SicklerChipType.info, label: "8:00 AM"),
-                SicklerChip(chipType: SicklerChipType.info, label: "3:00 PM"),
+                AppChip(chipType: SicklerChipType.info, label: "Daily"),
+                AppChip(chipType: SicklerChipType.info, label: "8:00 AM"),
+                AppChip(chipType: SicklerChipType.info, label: "3:00 PM"),
               ],
             ),
             const Gap(24),
@@ -72,7 +72,7 @@ class MedsDetailsScreen extends StatelessWidget {
             const Gap(12),
             const SicklerCalendar(),
             const Gap(24),
-            SicklerButton(
+            AppButton(
               onPressed: () {
                 context.pushNamed(AddMedsScreen.id);
               },

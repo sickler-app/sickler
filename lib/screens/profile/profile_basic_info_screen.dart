@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/providers/providers.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/profile/profile_vitals_info_screen.dart';
 
 import '../../core/core.dart';
@@ -50,7 +50,7 @@ class _ProfileBasicInfoScreenState
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.watch(userProvider.notifier).getCurrentUserData();
-      SicklerUser user = ref.watch(userProvider).value!;
+      CircleUser user = ref.watch(userProvider).value!;
       nameController.text = user.profile.displayName ?? "";
       ageController.text = user.profile.age.toString();
 
@@ -75,13 +75,13 @@ class _ProfileBasicInfoScreenState
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SicklerAppBar(
+              CustomAppBar(
                   pageTitle: widget.isEditing!
                       ? "Edit Profile"
                       : "Tell us more\nabout you"),
               Visibility(
                 visible: widget.isEditing!,
-                child: SicklerEditableAvatar(
+                child: EditableAvatar(
                   onEditPressed: () {
                     ///Todo: Implement on Edit Pressed;
                   },
@@ -127,12 +127,12 @@ class _ProfileBasicInfoScreenState
                         await showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
-                            builder: (context) => SicklerBottomSheet(
+                            builder: (context) => AppBottomSheet(
                                   title: "Age",
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: SicklerListWheelScrollViewPicker(
+                                  child: ListWheelScrollViewPicker(
                                     itemExtent: 48,
                                     onSelectedItemChanged: (selectedValue) {
                                       setState(() {
@@ -194,11 +194,11 @@ class _ProfileBasicInfoScreenState
                     const Gap(64),
 
                     ///Buttons
-                    SicklerButton(
+                    AppButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
 
-                            SicklerUser user = ref.watch(userProvider).value!;
+                            CircleUser user = ref.watch(userProvider).value!;
 
                             user = user.copyWith(
                                 profile: user.profile.copyWith(

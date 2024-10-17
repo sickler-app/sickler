@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/auth/register_screen.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
 import '../../models/models.dart';
@@ -49,7 +49,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SicklerAppBar(
+                const CustomAppBar(
                   pageTitle: "Sign In",
                   showBackButton: false,
                 ),
@@ -107,7 +107,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 const Spacer(),
 
                 ///Buttons
-                SicklerButton(
+                AppButton(
                   label: "Sign In",
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
@@ -117,7 +117,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
                       if (authNotifier.isSuccessful) {
                         await userNotifier.getCurrentUserData();
-                        SicklerUser user = ref.watch(userProvider).value!;
+                        CircleUser user = ref.watch(userProvider).value!;
                         if (context.mounted) {
                           showCustomSnackBar(
                               context: context,
@@ -164,7 +164,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 Align(
                     alignment: Alignment.center,
                     child: FittedBox(
-                      child: SicklerButton(
+                      child: AppButton(
                         isLoading: ref.watch(authProvider).isLoading,
                         isChipButton: true,
                         buttonType: SicklerButtonType.text,

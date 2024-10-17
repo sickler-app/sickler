@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/meds/components/sickler_calendar_day_selector.dart';
 import 'package:sickler/screens/profile/components/sickler_radio.dart';
 
@@ -44,7 +44,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SicklerAppBar(pageTitle: "Edit\nOccurrences"),
+              const CustomAppBar(pageTitle: "Edit\nOccurrences"),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -191,7 +191,7 @@ class _MedsScheduleScreenState extends State<MedsScheduleScreen> {
                         ],
                       ),
                       const Spacer(),
-                      SicklerButton(
+                      AppButton(
                           onPressed: () {
                             ///Todo: save data, add to state and pop
                           },

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/providers/water/water_providers.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/water/suggested_water_daily_goal_screen.dart';
 
 import '../../../core/core.dart';
@@ -25,7 +25,7 @@ class WaterStatistics extends ConsumerWidget {
           borderRadius: BorderRadius.circular(24)),
       child: Column(
         children: [
-          SicklerDateSwitcher(
+          DateSwitcher(
               color: isDarkMode ? theme.iconTheme.color : SicklerColours.blue20,
               backgroundColor:
                   isDarkMode ? SicklerColours.neutral30 : SicklerColours.blue90,

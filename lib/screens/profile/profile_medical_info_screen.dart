@@ -7,7 +7,7 @@ import 'package:sickler/models/models.dart';
 
 import '../../core/core.dart';
 import '../../providers/providers.dart';
-import '../global_components/global_components.dart';
+import '../global_components/components.dart';
 import '../water/suggested_water_daily_goal_screen.dart';
 
 class ProfileMedicalInfoScreen extends ConsumerStatefulWidget {
@@ -51,7 +51,7 @@ class _ProfileMedicalInfoScreenState
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.watch(userProvider.notifier).getCurrentUserData();
-      SicklerUser user = ref.watch(userProvider).value!;
+      CircleUser user = ref.watch(userProvider).value!;
       medicalConditions = user.profile.medicalConditions ?? [];
       allergies = user.profile.allergies ?? [];
     });
@@ -68,10 +68,10 @@ class _ProfileMedicalInfoScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SicklerAppBar(
+            CustomAppBar(
               pageTitle: "Medical\nInfo",
               actions: [
-                SicklerButton(
+                AppButton(
                   isChipButton: true,
                   onPressed: () {
                     //Todo: Skip Page
@@ -102,19 +102,19 @@ class _ProfileMedicalInfoScreenState
                     spacing: 12,
                     runSpacing: 4,
                     children: [
-                      SicklerChip(
+                      AppChip(
                         label: "Daily",
                         onSelected: (value) {},
                       ),
-                      SicklerChip(
+                      AppChip(
                         label: "Weekly",
                         onSelected: (value) {},
                       ),
-                      SicklerChip(
+                      AppChip(
                         label: "Monthly",
                         onSelected: (value) {},
                       ),
-                      SicklerChip(
+                      AppChip(
                         label: "Custom",
                         onSelected: (value) {},
                       ),
@@ -167,7 +167,7 @@ class _ProfileMedicalInfoScreenState
                     runSpacing: 4,
                     children: [
                       for (String allergy in allergies)
-                        SicklerChip(
+                        AppChip(
                           label: allergy,
                           chipType: SicklerChipType.info,
                           onDeleted: () {
@@ -219,7 +219,7 @@ class _ProfileMedicalInfoScreenState
                     runSpacing: 4,
                     children: [
                       for (String medicalCondition in medicalConditions)
-                        SicklerChip(
+                        AppChip(
                           label: medicalCondition,
                           chipType: SicklerChipType.info,
                           onDeleted: () {
@@ -231,10 +231,10 @@ class _ProfileMedicalInfoScreenState
                     ],
                   ),
                   const Gap(32),
-                  SicklerButton(
+                  AppButton(
                       onPressed: () async {
                         ///Todo: add the rest of the health data;
-                        SicklerUser user = ref.watch(userProvider).value!;
+                        CircleUser user = ref.watch(userProvider).value!;
                         user = user.copyWith(
                             preferences:
                                 user.preferences.copyWith(isOnboarded: true),

@@ -5,4 +5,4 @@ export 'meds_history_item.dart';
 export 'meds_type_selector.dart';
 export 'sickler_calendar_day_selector_item.dart';
 export 'sickler_calendar_day_selector.dart';
-export '../../global_components/sickler_date_switcher.dart';
+export '../../global_components/date_switcher.dart';

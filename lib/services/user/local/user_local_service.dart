@@ -9,36 +9,36 @@ class UserLocalService extends LocalDbService {
     db = initializeDB();
   }
 
-  Stream<List<SicklerUser>> listenUserPreferences() async* {
+  Stream<List<CircleUser>> listenUserPreferences() async* {
     final isar = await db;
     yield* isar.sicklerUsers.where().watch();
   }
 
-  Future<SicklerUser> getUser() async {
+  Future<CircleUser> getUser() async {
     final isar = await db;
-    List<SicklerUser> userList = await isar.sicklerUsers.where().findAll();
+    List<CircleUser> userList = await isar.sicklerUsers.where().findAll();
     if (userList.isEmpty) {
-      return SicklerUser.empty;
+      return CircleUser.empty;
     } else {
       return userList.first;
     }
   }
 
-  Future<void> addUser(SicklerUser user) async {
+  Future<void> addUser(CircleUser user) async {
     final isar = await db;
     await isar.writeTxn(() async {
       await isar.sicklerUsers.put(user);
     });
   }
 
-  Future<void> updateUser(SicklerUser user) async {
+  Future<void> updateUser(CircleUser user) async {
     final isar = await db;
     await isar.writeTxn(() async {
       await isar.sicklerUsers.put(user);
     });
   }
 
-  Future<void> deleteUser({SicklerUser? user}) async {
+  Future<void> deleteUser({CircleUser? user}) async {
     final isar = await db;
 
     if (user == null) {

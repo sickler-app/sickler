@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 class EmergencySelectContactsDialog extends StatelessWidget {
   const EmergencySelectContactsDialog({super.key});
@@ -9,7 +9,7 @@ class EmergencySelectContactsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return SicklerAlertDialog(
+    return AppAlertDialog(
       title: "Select Contacts",
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -24,7 +24,7 @@ class EmergencySelectContactsDialog extends StatelessWidget {
             ),
           ),
           const Gap(16),
-          SicklerButton(
+          AppButton(
             onPressed: () {},
             label: "Send to all contacts",
             buttonType: SicklerButtonType.primary,
@@ -33,7 +33,7 @@ class EmergencySelectContactsDialog extends StatelessWidget {
             iconPath: "assets/svg/emergency-alt.svg",
           ),
           const Gap(12),
-          SicklerButton(
+          AppButton(
             onPressed: () {},
             label: "Select Contacts",
             buttonType: SicklerButtonType.outline,

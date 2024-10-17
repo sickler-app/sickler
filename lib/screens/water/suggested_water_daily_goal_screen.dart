@@ -8,7 +8,7 @@ import 'package:sickler/models/models.dart';
 import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/providers/providers.dart';
 import 'package:sickler/providers/water/water_providers.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 import '../../providers/water/water_prefs_notifier.dart';
 import '../global_components/bottom_nav_bar.dart';
@@ -33,16 +33,16 @@ class _SuggestedWaterDailyGoalScreenState
     WaterPrefsNotifier waterPrefsNotifier =
         ref.watch(waterPreferencesProvider.notifier);
     WaterPreferences preferences = ref.watch(waterPreferencesProvider).value!;
-    SicklerUser user = ref.watch(userProvider).value!;
+    CircleUser user = ref.watch(userProvider).value!;
 
     return Scaffold(
       body: Column(
         children: [
-          SicklerAppBar(
+          CustomAppBar(
             showTitle: false,
             pageTitle: "Your daily goal",
             actions: [
-              SicklerButton(
+              AppButton(
                   isChipButton: true,
                   onPressed: () {
                     context.goNamed(BottomNavBar.id);
@@ -80,16 +80,16 @@ class _SuggestedWaterDailyGoalScreenState
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                SicklerButton(
+                AppButton(
                   onPressed: () async {
                     await showModalBottomSheet(
                       context: context,
-                      builder: (context) => SicklerBottomSheet(
+                      builder: (context) => AppBottomSheet(
                         title: "Select Volume",
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: SicklerListWheelScrollViewPicker(
+                        child: ListWheelScrollViewPicker(
                           primaryInitialValue: 1000,
                           primaryFinalValue: 5000,
                           primaryValueInterval: 100,
@@ -108,7 +108,7 @@ class _SuggestedWaterDailyGoalScreenState
                   buttonType: SicklerButtonType.outline,
                 ),
                 const Gap(16),
-                SicklerButton(
+                AppButton(
                   isLoading: ref.watch(waterPreferencesProvider).isLoading,
                   onPressed: () async {
                     preferences = preferences.copyWith(

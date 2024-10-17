@@ -5,7 +5,7 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/meds/components/components.dart';
 import 'package:sickler/screens/meds/components/meds_type_item.dart';
 
-import '../global_components/global_components.dart';
+import '../global_components/components.dart';
 
 class AddEmergencyContactScreen extends StatefulWidget {
   static const String id = "add_emergency_contact";
@@ -38,10 +38,10 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
         child: Form(
           child: Column(
             children: [
-              const SicklerAppBar(
+              const CustomAppBar(
                 pageTitle: "Add Emergency\nContacts",
               ),
-              SicklerEditableAvatar(
+              EditableAvatar(
                   imagePath: "assets/images/memoji.png", onEditPressed: () {}),
               const Gap(
                 48,
@@ -113,11 +113,11 @@ class _AddEmergencyContactScreenState extends State<AddEmergencyContactScreen> {
                       alignment: WrapAlignment.start,
                       spacing: 16,
                       children: [
-                        SicklerChip(
+                        AppChip(
                           label: "6 77 77 77 77",
                           chipType: SicklerChipType.info,
                         ),
-                        SicklerChip(
+                        AppChip(
                             label: "6 77 77 77 77",
                             chipType: SicklerChipType.info),
                       ],

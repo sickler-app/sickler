@@ -9,7 +9,7 @@ import 'package:sickler/core/snackbar_notifier.dart';
 import 'package:sickler/models/water/water_log.dart';
 import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/providers/providers.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/water/charts/chart_data_transformer.dart';
 import 'package:sickler/screens/water/charts/line_chart_widget.dart';
 import 'package:sickler/screens/water/components/water_volume_selector.dart';
@@ -43,7 +43,7 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
   Widget build(BuildContext context) {
     final WaterLogNotifier waterLogNotifier =
         ref.watch(waterLogProvider.notifier);
-    SicklerUser user = ref.watch(userProvider).value!;
+    CircleUser user = ref.watch(userProvider).value!;
     WaterStats waterStats = ref.watch(waterStatsProvider);
     WaterPreferences waterPreferences =
         ref.watch(waterPreferencesProvider).value!;
@@ -60,10 +60,10 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SicklerAppBar(pageTitle: "Water"),
+              const CustomAppBar(pageTitle: "Water"),
               Align(
                 alignment: Alignment.center,
-                child: SicklerCircularPercentIndicator(
+                child: CustomCircularPercentIndicator(
                   value: waterStats.percentCompleteToday.toInt().toString(),
                   shouldAnimate: true,
                   unit: "%",

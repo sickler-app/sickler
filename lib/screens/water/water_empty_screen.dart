@@ -2,7 +2,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 class WaterEmptyScreen extends StatefulWidget {
   static const String id = "water_goal_empty";
@@ -21,7 +21,7 @@ class _WaterEmptyScreenState extends State<WaterEmptyScreen> {
     return Scaffold(
       body: Column(
         children: [
-          const SicklerAppBar(
+          const CustomAppBar(
             showTitle: true,
             pageTitle: "Water Intake",
             actions: [],
@@ -48,7 +48,7 @@ class _WaterEmptyScreenState extends State<WaterEmptyScreen> {
             child: Column(
               children: [
                 const Gap(16),
-                SicklerButton(
+                AppButton(
                   onPressed: () {},
                   icon: FluentIcons.add_24_regular,
                   label: "Add Goal ",

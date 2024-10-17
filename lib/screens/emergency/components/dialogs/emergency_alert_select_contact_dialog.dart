@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/global_components/global_components.dart';
+import 'package:sickler/screens/global_components/components.dart';
 
 import '../components.dart';
 
@@ -14,7 +14,7 @@ class EmergencyAlertSelectContactDialog extends StatelessWidget {
     //  final bool isDarkMode = theme.colorScheme.brightness == Brightness.dark;
 
     ///TODO: Wrap with BackButton Listener
-    return SicklerAlertDialog(
+    return AppAlertDialog(
       title: "Emergency Alert",
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -37,7 +37,7 @@ class EmergencyAlertSelectContactDialog extends StatelessWidget {
               name: "Amelia Robertson",
               imagePath: "assets/images/memoji.png"),
           const Gap(16),
-          SicklerButton(
+          AppButton(
             onPressed: () {},
             label: "Send Alert",
             buttonType: SicklerButtonType.primary,

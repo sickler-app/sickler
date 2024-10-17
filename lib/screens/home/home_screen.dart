@@ -38,7 +38,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    final SicklerUser? user = ref.watch(userProvider).value;
+    final CircleUser? user = ref.watch(userProvider).value;
 
     final String displayName = user?.profile.displayName != null
         ? user!.profile.displayName!.split(" ").first

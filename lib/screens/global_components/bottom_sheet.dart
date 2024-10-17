@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import 'global_components.dart';
+import 'components.dart';
 
-class SicklerBottomSheet extends StatelessWidget {
+class AppBottomSheet extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
   final Widget child;
   final String buttonLabel;
-  const SicklerBottomSheet(
+  const AppBottomSheet(
       {super.key,
       required this.title,
       required this.onPressed,
@@ -44,7 +44,7 @@ class SicklerBottomSheet extends StatelessWidget {
             ),
             child,
             const Gap(32),
-            SicklerButton(onPressed: onPressed, label: buttonLabel),
+            AppButton(onPressed: onPressed, label: buttonLabel),
             const SizedBox(
               height: 64,
             )

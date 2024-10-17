@@ -33,7 +33,7 @@ class WaterPrefsNotifier extends AsyncNotifier<WaterPreferences> {
 
   /// Water Preferences
   Future<void> getWaterPreferences(
-      {SicklerUser? user, bool? getFromRemote}) async {
+      {CircleUser? user, bool? getFromRemote}) async {
     state = const AsyncValue.loading();
     final Either<Failure, WaterPreferences> response = await _waterRepository
         .getWaterPreferences(user: user, getFromRemote: getFromRemote);
@@ -50,7 +50,7 @@ class WaterPrefsNotifier extends AsyncNotifier<WaterPreferences> {
 
   Future<void> addWaterPreferences(
       {required WaterPreferences preferences,
-      SicklerUser? user,
+      CircleUser? user,
       bool updateRemote = false}) async {
     state = const AsyncValue.loading();
     final Either<Failure, void> response =
@@ -67,7 +67,7 @@ class WaterPrefsNotifier extends AsyncNotifier<WaterPreferences> {
 
   Future<void> updateWaterPreferences({
     required WaterPreferences preferences,
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     state = const AsyncValue.loading();
@@ -85,7 +85,7 @@ class WaterPrefsNotifier extends AsyncNotifier<WaterPreferences> {
 
   Future<void> deleteWaterPreferences({
     required WaterPreferences preferences,
-    required SicklerUser user,
+    required CircleUser user,
     bool updateRemote = false,
   }) async {
     state = const AsyncValue.loading();

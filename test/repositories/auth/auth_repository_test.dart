@@ -39,7 +39,7 @@ void main() {
   late final AuthService mockedAuthService;
   // late final UserLocalService mockedUserLocalService;
   late final AuthRepository authRepository;
-  late final SicklerUser sicklerUser;
+  late final CircleUser sicklerUser;
   late final UserCredential mockUserCredential;
   late final User mockUser;
 
@@ -52,7 +52,7 @@ void main() {
     authRepository = AuthRepository(
         authService: mockedAuthService, userLocalService: userLocalService);
 
-    sicklerUser = const SicklerUser(
+    sicklerUser = const CircleUser(
       photoUrl: "photo",
       email: "test@email.com",
       uid: "uid",
@@ -70,7 +70,7 @@ void main() {
           email: "test@email.com",
           password: "12345678")).thenAnswer((_) async => mockUserCredential);
 
-      Either<Failure, SicklerUser?> response =
+      Either<Failure, CircleUser?> response =
           await authRepository.registerWithEmailAndPassword(
               email: "test@email.com", password: "12345678");
 
@@ -84,7 +84,7 @@ void main() {
           email: "test@email.com",
           password: "12345678")).thenThrow(Exception("test error occurred"));
 
-      Either<Failure, SicklerUser?> response =
+      Either<Failure, CircleUser?> response =
           await authRepository.registerWithEmailAndPassword(
               email: "test@email.com", password: "12345678");
 
@@ -101,7 +101,7 @@ void main() {
           .thenThrow(FirebaseException(
               plugin: "firebaseAuth", message: "firebase test error occurred"));
 
-      Either<Failure, SicklerUser?> response =
+      Either<Failure, CircleUser?> response =
           await authRepository.registerWithEmailAndPassword(
               email: "test@email.com", password: "12345678");
 
@@ -119,7 +119,7 @@ void main() {
           email: "test@email.com",
           password: "12345678")).thenAnswer((_) async => mockUserCredential);
 
-      Either<Failure, SicklerUser?> response =
+      Either<Failure, CircleUser?> response =
           await authRepository.signInWithEmailAndPassword(
               email: "test@email.com", password: "12345678");
 
@@ -133,7 +133,7 @@ void main() {
           email: "test@email.com",
           password: "12345678")).thenThrow(Exception("test error occurred"));
 
-      Either<Failure, SicklerUser?> response =
+      Either<Failure, CircleUser?> response =
           await authRepository.signInWithEmailAndPassword(
               email: "test@email.com", password: "12345678");
 
@@ -151,7 +151,7 @@ void main() {
           .thenThrow(FirebaseException(
               plugin: "firebaseAuth", message: "firebase test error occurred"));
 
-      Either<Failure, SicklerUser?> response =
+      Either<Failure, CircleUser?> response =
           await authRepository.signInWithEmailAndPassword(
               email: "test@email.com", password: "12345678");
 
@@ -168,7 +168,7 @@ void main() {
       when(() => mockedAuthService.signInWithGoogle())
           .thenAnswer((_) async => mockUserCredential);
 
-      Either<Failure, SicklerUser?> response =
+      Either<Failure, CircleUser?> response =
           await authRepository.signInWithGoogle();
 
       expect(response, Right(sicklerUser));
@@ -180,7 +180,7 @@ void main() {
       when(() => mockedAuthService.signInWithGoogle())
           .thenThrow(Exception("test error occurred"));
 
-      Either<Failure, SicklerUser?> response =
+      Either<Failure, CircleUser?> response =
           await authRepository.signInWithGoogle();
 
       expect(
@@ -195,7 +195,7 @@ void main() {
           FirebaseException(
               plugin: "firebaseAuth", message: "firebase test error occurred"));
 
-      Either<Failure, SicklerUser?> response =
+      Either<Failure, CircleUser?> response =
           await authRepository.signInWithGoogle();
 
       expect(
