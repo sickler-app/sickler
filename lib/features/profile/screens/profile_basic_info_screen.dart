@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/features/auth/providers/auth_providers.dart';
-import 'package:sickler/screens/global_components/components.dart';
-import 'package:sickler/screens/profile/profile_vitals_info_screen.dart';
+import '../../../components/components.dart';
+import '../../../core/core.dart';
+import '../../auth/auth.dart';
+import '../profile.dart';
 
-import '../../core/core.dart';
-import '../../models/models.dart';
-import 'components/sickler_radio.dart';
 
 class ProfileBasicInfoScreen extends ConsumerStatefulWidget {
   static const String id = "basic_info";
@@ -165,7 +163,7 @@ class _ProfileBasicInfoScreenState
                     Row(
                       children: [
                         Expanded(
-                          child: SicklerRadio<Gender>(
+                          child: AppRadio<Gender>(
                             label: "Female",
                             value: Gender.female,
                             groupValue: selectedRadioValue,
@@ -178,7 +176,7 @@ class _ProfileBasicInfoScreenState
                         ),
                         const Gap(16),
                         Expanded(
-                          child: SicklerRadio<Gender>(
+                          child: AppRadio<Gender>(
                             label: "Male",
                             value: Gender.male,
                             groupValue: selectedRadioValue,

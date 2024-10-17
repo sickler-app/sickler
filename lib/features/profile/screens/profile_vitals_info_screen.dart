@@ -4,13 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/models/models.dart';
-import 'package:sickler/features/auth/providers/auth_providers.dart';
-import 'package:sickler/screens/global_components/components.dart';
-import 'package:sickler/screens/profile/profile_medical_info_screen.dart';
 
-import '../../core/core.dart';
-import 'components/components.dart';
+import '../../../components/components.dart';
+import '../../../core/core.dart';
+import '../../auth/auth.dart';
+import '../profile.dart';
+
 
 class ProfileVitalsInfoScreen extends ConsumerStatefulWidget {
   static const String id = "vitals";

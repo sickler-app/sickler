@@ -2,7 +2,8 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/global_components/components.dart';
+
+import '../../../../../components/components.dart';
 
 class EmergencyAlertDisclaimerDialog extends StatelessWidget {
   const EmergencyAlertDisclaimerDialog({super.key});

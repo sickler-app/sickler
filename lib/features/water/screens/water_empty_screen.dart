@@ -2,7 +2,6 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/global_components/components.dart';
 
 class WaterEmptyScreen extends StatefulWidget {
   static const String id = "water_goal_empty";

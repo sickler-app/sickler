@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
-import 'package:sickler/features/auth/models/app_user.dart';
-import 'package:sickler/services/local_db/databse_service.dart';
+import 'package:sickler/features/auth/models/user/app_user.dart';
+import 'package:sickler/databse_service.dart';
 
 class UserLocalService extends LocalDbService {
   late Future<Isar> db;

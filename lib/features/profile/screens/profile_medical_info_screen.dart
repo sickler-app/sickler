@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/models/models.dart';
-
-import '../../core/core.dart';
-import '../../features/auth/providers/auth_providers.dart';
-import '../global_components/components.dart';
-import '../water/suggested_water_daily_goal_screen.dart';
+import '../../../components/components.dart';
+import '../../../core/core.dart';
+import '../../auth/auth.dart';
+import '../../water/water.dart';
 
 class ProfileMedicalInfoScreen extends ConsumerStatefulWidget {
   static const String id = "medical_info";

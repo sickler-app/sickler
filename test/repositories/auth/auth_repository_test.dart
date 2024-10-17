@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/features/auth/models/app_user.dart';
+import 'package:sickler/features/auth/models/user/app_user.dart';
 import 'package:sickler/features/auth/providers/auth_providers.dart';
 import 'package:sickler/repositories/repositories.dart';
 import 'package:sickler/services/services.dart';

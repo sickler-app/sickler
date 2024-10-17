@@ -4,7 +4,7 @@ import 'package:sickler/models/models.dart';
 import 'package:sickler/models/water/water_log.dart';
 import 'package:sickler/models/water/water_preferences.dart';
 
-import '../../features/auth/models/app_user.dart';
+import 'features/auth/models/user/app_user.dart';
 
 class LocalDbService {
   ///Pass all collection Schemas here

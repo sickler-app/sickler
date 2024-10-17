@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/core.dart';
+import '../../../../core/core.dart';
 
-class SicklerRadio<T> extends StatelessWidget {
+
+
+class AppRadio<T> extends StatelessWidget {
   final String label;
   final T value;
   final T groupValue;
@@ -12,7 +14,7 @@ class SicklerRadio<T> extends StatelessWidget {
   final Color? fillColor;
   final bool? showBorder;
 
-  const SicklerRadio(
+  const AppRadio(
       {super.key,
       required this.label,
       required this.value,

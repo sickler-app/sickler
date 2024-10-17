@@ -11,7 +11,7 @@ import 'package:sickler/screens/global_components/components.dart';
 import '../providers/auth_providers.dart';
 import '../../../screens/global_components/bottom_nav_bar.dart';
 import '../../../screens/profile/profile_basic_info_screen.dart';
-import 'auth_success.dart';
+import 'auth/auth_success.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   static const String id = "register";

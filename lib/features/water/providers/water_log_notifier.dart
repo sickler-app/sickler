@@ -6,7 +6,7 @@ import 'package:sickler/models/water/water_log.dart';
 import 'package:sickler/repositories/water/water_repository.dart';
 
 import '../../../core/core.dart';
-import '../../auth/models/app_user.dart';
+import '../../auth/models/user/app_user.dart';
 
 class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
   final WaterRepository _waterRepository;

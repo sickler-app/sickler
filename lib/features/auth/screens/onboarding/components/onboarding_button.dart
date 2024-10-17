@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../core/core.dart';
+import '../../../../../core/core.dart';
+
 
 class OnboardingButton extends StatelessWidget {
   const OnboardingButton(

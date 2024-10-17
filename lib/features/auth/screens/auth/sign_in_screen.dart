@@ -4,13 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/features/auth/screens/register_screen.dart';
-import 'package:sickler/screens/global_components/components.dart';
-import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
-
-import '../../../models/models.dart';
-import '../providers/auth_providers.dart';
-import '../../../screens/global_components/bottom_nav_bar.dart';
+import '../../../../components/components.dart';
+import '../../auth.dart';
 import 'auth_success.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {

@@ -4,14 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/models/models.dart';
-import 'package:sickler/features/auth/screens/sign_in_screen.dart';
-import 'package:sickler/screens/global_components/components.dart';
 
-import '../providers/auth_providers.dart';
-import '../../../screens/global_components/bottom_nav_bar.dart';
-import '../../../screens/profile/profile_basic_info_screen.dart';
-import 'auth_success.dart';
+import '../../auth.dart';
+
 
 class GoogleSignInScreen extends ConsumerStatefulWidget {
   static const String id = "google_sign_in";

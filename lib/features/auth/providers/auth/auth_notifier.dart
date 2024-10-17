@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/features/auth/models/app_user.dart';
+import 'package:sickler/features/auth/models/user/app_user.dart';
 import 'package:sickler/features/auth/repositories/auth/auth_repository.dart';
 
 class AuthNotifier extends AsyncNotifier<AppUser?> {
