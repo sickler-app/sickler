@@ -28,7 +28,7 @@ class VitalsItemCard extends StatelessWidget {
       onTap: onPressed,
       borderRadius: BorderRadius.circular(24),
       splashFactory: InkSparkle.splashFactory,
-      splashColor: color?.withOpacity(.2) ?? theme.colorScheme.primary,
+      splashColor: color?.withValues(alpha:.2) ?? theme.colorScheme.primary,
       child: Ink(
         padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8, right: 8),
         decoration: BoxDecoration(

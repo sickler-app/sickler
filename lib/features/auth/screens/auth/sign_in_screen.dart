@@ -8,7 +8,6 @@ import '../../../../components/bottom_nav_bar.dart';
 import '../../../../components/components.dart';
 import '../../../profile/profile.dart';
 import '../../auth.dart';
-import 'auth_success.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   static const String id = "sign_in";

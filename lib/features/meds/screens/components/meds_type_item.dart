@@ -167,7 +167,7 @@ class _MedsTypeItemState extends State<MedsTypeItem>
                 animationController.reverse(from: 1.0);
               },
               onTap: widget.onPressed,
-              splashColor: _color.withOpacity(.2),
+              splashColor: _color.withValues(alpha:.2),
               //splashColor: Colors.transparent,
               splashFactory: InkSparkle.splashFactory,
               borderRadius: BorderRadius.circular(_radiusAnimation.value),

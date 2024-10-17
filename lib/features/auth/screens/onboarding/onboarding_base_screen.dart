@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 
 import '../../auth.dart';
-import 'components/onboarding_button.dart';
 
 class OnboardingBaseScreen extends ConsumerStatefulWidget {
   static const String id = "onboarding";

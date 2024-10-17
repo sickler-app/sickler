@@ -263,14 +263,14 @@ class LineChartWidget extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            color?.withOpacity(0.4) ??
-                theme.colorScheme.tertiary.withOpacity(0.4),
-            color?.withOpacity(0) ?? theme.colorScheme.tertiary.withOpacity(0),
+            color?.withValues(alpha:0.4) ??
+                theme.colorScheme.tertiary.withValues(alpha:0.4),
+            color?.withValues(alpha:0) ?? theme.colorScheme.tertiary.withValues(alpha:0),
           ],
           //
           // colors: [
-          //   Colors.white.withOpacity(0.4),
-          //   Colors.white.withOpacity(0),
+          //   Colors.white.withValues(alpha:0.4),
+          //   Colors.white.withValues(alpha:0),
           // ],
         ),
       ),

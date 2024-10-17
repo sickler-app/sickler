@@ -10,7 +10,6 @@ import 'package:sickler/core/core.dart';
 import '../../../components/components.dart';
 import '../../water/water.dart';
 import '../profile.dart';
-import 'components/components.dart';
 
 class ProfileScreen extends ConsumerWidget {
   static const String id = "profile";

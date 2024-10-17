@@ -78,7 +78,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                   const Spacer(),
                   InkWell(
-                    splashColor: theme.colorScheme.primary.withOpacity(.2),
+                    splashColor: theme.colorScheme.primary.withValues(alpha:.2),
                     splashFactory: InkSparkle.splashFactory,
                     borderRadius: BorderRadius.circular(kPadding64),
                     onTap: () {

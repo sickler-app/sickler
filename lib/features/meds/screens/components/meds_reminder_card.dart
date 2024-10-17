@@ -39,7 +39,7 @@ class _MedsScreenReminderCardState extends State<MedsScreenReminderCard>
     return InkWell(
       borderRadius: BorderRadius.circular(24),
       splashFactory: InkSparkle.splashFactory,
-      splashColor: theme.colorScheme.primary.withOpacity(.2),
+      splashColor: theme.colorScheme.primary.withValues(alpha:.2),
       onTap: () {
         showModalBottomSheet(
           isScrollControlled: true,

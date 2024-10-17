@@ -73,7 +73,7 @@ class _SicklerCalendarWeekSelectorItemState
             animationController.reverse(from: 1.0);
           },
           onTap: widget.onPressed,
-          splashColor: _color.withOpacity(.2),
+          splashColor: _color.withValues(alpha:.2),
           splashFactory: InkSparkle.splashFactory,
           borderRadius: BorderRadius.circular(_radiusAnimation.value),
           child: Ink(

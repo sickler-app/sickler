@@ -67,7 +67,7 @@ class _GenotypeSelectorItemState extends State<GenotypeSelectorItem> {
 
     return InkWell(
       onTap: widget.onPressed,
-      splashColor: widget.color?.withOpacity(.2) ?? _color.withOpacity(.2),
+      splashColor: widget.color?.withValues(alpha:.2) ?? _color.withValues(alpha:.2),
       splashFactory: InkSparkle.splashFactory,
       borderRadius: BorderRadius.circular(72),
       child: AnimatedContainer(

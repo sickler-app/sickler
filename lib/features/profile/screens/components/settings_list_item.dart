@@ -36,7 +36,7 @@ class SettingsListItem extends StatelessWidget {
       onTap: () {},
       splashFactory: InkSparkle.splashFactory,
       splashColor:
-      color?.withOpacity(.2) ?? theme.colorScheme.primary.withOpacity(.2),
+      color?.withValues(alpha:.2) ?? theme.colorScheme.primary.withValues(alpha:.2),
       child: Ink(
         decoration: BoxDecoration(
           border: showBorder!

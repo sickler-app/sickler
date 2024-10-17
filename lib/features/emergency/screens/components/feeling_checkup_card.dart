@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../components/components.dart';
 import '../../../../core/core.dart';
+import '../../emergency.dart';
 
 class FeelingCheckupCard extends StatelessWidget {
   const FeelingCheckupCard({super.key});

@@ -137,8 +137,8 @@ class WaterLineChart extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    theme.colorScheme.tertiary.withOpacity(0.5),
-                    theme.colorScheme.tertiary.withOpacity(0)
+                    theme.colorScheme.tertiary.withValues(alpha:0.5),
+                    theme.colorScheme.tertiary.withValues(alpha:0)
                   ],
                 )),
           ),

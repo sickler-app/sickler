@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/features/auth/screens/auth/auth_success.dart';
-
 import '../components/bottom_nav_bar.dart';
 import '../features/auth/auth.dart';
 import '../features/emergency/emergency.dart';

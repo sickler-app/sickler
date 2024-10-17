@@ -54,7 +54,7 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
       children: [
         NavigationBar(
           indicatorColor: Platform.isIOS
-              ? Theme.of(context).scaffoldBackgroundColor.withOpacity(0)
+              ? Theme.of(context).scaffoldBackgroundColor.withValues(alpha:0)
               : Theme.of(context).colorScheme.primaryContainer,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,

@@ -27,7 +27,7 @@ class WaterCard extends StatelessWidget {
       onTap: onPressed,
       borderRadius: BorderRadius.circular(24),
       splashFactory: InkSparkle.splashFactory,
-      splashColor: theme.colorScheme.tertiary.withOpacity(.2),
+      splashColor: theme.colorScheme.tertiary.withValues(alpha:.2),
       child: Ink(
         padding: const EdgeInsets.all(kPadding16),
         decoration: BoxDecoration(

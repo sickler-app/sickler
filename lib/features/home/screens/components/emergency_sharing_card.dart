@@ -15,7 +15,7 @@ class EmergencySharingCard extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(24),
       splashFactory: InkSparkle.splashFactory,
-      splashColor: theme.colorScheme.error.withOpacity(.2),
+      splashColor: theme.colorScheme.error.withValues(alpha:.2),
       onTap: onPressed,
       child: Ink(
         height: 200,

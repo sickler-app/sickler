@@ -80,7 +80,7 @@ class _AppSelectorItemState extends State<AppSelectorItem>
               },
               onTap: widget.onPressed,
               splashColor: widget.color?.withValues(alpha: 0.2) ??
-                  theme.colorScheme.primary.withOpacity(.2),
+                  theme.colorScheme.primary.withValues(alpha:.2),
               //splashColor: Colors.transparent,
               splashFactory: InkSparkle.splashFactory,
               borderRadius: BorderRadius.circular(_radiusAnimation.value),
