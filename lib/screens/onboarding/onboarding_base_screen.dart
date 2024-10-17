@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
-import 'package:sickler/screens/auth/google_sign_in_screen.dart';
+import 'package:sickler/features/auth/screens/google_sign_in_screen.dart';
 import 'package:sickler/screens/onboarding/onboarding_template_screen.dart';
 
 import 'components/onboarding_button.dart';

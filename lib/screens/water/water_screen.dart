@@ -43,7 +43,7 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
   Widget build(BuildContext context) {
     final WaterLogNotifier waterLogNotifier =
         ref.watch(waterLogProvider.notifier);
-    CircleUser user = ref.watch(userProvider).value!;
+    AppUser user = ref.watch(userProvider).value!;
     WaterStats waterStats = ref.watch(waterStatsProvider);
     WaterPreferences waterPreferences =
         ref.watch(waterPreferencesProvider).value!;

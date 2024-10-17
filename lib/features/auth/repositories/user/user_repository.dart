@@ -6,7 +6,7 @@ import 'package:sickler/core/core.dart';
 import 'package:sickler/services/user/remote/user_service.dart';
 
 import '../../models/models.dart';
-import '../../services/auth/auth_service.dart';
+import '../../services/auth/remote/auth_service.dart';
 import '../../services/user/local/user_local_service.dart';
 
 class UserRepository {
@@ -22,7 +22,7 @@ class UserRepository {
         _userLocalService = userLocalService,
         _userService = userService;
 
-  FutureEither<CircleUser> getCurrentUserData(
+  FutureEither<AppUser> getCurrentUserData(
       {bool forceRefresh = false}) async {
     return futureHandler(() async {
       ///First get from Firebase Auth in order to verify if the user is actually signed in before making any calls to remote;
@@ -33,7 +33,7 @@ class UserRepository {
         ///If user is not signed in, return an empty class
         log("User is not signed in");
         await _userLocalService.deleteUser();
-        return CircleUser.empty;
+        return AppUser.empty;
       }
 
       if (forceRefresh) {
@@ -41,28 +41,28 @@ class UserRepository {
         return await _getRemoteUser(currentUser.uid);
       }
 
-      CircleUser localUser = await _userLocalService.getUser();
+      AppUser localUser = await _userLocalService.getUser();
       if (localUser.isNotEmpty) {
         log("Local User Found");
         return localUser;
       } else {
         log("Local user is empty");
         await _userLocalService.deleteUser();
-        return CircleUser.empty;
+        return AppUser.empty;
       }
 
     });
   }
 
-  Future<CircleUser> _getRemoteUser(String uid) async {
+  Future<AppUser> _getRemoteUser(String uid) async {
     DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
         await _userService.getUserData(uid);
 
     if (documentSnapshot.exists &&
         documentSnapshot.data() != null &&
         documentSnapshot.data()!.isNotEmpty) {
-      CircleUser remoteUser =
-          CircleUser.fromMap(data: documentSnapshot.data()!);
+      AppUser remoteUser =
+          AppUser.fromMap(data: documentSnapshot.data()!);
       await _userLocalService.addUser(remoteUser);
       return remoteUser;
     } else {
@@ -71,7 +71,7 @@ class UserRepository {
   }
 
   FutureEither<void> updateUserData(
-      {required CircleUser user, bool updateRemote = false}) async {
+      {required AppUser user, bool updateRemote = false}) async {
     return futureHandler(() async {
       await _userLocalService.updateUser(user);
       if (updateRemote) {
@@ -81,7 +81,7 @@ class UserRepository {
   }
 
   FutureEither<void> addUserData(
-      {required CircleUser user, bool updateRemote = false}) async {
+      {required AppUser user, bool updateRemote = false}) async {
     return futureHandler(() async {
       await _userLocalService.updateUser(user);
       if (updateRemote) {
@@ -92,7 +92,7 @@ class UserRepository {
 
   /// --------- Delete User Data --------///
   FutureEither<void> deleteUserData(
-      {required CircleUser user, bool deleteRemote = false}) async {
+      {required AppUser user, bool deleteRemote = false}) async {
     return futureHandler(() async {
       await _userLocalService.deleteUser(user: user);
 

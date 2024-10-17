@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/models/user/sickler_user.dart';
-import 'package:sickler/repositories/auth/auth_repository.dart';
+import 'package:sickler/features/auth/models/app_user.dart';
+import 'package:sickler/features/auth/repositories/auth/auth_repository.dart';
 
-class AuthNotifier extends AsyncNotifier<CircleUser?> {
+class AuthNotifier extends AsyncNotifier<AppUser?> {
   final AuthRepository _authRepository;
 
   AuthNotifier({required AuthRepository authRepository})
@@ -24,14 +24,14 @@ class AuthNotifier extends AsyncNotifier<CircleUser?> {
       : state.error.toString();
 
   @override
-  Future<CircleUser> build() async {
-    return CircleUser.empty;
+  Future<AppUser> build() async {
+    return AppUser.empty;
   }
 
   Future<void> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     state = const AsyncValue.loading();
-    final Either<Failure, CircleUser?> response = await _authRepository
+    final Either<Failure, AppUser?> response = await _authRepository
         .signInWithEmailAndPassword(email: email, password: password);
 
     response.fold((failure) {
@@ -44,7 +44,7 @@ class AuthNotifier extends AsyncNotifier<CircleUser?> {
   Future<void> registerWithEmailAndPassword(
       {required String email, required String password}) async {
     state = const AsyncValue.loading();
-    final Either<Failure, CircleUser?> response = await _authRepository
+    final Either<Failure, AppUser?> response = await _authRepository
         .registerWithEmailAndPassword(email: email, password: password);
 
     response.fold((failure) {
@@ -56,7 +56,7 @@ class AuthNotifier extends AsyncNotifier<CircleUser?> {
 
   Future<void> singInWithGoogle() async {
     state = const AsyncValue.loading();
-    final Either<Failure, CircleUser?> response =
+    final Either<Failure, AppUser?> response =
         await _authRepository.signInWithGoogle();
 
     response.fold((failure) {
@@ -73,7 +73,7 @@ class AuthNotifier extends AsyncNotifier<CircleUser?> {
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
-      state = AsyncValue.data(CircleUser.empty);
+      state = AsyncValue.data(AppUser.empty);
     });
   }
 
@@ -85,7 +85,7 @@ class AuthNotifier extends AsyncNotifier<CircleUser?> {
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
-      state = AsyncValue.data(CircleUser.empty);
+      state = AsyncValue.data(AppUser.empty);
     });
   }
 
@@ -98,12 +98,12 @@ class AuthNotifier extends AsyncNotifier<CircleUser?> {
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
-      state = AsyncValue.data(CircleUser.empty);
+      state = AsyncValue.data(AppUser.empty);
     });
   }
 
-  Stream<CircleUser> authStateChanges() {
-    final Stream<CircleUser> userStream =
+  Stream<AppUser> authStateChanges() {
+    final Stream<AppUser> userStream =
         _authRepository.getAuthStateChanges();
 
     userStream.listen((event) {

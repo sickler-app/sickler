@@ -6,7 +6,7 @@ import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/repositories/water/water_repository.dart';
 
 import '../../core/core.dart';
-import '../../models/user/sickler_user.dart';
+import '../../features/auth/models/app_user.dart';
 
 class WaterPrefsNotifier extends AsyncNotifier<WaterPreferences> {
   final WaterRepository _waterRepository;
@@ -33,7 +33,7 @@ class WaterPrefsNotifier extends AsyncNotifier<WaterPreferences> {
 
   /// Water Preferences
   Future<void> getWaterPreferences(
-      {CircleUser? user, bool? getFromRemote}) async {
+      {AppUser? user, bool? getFromRemote}) async {
     state = const AsyncValue.loading();
     final Either<Failure, WaterPreferences> response = await _waterRepository
         .getWaterPreferences(user: user, getFromRemote: getFromRemote);
@@ -50,7 +50,7 @@ class WaterPrefsNotifier extends AsyncNotifier<WaterPreferences> {
 
   Future<void> addWaterPreferences(
       {required WaterPreferences preferences,
-      CircleUser? user,
+      AppUser? user,
       bool updateRemote = false}) async {
     state = const AsyncValue.loading();
     final Either<Failure, void> response =
@@ -67,7 +67,7 @@ class WaterPrefsNotifier extends AsyncNotifier<WaterPreferences> {
 
   Future<void> updateWaterPreferences({
     required WaterPreferences preferences,
-    required CircleUser user,
+    required AppUser user,
     bool updateRemote = false,
   }) async {
     state = const AsyncValue.loading();
@@ -85,7 +85,7 @@ class WaterPrefsNotifier extends AsyncNotifier<WaterPreferences> {
 
   Future<void> deleteWaterPreferences({
     required WaterPreferences preferences,
-    required CircleUser user,
+    required AppUser user,
     bool updateRemote = false,
   }) async {
     state = const AsyncValue.loading();

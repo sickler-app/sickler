@@ -10,12 +10,12 @@ final AuthService authService = AuthService();
 final AuthRepository authRepository = AuthRepository(
     authService: authService, userLocalService: userLocalService);
 
-final authProvider = AsyncNotifierProvider<AuthNotifier, CircleUser?>(
+final authProvider = AsyncNotifierProvider<AuthNotifier, AppUser?>(
     () => AuthNotifier(authRepository: authRepository));
 
 @Deprecated("Deprecating the authStateChangesStreamProvider")
 final authStateChangesStreamProvider =
-    StreamProvider<CircleUser>((ref) async* {
+    StreamProvider<AppUser>((ref) async* {
   yield* ref.watch(authProvider.notifier).authStateChanges();
 });
 
@@ -27,6 +27,6 @@ final UserRepository userRepository = UserRepository(
     userLocalService: userLocalService,
     authService: authService);
 
-final userProvider = AsyncNotifierProvider<UserNotifier, CircleUser>(
+final userProvider = AsyncNotifierProvider<UserNotifier, AppUser>(
     () => UserNotifier(userRepository: userRepository));
 

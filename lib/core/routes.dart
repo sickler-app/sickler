@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/screens/auth/auth_success.dart';
-import 'package:sickler/screens/auth/google_sign_in_screen.dart';
-import 'package:sickler/screens/auth/loading_screen.dart';
-import 'package:sickler/screens/auth/register_screen.dart';
-import 'package:sickler/screens/auth/sign_in_screen.dart';
+import 'package:sickler/features/auth/screens/auth_success.dart';
+import 'package:sickler/features/auth/screens/google_sign_in_screen.dart';
+import 'package:sickler/features/auth/screens/register_screen.dart';
+import 'package:sickler/features/auth/screens/sign_in_screen.dart';
 import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
 import 'package:sickler/screens/emergency/crisis_logs_screen.dart';
 import 'package:sickler/screens/emergency/emergency_screen.dart';

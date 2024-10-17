@@ -50,7 +50,7 @@ class _ProfileBasicInfoScreenState
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.watch(userProvider.notifier).getCurrentUserData();
-      CircleUser user = ref.watch(userProvider).value!;
+      AppUser user = ref.watch(userProvider).value!;
       nameController.text = user.profile.displayName ?? "";
       ageController.text = user.profile.age.toString();
 
@@ -198,7 +198,7 @@ class _ProfileBasicInfoScreenState
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
 
-                            CircleUser user = ref.watch(userProvider).value!;
+                            AppUser user = ref.watch(userProvider).value!;
 
                             user = user.copyWith(
                                 profile: user.profile.copyWith(

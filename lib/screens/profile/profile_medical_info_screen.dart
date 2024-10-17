@@ -51,7 +51,7 @@ class _ProfileMedicalInfoScreenState
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.watch(userProvider.notifier).getCurrentUserData();
-      CircleUser user = ref.watch(userProvider).value!;
+      AppUser user = ref.watch(userProvider).value!;
       medicalConditions = user.profile.medicalConditions ?? [];
       allergies = user.profile.allergies ?? [];
     });
@@ -234,7 +234,7 @@ class _ProfileMedicalInfoScreenState
                   AppButton(
                       onPressed: () async {
                         ///Todo: add the rest of the health data;
-                        CircleUser user = ref.watch(userProvider).value!;
+                        AppUser user = ref.watch(userProvider).value!;
                         user = user.copyWith(
                             preferences:
                                 user.preferences.copyWith(isOnboarded: true),

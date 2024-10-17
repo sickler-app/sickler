@@ -4,13 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
-import 'package:sickler/screens/auth/register_screen.dart';
+import 'package:sickler/features/auth/screens/register_screen.dart';
 import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
 
-import '../../models/models.dart';
-import '../../providers/providers.dart';
-import '../global_components/bottom_nav_bar.dart';
+import '../../../models/models.dart';
+import '../../../providers/providers.dart';
+import '../../../screens/global_components/bottom_nav_bar.dart';
 import 'auth_success.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
@@ -117,7 +117,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
                       if (authNotifier.isSuccessful) {
                         await userNotifier.getCurrentUserData();
-                        CircleUser user = ref.watch(userProvider).value!;
+                        AppUser user = ref.watch(userProvider).value!;
                         if (context.mounted) {
                           showCustomSnackBar(
                               context: context,

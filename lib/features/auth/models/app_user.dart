@@ -1,13 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:isar/isar.dart';
+import 'package:sickler/features/auth/models/user_preferences.dart';
 
-import '../models.dart';
+import '../../../models/models.dart';
 
-part 'sickler_user.g.dart';
+part 'app_user.g.dart';
 
 @Collection(inheritance: false)
-class CircleUser extends Equatable {
+class AppUser extends Equatable {
   final Id id = 1;
   final String uid;
   final String email;
@@ -18,7 +19,7 @@ class CircleUser extends Equatable {
   final UserProfile profile;
   final UserPreferences preferences;
 
-  const CircleUser({
+  const AppUser({
     required this.email,
     required this.isAnonymous,
     required this.uid,
@@ -30,7 +31,7 @@ class CircleUser extends Equatable {
   });
 
   ///-------copyWith--------///
-  CircleUser copyWith({
+  AppUser copyWith({
     String? email,
     bool? isAnonymous,
     String? uid,
@@ -40,7 +41,7 @@ class CircleUser extends Equatable {
     UserProfile? profile,
     UserPreferences? preferences,
   }) {
-    return CircleUser(
+    return AppUser(
       email: email ?? this.email,
       uid: uid ?? this.uid,
       photoUrl: photoUrl ?? this.photoUrl,
@@ -69,8 +70,8 @@ class CircleUser extends Equatable {
     return data;
   }
 
-  factory CircleUser.fromMap({required Map<String, dynamic> data}) {
-    return CircleUser(
+  factory AppUser.fromMap({required Map<String, dynamic> data}) {
+    return AppUser(
         profile: UserProfile.fromMap(data["profile"]),
         preferences: UserPreferences.fromMap(data: data["preferences"]),
         email: data["email"],
@@ -80,11 +81,11 @@ class CircleUser extends Equatable {
         isPhoneVerified: data["isPhoneVerified"]);
   }
 
-  factory CircleUser.fromUser({required User? user}) {
+  factory AppUser.fromUser({required User? user}) {
     if (user == null) {
-      return CircleUser.empty;
+      return AppUser.empty;
     } else {
-      return CircleUser(
+      return AppUser(
         email: user.email!,
         uid: user.uid,
         isEmailVerified: user.emailVerified,
@@ -97,16 +98,16 @@ class CircleUser extends Equatable {
   ///-------Empty--------///
 
   @ignore
-  static CircleUser empty =
-      const CircleUser(email: "", isAnonymous: false, uid: "");
+  static AppUser empty =
+      const AppUser(email: "", isAnonymous: false, uid: "");
   @ignore
-  bool get isEmpty => this == CircleUser.empty;
+  bool get isEmpty => this == AppUser.empty;
   @ignore
-  bool get isNotEmpty => this != CircleUser.empty;
+  bool get isNotEmpty => this != AppUser.empty;
 
   @override
   String toString() {
-    if (this == CircleUser.empty) {
+    if (this == AppUser.empty) {
       return "SicklerUser.empty";
     }
 

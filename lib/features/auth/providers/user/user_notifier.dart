@@ -7,7 +7,7 @@ import 'package:sickler/repositories/user/user_repository.dart';
 import '../../core/failure.dart';
 import '../../models/models.dart';
 
-class UserNotifier extends AsyncNotifier<CircleUser> {
+class UserNotifier extends AsyncNotifier<AppUser> {
   final UserRepository _userRepository;
   UserNotifier({required UserRepository userRepository})
       : _userRepository = userRepository;
@@ -25,18 +25,18 @@ class UserNotifier extends AsyncNotifier<CircleUser> {
       : state.error.toString();
 
   @override
-  Future<CircleUser> build() async {
-    return CircleUser.empty;
+  Future<AppUser> build() async {
+    return AppUser.empty;
   }
 
-  void saveDataToState(CircleUser user) {
+  void saveDataToState(AppUser user) {
     state = AsyncValue.data(user);
   }
 
   Future<void> getCurrentUserData({bool forceRefresh = false}) async {
     state = const AsyncValue.loading();
 
-    final Either<Failure, CircleUser> response =
+    final Either<Failure, AppUser> response =
         await _userRepository.getCurrentUserData(forceRefresh: forceRefresh);
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
@@ -46,7 +46,7 @@ class UserNotifier extends AsyncNotifier<CircleUser> {
   }
 
   Future<void> addUserData(
-      {required CircleUser user, bool updateRemote = false}) async {
+      {required AppUser user, bool updateRemote = false}) async {
     log("ADDING DATA");
     state = const AsyncValue.loading();
     final Either<Failure, void> response = await _userRepository.addUserData(
@@ -62,7 +62,7 @@ class UserNotifier extends AsyncNotifier<CircleUser> {
   }
 
   Future<void> updateUserData(
-      {required CircleUser user, bool updateRemote = false}) async {
+      {required AppUser user, bool updateRemote = false}) async {
     log("UPDATING USER DATA");
     state = const AsyncValue.loading();
     final Either<Failure, void> response = await _userRepository.updateUserData(
@@ -78,14 +78,14 @@ class UserNotifier extends AsyncNotifier<CircleUser> {
   }
 
   Future<void> deleteUserData(
-      {required CircleUser user, bool updateRemote = false}) async {
+      {required AppUser user, bool updateRemote = false}) async {
     state = const AsyncValue.loading();
     final Either<Failure, void> response = await _userRepository.deleteUserData(
         user: user, deleteRemote: updateRemote);
     response.fold((failure) {
       state = AsyncValue.error(failure, StackTrace.current);
     }, (empty) {
-      state = AsyncValue.data(CircleUser.empty);
+      state = AsyncValue.data(AppUser.empty);
     });
   }
 }

@@ -33,7 +33,7 @@ class _SuggestedWaterDailyGoalScreenState
     WaterPrefsNotifier waterPrefsNotifier =
         ref.watch(waterPreferencesProvider.notifier);
     WaterPreferences preferences = ref.watch(waterPreferencesProvider).value!;
-    CircleUser user = ref.watch(userProvider).value!;
+    AppUser user = ref.watch(userProvider).value!;
 
     return Scaffold(
       body: Column(

@@ -35,7 +35,7 @@ class _ProfileVitalsInfoScreenState
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.watch(userProvider.notifier).getCurrentUserData();
-      CircleUser user = ref.watch(userProvider).value!;
+      AppUser user = ref.watch(userProvider).value!;
       heightController.text = user.profile.height.toString();
       weightController.text = user.profile.weight.toString();
 
@@ -172,7 +172,7 @@ class _ProfileVitalsInfoScreenState
                         //Todo: Continue
                         if (_formKey.currentState!.validate()) {
                           final userNotifier = ref.watch(userProvider.notifier);
-                          CircleUser user = ref.watch(userProvider).value!;
+                          AppUser user = ref.watch(userProvider).value!;
 
                           user = user.copyWith(
                               profile: user.profile.copyWith(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/models/user/sickler_user.dart';
+import 'package:sickler/features/auth/models/app_user.dart';
 import 'package:sickler/models/water/water_preferences.dart';
 import 'package:sickler/providers/providers.dart';
 import 'package:sickler/providers/water/water_providers.dart';
@@ -38,7 +38,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    final CircleUser? user = ref.watch(userProvider).value;
+    final AppUser? user = ref.watch(userProvider).value;
 
     final String displayName = user?.profile.displayName != null
         ? user!.profile.displayName!.split(" ").first

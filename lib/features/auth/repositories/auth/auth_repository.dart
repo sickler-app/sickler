@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sickler/services/auth/auth_service.dart';
 
-import '../../core/core.dart';
-import '../../models/models.dart';
-import '../../services/user/local/user_local_service.dart';
+import '../../../../core/core.dart';
+import '../../../../models/models.dart';
+import '../../../../services/user/local/user_local_service.dart';
 
 class AuthRepository {
   final AuthService _authService;
@@ -17,7 +17,7 @@ class AuthRepository {
       : _userLocalService = userLocalService,
         _authService = authService;
 
-  FutureEither<CircleUser?> signInWithEmailAndPassword({
+  FutureEither<AppUser?> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -29,7 +29,7 @@ class AuthRepository {
     });
   }
 
-  FutureEither<CircleUser?> registerWithEmailAndPassword(
+  FutureEither<AppUser?> registerWithEmailAndPassword(
       {required String email, required String password}) {
     return futureHandler(() async {
       final UserCredential userCredential = await _authService
@@ -38,7 +38,7 @@ class AuthRepository {
     });
   }
 
-  FutureEither<CircleUser> signInWithGoogle() {
+  FutureEither<AppUser> signInWithGoogle() {
     return futureHandler(() async {
       final UserCredential userCredential =
           await _authService.signInWithGoogle();
@@ -53,12 +53,12 @@ class AuthRepository {
     });
   }
 
-  Stream<CircleUser> getAuthStateChanges() {
+  Stream<AppUser> getAuthStateChanges() {
     return _authService.authStateChanges().map((User? user) {
       if (user == null) {
-        return CircleUser.empty;
+        return AppUser.empty;
       }
-      return CircleUser.fromUser(user: user).copyWith(
+      return AppUser.fromUser(user: user).copyWith(
         profile: UserProfile.fromFirebaseUser(user: user),
       );
     });
@@ -82,9 +82,9 @@ class AuthRepository {
     });
   }
 
-  Future<CircleUser> _handleUserCredential(
+  Future<AppUser> _handleUserCredential(
       UserCredential userCredential) async {
-    CircleUser sicklerUser = CircleUser.fromUser(user: userCredential.user);
+    AppUser sicklerUser = AppUser.fromUser(user: userCredential.user);
     sicklerUser = sicklerUser.copyWith(
         profile: UserProfile.fromFirebaseUser(user: userCredential.user));
 

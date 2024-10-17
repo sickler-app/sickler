@@ -1,5 +1,5 @@
 import 'package:isar/isar.dart';
-import 'package:sickler/models/user/sickler_user.dart';
+import 'package:sickler/features/auth/models/app_user.dart';
 import 'package:sickler/services/local_db/databse_service.dart';
 
 class UserLocalService extends LocalDbService {
@@ -9,36 +9,36 @@ class UserLocalService extends LocalDbService {
     db = initializeDB();
   }
 
-  Stream<List<CircleUser>> listenUserPreferences() async* {
+  Stream<List<AppUser>> listenUserPreferences() async* {
     final isar = await db;
     yield* isar.sicklerUsers.where().watch();
   }
 
-  Future<CircleUser> getUser() async {
+  Future<AppUser> getUser() async {
     final isar = await db;
-    List<CircleUser> userList = await isar.sicklerUsers.where().findAll();
+    List<AppUser> userList = await isar.sicklerUsers.where().findAll();
     if (userList.isEmpty) {
-      return CircleUser.empty;
+      return AppUser.empty;
     } else {
       return userList.first;
     }
   }
 
-  Future<void> addUser(CircleUser user) async {
+  Future<void> addUser(AppUser user) async {
     final isar = await db;
     await isar.writeTxn(() async {
       await isar.sicklerUsers.put(user);
     });
   }
 
-  Future<void> updateUser(CircleUser user) async {
+  Future<void> updateUser(AppUser user) async {
     final isar = await db;
     await isar.writeTxn(() async {
       await isar.sicklerUsers.put(user);
     });
   }
 
-  Future<void> deleteUser({CircleUser? user}) async {
+  Future<void> deleteUser({AppUser? user}) async {
     final isar = await db;
 
     if (user == null) {

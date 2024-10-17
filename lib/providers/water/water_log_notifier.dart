@@ -6,7 +6,7 @@ import 'package:sickler/models/water/water_log.dart';
 import 'package:sickler/repositories/water/water_repository.dart';
 
 import '../../core/core.dart';
-import '../../models/user/sickler_user.dart';
+import '../../features/auth/models/app_user.dart';
 
 class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
   final WaterRepository _waterRepository;
@@ -31,7 +31,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
 
   /// --- Logs ----///
   Future<void> getWaterLogs(
-      {CircleUser? user,
+      {AppUser? user,
       bool? getFromRemote,
       DateTime? start,
       DateTime? end}) async {
@@ -89,7 +89,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
 
   Future<void> addWaterLog(
       {required WaterLog entry,
-      required CircleUser user,
+      required AppUser user,
       bool updateRemote = false}) async {
     //print("Adding log");
     Stopwatch stopwatch = Stopwatch()..start();
@@ -110,7 +110,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
 
   Future<void> updateWaterLog({
     required WaterLog entry,
-    required CircleUser user,
+    required AppUser user,
     bool updateRemote = false,
   }) async {
     state = const AsyncValue.loading();
@@ -127,7 +127,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
 
   Future<void> deleteWaterLog({
     required WaterLog entry,
-    required CircleUser user,
+    required AppUser user,
     bool updateRemote = false,
   }) async {
     state = const AsyncValue.loading();
@@ -143,7 +143,7 @@ class WaterLogNotifier extends AsyncNotifier<List<WaterLog>> {
   }
 
   Future<void> clear({
-    required CircleUser user,
+    required AppUser user,
     bool updateRemote = false,
   }) async {
     state = const AsyncValue.loading();
