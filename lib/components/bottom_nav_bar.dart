@@ -4,11 +4,6 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sickler/screens/emergency/emergency_screen.dart';
-import 'package:sickler/screens/home/home_screen.dart';
-import 'package:sickler/screens/meds/meds_screen.dart';
-import 'package:sickler/screens/profile/profile_screen.dart';
-import 'package:sickler/screens/water/water_screen.dart';
 
 class BottomNavBar extends ConsumerStatefulWidget {
   static const String id = "nav_bar";
