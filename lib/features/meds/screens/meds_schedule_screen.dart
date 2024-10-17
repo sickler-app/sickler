@@ -5,7 +5,7 @@ import 'package:sickler/screens/global_components/components.dart';
 import 'package:sickler/screens/meds/components/sickler_calendar_day_selector.dart';
 import 'package:sickler/screens/profile/components/sickler_radio.dart';
 
-import '../../core/core.dart';
+import '../../../core/core.dart';
 
 class MedsScheduleScreen extends StatefulWidget {
   static const String id = "meds_schedule";

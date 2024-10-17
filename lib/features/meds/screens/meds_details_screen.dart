@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sickler/core/core.dart';
 import 'package:sickler/screens/global_components/components.dart';
-import 'package:sickler/screens/meds/add_edit_meds_screen.dart';
+import 'package:sickler/features/meds/screens/add_edit_meds_screen.dart';
 
 class MedsDetailsScreen extends StatelessWidget {
   static const String id = "meds_details";

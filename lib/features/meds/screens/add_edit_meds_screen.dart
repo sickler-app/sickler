@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../core/core.dart';
-import '../global_components/components.dart';
-import 'components/components.dart';
+import '../../../core/core.dart';
+import '../../../screens/global_components/components.dart';
+import '../../../screens/meds/components/components.dart';
 
 class AddMedsScreen extends StatefulWidget {
   static const String id = "add_meds";
