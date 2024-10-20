@@ -1,30 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/screens/auth/auth_success.dart';
-import 'package:sickler/screens/auth/google_sign_in_screen.dart';
-import 'package:sickler/screens/auth/loading_screen.dart';
-import 'package:sickler/screens/auth/register_screen.dart';
-import 'package:sickler/screens/auth/sign_in_screen.dart';
-import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
-import 'package:sickler/screens/emergency/crisis_logs_screen.dart';
-import 'package:sickler/screens/emergency/emergency_screen.dart';
-import 'package:sickler/screens/global_components/bottom_nav_bar.dart';
-import 'package:sickler/screens/home/home_screen.dart';
-import 'package:sickler/screens/meds/add_edit_meds_screen.dart';
-import 'package:sickler/screens/meds/meds_details_screen.dart';
-import 'package:sickler/screens/meds/meds_schedule_screen.dart';
-import 'package:sickler/screens/meds/meds_screen.dart';
-import 'package:sickler/screens/onboarding/onboarding_base_screen.dart';
-import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
-import 'package:sickler/screens/profile/profile_medical_info_screen.dart';
-import 'package:sickler/screens/profile/profile_screen.dart';
-import 'package:sickler/screens/profile/profile_vitals_info_screen.dart';
-import 'package:sickler/screens/profile/settings_screen.dart';
-import 'package:sickler/screens/water/edit_daily_goal_screen.dart';
-import 'package:sickler/screens/water/suggested_water_daily_goal_screen.dart';
-import 'package:sickler/screens/water/water_empty_screen.dart';
-import 'package:sickler/screens/water/water_screen.dart';
+import '../components/bottom_nav_bar.dart';
+import '../features/auth/auth.dart';
+import '../features/emergency/emergency.dart';
+import '../features/home/home.dart';
+import '../features/meds/meds.dart';
+import '../features/profile/profile.dart';
+import '../features/water/screens/water_empty_screen.dart';
+import '../features/water/water.dart';
+
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(

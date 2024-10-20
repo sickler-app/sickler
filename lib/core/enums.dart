@@ -14,7 +14,7 @@ enum Gender { male, female }
 
 enum Genotype { as, ss, aa, na }
 
-enum SicklerListWheelScrollViewPickerMode {
+enum AppListWheelScrollViewPickerMode {
   integer,
   duration,
   time,

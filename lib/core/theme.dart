@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'core.dart';
 
-class SicklerThemeData {
+class AppThemeData {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     useMaterial3: true,
-    primaryColor: SicklerColours.purpleSeed,
-    primaryColorLight: SicklerColours.purple50,
-    primaryColorDark: SicklerColours.purple30,
-    scaffoldBackgroundColor: SicklerColours.white,
-    iconTheme: const IconThemeData(color: SicklerColours.black),
-    primaryIconTheme: const IconThemeData(color: SicklerColours.black),
+    primaryColor: AppColours.purpleSeed,
+    primaryColorLight: AppColours.purple50,
+    primaryColorDark: AppColours.purple30,
+    scaffoldBackgroundColor: AppColours.white,
+    iconTheme: const IconThemeData(color: AppColours.black),
+    primaryIconTheme: const IconThemeData(color: AppColours.black),
     splashFactory: InkSparkle.splashFactory,
     cardTheme: CardTheme(
-      color: SicklerColours.purple95,
+      color: AppColours.purple95,
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
@@ -23,33 +23,33 @@ class SicklerThemeData {
     fontFamily: 'Plus Jakarta Sans',
     textTheme: TextTheme(
       displayLarge:
-          SicklerTextStyles.displayLarge.copyWith(color: SicklerColours.black),
+          AppTextStyles.displayLarge.copyWith(color: AppColours.black),
       displayMedium:
-          SicklerTextStyles.displayMedium.copyWith(color: SicklerColours.black),
+          AppTextStyles.displayMedium.copyWith(color: AppColours.black),
       displaySmall:
-          SicklerTextStyles.displaySmall.copyWith(color: SicklerColours.black),
+          AppTextStyles.displaySmall.copyWith(color: AppColours.black),
       headlineLarge:
-          SicklerTextStyles.headlineLarge.copyWith(color: SicklerColours.black),
+          AppTextStyles.headlineLarge.copyWith(color: AppColours.black),
       headlineSmall:
-          SicklerTextStyles.headlineSmall.copyWith(color: SicklerColours.black),
-      headlineMedium: SicklerTextStyles.headlineMedium
-          .copyWith(color: SicklerColours.black),
+          AppTextStyles.headlineSmall.copyWith(color: AppColours.black),
+      headlineMedium: AppTextStyles.headlineMedium
+          .copyWith(color: AppColours.black),
       titleLarge:
-          SicklerTextStyles.titleLarge.copyWith(color: SicklerColours.black),
+          AppTextStyles.titleLarge.copyWith(color: AppColours.black),
       titleMedium:
-          SicklerTextStyles.titleMedium.copyWith(color: SicklerColours.black),
+          AppTextStyles.titleMedium.copyWith(color: AppColours.black),
       titleSmall:
-          SicklerTextStyles.titleSmall.copyWith(color: SicklerColours.black),
+          AppTextStyles.titleSmall.copyWith(color: AppColours.black),
       bodyLarge:
-          SicklerTextStyles.bodyLarge.copyWith(color: SicklerColours.black),
+          AppTextStyles.bodyLarge.copyWith(color: AppColours.black),
       bodyMedium:
-          SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.black),
+          AppTextStyles.bodyMedium.copyWith(color: AppColours.black),
       bodySmall:
-          SicklerTextStyles.bodySmall.copyWith(color: SicklerColours.black),
+          AppTextStyles.bodySmall.copyWith(color: AppColours.black),
     ),
     appBarTheme:
         const AppBarTheme(elevation: 0, backgroundColor: Colors.transparent),
-    cardColor: SicklerColours.purple95,
+    cardColor: AppColours.purple95,
     elevatedButtonTheme: const ElevatedButtonThemeData(
       style: ButtonStyle(
         splashFactory: InkSparkle.splashFactory,
@@ -72,16 +72,16 @@ class SicklerThemeData {
     )),
     chipTheme: ChipThemeData(
       labelStyle:
-          SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.purple10),
+          AppTextStyles.bodyMedium.copyWith(color: AppColours.purple10),
       elevation: 0,
-      selectedColor: SicklerColours.purple90,
-      backgroundColor: SicklerColours.neutral95,
+      selectedColor: AppColours.purple90,
+      backgroundColor: AppColours.neutral95,
       side: BorderSide.none,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
     ),
     sliderTheme: const SliderThemeData(
-        activeTickMarkColor: SicklerColours.purple40,
-        inactiveTrackColor: SicklerColours.neutral90,
+        activeTickMarkColor: AppColours.purple40,
+        inactiveTrackColor: AppColours.neutral90,
         trackHeight: 4,
         trackShape: RoundedRectSliderTrackShape(),
         thumbShape: RoundSliderThumbShape(
@@ -90,44 +90,44 @@ class SicklerThemeData {
           disabledThumbRadius: 4,
           pressedElevation: 0,
         ),
-        thumbColor: SicklerColours.white,
+        thumbColor: AppColours.white,
         overlayColor: Colors.transparent,
         overlayShape: RoundSliderOverlayShape(overlayRadius: 0)),
     switchTheme: SwitchThemeData(
-      thumbColor: const WidgetStatePropertyAll<Color>(SicklerColours.white),
+      thumbColor: const WidgetStatePropertyAll<Color>(AppColours.white),
       trackColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return SicklerColours.purple40;
+          return AppColours.purple40;
         }
-        return SicklerColours.purple90;
+        return AppColours.purple90;
       }),
       trackOutlineColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return SicklerColours.purple40;
+          return AppColours.purple40;
         }
-        return SicklerColours.purple90;
+        return AppColours.purple90;
       }),
       trackOutlineWidth: const WidgetStatePropertyAll<double>(0),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.light,
-      seedColor: SicklerColours.purpleSeed,
-      primary: SicklerColours.purpleSeed,
-      onPrimary: SicklerColours.white,
-      primaryContainer: SicklerColours.purple90,
-      onPrimaryContainer: SicklerColours.purple10,
-      secondary: SicklerColours.orangeSeed,
-      onSecondary: SicklerColours.white,
-      secondaryContainer: SicklerColours.orange95,
-      tertiary: SicklerColours.blueSeed,
-      onTertiary: SicklerColours.blue10,
-      tertiaryContainer: SicklerColours.blue95,
-      onTertiaryContainer: SicklerColours.blue10,
-      error: SicklerColours.red50,
-      onError: SicklerColours.white,
-      errorContainer: SicklerColours.red95,
-      onErrorContainer: SicklerColours.red10,
+      seedColor: AppColours.purpleSeed,
+      primary: AppColours.purpleSeed,
+      onPrimary: AppColours.white,
+      primaryContainer: AppColours.purple90,
+      onPrimaryContainer: AppColours.purple10,
+      secondary: AppColours.orangeSeed,
+      onSecondary: AppColours.white,
+      secondaryContainer: AppColours.orange95,
+      tertiary: AppColours.blueSeed,
+      onTertiary: AppColours.blue10,
+      tertiaryContainer: AppColours.blue95,
+      onTertiaryContainer: AppColours.blue10,
+      error: AppColours.red50,
+      onError: AppColours.white,
+      errorContainer: AppColours.red95,
+      onErrorContainer: AppColours.red10,
     ),
   );
 
@@ -135,36 +135,36 @@ class SicklerThemeData {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    primaryColor: SicklerColours.purple70,
-    primaryColorLight: SicklerColours.purple90,
-    primaryColorDark: SicklerColours.purple70,
-    scaffoldBackgroundColor: SicklerColours.black,
-    iconTheme: const IconThemeData(color: SicklerColours.white),
-    primaryIconTheme: const IconThemeData(color: SicklerColours.white),
+    primaryColor: AppColours.purple70,
+    primaryColorLight: AppColours.purple90,
+    primaryColorDark: AppColours.purple70,
+    scaffoldBackgroundColor: AppColours.black,
+    iconTheme: const IconThemeData(color: AppColours.white),
+    primaryIconTheme: const IconThemeData(color: AppColours.white),
     splashFactory: InkSparkle.splashFactory,
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return SicklerColours.purple10;
+          return AppColours.purple10;
         }
-        return SicklerColours.neutral70;
+        return AppColours.neutral70;
       }),
       trackColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return SicklerColours.purple70;
+          return AppColours.purple70;
         }
-        return SicklerColours.neutral20;
+        return AppColours.neutral20;
       }),
       trackOutlineColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return SicklerColours.purple70;
+          return AppColours.purple70;
         }
-        return SicklerColours.neutral20;
+        return AppColours.neutral20;
       }),
       trackOutlineWidth: const WidgetStatePropertyAll<double>(0),
     ),
     cardTheme: CardTheme(
-      color: SicklerColours.neutral20,
+      color: AppColours.neutral20,
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
@@ -173,35 +173,35 @@ class SicklerThemeData {
     fontFamily: 'Plus Jakarta Sans',
     textTheme: TextTheme(
       displayLarge:
-          SicklerTextStyles.displayLarge.copyWith(color: SicklerColours.white),
+          AppTextStyles.displayLarge.copyWith(color: AppColours.white),
       displayMedium:
-          SicklerTextStyles.displayMedium.copyWith(color: SicklerColours.white),
+          AppTextStyles.displayMedium.copyWith(color: AppColours.white),
       displaySmall:
-          SicklerTextStyles.displaySmall.copyWith(color: SicklerColours.white),
+          AppTextStyles.displaySmall.copyWith(color: AppColours.white),
       headlineLarge:
-          SicklerTextStyles.headlineLarge.copyWith(color: SicklerColours.white),
+          AppTextStyles.headlineLarge.copyWith(color: AppColours.white),
       headlineSmall:
-          SicklerTextStyles.headlineSmall.copyWith(color: SicklerColours.white),
-      headlineMedium: SicklerTextStyles.headlineMedium
-          .copyWith(color: SicklerColours.white),
+          AppTextStyles.headlineSmall.copyWith(color: AppColours.white),
+      headlineMedium: AppTextStyles.headlineMedium
+          .copyWith(color: AppColours.white),
       titleLarge:
-          SicklerTextStyles.titleLarge.copyWith(color: SicklerColours.white),
+          AppTextStyles.titleLarge.copyWith(color: AppColours.white),
       titleMedium:
-          SicklerTextStyles.titleMedium.copyWith(color: SicklerColours.white),
+          AppTextStyles.titleMedium.copyWith(color: AppColours.white),
       titleSmall:
-          SicklerTextStyles.titleSmall.copyWith(color: SicklerColours.white),
+          AppTextStyles.titleSmall.copyWith(color: AppColours.white),
       bodyLarge:
-          SicklerTextStyles.bodyLarge.copyWith(color: SicklerColours.white),
+          AppTextStyles.bodyLarge.copyWith(color: AppColours.white),
       bodyMedium:
-          SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.white),
+          AppTextStyles.bodyMedium.copyWith(color: AppColours.white),
       bodySmall:
-          SicklerTextStyles.bodySmall.copyWith(color: SicklerColours.white),
+          AppTextStyles.bodySmall.copyWith(color: AppColours.white),
     ),
     appBarTheme: const AppBarTheme(
       elevation: 0,
       backgroundColor: Colors.transparent,
     ),
-    cardColor: SicklerColours.neutral20,
+    cardColor: AppColours.neutral20,
     elevatedButtonTheme: const ElevatedButtonThemeData(
       style: ButtonStyle(
         splashFactory: InkSparkle.splashFactory,
@@ -224,14 +224,14 @@ class SicklerThemeData {
     )),
     chipTheme: ChipThemeData(
       elevation: 0,
-      selectedColor: SicklerColours.purple70,
-      backgroundColor: SicklerColours.neutral20,
+      selectedColor: AppColours.purple70,
+      backgroundColor: AppColours.neutral20,
       side: BorderSide.none,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
     ),
     sliderTheme: const SliderThemeData(
-        activeTickMarkColor: SicklerColours.purple40,
-        inactiveTrackColor: SicklerColours.neutral90,
+        activeTickMarkColor: AppColours.purple40,
+        inactiveTrackColor: AppColours.neutral90,
         trackHeight: 2,
         trackShape: RoundedRectSliderTrackShape(),
         thumbShape: RoundSliderThumbShape(
@@ -240,27 +240,27 @@ class SicklerThemeData {
           disabledThumbRadius: 4,
           pressedElevation: 0,
         ),
-        thumbColor: SicklerColours.white,
+        thumbColor: AppColours.white,
         overlayColor: Colors.transparent,
         overlayShape: RoundSliderOverlayShape(overlayRadius: 0)),
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.dark,
-      seedColor: SicklerColours.purpleSeed,
-      primary: SicklerColours.purple70,
-      onPrimary: SicklerColours.purple10,
-      primaryContainer: SicklerColours.purple10,
-      onPrimaryContainer: SicklerColours.purple95,
-      secondary: SicklerColours.orange70,
-      onSecondary: SicklerColours.black,
-      secondaryContainer: SicklerColours.orange10,
-      tertiary: SicklerColours.blueSeed,
-      onTertiary: SicklerColours.white,
-      tertiaryContainer: SicklerColours.blue10,
-      onTertiaryContainer: SicklerColours.white,
-      error: SicklerColours.red60,
-      onError: SicklerColours.white,
-      errorContainer: SicklerColours.red10,
-      onErrorContainer: SicklerColours.red90,
+      seedColor: AppColours.purpleSeed,
+      primary: AppColours.purple70,
+      onPrimary: AppColours.purple10,
+      primaryContainer: AppColours.purple10,
+      onPrimaryContainer: AppColours.purple95,
+      secondary: AppColours.orange70,
+      onSecondary: AppColours.black,
+      secondaryContainer: AppColours.orange10,
+      tertiary: AppColours.blueSeed,
+      onTertiary: AppColours.white,
+      tertiaryContainer: AppColours.blue10,
+      onTertiaryContainer: AppColours.white,
+      error: AppColours.red60,
+      onError: AppColours.white,
+      errorContainer: AppColours.red10,
+      onErrorContainer: AppColours.red90,
     ),
   );
 }

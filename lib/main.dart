@@ -6,9 +6,9 @@ import 'package:go_router/go_router.dart';
 import 'package:sickler/core/routes.dart';
 import 'package:sickler/core/theme.dart';
 import 'package:sickler/firebase_options.dart';
-import 'package:sickler/screens/water/water_screen.dart';
 
 import 'core/core.dart';
+import 'features/water/water.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,8 +44,8 @@ class _MyAppState extends ConsumerState<MyApp> {
       child: MaterialApp(
         title: 'Sickler',
         debugShowCheckedModeBanner: false,
-        theme: SicklerThemeData.lightTheme,
-        darkTheme: SicklerThemeData.darkTheme,
+        theme: AppThemeData.lightTheme,
+        darkTheme: AppThemeData.darkTheme,
         themeMode: ThemeMode.system,
         themeAnimationStyle: AnimationStyle(
           curve: Curves.easeInOut,
