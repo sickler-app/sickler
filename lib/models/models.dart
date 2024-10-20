@@ -1,1 +1,0 @@
-export 'auth/sickler_user_model.dart';

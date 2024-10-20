@@ -9,14 +9,15 @@ const double kPadding12 = 12.0;
 const double kPadding16 = 16.0;
 const double kPadding24 = 24.0;
 const double kPadding32 = 32.0;
+const double kPadding48 = 48.0;
 const double kPadding64 = 64.0;
 
 ///------Input Decorations-------///
-class SicklerInputDecoration {
+class AppInputDecoration {
   static InputDecoration inputDecoration(BuildContext context) {
     return InputDecoration(
         contentPadding: const EdgeInsets.all(12),
-        errorStyle: SicklerTextStyles.bodyMedium
+        errorStyle: AppTextStyles.bodyMedium
             .copyWith(color: Theme.of(context).colorScheme.error),
         errorBorder: OutlineInputBorder(
           gapPadding: 4,
@@ -42,21 +43,21 @@ class SicklerInputDecoration {
         focusedBorder: OutlineInputBorder(
           gapPadding: 0,
           borderSide:
-              const BorderSide(width: 1, color: SicklerColours.purple60),
+              const BorderSide(width: 1, color: AppColours.purple60),
           borderRadius: BorderRadius.circular(12),
         ),
         filled: true,
         isDense: true,
         fillColor: Theme.of(context).cardColor,
-        hintStyle: SicklerTextStyles.bodyMedium
-            .copyWith(color: SicklerColours.neutral50),
+        hintStyle: AppTextStyles.bodyMedium
+            .copyWith(color: AppColours.neutral50),
         labelStyle:
-            SicklerTextStyles.bodyMedium.copyWith(color: SicklerColours.black));
+            AppTextStyles.bodyMedium.copyWith(color: AppColours.black));
   }
 }
 
 ///------Colours-------///
-class SicklerColours {
+class AppColours {
   // static const Color black = Color(0xFF1C1A22);
   static const Color black = Color(0xFF0E0D11);
   // static const Color white = Color(0xFFFFFBFF);
@@ -147,122 +148,78 @@ class SicklerColours {
 }
 
 ///------Text Styles-------///
-class SicklerTextStyles {
+class AppTextStyles {
   ///---Display---//
-  static TextStyle displayLargeBold = const TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: 57,
-    height: 1,
-  );
 
   static TextStyle displayLarge = const TextStyle(
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w300,
     fontSize: 57,
-    height: 1,
-  );
-
-  static TextStyle displayMediumBold = const TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: 45,
     height: 1,
   );
 
   static TextStyle displayMedium = const TextStyle(
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w300,
     fontSize: 45,
-    height: 1,
-  );
-  static TextStyle displaySmallBold = const TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: 36,
     height: 1,
   );
 
   static TextStyle displaySmall = const TextStyle(
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w300,
     fontSize: 36,
     height: 1,
   );
 
   ///---Headline---///
   static TextStyle headlineLarge = const TextStyle(
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w300,
     fontSize: 32,
     //  height: 1,
   );
   static TextStyle headlineMedium = const TextStyle(
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w300,
     fontSize: 28,
     //   height: 1,
   );
   static TextStyle headlineSmall = const TextStyle(
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w300,
     fontSize: 24,
     //   height: 1,
   );
 
   ///---Title---///
-  static TextStyle titleLargeBold = const TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: 22,
-    //   height: 1,
-  );
+
   static TextStyle titleLarge = const TextStyle(
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w700,
     fontSize: 22,
     //  height: 1,
   );
 
-  static TextStyle titleMediumBold = const TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: 16,
-    //   height: 1,
-  );
   static TextStyle titleMedium = const TextStyle(
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w700,
     fontSize: 16,
     //  height: 1,
   );
 
-  static TextStyle titleSmallBold = const TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: 14,
-    //  height: 1,
-  );
   static TextStyle titleSmall = const TextStyle(
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w700,
     fontSize: 14,
     //   height: 1,
   );
 
   ///---Body---///
-  static TextStyle bodyLargeBold = const TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: 16,
-    //   height: 1,
-  );
+
   static TextStyle bodyLarge = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 16,
     //  height: 1,
   );
 
-  static TextStyle bodyMediumBold = const TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: 14,
-    //  height: 1,
-  );
   static TextStyle bodyMedium = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 14,
     //  height: 1,
   );
 
-  static TextStyle bodySmallBold = const TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: 12,
-    //   height: 1,
-  );
   static TextStyle bodySmall = const TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: 12,

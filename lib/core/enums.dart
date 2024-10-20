@@ -1,6 +1,6 @@
 enum AppState { initial, submitting, success, error }
 
-enum AuthState {  authenticated, unauthenticated }
+enum AuthState { authenticated, unauthenticated }
 
 enum SicklerButtonType { primary, secondary, outline, text }
 
@@ -12,9 +12,9 @@ enum SelectorColors { purple, blue, green, red, orange }
 
 enum Gender { male, female }
 
-enum Genotype { as, ss, aa }
+enum Genotype { as, ss, aa, na }
 
-enum SicklerListWheelScrollViewPickerMode {
+enum AppListWheelScrollViewPickerMode {
   integer,
   duration,
   time,
@@ -33,16 +33,66 @@ enum MedicationType {
   custom
 }
 
+enum Units {
+  ///Mass Measurement Units
+  pound,
+  ounce,
+  kilogram,
+  gram,
+  milligram,
 
+  /// Length measurement units
+  kilometres,
+  metres,
+  centimetres,
+  millimetres,
+  miles,
+  inches,
+  feet,
 
-// enum VolumeType {
-//   volume1,
-//   volume2,
-//   volume3,
-//   volume4,
-//   volume5,
-// }
+  ///Volume measurement units
+  litres,
+  millilitres,
+  centilitres,
+  gallons;
 
+  String get symbol {
+    switch (this) {
+      case Units.pound:
+        return 'lb';
+      case Units.ounce:
+        return 'oz';
+      case Units.kilogram:
+        return 'kg';
+      case Units.gram:
+        return 'g';
+      case Units.milligram:
+        return 'mg';
+      case Units.kilometres:
+        return 'km';
+      case Units.metres:
+        return 'm';
+      case Units.centimetres:
+        return 'cm';
+      case Units.millimetres:
+        return 'mm';
+      case Units.miles:
+        return 'mi';
+      case Units.inches:
+        return 'in';
+      case Units.feet:
+        return 'ft';
+      case Units.litres:
+        return 'L';
+      case Units.millilitres:
+        return 'ml';
+      case Units.centilitres:
+        return 'cl';
+      case Units.gallons:
+        return 'gal';
+    }
+  }
+}
 
 enum MedsScheduleEndingState {
   ///An Enum to define the states of the Medication repeat ending format.

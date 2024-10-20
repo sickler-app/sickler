@@ -1,47 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sickler/models/auth/sickler_user_model.dart';
-import 'package:sickler/providers/providers.dart';
-import 'package:sickler/screens/auth/register_screen.dart';
-import 'package:sickler/screens/auth/sign_in_screen.dart';
-import 'package:sickler/screens/emergency/add_emergency_contact_screen.dart';
-import 'package:sickler/screens/emergency/crisis_logs_screen.dart';
-import 'package:sickler/screens/emergency/emergency_screen.dart';
-import 'package:sickler/screens/global_components/bottom_nav_bar.dart';
-import 'package:sickler/screens/home/home_screen.dart';
-import 'package:sickler/screens/meds/add_edit_meds_screen.dart';
-import 'package:sickler/screens/meds/meds_details_screen.dart';
-import 'package:sickler/screens/meds/meds_schedule_screen.dart';
-import 'package:sickler/screens/meds/meds_screen.dart';
-import 'package:sickler/screens/onboarding/onboarding_base_screen.dart';
-import 'package:sickler/screens/profile/profile_basic_info_screen.dart';
-import 'package:sickler/screens/profile/profile_medical_info_screen.dart';
-import 'package:sickler/screens/profile/profile_screen.dart';
-import 'package:sickler/screens/profile/profile_vitals_info_screen.dart';
-import 'package:sickler/screens/profile/settings_screen.dart';
-import 'package:sickler/screens/water/edit_daily_goal_screen.dart';
-import 'package:sickler/screens/water/suggested_water_daily_goal_screen.dart';
-import 'package:sickler/screens/water/water_empty_screen.dart';
-import 'package:sickler/screens/water/water_screen.dart';
+import '../components/bottom_nav_bar.dart';
+import '../features/auth/auth.dart';
+import '../features/emergency/emergency.dart';
+import '../features/home/home.dart';
+import '../features/meds/meds.dart';
+import '../features/profile/profile.dart';
+import '../features/water/screens/water_empty_screen.dart';
+import '../features/water/water.dart';
+
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(currentUserStreamProvider);
-
   return GoRouter(
-    initialLocation: "/",
-    redirect: (BuildContext context, GoRouterState state) {
-      final SicklerUser? user = authState.value;
-      final bool isLoggedIn = (user != null && user.isNotEmpty);
-
-      if (!isLoggedIn &&
-          state.matchedLocation != "/${SignInScreen.id}" &&
-          state.matchedLocation != "/${RegisterScreen.id}") {
-        return "/${SignInScreen.id}";
-      }
-
-      return null;
-    },
+    initialLocation: "/${LoadingScreen.id}",
     routes: [
       ///-------H
       GoRoute(
@@ -49,6 +21,13 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: BottomNavBar.id,
         builder: (BuildContext context, GoRouterState state) =>
             const BottomNavBar(),
+      ),
+
+      GoRoute(
+        path: "/${LoadingScreen.id}",
+        name: LoadingScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const LoadingScreen(),
       ),
 
       ///-------Home-------///
@@ -115,32 +94,30 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: ProfileScreen.id,
         builder: (BuildContext context, GoRouterState state) =>
             const ProfileScreen(),
-        routes: <GoRoute>[
-          GoRoute(
-            path: SettingsScreen.id,
-            name: SettingsScreen.id,
-            builder: (BuildContext context, GoRouterState state) =>
-                const SettingsScreen(),
-          ),
-          GoRoute(
-            path: ProfileBasicInfoScreen.id,
-            name: ProfileBasicInfoScreen.id,
-            builder: (BuildContext context, GoRouterState state) =>
-                const ProfileBasicInfoScreen(),
-          ),
-          GoRoute(
-            path: ProfileMedicalInfoScreen.id,
-            name: ProfileMedicalInfoScreen.id,
-            builder: (BuildContext context, GoRouterState state) =>
-                const ProfileMedicalInfoScreen(),
-          ),
-          GoRoute(
-            path: ProfileVitalsInfoScreen.id,
-            name: ProfileVitalsInfoScreen.id,
-            builder: (BuildContext context, GoRouterState state) =>
-                const ProfileVitalsInfoScreen(),
-          ),
-        ],
+      ),
+      GoRoute(
+        path: "/${SettingsScreen.id}",
+        name: SettingsScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const SettingsScreen(),
+      ),
+      GoRoute(
+        path: "/${ProfileBasicInfoScreen.id}",
+        name: ProfileBasicInfoScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ProfileBasicInfoScreen(),
+      ),
+      GoRoute(
+        path: "/${ProfileMedicalInfoScreen.id}",
+        name: ProfileMedicalInfoScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ProfileMedicalInfoScreen(),
+      ),
+      GoRoute(
+        path: "/${ProfileVitalsInfoScreen.id}",
+        name: ProfileVitalsInfoScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ProfileVitalsInfoScreen(),
       ),
 
       ///------Medication-------///
@@ -173,16 +150,28 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       ///------ Onboarding Auth-------///
       GoRoute(
-        path: "/${SignInScreen.id}",
+        path: "/auth/${SignInScreen.id}",
         name: SignInScreen.id,
         builder: (BuildContext context, GoRouterState state) =>
             const SignInScreen(),
       ),
       GoRoute(
-        path: "/${RegisterScreen.id}",
+        path: "/auth/${RegisterScreen.id}",
         name: RegisterScreen.id,
         builder: (BuildContext context, GoRouterState state) =>
             const RegisterScreen(),
+      ),
+      GoRoute(
+        path: "/auth/${GoogleSignInScreen.id}",
+        name: GoogleSignInScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const GoogleSignInScreen(),
+      ),
+      GoRoute(
+        path: "/auth/${AuthSuccessScreen.id}",
+        name: AuthSuccessScreen.id,
+        builder: (BuildContext context, GoRouterState state) =>
+            const AuthSuccessScreen(),
       ),
       GoRoute(
         path: "/${OnboardingBaseScreen.id}",

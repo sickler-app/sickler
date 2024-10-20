@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - main
-      - development
+      - dev
 
 jobs:
 
@@ -34,10 +34,10 @@ jobs:
         with:
           channel: 'stable'
 
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '11'
+          java-version: '17'
 
       - run: flutter --version
       - run: flutter pub get
@@ -47,7 +47,7 @@ jobs:
 
       # Make build artifacts available
       - name: Make Artifacts available
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: apk
           path: build/app/outputs/flutter-apk
